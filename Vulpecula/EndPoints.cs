@@ -4,7 +4,7 @@
     {
         private static readonly string CroudiaAPIv1 = "https://api.croudia.com/";
 
-        private static readonly string CroudiaAPIv2 = "https://api..croudia.com/2/";
+        private static readonly string CroudiaAPIv2 = "https://api.croudia.com/2/";
 
         private const string Format = ".json";
 
