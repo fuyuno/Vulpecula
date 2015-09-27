@@ -13,7 +13,7 @@
     <DefaultLanguage>ja-JP</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -34,8 +34,47 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="EndPoints.cs" />
+    <Compile Include="Models\Base\Cursor.cs" />
+    <Compile Include="Models\Entities.cs" />
+    <Compile Include="Models\IDs.cs" />
+    <Compile Include="Models\List.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Media.cs" />
+    <Compile Include="Models\MediaType.cs" />
+    <Compile Include="Models\RelationShip.cs" />
+    <Compile Include="Models\RelationShipOwner2.cs" />
+    <Compile Include="Models\RelationShipOwner.cs" />
+    <Compile Include="Models\RelationShipSource.cs" />
+    <Compile Include="Models\RelationShipTarget.cs" />
+    <Compile Include="Models\SearchMetadata.cs" />
+    <Compile Include="Models\SearchOwner.cs" />
+    <Compile Include="Models\SecretMail.cs" />
+    <Compile Include="Models\Source.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\Base\StatusBase.cs" />
+    <Compile Include="Models\Token.cs" />
+    <Compile Include="Models\Trend.cs" />
+    <Compile Include="Models\TrendOwner.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rest\Account.cs" />
+    <Compile Include="Rest\Blocks.cs" />
+    <Compile Include="Croudia.cs" />
+    <Compile Include="Rest\Internal\CroudiaApiImpl.cs" />
+    <Compile Include="Rest\Favorites.cs" />
+    <Compile Include="Rest\Followers.cs" />
+    <Compile Include="Rest\Friends.cs" />
+    <Compile Include="Rest\FriendShips.cs" />
+    <Compile Include="Rest\Internal\OAuth2ClientHandler.cs" />
+    <Compile Include="Rest\Mutes.cs" />
+    <Compile Include="Rest\OAuth.cs" />
+    <Compile Include="Rest\Search.cs" />
+    <Compile Include="Rest\SecretMails.cs" />
+    <Compile Include="Rest\Statuses.cs" />
+    <Compile Include="Rest\Trends.cs" />
+    <Compile Include="Rest\Users.cs" />
+    <Compile Include="Utilities\ImageMIME.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
