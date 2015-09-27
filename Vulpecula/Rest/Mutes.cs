@@ -7,20 +7,20 @@ using Vulpecula.Rest.Internal;
 
 namespace Vulpecula.Rest
 {
-    internal class Mutes : CroudiaApiImpl
+    public class Mutes : CroudiaApiImpl
     {
         /// <summary>
         /// mutes/users/* への API アクセスを提供します。
         /// </summary>
         public MutesUsers Users => new MutesUsers(this.Croudia);
 
-        public Mutes(Croudia croudia) : base(croudia)
+        internal Mutes(Croudia croudia) : base(croudia)
         {
         }
 
-        internal class MutesUsers : CroudiaApiImpl
+        public class MutesUsers : CroudiaApiImpl
         {
-            public MutesUsers(Croudia croudia) : base(croudia)
+            internal MutesUsers(Croudia croudia) : base(croudia)
             {
             }
 

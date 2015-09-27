@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 using Vulpecula.Models;
+using Vulpecula.Rest;
 using Vulpecula.Rest.Internal;
 
 // ReSharper disable PossibleMultipleEnumeration
@@ -23,9 +24,35 @@ namespace Vulpecula
 
         public string ConsumerSecret { get; }
 
-        public string AccessToken { set; get; }
+        public string AccessToken { get; set; }
 
         public string RefreshToken { get; set; }
+
+        public Account Account => new Account(this);
+
+        public Blocks Blocks => new Blocks(this);
+
+        public Favorites Favorites => new Favorites(this);
+
+        public Followers Followers => new Followers(this);
+
+        public Friends Friends => new Friends(this);
+
+        public FriendShips FriendShips => new FriendShips(this);
+
+        public Mutes Mutes => new Mutes(this);
+
+        public OAuth OAuth => new OAuth(this);
+
+        public Search Search => new Search(this);
+
+        public SecretMails SecretMails => new SecretMails(this);
+
+        public Statuses Statuses => new Statuses(this);
+
+        public Trends Trends => new Trends(this);
+
+        public Users Users => new Users(this);
 
         public Croudia(string consumerKey, string consumerSecret) : this(consumerKey, consumerSecret, "", "")
         {
@@ -50,7 +77,7 @@ namespace Vulpecula
             return await this.GetAsync<T>(url, param);
         }
 
-        public async Task<T> GetAsync<T>(string url, IEnumerable<KeyValuePair<string, object>> parameters)
+        private async Task<T> GetAsync<T>(string url, IEnumerable<KeyValuePair<string, object>> parameters)
         {
             if (parameters != null)
                 url += "?" + string.Join("&", parameters.Select(w => $"{w.Key}={w.Value}"));
@@ -66,7 +93,7 @@ namespace Vulpecula
             return await this.PostAsync<T>(url, param);
         }
 
-        public async Task<T> PostAsync<T>(string url, IEnumerable<KeyValuePair<string, object>> parameters)
+        private async Task<T> PostAsync<T>(string url, IEnumerable<KeyValuePair<string, object>> parameters)
         {
             var httpClient = new HttpClient(new OAuth2ClientHandler(this));
             HttpContent content;

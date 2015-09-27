@@ -7,9 +7,9 @@ using Vulpecula.Rest.Internal;
 
 namespace Vulpecula.Rest
 {
-    internal class OAuth : CroudiaApiImpl
+    public class OAuth : CroudiaApiImpl
     {
-        public OAuth(Croudia croudia) : base(croudia)
+        internal OAuth(Croudia croudia) : base(croudia)
         {
         }
 

@@ -8,9 +8,9 @@ using Vulpecula.Rest.Internal;
 
 namespace Vulpecula.Rest
 {
-    internal class Users : CroudiaApiImpl
+    public class Users : CroudiaApiImpl
     {
-        public Users(Croudia croudia) : base(croudia)
+        internal Users(Croudia croudia) : base(croudia)
         {
         }
 

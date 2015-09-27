@@ -5,9 +5,9 @@ using Vulpecula.Rest.Internal;
 
 namespace Vulpecula.Rest
 {
-    internal class Trends : CroudiaApiImpl
+    public class Trends : CroudiaApiImpl
     {
-        public Trends(Croudia croudia) : base(croudia)
+        internal Trends(Croudia croudia) : base(croudia)
         {
         }
 

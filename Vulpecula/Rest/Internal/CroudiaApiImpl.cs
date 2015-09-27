@@ -4,7 +4,7 @@
     {
         protected readonly Croudia Croudia;
 
-        public CroudiaApiImpl(Croudia croudia)
+        protected CroudiaApiImpl(Croudia croudia)
         {
             this.Croudia = croudia;
         }

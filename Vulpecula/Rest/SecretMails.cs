@@ -9,9 +9,9 @@ using Vulpecula.Rest.Internal;
 
 namespace Vulpecula.Rest
 {
-    internal class SecretMails : CroudiaApiImpl
+    public class SecretMails : CroudiaApiImpl
     {
-        public SecretMails(Croudia croudia) : base(croudia)
+        internal SecretMails(Croudia croudia) : base(croudia)
         {
         }
 

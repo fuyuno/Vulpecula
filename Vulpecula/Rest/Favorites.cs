@@ -8,9 +8,9 @@ using Vulpecula.Rest.Internal;
 
 namespace Vulpecula.Rest
 {
-    internal class Favorites : CroudiaApiImpl
+    public class Favorites : CroudiaApiImpl
     {
-        public Favorites(Croudia croudia) : base(croudia)
+        internal Favorites(Croudia croudia) : base(croudia)
         {
         }
 

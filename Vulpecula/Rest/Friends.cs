@@ -7,9 +7,9 @@ using Vulpecula.Rest.Internal;
 
 namespace Vulpecula.Rest
 {
-    internal class Friends : CroudiaApiImpl
+    public class Friends : CroudiaApiImpl
     {
-        public Friends(Croudia croudia) : base(croudia)
+        internal Friends(Croudia croudia) : base(croudia)
         {
         }
 

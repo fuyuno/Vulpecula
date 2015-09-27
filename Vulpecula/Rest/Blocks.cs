@@ -7,9 +7,9 @@ using Vulpecula.Rest.Internal;
 
 namespace Vulpecula.Rest
 {
-    internal class Blocks : CroudiaApiImpl
+    public class Blocks : CroudiaApiImpl
     {
-        public Blocks(Croudia croudia) : base(croudia)
+        internal Blocks(Croudia croudia) : base(croudia)
         {
         }
 
