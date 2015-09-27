@@ -27,7 +27,7 @@ namespace Vulpecula.Rest
         /// </param>
         /// <returns></returns>
         [Obsolete("This method is not available because api.croudia.com disable this endpoint.", false)]
-        public async Task<IEnumerable<Status>> List(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<Status>> ListAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.Favorites, parameters);
         }
@@ -42,7 +42,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<Status> Create(long id, params Expression<Func<string, object>>[] parameters)
+        public async Task<Status> CreateAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<Status>(string.Format(EndPoints.FavoritedCreateId, id), parameters);
         }
@@ -57,7 +57,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<Status> Destroy(long id, params Expression<Func<string, object>>[] parameters)
+        public async Task<Status> DestroyAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<Status>(string.Format(EndPoints.FavoritesDestroyId, id), parameters);
         }

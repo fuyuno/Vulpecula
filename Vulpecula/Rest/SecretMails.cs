@@ -26,7 +26,7 @@ namespace Vulpecula.Rest
         /// <para>count : long</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IEnumerable<SecretMails>> Received(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<SecretMails>> ReceivedAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<SecretMails>>(EndPoints.SecretMails, parameters);
         }
@@ -42,7 +42,7 @@ namespace Vulpecula.Rest
         /// <para>count : long</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IEnumerable<SecretMails>> Sent(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<SecretMails>> SentAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<SecretMails>>(EndPoints.SecretMailsSent, parameters);
         }
@@ -58,7 +58,7 @@ namespace Vulpecula.Rest
         /// <para>user_id : long (* Either a user_id or screen_name is required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<SecretMail> New(params Expression<Func<string, object>>[] parameters)
+        public async Task<SecretMail> NewAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<SecretMail>(EndPoints.SecretMailsNew, parameters);
         }
@@ -75,7 +75,7 @@ namespace Vulpecula.Rest
         /// <para>media : <see cref="System.IO.Stream"/> (* Required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<SecretMail> NewWithMedia(params Expression<Func<string, object>>[] parameters)
+        public async Task<SecretMail> NewWithMediaAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<SecretMail>(EndPoints.SecretMailsNewWithMedia, parameters);
         }
@@ -86,7 +86,7 @@ namespace Vulpecula.Rest
         /// </summary>
         /// <param name="id">削除するシークレットメールのID</param>
         /// <returns></returns>
-        public async Task<SecretMail> Destroy(long id)
+        public async Task<SecretMail> DestroyAsync(long id)
         {
             return await this.Croudia.PostAsync<SecretMail>(string.Format(EndPoints.SecretMailsDestroyId, id));
         }
@@ -96,7 +96,7 @@ namespace Vulpecula.Rest
         /// </summary>
         /// <param name="id">取得するシークレットメールのID</param>
         /// <returns></returns>
-        public async Task<SecretMail> Show(long id)
+        public async Task<SecretMail> ShowAsync(long id)
         {
             return await this.Croudia.PostAsync<SecretMail>(string.Format(EndPoints.SecretMailsShowId, id));
         }
@@ -106,7 +106,7 @@ namespace Vulpecula.Rest
         /// </summary>
         /// <param name="id">取得する画像ID</param>
         /// <returns></returns>
-        public /* async */ Task<Stream> GetSecretPhoto(long id)
+        public /* async */ Task<Stream> GetSecretPhotoAsync(long id)
         {
             throw new NotImplementedException();
         }

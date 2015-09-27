@@ -27,7 +27,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<SearchOwner> Voices(params Expression<Func<string, object>>[] parameters)
+        public async Task<SearchOwner> VoicesAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<SearchOwner>(EndPoints.SearchVoices, parameters);
         }
@@ -43,7 +43,7 @@ namespace Vulpecula.Rest
         /// <para>trim_user : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IEnumerable<User>> Users(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<User>> UsersAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<User>>(EndPoints.UsersSearch, parameters);
         }
@@ -59,7 +59,7 @@ namespace Vulpecula.Rest
         /// <para>trim_user : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IEnumerable<User>> Profile(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<User>> ProfileAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<User>>(EndPoints.ProfileSearch, parameters);
         }
@@ -77,7 +77,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<SearchOwner> Favorites(params Expression<Func<string, object>>[] parameters)
+        public async Task<SearchOwner> FavoritesAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<SearchOwner>(EndPoints.SearchFavorits, parameters);
         }

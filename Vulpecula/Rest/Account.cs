@@ -17,7 +17,7 @@ namespace Vulpecula.Rest
         /// 認証に成功するとリクエストしたユーザーの <see cref="Vulpecula.Models.User"/> を返します。
         /// </summary>
         /// <returns></returns>
-        public async Task<User> VerifyCredentials()
+        public async Task<User> VerifyCredentialsAsync()
         {
             return await this.Croudia.GetAsync<User>(EndPoints.AccountVeriryCredentials);
         }
@@ -31,7 +31,7 @@ namespace Vulpecula.Rest
         /// <para>image : <see cref="System.IO.Stream"/> (* Required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<User> UpdateProfileImage(Expression<Func<string, object>>[] parameters)
+        public async Task<User> UpdateProfileImageAsync(Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<User>(EndPoints.AccountUpdateProfileImage, parameters);
         }
@@ -45,7 +45,7 @@ namespace Vulpecula.Rest
         /// <para>image : <see cref="System.IO.Stream"/> (* Required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<User> UpdateCoverImage(Expression<Func<string, object>>[] parameters)
+        public async Task<User> UpdateCoverImageAsync(Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<User>(EndPoints.AccountUpdateCoverImage, parameters);
         }
@@ -63,7 +63,7 @@ namespace Vulpecula.Rest
         /// <para>protected : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<User> UpdateProfile(Expression<Func<string, object>>[] parameters)
+        public async Task<User> UpdateProfileAsync(Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<User>(EndPoints.AccountUpdateProfile, parameters);
         }

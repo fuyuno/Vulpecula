@@ -23,7 +23,7 @@ namespace Vulpecula.Rest
         /// <para>cursor : long</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IDs> Ids(params Expression<Func<string, object>>[] parameters)
+        public async Task<IDs> IdsAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IDs>(EndPoints.FollowersIds, parameters);
         }
@@ -39,7 +39,7 @@ namespace Vulpecula.Rest
         /// <para>trim_user : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<List> List(params Expression<Func<string, object>>[] parameters)
+        public async Task<List> ListAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<List>(EndPoints.FollowersList, parameters);
         }

@@ -27,7 +27,7 @@ namespace Vulpecula.Rest
         /// <para>count : long</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IEnumerable<Status>> GetPublicTimeline(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<Status>> GetPublicTimelineAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesPublicTimeline, parameters);
         }
@@ -44,7 +44,7 @@ namespace Vulpecula.Rest
         /// <para>count : long</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IEnumerable<Status>> GetHomeTimeline(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<Status>> GetHomeTimelineAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesHomeTimeline, parameters);
         }
@@ -65,7 +65,7 @@ namespace Vulpecula.Rest
         /// <para>count : long</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IEnumerable<Status>> GetUserTimeline(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<Status>> GetUserTimelineAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesUserTimeline, parameters);
         }
@@ -82,7 +82,7 @@ namespace Vulpecula.Rest
         /// <para>count : long</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IEnumerable<Status>> GetMentions(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<Status>> GetMentionsAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesMentions, parameters);
         }
@@ -100,7 +100,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<Status> Update(params Expression<Func<string, object>>[] parameters)
+        public async Task<Status> UpdateAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<Status>(EndPoints.StatusesUpdate, parameters);
         }
@@ -119,7 +119,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<Status> UpdateWithMedia(params Expression<Func<string, object>>[] parameters)
+        public async Task<Status> UpdateWithMediaAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<Status>(EndPoints.StatusesUpdateWithMedia, parameters);
         }
@@ -135,7 +135,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<Status> Destroy(long id, params Expression<Func<string, object>>[] parameters)
+        public async Task<Status> DestroyAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesDestroyId, id), parameters);
         }
@@ -150,7 +150,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<Status> Show(long id, params Expression<Func<string, object>>[] parameters)
+        public async Task<Status> ShowAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesShowId, id), parameters);
         }
@@ -166,7 +166,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<Status> Spread(long id, params Expression<Func<string, object>>[] parameters)
+        public async Task<Status> SpreadAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesSpreadId, id), parameters);
         }
@@ -182,7 +182,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<Status> Comment(params Expression<Func<string, object>>[] parameters)
+        public async Task<Status> CommentAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<Status>(EndPoints.StatusesComment, parameters);
         }
@@ -199,7 +199,7 @@ namespace Vulpecula.Rest
         /// <para>include_entities : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<Status> CommentWithMedia(params Expression<Func<string, object>>[] parameters)
+        public async Task<Status> CommentWithMediaAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<Status>(EndPoints.StatusesCommentWithMedia, parameters);
         }

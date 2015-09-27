@@ -24,7 +24,7 @@ namespace Vulpecula.Rest
         /// <para>user_id : long (* Either a user_id or screen_name is required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<User> Create(params Expression<Func<string, object>>[] parameters)
+        public async Task<User> CreateAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<User>(EndPoints.FriendShipsCreate, parameters);
         }
@@ -39,7 +39,7 @@ namespace Vulpecula.Rest
         /// <para>user_id : long (* Either a user_id or screen_name is required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<User> Destroy(params Expression<Func<string, object>>[] parameters)
+        public async Task<User> DestroyAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<User>(EndPoints.FriendShipsDestroy, parameters);
         }
@@ -55,7 +55,7 @@ namespace Vulpecula.Rest
         /// <para>target_screen_name : string (* Either a target_id or target_screen_name is required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<RelationShipOwner> Show(params Expression<Func<string, object>>[] parameters)
+        public async Task<RelationShipOwner> ShowAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<RelationShipOwner>(EndPoints.FriendShipsShow, parameters);
         }
@@ -70,7 +70,7 @@ namespace Vulpecula.Rest
         /// <para>user_id : long (* Either a user_id or screen_name is required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IEnumerable<RelationShipOwner2>> Lookup(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<RelationShipOwner2>> LookupAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<RelationShipOwner2>>(EndPoints.FriendShipsLookup, parameters);
         }

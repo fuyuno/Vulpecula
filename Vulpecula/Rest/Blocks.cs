@@ -23,7 +23,7 @@ namespace Vulpecula.Rest
         /// <para>user_id : long (* Either a user_id or screen_name is required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<User> Create(params Expression<Func<string, object>>[] parameters)
+        public async Task<User> CreateAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<User>(EndPoints.BlocksCreate, parameters);
         }
@@ -38,7 +38,7 @@ namespace Vulpecula.Rest
         /// <para>user_id : long (* Either a user_id or screen_name is required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<User> Destroy(params Expression<Func<string, object>>[] parameters)
+        public async Task<User> DestroyAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.PostAsync<User>(EndPoints.BlocksDestroy, parameters);
         }
@@ -52,7 +52,7 @@ namespace Vulpecula.Rest
         /// <para>trim_user : bool</para>
         /// </param>
         /// <returns></returns>
-        public async Task<List> List(params Expression<Func<string, object>>[] parameters)
+        public async Task<List> ListAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<List>(EndPoints.BlocksList, parameters);
         }
@@ -65,7 +65,7 @@ namespace Vulpecula.Rest
         /// <para>cursor : long</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IDs> Ids(params Expression<Func<string, object>>[] parameters)
+        public async Task<IDs> IdsAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IDs>(EndPoints.BlocksIds, parameters);
         }

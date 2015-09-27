@@ -16,7 +16,7 @@ namespace Vulpecula.Rest
         /// <para>レスポンスにはリクエストした時間、トレンドワードの名前、検索結果を表示する為のクエリが含まれます。</para>
         /// </summary>
         /// <returns></returns>
-        public async Task<TrendOwner> Place(/* params Expression<Func<string, object>>[] parameters */)
+        public async Task<TrendOwner> PlaceAsync(/* params Expression<Func<string, object>>[] parameters */)
         {
             return await this.Croudia.GetAsync<TrendOwner>(EndPoints.TrendsPlace, id => 1);
         }

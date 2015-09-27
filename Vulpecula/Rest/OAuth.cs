@@ -30,7 +30,7 @@ namespace Vulpecula.Rest
         /// アクセストークンを更新します。
         /// </summary>
         /// <returns></returns>
-        public async Task<Token> Token(string access_code)
+        public async Task<Token> TokenAsync(string access_code)
         {
             return await this.Croudia.GetAsync<Token>(EndPoints.OAuth2Token, grant_type => "authorization_code",
                 client_id => this.Croudia.ConsumerKey, cleint_secret => this.Croudia.ConsumerSecret, code => access_code);
@@ -40,7 +40,7 @@ namespace Vulpecula.Rest
         /// アクセストークンを更新します。
         /// </summary>
         /// <returns></returns>
-        public async Task<Token> Refresh()
+        public async Task<Token> RefreshAsync()
         {
             return await this.Croudia.GetAsync<Token>(EndPoints.OAuth2Token, grant_type => "refresh_token",
                 client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret,

@@ -23,7 +23,7 @@ namespace Vulpecula.Rest
         /// <para>user_id : long (* Either a user_id or screen_name is required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<User> Show(params Expression<Func<string, object>>[] parameters)
+        public async Task<User> ShowAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<User>(EndPoints.UsersShow, parameters);
         }
@@ -38,7 +38,7 @@ namespace Vulpecula.Rest
         /// <para>user_id : long (* Either a user_id or screen_name is required)</para>
         /// </param>
         /// <returns></returns>
-        public async Task<IEnumerable<User>> Lookup(params Expression<Func<string, object>>[] parameters)
+        public async Task<IEnumerable<User>> LookupAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<IEnumerable<User>>(EndPoints.UsersLookup, parameters);
         }
