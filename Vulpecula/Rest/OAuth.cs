@@ -32,8 +32,22 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Token> TokenAsync(string access_code)
         {
-            return await this.Croudia.GetAsync<Token>(EndPoints.OAuth2Token, grant_type => "authorization_code",
-                client_id => this.Croudia.ConsumerKey, cleint_secret => this.Croudia.ConsumerSecret, code => access_code);
+            return await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "authorization_code",
+                client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret, code => access_code);
+        }
+
+        /// <summary>
+        /// アクセストークンを更新します。
+        /// </summary>
+        /// <returns></returns>
+        public Token Token(string access_code)
+        {
+            var task = Task.Run(async () =>
+                await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "authorization_code",
+                    client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret,
+                    code => access_code));
+            task.Wait();
+            return task.Result;
         }
 
         /// <summary>
@@ -42,9 +56,23 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Token> RefreshAsync()
         {
-            return await this.Croudia.GetAsync<Token>(EndPoints.OAuth2Token, grant_type => "refresh_token",
+            return await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "refresh_token",
                 client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret,
                 refresh_token => this.Croudia.RefreshToken);
+        }
+
+        /// <summary>
+        /// アクセストークンを更新します。
+        /// </summary>
+        /// <returns></returns>
+        public Token Refresh()
+        {
+            var task = Task.Run(async () =>
+                await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "refresh_token",
+                    client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret,
+                    refresh_token => this.Croudia.RefreshToken));
+            task.Wait();
+            return task.Result;
         }
     }
 }

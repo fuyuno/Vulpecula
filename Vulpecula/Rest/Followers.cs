@@ -29,6 +29,23 @@ namespace Vulpecula.Rest
         }
 
         /// <summary>
+        /// 指定したユーザーのフォロワーのユーザーID一覧を返します。100件ずつ取得できます。
+        /// </summary>
+        /// <param name="parameters">
+        /// <para>利用可能なパラメータ</para>
+        /// <para>screen_name : string (* Either a user_id or screen_name is required)</para>
+        /// <para>user_id : long (* Either a user_id or screen_name is required)</para>
+        /// <para>cursor : long</para>
+        /// </param>
+        /// <returns></returns>
+        public IDs Ids(params Expression<Func<string, object>>[] parameters)
+        {
+            var task = Task.Run(async () => await this.Croudia.GetAsync<IDs>(EndPoints.FollowersIds, parameters));
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
         /// 指定したユーザーのフォロワーオブジェクト一覧を返します。20件ずつ取得できます。
         /// </summary>
         /// <param name="parameters">
@@ -42,6 +59,24 @@ namespace Vulpecula.Rest
         public async Task<List> ListAsync(params Expression<Func<string, object>>[] parameters)
         {
             return await this.Croudia.GetAsync<List>(EndPoints.FollowersList, parameters);
+        }
+
+        /// <summary>
+        /// 指定したユーザーのフォロワーオブジェクト一覧を返します。20件ずつ取得できます。
+        /// </summary>
+        /// <param name="parameters">
+        /// <para>利用可能なパラメータ</para>
+        /// <para>screen_name : string (* Either a user_id or screen_name is required)</para>
+        /// <para>user_id : long (* Either a user_id or screen_name is required)</para>
+        /// <para>cursor : long</para>
+        /// <para>trim_user : bool</para>
+        /// </param>
+        /// <returns></returns>
+        public List List(params Expression<Func<string, object>>[] parameters)
+        {
+            var task = Task.Run(async () => await this.Croudia.GetAsync<List>(EndPoints.FollowersList, parameters));
+            task.Wait();
+            return task.Result;
         }
     }
 }
