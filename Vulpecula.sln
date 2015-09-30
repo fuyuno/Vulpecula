@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Desktop", "Vulpec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Streaming", "Vulpecula.Streaming\Vulpecula.Streaming.csproj", "{2538124A-5DC4-4200-83FD-6EC643CCB7E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Streaming.Test", "Vulpecula.Streaming.Test\Vulpecula.Streaming.Test.csproj", "{2AF423EE-56A8-4E82-95B8-B5E19730EFF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Streaming.Sandbox", "Vulpecula.Streaming.Test\Vulpecula.Streaming.Sandbox.csproj", "{2AF423EE-56A8-4E82-95B8-B5E19730EFF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

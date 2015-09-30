@@ -20,7 +20,7 @@ foreach (var status in croudia.Statuses.GetPublicTimelineAsStreaming())
 
 // Reactive
 var stream = croudia.Statuses.GetPublicTimelineAsObservable();
-var disposable = stream.Subscribe(status =>
+var disposable = stream.Where(w => w.Source.Name == "Croudia").Subscribe(status =>
 {
     Console.WriteLine($"{status.User.Name} @{status.User.ScreenName}");
     Console.WriteLine(status.Text);
@@ -31,5 +31,4 @@ var task = Task.Delay(TimeSpan.FromSeconds(60));
 task.Wait();
 Console.WriteLine("Disconnected.");
 disposable.Dispose();
-
 ```
