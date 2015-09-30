@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
+
+using Vulpecula.Streaming.Reactive;
 
 namespace Vulpecula.Streaming.Test
 {
@@ -20,14 +23,28 @@ namespace Vulpecula.Streaming.Test
             var token = croudia.OAuth.Token(Console.ReadLine());
             croudia.AccessToken = token.AccessToken;
 
-            CroudiaStreaming.TimeSpan = TimeSpan.FromSeconds(10);
+            CroudiaStreaming.TimeSpan = TimeSpan.FromSeconds(5);
 
+            // foreach
             foreach (var status in croudia.Statuses.GetPublicTimelineAsStreaming())
             {
                 Console.WriteLine($"{status.User.Name} @{status.User.ScreenName}");
                 Console.WriteLine(status.Text);
                 Console.WriteLine("-------------------------------------------------------------------");
             }
+
+            var stream = croudia.Statuses.GetPublicTimelineAsObservable();
+            var disposable = stream.Subscribe(status =>
+            {
+                Console.WriteLine($"{status.User.Name} @{status.User.ScreenName}");
+                Console.WriteLine(status.Text);
+                Console.WriteLine("-------------------------------------------------------------------");
+            });
+
+            var task = Task.Delay(TimeSpan.FromSeconds(60));
+            task.Wait();
+            Console.WriteLine("Disconnected.");
+            disposable.Dispose();
         }
     }
 }

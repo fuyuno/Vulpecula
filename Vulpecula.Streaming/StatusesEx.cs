@@ -37,7 +37,7 @@ namespace Vulpecula.Streaming
                 if (lastStatusId != 0)
                 {
                     var id = lastStatusId;
-                    AdjustParameters(parameters, since_id => id);
+                    parameters = AdjustParameters(parameters, since_id => id);
                 }
                 var statuses = obj.GetPublieTimeline(parameters).ToArray();
                 if (!statuses.Any())
@@ -78,7 +78,7 @@ namespace Vulpecula.Streaming
                 if (lastStatusId != 0)
                 {
                     var id = lastStatusId;
-                    AdjustParameters(parameters, since_id => id);
+                    parameters = AdjustParameters(parameters, since_id => id);
                 }
                 var statuses = obj.GetHomeTimeline(parameters).ToArray();
                 if (!statuses.Any())
@@ -102,6 +102,7 @@ namespace Vulpecula.Streaming
         /// <para>screen_nameまたはuser_idパラメータを指定することで、他のユーザーのタイムラインを取得することができます。</para>
         /// <para>* ただし、非公開ユーザーのタイムラインを取得するには事前にフォローリクエストを承認している必要があります。</para>
         /// </summary>
+        /// <param name="obj"></param>
         /// <param name="parameters">
         /// <para>利用可能なパラメータ</para>
         /// <para>screen_name : string</para>
@@ -122,7 +123,7 @@ namespace Vulpecula.Streaming
                 if (lastStatusId != 0)
                 {
                     var id = lastStatusId;
-                    AdjustParameters(parameters, since_id => id);
+                    parameters = AdjustParameters(parameters, since_id => id);
                 }
                 var statuses = obj.GetUserTimeline(parameters).ToArray();
                 if (!statuses.Any())
@@ -144,6 +145,7 @@ namespace Vulpecula.Streaming
         /// <summary>
         /// 認証ユーザー宛の関連ささやき（＠ユーザー名を含むささやき）最新20件を返します。
         /// </summary>
+        /// <param name="obj"></param>
         /// <param name="parameters">
         /// <para>利用可能なパラメータ</para>
         /// <para>trim_user : bool</para>
@@ -162,7 +164,7 @@ namespace Vulpecula.Streaming
                 if (lastStatusId != 0)
                 {
                     var id = lastStatusId;
-                    AdjustParameters(parameters, since_id => id);
+                    parameters = AdjustParameters(parameters, since_id => id);
                 }
                 var statuses = obj.GetMentions(parameters).ToArray();
                 if (!statuses.Any())
@@ -181,7 +183,7 @@ namespace Vulpecula.Streaming
             }
         }
 
-        private static void AdjustParameters(Expression<Func<string, object>>[] parameters, Expression<Func<string, object>> newParameter)
+        private static Expression<Func<string, object>>[] AdjustParameters(Expression<Func<string, object>>[] parameters, Expression<Func<string, object>> newParameter)
         {
             var param = parameters.FirstOrDefault(w => w.Parameters[0].Name == newParameter.Parameters[0].Name);
             if (param == null)
@@ -195,6 +197,7 @@ namespace Vulpecula.Streaming
                         .Index;
                 parameters[index] = newParameter;
             }
+            return parameters;
         }
 
         private static void Wait()

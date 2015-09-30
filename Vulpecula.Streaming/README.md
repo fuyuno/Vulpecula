@@ -6,14 +6,30 @@ Sample
 ```csharp
 var croudia = new Croudia("xxxxx", "xxxxx", "xxxxx", "xxxxx");
 
-// 10秒スパン
+// 10秒スパン(デフォルトは5秒)
 CroudiaStreaming.TimeSpan = TimeSpan.FromSeconds(10); 
 
 // foreach
-foreach(var status = croudia.Statuses.GetPublicTimelineAsStreaming())
-    Console.WriteLine(status.ToString());
+foreach (var status in croudia.Statuses.GetPublicTimelineAsStreaming())
+{
+    Console.WriteLine($"{status.User.Name} @{status.User.ScreenName}");
+    Console.WriteLine(status.Text);
+    Console.WriteLine("-------------------------------------------------------------------");
+}
 
-// use parameters
-foreach(var status = croudia.Statuses.GetPublicTimelineAsStreaming(trim_user => true))
-    Console.WriteLine(status.ToString());
+
+// Reactive
+var stream = croudia.Statuses.GetPublicTimelineAsObservable();
+var disposable = stream.Subscribe(status =>
+{
+    Console.WriteLine($"{status.User.Name} @{status.User.ScreenName}");
+    Console.WriteLine(status.Text);
+    Console.WriteLine("-------------------------------------------------------------------");
+});
+
+var task = Task.Delay(TimeSpan.FromSeconds(60));
+task.Wait();
+Console.WriteLine("Disconnected.");
+disposable.Dispose();
+
 ```
