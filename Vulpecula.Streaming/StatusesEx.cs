@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 using Vulpecula.Models;
 using Vulpecula.Rest;
@@ -37,12 +36,12 @@ namespace Vulpecula.Streaming
                 if (lastStatusId != 0)
                 {
                     var id = lastStatusId;
-                    parameters = AdjustParameters(parameters, since_id => id);
+                    parameters = CroudiaStreaming.AdjustParameters(parameters, since_id => id);
                 }
                 var statuses = obj.GetPublieTimeline(parameters).ToArray();
                 if (!statuses.Any())
                 {
-                    Wait();
+                    CroudiaStreaming.Wait();
                     continue;
                 }
 
@@ -52,7 +51,7 @@ namespace Vulpecula.Streaming
                 foreach (var status in statuses)
                     yield return status;
 
-                Wait();
+                CroudiaStreaming.Wait();
             }
         }
 
@@ -78,12 +77,12 @@ namespace Vulpecula.Streaming
                 if (lastStatusId != 0)
                 {
                     var id = lastStatusId;
-                    parameters = AdjustParameters(parameters, since_id => id);
+                    parameters = CroudiaStreaming.AdjustParameters(parameters, since_id => id);
                 }
                 var statuses = obj.GetHomeTimeline(parameters).ToArray();
                 if (!statuses.Any())
                 {
-                    Wait();
+                    CroudiaStreaming.Wait();
                     continue;
                 }
 
@@ -93,7 +92,7 @@ namespace Vulpecula.Streaming
                 foreach (var status in statuses)
                     yield return status;
 
-                Wait();
+                CroudiaStreaming.Wait();
             }
         }
 
@@ -123,12 +122,12 @@ namespace Vulpecula.Streaming
                 if (lastStatusId != 0)
                 {
                     var id = lastStatusId;
-                    parameters = AdjustParameters(parameters, since_id => id);
+                    parameters = CroudiaStreaming.AdjustParameters(parameters, since_id => id);
                 }
                 var statuses = obj.GetUserTimeline(parameters).ToArray();
                 if (!statuses.Any())
                 {
-                    Wait();
+                    CroudiaStreaming.Wait();
                     continue;
                 }
 
@@ -138,7 +137,7 @@ namespace Vulpecula.Streaming
                 foreach (var status in statuses)
                     yield return status;
 
-                Wait();
+                CroudiaStreaming.Wait();
             }
         }
 
@@ -164,12 +163,12 @@ namespace Vulpecula.Streaming
                 if (lastStatusId != 0)
                 {
                     var id = lastStatusId;
-                    parameters = AdjustParameters(parameters, since_id => id);
+                    parameters = CroudiaStreaming.AdjustParameters(parameters, since_id => id);
                 }
                 var statuses = obj.GetMentions(parameters).ToArray();
                 if (!statuses.Any())
                 {
-                    Wait();
+                    CroudiaStreaming.Wait();
                     continue;
                 }
 
@@ -179,31 +178,8 @@ namespace Vulpecula.Streaming
                 foreach (var status in statuses)
                     yield return status;
 
-                Wait();
+                CroudiaStreaming.Wait();
             }
-        }
-
-        private static Expression<Func<string, object>>[] AdjustParameters(Expression<Func<string, object>>[] parameters, Expression<Func<string, object>> newParameter)
-        {
-            var param = parameters.FirstOrDefault(w => w.Parameters[0].Name == newParameter.Parameters[0].Name);
-            if (param == null)
-                // ReSharper disable once RedundantAssignment
-                parameters = parameters.Concat(new[] { newParameter }).ToArray();
-            else
-            {
-                var index =
-                    parameters.Select((expr, i) => new { Expr = expr, Index = i })
-                        .First(w => w.Expr.Parameters[0].Name == newParameter.Parameters[0].Name)
-                        .Index;
-                parameters[index] = newParameter;
-            }
-            return parameters;
-        }
-
-        private static void Wait()
-        {
-            var task = Task.Delay(CroudiaStreaming.TimeSpan);
-            task.Wait();
         }
     }
 }

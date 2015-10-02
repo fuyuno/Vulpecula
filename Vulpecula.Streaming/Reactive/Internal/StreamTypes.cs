@@ -1,6 +1,6 @@
 ﻿namespace Vulpecula.Streaming.Reactive.Internal
 {
-    internal class StreamTypes
+    internal static class StreamTypes
     {
         internal enum Statuses
         {
@@ -11,6 +11,13 @@
             User,
 
             Mentions
+        }
+
+        internal enum SecretMails
+        {
+            Received,
+
+            Sent
         }
     }
 }
