@@ -100,7 +100,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\ApplicationDefintions.cs" />
+    <Compile Include="Models\AppDefintions.cs" />
+    <Compile Include="Models\CroudiaProvider.cs" />
+    <Compile Include="Models\VulpeculaSettings.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -137,7 +139,6 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Vulpecula.Streaming\Vulpecula.Streaming.csproj">
       <Project>{2538124a-5dc4-4200-83fd-6ec643ccb7e8}</Project>

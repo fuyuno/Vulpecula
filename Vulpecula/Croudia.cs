@@ -71,6 +71,12 @@ namespace Vulpecula
             this.RefreshToken = refreshToken;
         }
 
+        public void SetTokens(Token token)
+        {
+            this.AccessToken = token.AccessToken;
+            this.RefreshToken = token.RefreshToken;
+        }
+
         public async Task<T> GetAsync<T>(string url, params Expression<Func<string, object>>[] parameters)
         {
             var param = parameters.Select(expression => new KeyValuePair<string, object>(expression.Parameters[0].Name, expression.Compile().Invoke(null))).ToList();

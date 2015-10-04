@@ -32,8 +32,10 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Token> TokenAsync(string access_code)
         {
-            return await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "authorization_code",
+            var token = await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "authorization_code",
                 client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret, code => access_code);
+            this.Croudia.SetTokens(token);
+            return token;
         }
 
         /// <summary>
@@ -47,6 +49,7 @@ namespace Vulpecula.Rest
                     client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret,
                     code => access_code));
             task.Wait();
+            this.Croudia.SetTokens(task.Result);
             return task.Result;
         }
 
@@ -56,9 +59,11 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Token> RefreshAsync()
         {
-            return await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "refresh_token",
+            var token = await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "refresh_token",
                 client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret,
                 refresh_token => this.Croudia.RefreshToken);
+            this.Croudia.SetTokens(token);
+            return token;
         }
 
         /// <summary>
@@ -72,6 +77,7 @@ namespace Vulpecula.Rest
                     client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret,
                     refresh_token => this.Croudia.RefreshToken));
             task.Wait();
+            this.Croudia.SetTokens(task.Result);
             return task.Result;
         }
     }

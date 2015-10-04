@@ -14,7 +14,7 @@
   <mp:PhoneIdentity PhoneProductId="e55c4077-e09f-4da2-a0a5-34e54bd0e863" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Vulpecula.Universal</DisplayName>
+    <DisplayName>Vulpecula for Windows</DisplayName>
     <PublisherDisplayName>Mikazuki</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

@@ -6,6 +6,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:prism="http://prismlibrary.com/"
       xmlns:vm="using:Vulpecula.Universal.ViewModels"
+      d:DataContext="{d:DesignInstance vm:MainPageViewModel}"
       mc:Ignorable="d">
 
     <Page.DataContext>
@@ -14,5 +15,6 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock FontSize="48" Text="{Binding Text}" />
+        <Button Command="{Binding AuthCommand}" Content="認証" />
     </Grid>
 </Page>
