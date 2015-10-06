@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+
 using Vulpecula.Universal.Models;
 
 namespace Vulpecula.Universal.ViewModels

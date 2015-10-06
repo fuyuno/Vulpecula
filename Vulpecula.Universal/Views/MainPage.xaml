@@ -14,7 +14,106 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock FontSize="48" Text="{Binding Text}" />
-        <Button Command="{Binding AuthCommand}" Content="認証" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+                    Orientation="Horizontal">
+            <ToggleButton x:Name="HamburgerButton"
+                          Width="48"
+                          Height="48"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
+            </ToggleButton>
+            <TextBlock Margin="10,0"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       Text="Vulpecula" />
+        </StackPanel>
+        <SplitView Grid.Row="1"
+                   DisplayMode="CompactInline"
+                   IsPaneOpen="{Binding ElementName=HamburgerButton,
+                                        Path=IsChecked}">
+            <SplitView.Pane>
+                <RelativePanel>
+                    <!--  #region Header of SplitView  -->
+                    <StackPanel RelativePanel.AlignTopWithPanel="True">
+                        <ListBox>
+                            <ListBoxItem Padding="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Width="48"
+                                              Height="48"
+                                              FontSize="24"
+                                              Glyph="&#xE094;" />
+                                    <SearchBox Width="252"
+                                               Height="38"
+                                               Margin="10,0"
+                                               VerticalAlignment="Center"
+                                               BorderThickness="1"
+                                               FontSize="18"
+                                               PlaceholderText="ささやき / ユーザー を検索" />
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem Padding="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Width="48"
+                                              Height="48"
+                                              FontSize="24"
+                                              Glyph="&#xE109;" />
+                                    <TextBlock Margin="10,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               Text="アカウントを追加" />
+                                </StackPanel>
+                            </ListBoxItem>
+                        </ListBox>
+                    </StackPanel>
+                    <!--  #endregion  -->
+                    <!--  #region Footer of SplitView  -->
+                    <StackPanel RelativePanel.AlignBottomWithPanel="True">
+                        <ListBox>
+                            <ListBoxItem Padding="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Width="48"
+                                              Height="48"
+                                              FontSize="24"
+                                              Glyph="&#xE125;" />
+                                    <TextBlock Margin="10,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               Text="アカウント" />
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem Padding="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Width="48"
+                                              Height="48"
+                                              FontSize="24"
+                                              Glyph="&#xE115;" />
+                                    <TextBlock Margin="10,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               Text="設定" />
+                                </StackPanel>
+                            </ListBoxItem>
+                        </ListBox>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="48px"
+                                   Height="48px"
+                                   Source="../Assets/Icon.png" />
+                            <TextBlock Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18"
+                                       Text="Vulpecula for Windows" />
+                        </StackPanel>
+                    </StackPanel>
+                    <!--  #endregion  -->
+                </RelativePanel>
+            </SplitView.Pane>
+        </SplitView>
     </Grid>
 </Page>

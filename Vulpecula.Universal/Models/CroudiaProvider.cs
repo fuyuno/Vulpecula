@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Vulpecula.Models;
+
 using Windows.Security.Authentication.Web;
 using Windows.Security.Credentials;
 
@@ -13,8 +15,7 @@ namespace Vulpecula.Universal.Models
 
         public CroudiaProvider()
         {
-            this.Croudia = new Croudia(AppDefintions.ConsumerKey, AppDefintions.ConsumerSecret,
-                App.AppSettings.AccessToken, App.AppSettings.RefreshToken);
+            this.Croudia = new Croudia(AppDefintions.ConsumerKey, AppDefintions.ConsumerSecret);
         }
 
         public async Task<User> Authorization()
