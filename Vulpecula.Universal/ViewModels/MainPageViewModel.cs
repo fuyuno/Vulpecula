@@ -1,6 +1,9 @@
-﻿using Prism.Commands;
+﻿using System.Collections.ObjectModel;
+
+using Prism.Commands;
 using Prism.Mvvm;
 
+using Vulpecula.Models;
 using Vulpecula.Universal.Models;
 
 namespace Vulpecula.Universal.ViewModels
@@ -13,10 +16,20 @@ namespace Vulpecula.Universal.ViewModels
         {
             this._croudiaProvider = new CroudiaProvider();
             // Initialize
+            this.Initialize();
+        }
+
+        private void Initialize()
+        {
+            this.UserAccounts = new ObservableCollection<User>();
             this.Text = "Hello MVVM on UWP!";
         }
 
-        #region Text変更通知プロパティ
+        #region Properties
+
+        public ObservableCollection<User> UserAccounts { get; set; }
+
+        #region Text
 
         private string _Text;
 
@@ -28,6 +41,10 @@ namespace Vulpecula.Universal.ViewModels
 
         #endregion
 
+        #endregion
+
+        #region Commands
+        #region AuthCommand
         private DelegateCommand _authCommand;
 
         public DelegateCommand AuthCommand => this._authCommand ?? (this._authCommand = new DelegateCommand(Authorization));
@@ -35,7 +52,11 @@ namespace Vulpecula.Universal.ViewModels
         private async void Authorization()
         {
             var user = await this._croudiaProvider.Authorization();
+            this.UserAccounts.Add(user);
             this.Text = $"Hello, @{user.ScreenName}!";
         }
+
+        #endregion
+        #endregion
     }
 }

@@ -35,29 +35,44 @@
                        Text="Vulpecula" />
         </StackPanel>
         <SplitView Grid.Row="1"
-                   DisplayMode="CompactInline"
+                   DisplayMode="CompactOverlay"
                    IsPaneOpen="{Binding ElementName=HamburgerButton,
                                         Path=IsChecked}">
             <SplitView.Pane>
                 <RelativePanel>
                     <!--  #region Header of SplitView  -->
-                    <StackPanel RelativePanel.AlignTopWithPanel="True">
+                    <StackPanel x:Name="Header" RelativePanel.AlignTopWithPanel="True">
+                        <ListBox ItemsSource="{Binding UserAccounts}">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="0" />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Grid Width="48" Height="48">
+                                            <Border Margin="5" CornerRadius="19">
+                                                <Border.Background>
+                                                    <ImageBrush ImageSource="{Binding ProfileImageUrlHttps}" />
+                                                </Border.Background>
+                                            </Border>
+                                        </Grid>
+                                        <TextBlock Margin="10,0"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="18"
+                                                   Text="{Binding ScreenName,
+                                                                  Converter={StaticResource StringFormatConverter},
+                                                                  ConverterParameter='@{0}'}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    <!--  #endregion  -->
+                    <!--  #region Center Content of SplitView  -->
+                    <StackPanel RelativePanel.Below="Header">
                         <ListBox>
-                            <ListBoxItem Padding="0">
-                                <StackPanel Orientation="Horizontal">
-                                    <FontIcon Width="48"
-                                              Height="48"
-                                              FontSize="24"
-                                              Glyph="&#xE094;" />
-                                    <SearchBox Width="252"
-                                               Height="38"
-                                               Margin="10,0"
-                                               VerticalAlignment="Center"
-                                               BorderThickness="1"
-                                               FontSize="18"
-                                               PlaceholderText="ささやき / ユーザー を検索" />
-                                </StackPanel>
-                            </ListBoxItem>
                             <ListBoxItem Padding="0">
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon Width="48"
@@ -76,6 +91,21 @@
                     <!--  #region Footer of SplitView  -->
                     <StackPanel RelativePanel.AlignBottomWithPanel="True">
                         <ListBox>
+                            <ListBoxItem Padding="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Width="48"
+                                              Height="48"
+                                              FontSize="24"
+                                              Glyph="&#xE094;" />
+                                    <SearchBox Width="252"
+                                               Height="38"
+                                               Margin="10,0"
+                                               VerticalAlignment="Center"
+                                               BorderThickness="1"
+                                               FontSize="18"
+                                               PlaceholderText="ささやき / ユーザー を検索" />
+                                </StackPanel>
+                            </ListBoxItem>
                             <ListBoxItem Padding="0">
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon Width="48"
@@ -114,6 +144,17 @@
                     <!--  #endregion  -->
                 </RelativePanel>
             </SplitView.Pane>
+            <SplitView.Content>
+                <ScrollViewer>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="18" Text="{Binding Text}" />
+                        <Button Command="{Binding AuthCommand}"
+                                Content="認証"
+                                FontSize="18" />
+
+                    </StackPanel>
+                </ScrollViewer>
+            </SplitView.Content>
         </SplitView>
     </Grid>
 </Page>
