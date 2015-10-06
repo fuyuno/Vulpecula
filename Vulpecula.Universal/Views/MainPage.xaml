@@ -6,7 +6,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:prism="http://prismlibrary.com/"
       xmlns:vm="using:Vulpecula.Universal.ViewModels"
-      d:DataContext="{d:DesignInstance vm:MainPageViewModel}"
       mc:Ignorable="d">
 
     <Page.DataContext>
@@ -21,12 +20,15 @@
         <StackPanel Grid.Row="0"
                     Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
                     Orientation="Horizontal">
-            <ToggleButton x:Name="HamburgerButton"
-                          Width="48"
+            <ToggleButton Width="48"
                           Height="48"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
-                          Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
+                          Checked="{x:Bind ViewModel.OnChecked}"
+                          Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+                          IsChecked="{Binding IsHamburgerChecked,
+                                              Mode=TwoWay}"
+                          Unchecked="{x:Bind ViewModel.OnUnchecked}">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
             </ToggleButton>
             <TextBlock Margin="10,0"
@@ -36,8 +38,9 @@
         </StackPanel>
         <SplitView Grid.Row="1"
                    DisplayMode="CompactOverlay"
-                   IsPaneOpen="{Binding ElementName=HamburgerButton,
-                                        Path=IsChecked}">
+                   IsPaneOpen="{Binding IsHamburgerChecked,
+                                        UpdateSourceTrigger=PropertyChanged}"
+                   PaneClosing="{x:Bind ViewModel.PaneClosing}">
             <SplitView.Pane>
                 <RelativePanel>
                     <!--  #region Header of SplitView  -->
