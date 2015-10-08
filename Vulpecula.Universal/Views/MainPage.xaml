@@ -12,7 +12,7 @@
         <vm:MainPageViewModel />
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="{x:Bind ViewModel.OnLoaded}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
             <RowDefinition Height="*" />
@@ -57,14 +57,14 @@
                                         <Grid Width="48" Height="48">
                                             <Border Margin="5" CornerRadius="19">
                                                 <Border.Background>
-                                                    <ImageBrush ImageSource="{Binding ProfileImageUrlHttps}" />
+                                                    <ImageBrush ImageSource="{Binding User.ProfileImageUrlHttps}" />
                                                 </Border.Background>
                                             </Border>
                                         </Grid>
                                         <TextBlock Margin="10,0"
                                                    VerticalAlignment="Center"
                                                    FontSize="18"
-                                                   Text="{Binding ScreenName,
+                                                   Text="{Binding User.ScreenName,
                                                                   Converter={StaticResource StringFormatConverter},
                                                                   ConverterParameter='@{0}'}" />
                                     </StackPanel>
@@ -75,8 +75,8 @@
                     <!--  #endregion  -->
                     <!--  #region Center Content of SplitView  -->
                     <StackPanel RelativePanel.Below="Header">
-                        <ListBox>
-                            <ListBoxItem Padding="0">
+                        <ListBox SelectionChanged="{x:Bind ViewModel.OnSelectionChanged}">
+                            <ListBoxItem Padding="0" Tapped="{x:Bind ViewModel.OnTapped}">
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon Width="48"
                                               Height="48"
@@ -93,7 +93,7 @@
                     <!--  #endregion  -->
                     <!--  #region Footer of SplitView  -->
                     <StackPanel RelativePanel.AlignBottomWithPanel="True">
-                        <ListBox>
+                        <ListBox SelectionChanged="{x:Bind ViewModel.OnSelectionChanged}">
                             <ListBoxItem Padding="0">
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon Width="48"
@@ -151,10 +151,6 @@
                 <ScrollViewer>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontSize="18" Text="{Binding Text}" />
-                        <Button Command="{Binding AuthCommand}"
-                                Content="認証"
-                                FontSize="18" />
-
                     </StackPanel>
                 </ScrollViewer>
             </SplitView.Content>

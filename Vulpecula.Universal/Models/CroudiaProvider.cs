@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
-
-using Vulpecula.Models;
 
 using Windows.Security.Authentication.Web;
 using Windows.Security.Credentials;
+
+using Vulpecula.Models;
 
 namespace Vulpecula.Universal.Models
 {
@@ -13,28 +12,28 @@ namespace Vulpecula.Universal.Models
     {
         public Croudia Croudia { get; }
 
+        public User User { get; private set; }
+
         public CroudiaProvider()
         {
             this.Croudia = new Croudia(AppDefintions.ConsumerKey, AppDefintions.ConsumerSecret);
         }
 
-        public async Task<User> Authorization()
+        public async Task<bool> Authorization(PasswordVault vault, PasswordCredential credential)
         {
-            User user;
-            var vault = new PasswordVault();
-            var existing = vault.FindAllByResource(AppDefintions.VulpeculaAppKey).FirstOrDefault();
-            if (existing != null)
+            if (credential != null)
             {
-                existing.RetrievePassword();
-                this.Croudia.RefreshToken = existing.Password;
+                credential.RetrievePassword();
+                this.Croudia.RefreshToken = credential.Password;
                 try
                 {
                     await this.Croudia.OAuth.RefreshAsync();
-                    user = await this.Croudia.Account.VerifyCredentialsAsync();
+                    this.User = await this.Croudia.Account.VerifyCredentialsAsync();
 
                     // 更新は、再度同じ Resource, Username で Add すれば良い
-                    vault.Add(new PasswordCredential(AppDefintions.VulpeculaAppKey, user.ScreenName, this.Croudia.RefreshToken));
-                    return user;
+                    vault.Add(new PasswordCredential(AppDefintions.VulpeculaAppKey, this.User.IdStr,
+                        this.Croudia.RefreshToken));
+                    return true;
                 }
                 catch
                 {
@@ -44,16 +43,25 @@ namespace Vulpecula.Universal.Models
 
             var startUri = new Uri(this.Croudia.OAuth.GetAuthorizeUrl());
             var endUri = new Uri("http://vulpecula.mkzk.tk/");
-            var result = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, startUri, endUri);
+            var result =
+                await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, startUri, endUri);
             if (result.ResponseStatus != WebAuthenticationStatus.Success)
-                return null;
+                return false;
 
-            var url = result.ResponseData;
-            await this.Croudia.OAuth.TokenAsync(url.Substring(url.IndexOf("code=", StringComparison.Ordinal) + 5));
-            user = await this.Croudia.Account.VerifyCredentialsAsync();
+            try
+            {
+                var url = result.ResponseData;
+                await this.Croudia.OAuth.TokenAsync(url.Substring(url.IndexOf("code=", StringComparison.Ordinal) + 5));
+                this.User = await this.Croudia.Account.VerifyCredentialsAsync();
 
-            vault.Add(new PasswordCredential(AppDefintions.VulpeculaAppKey, user.ScreenName, this.Croudia.RefreshToken));
-            return user;
+                vault.Add(new PasswordCredential(AppDefintions.VulpeculaAppKey, this.User.IdStr,
+                    this.Croudia.RefreshToken));
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

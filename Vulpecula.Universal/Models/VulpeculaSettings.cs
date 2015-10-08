@@ -1,6 +1,6 @@
-﻿using Prism.Mvvm;
+﻿using Windows.Storage;
 
-using Windows.Storage;
+using Prism.Mvvm;
 
 namespace Vulpecula.Universal.Models
 {

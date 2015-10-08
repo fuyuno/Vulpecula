@@ -103,6 +103,7 @@
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Models\AppDefintions.cs" />
     <Compile Include="Models\CroudiaProvider.cs" />
+    <Compile Include="Models\InAppPurchase.cs" />
     <Compile Include="Models\VulpeculaSettings.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

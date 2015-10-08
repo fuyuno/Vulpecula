@@ -1,34 +1,73 @@
-﻿using System.Collections.ObjectModel;
-using Prism.Commands;
-using Prism.Mvvm;
-using Vulpecula.Models;
-using Vulpecula.Universal.Models;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+
+using Windows.Security.Credentials;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+
+using Prism.Mvvm;
+
+using Vulpecula.Universal.Models;
 
 namespace Vulpecula.Universal.ViewModels
 {
     public class MainPageViewModel : BindableBase
     {
-        private readonly CroudiaProvider _croudiaProvider;
+        private int _accountCount;
 
         public MainPageViewModel()
         {
-            this._croudiaProvider = new CroudiaProvider();
-            // Initialize
-            this.Initialize();
+            this.UserAccounts = new ObservableCollection<CroudiaProvider>();
+            this.Text = "Hello MVVM on UWP!";
+            this.IsHamburgerChecked = false;
         }
 
-        private void Initialize()
+        private async Task Initialize()
         {
-            this.UserAccounts = new ObservableCollection<User>();
-            this.IsHamburgerChecked = false;
-            this.Text = "Hello MVVM on UWP!";
+            try
+            {
+                var vault = new PasswordVault();
+                vault.RetrieveAll();
+                var accounts = vault.FindAllByResource(AppDefintions.VulpeculaAppKey);
+                foreach (var credential in accounts)
+                {
+                    var provider = new CroudiaProvider();
+                    if (!await provider.Authorization(vault, credential))
+                    {
+                        vault.Remove(credential);
+                        continue;
+                    }
+                    this.UserAccounts.Add(provider);
+                    this._accountCount++;
+                }
+            }
+            catch (COMException)
+            {
+                // ignored
+            }
+        }
+
+        private async Task Authorization()
+        {
+            // TODO: Wrong ViewModel
+            if (this._accountCount >= 10)
+            {
+                var dialog = new MessageDialog("これ以上アカウントを追加することはできません。", "内部エラー");
+                await dialog.ShowAsync();
+                return;
+            }
+            var provider = new CroudiaProvider();
+            if (!await provider.Authorization(new PasswordVault(), null))
+                return;
+            this.UserAccounts.Add(provider);
         }
 
         #region Properties
 
-        public ObservableCollection<User> UserAccounts { get; set; }
+        public ObservableCollection<CroudiaProvider> UserAccounts { get; }
 
         #region Text
 
@@ -56,33 +95,21 @@ namespace Vulpecula.Universal.ViewModels
 
         #endregion
 
-        #region Commands
-
-        #region AuthCommand
-
-        private DelegateCommand _authCommand;
-
-        public DelegateCommand AuthCommand
-            => this._authCommand ?? (this._authCommand = new DelegateCommand(Authorization));
-
-        private async void Authorization()
-        {
-            var user = await this._croudiaProvider.Authorization();
-            this.UserAccounts.Add(user);
-            this.Text = $"Hello, @{user.ScreenName}!";
-        }
-
-        #endregion
-
-        #endregion
-
         #region Events
+
+        // TODO: Remove Code-behind
+        public async void OnLoaded(object sender, RoutedEventArgs e) => await this.Initialize();
 
         public void OnChecked(object sender, RoutedEventArgs e) => this.IsHamburgerChecked = true;
 
         public void OnUnchecked(object sender, RoutedEventArgs e) => this.IsHamburgerChecked = false;
 
         public void PaneClosing(object sender, SplitViewPaneClosingEventArgs e) => this.IsHamburgerChecked = false;
+
+        public async void OnTapped(object sender, RoutedEventArgs e) => await this.Authorization();
+
+        public void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+            => ((ListBox) sender).SelectedIndex = -1;
 
         #endregion
     }
