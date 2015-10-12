@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Vulpecula.Universal.Views.Contents
 {
-    public sealed partial class MessageTimeline : UserControl
+    public sealed partial class Timeline : UserControl
     {
-        public MessageTimeline()
+        public Timeline()
         {
             this.InitializeComponent();
         }

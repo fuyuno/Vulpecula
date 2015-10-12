@@ -1,10 +1,16 @@
 ﻿using System;
-using Vulpecula.Universal.Models;
+using System.Diagnostics;
+
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+
+using Microsoft.ApplicationInsights;
+
+using Vulpecula.Universal.Models;
+using Vulpecula.Universal.Views;
 
 namespace Vulpecula.Universal
 {
@@ -13,16 +19,23 @@ namespace Vulpecula.Universal
     /// </summary>
     sealed partial class App : Application
     {
+        #region Statics
+
+        public static readonly VulpeculaSettings AppSettings = new VulpeculaSettings();
+
+        #endregion
+
         /// <summary>
         /// 単一アプリケーション オブジェクトを初期化します。これは、実行される作成したコードの
-        ///最初の行であるため、main() または WinMain() と論理的に等価です。
+        /// 最初の行であるため、main() または WinMain() と論理的に等価です。
         /// </summary>
         public App()
         {
-            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
-                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
-                Microsoft.ApplicationInsights.WindowsCollectors.Session);
+            WindowsAppInitializer.InitializeAsync(
+                WindowsCollectors.Metadata |
+                WindowsCollectors.Session);
             this.InitializeComponent();
+            AppSettings.Initialize();
             this.Suspending += OnSuspending;
         }
 
@@ -34,13 +47,13 @@ namespace Vulpecula.Universal
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            var rootFrame = Window.Current.Content as Frame;
 
             // ウィンドウに既にコンテンツが表示されている場合は、アプリケーションの初期化を繰り返さずに、
             // ウィンドウがアクティブであることだけを確認してください
@@ -65,7 +78,7 @@ namespace Vulpecula.Universal
                 // ナビゲーション スタックが復元されない場合は、最初のページに移動します。
                 // このとき、必要な情報をナビゲーション パラメーターとして渡して、新しいページを
                 //構成します
-                rootFrame.Navigate(typeof(Views.MainPage), e.Arguments);
+                rootFrame.Navigate(typeof (MainPage), e.Arguments);
             }
             // 現在のウィンドウがアクティブであることを確認します
             Window.Current.Activate();
@@ -94,11 +107,5 @@ namespace Vulpecula.Universal
             //TODO: アプリケーションの状態を保存してバックグラウンドの動作があれば停止します
             deferral.Complete();
         }
-
-        #region Statics
-
-        public static readonly VulpeculaSettings AppSettings = new VulpeculaSettings();
-
-        #endregion
     }
 }

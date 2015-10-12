@@ -101,20 +101,23 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Models\AccountManager.cs" />
     <Compile Include="Models\AppDefintions.cs" />
     <Compile Include="Models\CroudiaProvider.cs" />
     <Compile Include="Models\CroudiaObjects\Status.cs" />
+    <Compile Include="Models\Dialogs\DialogCommands.cs" />
+    <Compile Include="Models\Dialogs\MessageDialogWrapper.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.MultipleAccounts.cs" />
+    <Compile Include="Models\Timeline.cs" />
+    <Compile Include="Models\TimelineType.cs" />
     <Compile Include="Models\VulpeculaSettings.cs" />
-    <Compile Include="ViewModels\Contents\MessageTimelineViewModel.cs" />
-    <Compile Include="ViewModels\Contents\StatusTimelineViewModel.cs" />
+    <Compile Include="Selectors\TimelineTemplateSelector.cs" />
+    <Compile Include="ViewModels\Contents\MessagesTimelineViewModel.cs" />
+    <Compile Include="ViewModels\Contents\StatusesTimelineViewModel.cs" />
     <Compile Include="ViewModels\Contents\TimelineViewModel.cs" />
-    <Compile Include="Views\Contents\MessageTimeline.xaml.cs">
-      <DependentUpon>MessageTimeline.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Contents\StatusTimeline.xaml.cs">
-      <DependentUpon>StatusTimeline.xaml</DependentUpon>
+    <Compile Include="Views\Contents\Timeline.xaml.cs">
+      <DependentUpon>Timeline.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -145,11 +148,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\Contents\MessageTimeline.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Contents\StatusTimeline.xaml">
+    <Page Include="Views\Contents\Timeline.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,31 +1,33 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 using Windows.Security.Credentials;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 using Prism.Mvvm;
 
 using Vulpecula.Universal.Models;
+using Vulpecula.Universal.ViewModels.Contents;
 
 namespace Vulpecula.Universal.ViewModels
 {
     public class MainPageViewModel : BindableBase
     {
-        private int _accountCount;
+        public AccountManager AccountManager { get; set; }
 
         public MainPageViewModel()
         {
-            this.UserAccounts = new ObservableCollection<CroudiaProvider>();
+            this.Timelines = new ObservableCollection<TimelineViewModel>();
             this.Text = "Hello MVVM on UWP!";
             this.IsHamburgerChecked = false;
+
+            // this.Reset();
+            this.AccountManager = new AccountManager();
         }
 
-        private async Task Initialize()
+        private void Reset()
         {
             try
             {
@@ -34,14 +36,7 @@ namespace Vulpecula.Universal.ViewModels
                 var accounts = vault.FindAllByResource(AppDefintions.VulpeculaAppKey);
                 foreach (var credential in accounts)
                 {
-                    var provider = new CroudiaProvider();
-                    if (!await provider.Authorization(vault, credential))
-                    {
-                        vault.Remove(credential);
-                        continue;
-                    }
-                    this.UserAccounts.Add(provider);
-                    this._accountCount++;
+                    vault.Remove(credential);
                 }
             }
             catch (COMException)
@@ -50,24 +45,19 @@ namespace Vulpecula.Universal.ViewModels
             }
         }
 
+        private async Task Initialize()
+        {
+            await this.AccountManager.InitializeAccounts();
+        }
+
         private async Task Authorization()
         {
-            // TODO: Wrong ViewModel
-            if (this._accountCount >= 10)
-            {
-                var dialog = new MessageDialog("これ以上アカウントを追加することはできません。", "内部エラー");
-                await dialog.ShowAsync();
-                return;
-            }
-            var provider = new CroudiaProvider();
-            if (!await provider.Authorization(new PasswordVault(), null))
-                return;
-            this.UserAccounts.Add(provider);
+            await this.AccountManager.AuthorizationAccount();
         }
 
         #region Properties
 
-        public ObservableCollection<CroudiaProvider> UserAccounts { get; }
+        public ObservableCollection<TimelineViewModel> Timelines { get; }
 
         #region Text
 

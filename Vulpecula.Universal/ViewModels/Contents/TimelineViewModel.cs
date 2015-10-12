@@ -1,21 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using Prism.Mvvm;
 
-using Prism.Mvvm;
-
-using Vulpecula.Models;
+using Vulpecula.Universal.Models;
 
 namespace Vulpecula.Universal.ViewModels.Contents
 {
-    public class TimelineViewModel<T> : BindableBase
+    public class TimelineViewModel : BindableBase
     {
-        public User User { get; private set; }
+        public Timeline TimelineSetting { get; private set; }
 
-        public ObservableCollection<T> TimelineContents { get; private set; }
-
-        public TimelineViewModel(User user)
+        public TimelineViewModel(Timeline timeline)
         {
-            this.User = user;
-            this.TimelineContents = new ObservableCollection<T>();
+            this.TimelineSetting = timeline;
         }
     }
 }

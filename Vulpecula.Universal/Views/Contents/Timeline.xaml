@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Vulpecula.Universal.Views.Contents.MessageTimeline"
+    x:Class="Vulpecula.Universal.Views.Contents.Timeline"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Vulpecula.Universal.Views.Contents"

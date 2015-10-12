@@ -1,6 +1,7 @@
 ﻿<Page x:Class="Vulpecula.Universal.Views.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:contents="using:Vulpecula.Universal.Views.Contents"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:Vulpecula.Universal"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -45,7 +46,7 @@
                 <RelativePanel>
                     <!--  #region Header of SplitView  -->
                     <StackPanel x:Name="Header" RelativePanel.AlignTopWithPanel="True">
-                        <ListBox ItemsSource="{Binding UserAccounts}">
+                        <ListBox ItemsSource="{Binding AccountManager.Users}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="Padding" Value="0" />
@@ -57,14 +58,14 @@
                                         <Grid Width="48" Height="48">
                                             <Border Margin="5" CornerRadius="19">
                                                 <Border.Background>
-                                                    <ImageBrush ImageSource="{Binding User.ProfileImageUrlHttps}" />
+                                                    <ImageBrush ImageSource="{Binding ProfileImageUrlHttps}" />
                                                 </Border.Background>
                                             </Border>
                                         </Grid>
                                         <TextBlock Margin="10,0"
                                                    VerticalAlignment="Center"
                                                    FontSize="18"
-                                                   Text="{Binding User.ScreenName,
+                                                   Text="{Binding ScreenName,
                                                                   Converter={StaticResource StringFormatConverter},
                                                                   ConverterParameter='@{0}'}" />
                                     </StackPanel>
@@ -150,7 +151,18 @@
             <SplitView.Content>
                 <ScrollViewer>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="18" Text="{Binding Text}" />
+                        <ItemsControl ItemsSource="{Binding Timelines}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <contents:Timeline DataContext="{Binding}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                 </ScrollViewer>
             </SplitView.Content>

@@ -37,7 +37,7 @@ namespace Vulpecula.Universal.Models
                 }
                 catch
                 {
-                    // ignored
+                    return false;
                 }
             }
 
