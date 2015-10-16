@@ -1,19 +1,17 @@
 ﻿using System.Collections.ObjectModel;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-using Windows.Security.Credentials;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-using Prism.Mvvm;
+using Prism.Windows.Mvvm;
 
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.ViewModels.Contents;
 
 namespace Vulpecula.Universal.ViewModels
 {
-    public class MainPageViewModel : BindableBase
+    public class MainPageViewModel : ViewModelBase
     {
         public AccountManager AccountManager { get; set; }
 
@@ -22,27 +20,7 @@ namespace Vulpecula.Universal.ViewModels
             this.Timelines = new ObservableCollection<TimelineViewModel>();
             this.Text = "Hello MVVM on UWP!";
             this.IsHamburgerChecked = false;
-
-            // this.Reset();
             this.AccountManager = new AccountManager();
-        }
-
-        private void Reset()
-        {
-            try
-            {
-                var vault = new PasswordVault();
-                vault.RetrieveAll();
-                var accounts = vault.FindAllByResource(AppDefintions.VulpeculaAppKey);
-                foreach (var credential in accounts)
-                {
-                    vault.Remove(credential);
-                }
-            }
-            catch (COMException)
-            {
-                // ignored
-            }
         }
 
         private async Task Initialize()

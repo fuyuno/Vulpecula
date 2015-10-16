@@ -5,6 +5,7 @@
     "Microsoft.ApplicationInsights.WindowsApps": "1.1.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "Prism.Core": "6.1.0",
+    "Prism.Unity": "6.1.0",
     "Prism.Windows": "6.0.0",
     "Rx-Main": "2.2.5"
   },

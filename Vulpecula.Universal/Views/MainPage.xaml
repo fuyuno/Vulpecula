@@ -5,14 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:Vulpecula.Universal"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:prism="http://prismlibrary.com/"
+      xmlns:prism="using:Prism.Windows.Mvvm"
       xmlns:vm="using:Vulpecula.Universal.ViewModels"
+      prism:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
-
-    <Page.DataContext>
-        <vm:MainPageViewModel />
-    </Page.DataContext>
-
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="{x:Bind ViewModel.OnLoaded}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
@@ -46,7 +42,7 @@
                 <RelativePanel>
                     <!--  #region Header of SplitView  -->
                     <StackPanel x:Name="Header" RelativePanel.AlignTopWithPanel="True">
-                        <ListBox ItemsSource="{Binding AccountManager.Users}">
+                        <ListBox ItemsSource="{x:Bind ViewModel.AccountManager.Users}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="Padding" Value="0" />
@@ -151,7 +147,7 @@
             <SplitView.Content>
                 <ScrollViewer>
                     <StackPanel Orientation="Horizontal">
-                        <ItemsControl ItemsSource="{Binding Timelines}">
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.Timelines}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" />

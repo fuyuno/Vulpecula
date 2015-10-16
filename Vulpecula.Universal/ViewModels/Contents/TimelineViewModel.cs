@@ -1,10 +1,10 @@
-﻿using Prism.Mvvm;
+﻿using Prism.Windows.Mvvm;
 
 using Vulpecula.Universal.Models;
 
 namespace Vulpecula.Universal.ViewModels.Contents
 {
-    public class TimelineViewModel : BindableBase
+    public class TimelineViewModel : ViewModelBase
     {
         public Timeline TimelineSetting { get; private set; }
 
