@@ -147,6 +147,7 @@
             <SplitView.Content>
                 <ScrollViewer>
                     <StackPanel Orientation="Horizontal">
+                        <!--
                         <ItemsControl ItemsSource="{x:Bind ViewModel.Timelines}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -159,6 +160,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
+                        -->
                     </StackPanel>
                 </ScrollViewer>
             </SplitView.Content>

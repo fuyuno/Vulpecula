@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vulpecula.Universal.Models
+namespace Vulpecula.Universal.Models.Timelines
 {
     public enum TimelineType
     {

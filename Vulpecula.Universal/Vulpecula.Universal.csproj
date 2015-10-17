@@ -104,18 +104,19 @@
     <Compile Include="Models\AccountManager.cs" />
     <Compile Include="Models\AppDefintions.cs" />
     <Compile Include="Models\CroudiaProvider.cs" />
-    <Compile Include="Models\CroudiaObjects\Status.cs" />
     <Compile Include="Models\Dialogs\DialogCommands.cs" />
     <Compile Include="Models\Dialogs\MessageDialogWrapper.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.MultipleAccounts.cs" />
-    <Compile Include="Models\Timeline.cs" />
-    <Compile Include="Models\TimelineType.cs" />
+    <Compile Include="Models\ColumnManager.cs" />
+    <Compile Include="Models\Timelines\Column.cs" />
+    <Compile Include="Models\Timelines\ColumnInfo.cs" />
+    <Compile Include="Models\Timelines\TimelineType.cs" />
     <Compile Include="Models\VulpeculaSettings.cs" />
     <Compile Include="Selectors\TimelineTemplateSelector.cs" />
-    <Compile Include="ViewModels\Contents\MessagesTimelineViewModel.cs" />
-    <Compile Include="ViewModels\Contents\StatusesTimelineViewModel.cs" />
-    <Compile Include="ViewModels\Contents\TimelineViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\MessagesTimelineViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\StatusesTimelineViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\TimelineViewModelBase.cs" />
     <Compile Include="Views\Contents\Timeline.xaml.cs">
       <DependentUpon>Timeline.xaml</DependentUpon>
     </Compile>
@@ -170,7 +171,9 @@
       <Name>Vulpecula</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Migrate\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

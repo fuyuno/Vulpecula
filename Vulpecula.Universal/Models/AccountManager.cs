@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ using Vulpecula.Universal.Models.Dialogs;
 namespace Vulpecula.Universal.Models
 {
     /// <summary>
-    /// アカウントを管理するクラスです。
+    /// アカウントを管理します。
     /// </summary>
     public class AccountManager
     {
@@ -25,6 +26,25 @@ namespace Vulpecula.Universal.Models
             this.Providers = new ObservableCollection<CroudiaProvider>();
             this.Users = new ObservableCollection<User>();
             this._accountCounts = 0;
+        }
+
+        public void ResetAccounts()
+        {
+            try
+            {
+                var vault = new PasswordVault();
+                vault.RetrieveAll();
+
+                var accounts = vault.FindAllByResource(AppDefintions.VulpeculaAppKey);
+                foreach (var credential in accounts)
+                    vault.Remove(credential);
+                this.Providers.Clear();
+                this.Users.Clear();
+                this._accountCounts = 0;
+            }
+            catch (COMException)
+            {
+            }
         }
 
         public async Task InitializeAccounts()
@@ -49,8 +69,9 @@ namespace Vulpecula.Universal.Models
                     this._accountCounts++;
                 }
             }
-            catch (COMException)
+            catch (COMException e)
             {
+                Debug.WriteLine(e.Message);
             }
         }
 

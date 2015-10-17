@@ -7,25 +7,38 @@ using Windows.UI.Xaml.Controls;
 using Prism.Windows.Mvvm;
 
 using Vulpecula.Universal.Models;
-using Vulpecula.Universal.ViewModels.Contents;
+using Vulpecula.Universal.ViewModels.Timelines;
 
 namespace Vulpecula.Universal.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        public AccountManager AccountManager { get; set; }
+        public AccountManager AccountManager { get; }
+
+        public ColumnManager ColumnManager { get; }
 
         public MainPageViewModel()
         {
-            this.Timelines = new ObservableCollection<TimelineViewModel>();
-            this.Text = "Hello MVVM on UWP!";
+            this.Timelines = new ObservableCollection<TimelineViewModelBase>();
             this.IsHamburgerChecked = false;
             this.AccountManager = new AccountManager();
+            this.ColumnManager = new ColumnManager();
         }
 
         private async Task Initialize()
         {
+            // this.AccountManager.ResetAccounts();
+            // this.ColumnManager.ClearColumns();
+
             await this.AccountManager.InitializeAccounts();
+            this.ColumnManager.InitializeColumns();
+
+            if (this.AccountManager.Users.Count == 0)
+            {
+                await this.Authorization();
+                if (this.AccountManager.Users.Count > 0)
+                    this.ColumnManager.SetupInitialColumns(this.AccountManager.Users[0].Id);
+            }
         }
 
         private async Task Authorization()
@@ -35,19 +48,7 @@ namespace Vulpecula.Universal.ViewModels
 
         #region Properties
 
-        public ObservableCollection<TimelineViewModel> Timelines { get; }
-
-        #region Text
-
-        private string _text;
-
-        public string Text
-        {
-            get { return this._text; }
-            set { this.SetProperty(ref this._text, value); }
-        }
-
-        #endregion
+        public ObservableCollection<TimelineViewModelBase> Timelines { get; }
 
         #region IsHamburgerChecked
 
@@ -65,14 +66,13 @@ namespace Vulpecula.Universal.ViewModels
 
         #region Events
 
-        // TODO: Remove Code-behind
-        public async void OnLoaded(object sender, RoutedEventArgs e) => await this.Initialize();
+        public async void OnLoaded() => await this.Initialize();
 
-        public void OnChecked(object sender, RoutedEventArgs e) => this.IsHamburgerChecked = true;
+        public void OnChecked() => this.IsHamburgerChecked = true;
 
-        public void OnUnchecked(object sender, RoutedEventArgs e) => this.IsHamburgerChecked = false;
+        public void OnUnchecked() => this.IsHamburgerChecked = false;
 
-        public void PaneClosing(object sender, SplitViewPaneClosingEventArgs e) => this.IsHamburgerChecked = false;
+        public void PaneClosing() => this.IsHamburgerChecked = false;
 
         public async void OnTapped(object sender, RoutedEventArgs e) => await this.Authorization();
 

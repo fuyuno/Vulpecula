@@ -1,48 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
-<Package
-  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
-  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
-  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  IgnorableNamespaces="uap mp">
-
-  <Identity
-    Name="e55c4077-e09f-4da2-a0a5-34e54bd0e863"
-    Publisher="CN=Mikazuki"
-    Version="1.0.0.0" />
-
-  <mp:PhoneIdentity PhoneProductId="e55c4077-e09f-4da2-a0a5-34e54bd0e863" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
-
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+  <Identity Name="e55c4077-e09f-4da2-a0a5-34e54bd0e863" Publisher="CN=Mikazuki" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="e55c4077-e09f-4da2-a0a5-34e54bd0e863" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Vulpecula for Windows</DisplayName>
     <PublisherDisplayName>Mikazuki</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
-
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
   </Dependencies>
-
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
-
   <Applications>
-    <Application Id="App"
-      Executable="$targetnametoken$.exe"
-      EntryPoint="Vulpecula.Universal.App">
-      <uap:VisualElements
-        DisplayName="Vulpecula for Windows"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Vulpecula.Universal"
-        BackgroundColor="#000046">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Vulpecula.Universal.App">
+      <uap:VisualElements DisplayName="Vulpecula for Windows" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Vulpecula for Windows は、 Windows 向けの Croudia クライアントアプリケーションです。複数アカウント、マルチカラムで、快適に Croudia を使うことができます。" BackgroundColor="#000046">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+        </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
   </Applications>
-
   <Capabilities>
     <Capability Name="internetClient" />
   </Capabilities>

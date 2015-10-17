@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-using Vulpecula.Universal.ViewModels.Contents;
+using Vulpecula.Universal.ViewModels.Timelines;
 
 namespace Vulpecula.Universal.Selectors
 {
