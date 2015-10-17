@@ -1,11 +1,11 @@
 ﻿<Page x:Class="Vulpecula.Universal.Views.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:contents="using:Vulpecula.Universal.Views.Contents"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:Vulpecula.Universal"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:prism="using:Prism.Windows.Mvvm"
+      xmlns:timeline="using:Vulpecula.Universal.Views.Timelines"
       xmlns:vm="using:Vulpecula.Universal.ViewModels"
       prism:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
@@ -145,10 +145,9 @@
                 </RelativePanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <ScrollViewer>
+                <ScrollViewer HorizontalScrollMode="Auto" VerticalScrollMode="Disabled">
                     <StackPanel Orientation="Horizontal">
-                        <!--
-                        <ItemsControl ItemsSource="{x:Bind ViewModel.Timelines}">
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.ColumnManager.Columns}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" />
@@ -156,11 +155,10 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <contents:Timeline DataContext="{Binding}" />
+                                    <timeline:Column DataContext="{Binding}" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                        -->
                     </StackPanel>
                 </ScrollViewer>
             </SplitView.Content>

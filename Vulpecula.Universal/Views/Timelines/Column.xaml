@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Vulpecula.Universal.Views.Timelines.Column"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:Vulpecula.Universal.Views.Timelines"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:timelines="using:Vulpecula.Universal.Models.Timelines"
+             Width="360"
+             d:DataContext="{d:DesignInstance timelines:ColumnInfo}"
+             d:DesignHeight="640"
+             d:DesignWidth="360"
+             mc:Ignorable="d">
+
+    <Border BorderBrush="{StaticResource AppBarBorderThemeBrush}" BorderThickness="2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="48" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0"
+                        Background="{StaticResource AppBarBackgroundThemeBrush}"
+                        Orientation="Horizontal">
+                <Image Width="36"
+                       Height="36"
+                       Margin="10,6"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Source="https://img.croudia.com/profile_images/MikazukiFuyuno/pzqDtyUUiiBeX7nyvcngxhwi.png" />
+                <TextBlock VerticalAlignment="Center"
+                           FontSize="24"
+                           Text="{Binding Name}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <ListBox>
+                    <ListBoxItem>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="52" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Width="48"
+                                   Height="48"
+                                   Margin="2"
+                                   VerticalAlignment="Top"
+                                   Source="https://img.croudia.com/profile_images/MikazukiFuyuno/pzqDtyUUiiBeX7nyvcngxhwi.png" />
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="24" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="24" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Text="三日月ふゆの" />
+                                    <TextBlock Text="@MikazukiFuyuno" />
+                                    <TextBlock Text="2015/10/17 23:55" />
+                                </StackPanel>
+
+                                <TextBlock Grid.Row="1"
+                                           Text="急であれなんですが、CrArchiveとにゃんメーカー、ネコレットメーカーですが、8/3の深夜帯、メンテナンスのためちょっとの間だけ繋がらなくなるかもです。"
+                                           TextWrapping="WrapWholeWords" />
+
+                                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                    <Button>SHARE</Button>
+                                    <Button>FAVORITE</Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </ListBoxItem>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
