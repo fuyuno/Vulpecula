@@ -9,7 +9,9 @@
       xmlns:vm="using:Vulpecula.Universal.ViewModels"
       prism:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="{x:Bind ViewModel.OnLoaded}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          Loaded="{x:Bind ViewModel.OnLoaded}"
+          Unloaded="{x:Bind ViewModel.Dispose}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
             <RowDefinition Height="*" />
@@ -42,7 +44,7 @@
                 <RelativePanel>
                     <!--  #region Header of SplitView  -->
                     <StackPanel x:Name="Header" RelativePanel.AlignTopWithPanel="True">
-                        <ListBox ItemsSource="{x:Bind ViewModel.AccountManager.Users}">
+                        <ListBox ItemsSource="{x:Bind ViewModel.Users}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="Padding" Value="0" />
@@ -145,9 +147,11 @@
                 </RelativePanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <ScrollViewer HorizontalScrollMode="Auto" VerticalScrollMode="Disabled">
+                <ScrollViewer HorizontalScrollMode="Auto"
+                              VerticalScrollBarVisibility="Hidden"
+                              VerticalScrollMode="Disabled">
                     <StackPanel Orientation="Horizontal">
-                        <ItemsControl ItemsSource="{x:Bind ViewModel.ColumnManager.Columns}">
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.Columns}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" />

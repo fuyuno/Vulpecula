@@ -4,25 +4,33 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-using Prism.Windows.Mvvm;
-
+using Vulpecula.Models;
+using Vulpecula.Universal.Extensions;
+using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models;
+using Vulpecula.Universal.Models.Timelines;
+using Vulpecula.Universal.ViewModels.Primitives;
 using Vulpecula.Universal.ViewModels.Timelines;
 
 namespace Vulpecula.Universal.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModel
     {
-        public AccountManager AccountManager { get; }
+        private readonly AccountManager _accountManager;
 
-        public ColumnManager ColumnManager { get; }
+        private readonly ColumnManager _columnManager;
 
         public MainPageViewModel()
         {
-            this.Timelines = new ObservableCollection<TimelineViewModelBase>();
             this.IsHamburgerChecked = false;
-            this.AccountManager = new AccountManager();
-            this.ColumnManager = new ColumnManager();
+            this.Users = new ObservableCollection<User>();
+            this.Columns = new ObservableCollection<ColumnViewModel>();
+            this._accountManager = new AccountManager();
+            this._columnManager = new ColumnManager();
+
+            ViewModelHelper.SubscribeNotifyCollectionChanged(this._accountManager.Users, this.Users).AddTo(this);
+            ViewModelHelper.SubscribeNotifyCollectionChanged(this._columnManager.Columns, this.Columns, (ColumnInfo w) =>
+                new ColumnViewModel(Column.RelateUserToColumn(this.Users, w))).AddTo(this);
         }
 
         private async Task Initialize()
@@ -30,25 +38,27 @@ namespace Vulpecula.Universal.ViewModels
             // this.AccountManager.ResetAccounts();
             // this.ColumnManager.ClearColumns();
 
-            await this.AccountManager.InitializeAccounts();
-            this.ColumnManager.InitializeColumns();
+            await this._accountManager.InitializeAccounts();
+            this._columnManager.InitializeColumns();
 
-            if (this.AccountManager.Users.Count == 0)
+            if (this._accountManager.Users.Count == 0)
             {
                 await this.Authorization();
-                if (this.AccountManager.Users.Count > 0)
-                    this.ColumnManager.SetupInitialColumns(this.AccountManager.Users[0].Id);
+                if (this._accountManager.Users.Count > 0)
+                    this._columnManager.SetupInitialColumns(this._accountManager.Users[0].Id);
             }
         }
 
         private async Task Authorization()
         {
-            await this.AccountManager.AuthorizationAccount();
+            await this._accountManager.AuthorizationAccount();
         }
 
         #region Properties
 
-        public ObservableCollection<TimelineViewModelBase> Timelines { get; }
+        public ObservableCollection<ColumnViewModel> Columns { get; }
+
+        public ObservableCollection<User> Users { get; }
 
         #region IsHamburgerChecked
 

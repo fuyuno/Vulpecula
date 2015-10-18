@@ -4,9 +4,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="using:Vulpecula.Universal.Views.Timelines"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:timelines="using:Vulpecula.Universal.Models.Timelines"
+             xmlns:timelines="using:Vulpecula.Universal.ViewModels.Timelines"
              Width="360"
-             d:DataContext="{d:DesignInstance timelines:ColumnInfo}"
+             d:DataContext="{d:DesignInstance timelines:ColumnViewModel}"
              d:DesignHeight="640"
              d:DesignWidth="360"
              mc:Ignorable="d">
@@ -25,7 +25,7 @@
                        Margin="10,6"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Source="https://img.croudia.com/profile_images/MikazukiFuyuno/pzqDtyUUiiBeX7nyvcngxhwi.png" />
+                       Source="{Binding Icon}" />
                 <TextBlock VerticalAlignment="Center"
                            FontSize="24"
                            Text="{Binding Name}" />

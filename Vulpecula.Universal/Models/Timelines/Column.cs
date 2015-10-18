@@ -19,15 +19,11 @@ namespace Vulpecula.Universal.Models.Timelines
             this.User = user;
         }
 
-        public static IEnumerable<Column> RelateUserToColumn(IEnumerable<User> users, IEnumerable<ColumnInfo> columns)
+        public static Column RelateUserToColumn(IEnumerable<User> users, ColumnInfo column)
         {
-            var list = new List<Column>();
-            foreach (var column in columns)
-            {
-                if (users.Any(w => w.Id == column.UserId))
-                    list.Add(new Column(column, users.Single(w => w.Id == column.UserId)));
-            }
-            return list;
+            if (users.Any(w => w.Id == column.UserId))
+                return new Column(column, users.Single(w => w.Id == column.UserId));
+            throw new KeyNotFoundException($"UserId:{column.UserId} is not found in users that already loading.");
         }
     }
 }
