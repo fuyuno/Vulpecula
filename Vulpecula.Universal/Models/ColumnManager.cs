@@ -12,25 +12,25 @@ namespace Vulpecula.Universal.Models
     /// </summary>
     public class ColumnManager
     {
-        public ObservableCollection<ColumnInfo> Columns { get; }
+        public ObservableCollection<Column> Columns { get; }
 
         public ColumnManager()
         {
-            this.Columns = new ObservableCollection<ColumnInfo>();
+            this.Columns = new ObservableCollection<Column>();
         }
 
         public void InitializeColumns()
         {
             var columns = App.AppSettings.Columns;
             foreach (var column in columns)
-                this.Columns.Add(ColumnInfo.RestoreColumnInfo(column));
+                this.Columns.Add(Column.RestoreColumnInfo(column));
         }
 
         public void ClearColumns()
         {
             var columns = App.AppSettings.Columns;
             foreach (var column in columns)
-                this.RemoveColumn(ColumnInfo.RestoreColumnInfo(column));
+                this.RemoveColumn(Column.RestoreColumnInfo(column));
         }
 
         /// <summary>
@@ -39,30 +39,30 @@ namespace Vulpecula.Universal.Models
         /// <param name="userId"></param>
         public void SetupInitialColumns(long userId)
         {
-            this.AddColumn(ColumnInfo.CreateColumnInfo(TimelineType.Public, "public", userId));
-            this.AddColumn(ColumnInfo.CreateColumnInfo(TimelineType.Mentions, "mentions", userId));
-            this.AddColumn(ColumnInfo.CreateColumnInfo(TimelineType.DirectMessages, "messages", userId));
+            this.AddColumn(Column.CreateColumnInfo(TimelineType.Public, "public", userId));
+            this.AddColumn(Column.CreateColumnInfo(TimelineType.Mentions, "mentions", userId));
+            this.AddColumn(Column.CreateColumnInfo(TimelineType.DirectMessages, "messages", userId));
         }
 
-        public void AddColumn(ColumnInfo info)
+        public void AddColumn(Column info)
         {
             if (!info.ColumnId.StartsWith("Column-"))
                 throw new ArgumentException(nameof(info));
 
             var composite = new ApplicationDataCompositeValue
             {
-                [nameof(ColumnInfo.Type)] = info.Type.ToString(),
-                [nameof(ColumnInfo.ColumnId)] = info.ColumnId,
-                [nameof(ColumnInfo.Name)] = info.Name,
-                [nameof(ColumnInfo.UserId)] = info.UserId,
-                [nameof(ColumnInfo.Query)] = info.Query
+                [nameof(Column.Type)] = info.Type.ToString(),
+                [nameof(Column.ColumnId)] = info.ColumnId,
+                [nameof(Column.Name)] = info.Name,
+                [nameof(Column.UserId)] = info.UserId,
+                [nameof(Column.Query)] = info.Query
             };
 
             this.Columns.Add(info);
             App.AppSettings.AddValues(info.ColumnId, composite);
         }
 
-        public void RemoveColumn(ColumnInfo info)
+        public void RemoveColumn(Column info)
         {
             this.Columns.Remove(info);
             App.AppSettings.RemoveValue(info.ColumnId);

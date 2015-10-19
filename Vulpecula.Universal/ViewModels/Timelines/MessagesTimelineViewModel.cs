@@ -9,7 +9,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
     {
         public ObservableCollection<SecretMail> SecretMails { get; set; }
 
-        public MessagesTimelineViewModel(ColumnInfo columnInfo) : base(columnInfo)
+        public MessagesTimelineViewModel(Column columnInfo) : base(columnInfo)
         {
             this.SecretMails = new ObservableCollection<SecretMail>();
         }

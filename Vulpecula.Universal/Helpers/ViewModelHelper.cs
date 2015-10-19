@@ -3,8 +3,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 using Vulpecula.Universal.Extensions;
-using Vulpecula.Universal.Models.Timelines;
-using Vulpecula.Universal.ViewModels.Timelines;
 
 namespace Vulpecula.Universal.Helpers
 {
@@ -24,15 +22,15 @@ namespace Vulpecula.Universal.Helpers
                 switch (w.EventArgs.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        target.Insert(w.EventArgs.NewStartingIndex, (T)w.EventArgs.NewItems[0]);
+                        target.Insert(w.EventArgs.NewStartingIndex, (T) w.EventArgs.NewItems[0]);
                         break;
 
                     case NotifyCollectionChangedAction.Remove:
-                        target.Remove((T)w.EventArgs.NewItems[0]);
+                        target.Remove((T) w.EventArgs.NewItems[0]);
                         break;
 
                     case NotifyCollectionChangedAction.Replace:
-                        target[w.EventArgs.NewStartingIndex] = (T)w.EventArgs.NewItems[0];
+                        target[w.EventArgs.NewStartingIndex] = (T) w.EventArgs.NewItems[0];
                         break;
 
                     case NotifyCollectionChangedAction.Move:
@@ -63,15 +61,15 @@ namespace Vulpecula.Universal.Helpers
                 switch (w.EventArgs.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        target.Insert(w.EventArgs.NewStartingIndex, castFunc.Invoke((TModel)w.EventArgs.NewItems[0]));
+                        target.Insert(w.EventArgs.NewStartingIndex, castFunc.Invoke((TModel) w.EventArgs.NewItems[0]));
                         break;
 
                     case NotifyCollectionChangedAction.Remove:
-                        target.Remove(castFunc.Invoke((TModel)w.EventArgs.NewItems[0]));
+                        target.Remove(castFunc.Invoke((TModel) w.EventArgs.NewItems[0]));
                         break;
 
                     case NotifyCollectionChangedAction.Replace:
-                        target[w.EventArgs.NewStartingIndex] = castFunc.Invoke((TModel)w.EventArgs.NewItems[0]);
+                        target[w.EventArgs.NewStartingIndex] = castFunc.Invoke((TModel) w.EventArgs.NewItems[0]);
                         break;
 
                     case NotifyCollectionChangedAction.Move:

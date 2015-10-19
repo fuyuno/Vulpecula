@@ -6,9 +6,9 @@ namespace Vulpecula.Universal.ViewModels.Timelines
 {
     public class TimelineViewModelBase : ViewModelBase
     {
-        public ColumnInfo ColumnInfo { get; set; }
+        public Column ColumnInfo { get; set; }
 
-        protected TimelineViewModelBase(ColumnInfo columnInfo)
+        protected TimelineViewModelBase(Column columnInfo)
         {
             this.ColumnInfo = columnInfo;
         }

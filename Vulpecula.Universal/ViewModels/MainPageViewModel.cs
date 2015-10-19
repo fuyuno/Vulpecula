@@ -11,6 +11,7 @@ using Vulpecula.Universal.Models;
 using Vulpecula.Universal.Models.Timelines;
 using Vulpecula.Universal.ViewModels.Primitives;
 using Vulpecula.Universal.ViewModels.Timelines;
+using Vulpecula.Universal.ViewModels.Timelines.Statuses;
 
 namespace Vulpecula.Universal.ViewModels
 {
@@ -23,14 +24,14 @@ namespace Vulpecula.Universal.ViewModels
         public MainPageViewModel()
         {
             this.IsHamburgerChecked = false;
-            this.Users = new ObservableCollection<User>();
+            this.Users = new ObservableCollection<UserViewModel>();
             this.Columns = new ObservableCollection<ColumnViewModel>();
             this._accountManager = new AccountManager();
             this._columnManager = new ColumnManager();
 
-            ViewModelHelper.SubscribeNotifyCollectionChanged(this._accountManager.Users, this.Users).AddTo(this);
-            ViewModelHelper.SubscribeNotifyCollectionChanged(this._columnManager.Columns, this.Columns, (ColumnInfo w) =>
-                new ColumnViewModel(Column.RelateUserToColumn(this.Users, w))).AddTo(this);
+            ViewModelHelper.SubscribeNotifyCollectionChanged(this._accountManager.Users, this.Users, (User w) => new UserViewModel(w)).AddTo(this);
+            ViewModelHelper.SubscribeNotifyCollectionChanged(this._columnManager.Columns, this.Columns, (Column w) =>
+                ColumnViewModel.Create(this._accountManager.Users, w)).AddTo(this);
         }
 
         private async Task Initialize()
@@ -58,7 +59,7 @@ namespace Vulpecula.Universal.ViewModels
 
         public ObservableCollection<ColumnViewModel> Columns { get; }
 
-        public ObservableCollection<User> Users { get; }
+        public ObservableCollection<UserViewModel> Users { get; }
 
         #region IsHamburgerChecked
 

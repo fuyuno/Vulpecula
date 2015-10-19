@@ -9,7 +9,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
     {
         public ObservableCollection<Status> Statuses { get; set; }
 
-        public StatusesTimelineViewModel(ColumnInfo columnInfo) : base(columnInfo)
+        public StatusesTimelineViewModel(Column columnInfo) : base(columnInfo)
         {
             this.Statuses = new ObservableCollection<Status>();
         }

@@ -1,29 +1,95 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 
-using Vulpecula.Models;
+using Windows.Storage;
 
-// ReSharper disable PossibleMultipleEnumeration
+using Prism.Mvvm;
 
 namespace Vulpecula.Universal.Models.Timelines
 {
-    public class Column
+    public class Column : BindableBase
     {
-        public ColumnInfo Info { get; set; }
+        public TimelineType Type { get; set; }
 
-        public User User { get; set; }
+        public string ColumnId { get; set; }
 
-        public Column(ColumnInfo info, User user)
+        public long UserId { get; set; }
+
+        public string Query { get; set; }
+
+        private Column()
         {
-            this.Info = info;
-            this.User = user;
         }
 
-        public static Column RelateUserToColumn(IEnumerable<User> users, ColumnInfo column)
+        private Column(TimelineType type, string id, string name, long userId, string query)
         {
-            if (users.Any(w => w.Id == column.UserId))
-                return new Column(column, users.Single(w => w.Id == column.UserId));
-            throw new KeyNotFoundException($"UserId:{column.UserId} is not found in users that already loading.");
+            this.Type = type;
+            this.ColumnId = id;
+            this.Name = name;
+            this.UserId = userId;
+            this.Query = query;
         }
+
+        public static Column CreateColumnInfo(TimelineType type, string name, long userId, string query = null)
+        {
+            return new Column(type, $"Column-{Guid.NewGuid()}", name, userId, query);
+        }
+
+        public static Column RestoreColumnInfo(ApplicationDataCompositeValue adcv)
+        {
+            TimelineType type;
+            if (!Enum.TryParse(adcv[nameof(Type)].ToString(), out type))
+                throw new InvalidDataException();
+            var info = new Column
+            {
+                Type = type,
+                ColumnId = adcv[nameof(ColumnId)].ToString(),
+                Name = adcv[nameof(Name)].ToString(),
+                UserId = long.Parse(adcv[nameof(UserId)].ToString()),
+                Query = adcv[nameof(Query)]?.ToString()
+            };
+            Debug.WriteLine($"Restored column {{ID:{info.ColumnId}, Name:{info.Name}, Query:{info.Query}}}.");
+            return info;
+        }
+
+        /// <summary>
+        /// 指定したオブジェクトが、現在のオブジェクトと等しいかどうかを判断します。
+        /// </summary>
+        /// <returns>
+        /// 指定したオブジェクトが現在のオブジェクトと等しい場合は true。それ以外の場合は false。
+        /// </returns>
+        /// <param name="obj">現在のオブジェクトと比較するオブジェクト。 </param>
+        public override bool Equals(object obj)
+        {
+            var info = obj as Column;
+            if (info == null)
+                return false;
+            return info.ColumnId == this.ColumnId;
+        }
+
+        /// <summary>
+        /// 既定のハッシュ関数として機能します。
+        /// </summary>
+        /// <returns>
+        /// 現在のオブジェクトのハッシュ コード。
+        /// </returns>
+        public override int GetHashCode()
+        {
+            // ReSharper disable once NonReadonlyMemberInGetHashCode
+            return this.ColumnId.GetHashCode();
+        }
+
+        #region Name
+
+        private string _name;
+
+        public string Name
+        {
+            get { return this._name; }
+            set { this.SetProperty(ref this._name, value); }
+        }
+
+        #endregion
     }
 }

@@ -14,7 +14,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Statuses
 
         public string ScreenName => this._user.ScreenName;
 
-        public string ProfileImageUrl => this._user.ProfileImageUrlHttps;
+        public string Icon => this._user.ProfileImageUrlHttps;
 
         public string CoverImageUrl => this._user.CoverImageUrlHttps;
 
