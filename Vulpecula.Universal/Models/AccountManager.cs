@@ -77,7 +77,7 @@ namespace Vulpecula.Universal.Models
 
         public async Task AuthorizationAccount(PasswordCredential credential = null)
         {
-            if (this._accountCounts > 10)
+            if (this._accountCounts >= 10)
             {
                 await MessageDialogWrapper.ShowOkMessageDialogAsync("これ以上アカウントを追加することはできません。", "認証エラー");
                 return;

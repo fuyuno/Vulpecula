@@ -4,6 +4,8 @@ using System.Linq;
 using Vulpecula.Models;
 using Vulpecula.Universal.Models.Timelines;
 
+// ReSharper disable PossibleMultipleEnumeration
+
 namespace Vulpecula.Universal.ViewModels.Timelines
 {
     public class ColumnViewModel
