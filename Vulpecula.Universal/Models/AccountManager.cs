@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 using Windows.Security.Credentials;
 
+using JetBrains.Annotations;
+
 using Vulpecula.Models;
 using Vulpecula.Universal.Models.Dialogs;
 
@@ -28,6 +30,7 @@ namespace Vulpecula.Universal.Models
             this._accountCounts = 0;
         }
 
+        [UsedImplicitly]
         public void ResetAccounts()
         {
             try

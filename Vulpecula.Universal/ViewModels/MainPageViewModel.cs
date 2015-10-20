@@ -31,7 +31,7 @@ namespace Vulpecula.Universal.ViewModels
 
             ViewModelHelper.SubscribeNotifyCollectionChanged(this._accountManager.Users, this.Users, (User w) => new UserViewModel(w)).AddTo(this);
             ViewModelHelper.SubscribeNotifyCollectionChanged(this._columnManager.Columns, this.Columns, (Column w) =>
-                ColumnViewModel.Create(this._accountManager.Users, w)).AddTo(this);
+                ColumnViewModel.Create(this._accountManager.Providers, w)).AddTo(this);
         }
 
         private async Task Initialize()
@@ -88,7 +88,7 @@ namespace Vulpecula.Universal.ViewModels
         public async void OnTapped(object sender, RoutedEventArgs e) => await this.Authorization();
 
         public void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-            => ((ListBox) sender).SelectedIndex = -1;
+            => ((ListBox)sender).SelectedIndex = -1;
 
         #endregion
     }

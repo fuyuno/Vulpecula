@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 
 using Windows.Storage;
 
+using JetBrains.Annotations;
+
 using Vulpecula.Universal.Models.Timelines;
 
 namespace Vulpecula.Universal.Models
@@ -26,6 +28,7 @@ namespace Vulpecula.Universal.Models
                 this.Columns.Add(Column.RestoreColumnInfo(column));
         }
 
+        [UsedImplicitly]
         public void ClearColumns()
         {
             var columns = App.AppSettings.Columns;

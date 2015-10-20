@@ -113,6 +113,7 @@
     <Compile Include="Models\Purchase\InAppPurchase.MultipleAccounts.cs" />
     <Compile Include="Models\ColumnManager.cs" />
     <Compile Include="Models\Timelines\Column.cs" />
+    <Compile Include="Models\Timelines\Services\TimelineService.cs" />
     <Compile Include="Models\Timelines\TimelineType.cs" />
     <Compile Include="Models\VulpeculaSettings.cs" />
     <Compile Include="Selectors\TimelineTemplateSelector.cs" />
