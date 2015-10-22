@@ -1,6 +1,9 @@
-﻿using Prism.Windows.Mvvm;
+﻿using System.Collections.ObjectModel;
+
+using Prism.Windows.Mvvm;
 
 using Vulpecula.Universal.Models.Timelines;
+using Vulpecula.Universal.ViewModels.Primitives;
 
 namespace Vulpecula.Universal.ViewModels.Timelines
 {
@@ -8,9 +11,12 @@ namespace Vulpecula.Universal.ViewModels.Timelines
     {
         public Column ColumnInfo { get; set; }
 
+        public ObservableCollection<ViewModel> Statuses { get; }
+
         protected TimelineViewModelBase(Column columnInfo)
         {
             this.ColumnInfo = columnInfo;
+            this.Statuses = new ObservableCollection<ViewModel>();
         }
     }
 }

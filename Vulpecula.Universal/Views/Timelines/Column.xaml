@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="using:Vulpecula.Universal.Views.Timelines"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:primitives="using:Vulpecula.Universal.Views.Timelines.Primitive"
              xmlns:timelines="using:Vulpecula.Universal.ViewModels.Timelines"
              Width="360"
              d:DataContext="{d:DesignInstance timelines:ColumnViewModel}"
@@ -32,42 +33,11 @@
             </StackPanel>
             <StackPanel Grid.Row="1">
                 <ListBox>
-                    <ListBoxItem>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="52" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Image Width="48"
-                                   Height="48"
-                                   Margin="2"
-                                   VerticalAlignment="Top"
-                                   Source="https://img.croudia.com/profile_images/MikazukiFuyuno/pzqDtyUUiiBeX7nyvcngxhwi.png" />
-                            <Grid Grid.Column="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="24" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="24" />
-                                </Grid.RowDefinitions>
-
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="三日月ふゆの" />
-                                    <TextBlock Text="@MikazukiFuyuno" />
-                                    <TextBlock Text="2015/10/17 23:55" />
-                                </StackPanel>
-
-                                <TextBlock Grid.Row="1"
-                                           Text="急であれなんですが、CrArchiveとにゃんメーカー、ネコレットメーカーですが、8/3の深夜帯、メンテナンスのためちょっとの間だけ繋がらなくなるかもです。"
-                                           TextWrapping="WrapWholeWords" />
-
-                                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                    <Button>SHARE</Button>
-                                    <Button>FAVORITE</Button>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                    </ListBoxItem>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <primitives:StatusView DataContext="{Binding}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </StackPanel>
         </Grid>

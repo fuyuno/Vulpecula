@@ -1,12 +1,11 @@
 ﻿using System;
 
-using Prism.Windows.Mvvm;
-
 using Vulpecula.Models;
+using Vulpecula.Universal.ViewModels.Primitives;
 
-namespace Vulpecula.Universal.ViewModels.Timelines.Statuses
+namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 {
-    public class UserViewModel : ViewModelBase
+    public class UserViewModel : ViewModel
     {
         private readonly User _user;
 

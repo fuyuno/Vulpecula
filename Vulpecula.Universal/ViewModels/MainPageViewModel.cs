@@ -11,7 +11,7 @@ using Vulpecula.Universal.Models;
 using Vulpecula.Universal.Models.Timelines;
 using Vulpecula.Universal.ViewModels.Primitives;
 using Vulpecula.Universal.ViewModels.Timelines;
-using Vulpecula.Universal.ViewModels.Timelines.Statuses;
+using Vulpecula.Universal.ViewModels.Timelines.Primitives;
 
 namespace Vulpecula.Universal.ViewModels
 {
@@ -88,7 +88,7 @@ namespace Vulpecula.Universal.ViewModels
         public async void OnTapped(object sender, RoutedEventArgs e) => await this.Authorization();
 
         public void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-            => ((ListBox)sender).SelectedIndex = -1;
+            => ((ListBox) sender).SelectedIndex = -1;
 
         #endregion
     }

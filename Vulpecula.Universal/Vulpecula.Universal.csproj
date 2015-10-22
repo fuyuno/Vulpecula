@@ -100,6 +100,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Extensions\ObservableCollectionEx.cs" />
     <Compile Include="Extensions\ViewModelEx.cs" />
@@ -113,15 +114,14 @@
     <Compile Include="Models\Purchase\InAppPurchase.MultipleAccounts.cs" />
     <Compile Include="Models\ColumnManager.cs" />
     <Compile Include="Models\Timelines\Column.cs" />
+    <Compile Include="Models\Timelines\Primitive\StatusModel.cs" />
     <Compile Include="Models\Timelines\Services\TimelineService.cs" />
     <Compile Include="Models\Timelines\TimelineType.cs" />
     <Compile Include="Models\VulpeculaSettings.cs" />
-    <Compile Include="Selectors\TimelineTemplateSelector.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
     <Compile Include="ViewModels\Timelines\ColumnViewModel.cs" />
-    <Compile Include="ViewModels\Timelines\MessagesTimelineViewModel.cs" />
-    <Compile Include="ViewModels\Timelines\StatusesTimelineViewModel.cs" />
-    <Compile Include="ViewModels\Timelines\Statuses\UserViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\Primitives\StatusViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\Primitives\UserViewModel.cs" />
     <Compile Include="ViewModels\Timelines\TimelineViewModelBase.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -130,6 +130,9 @@
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\Timelines\Column.xaml.cs">
       <DependentUpon>Column.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Timelines\Primitive\StatusView.xaml.cs">
+      <DependentUpon>StatusView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +163,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Timelines\Column.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Timelines\Primitive\StatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

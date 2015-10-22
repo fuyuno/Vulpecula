@@ -33,6 +33,11 @@ namespace Vulpecula.Universal.Models.Timelines
         /// <summary>
         /// Direct messages timeline (/secret_mails.json, /secret_mails/sent.json)
         /// </summary>
-        DirectMessages
+        DirectMessages,
+
+        /// <summary>
+        /// Event notification (UNDEFINED)
+        /// </summary>
+        Event
     }
 }
