@@ -41,5 +41,8 @@ namespace Vulpecula.Models
 
         [JsonProperty("spread_status")]
         public Status SpreadStatus { get; set; }
+
+        [JsonProperty("quote_status")]
+        public Status QuotedStatus { get; set; }
     }
 }
