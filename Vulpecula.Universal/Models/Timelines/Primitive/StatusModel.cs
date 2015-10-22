@@ -43,7 +43,9 @@ namespace Vulpecula.Universal.Models.Timelines.Primitive
 
         public User Recipient => this.IsDirectMessage ? this._secretMail.Recipient : new User();
 
-        public StatusModel SpreadStatus => new StatusModel(this._status.SpreadStatus);
+        public StatusModel SpreadStatus => this._status.SpreadStatus != null ? new StatusModel(this._status.SpreadStatus) : null;
+
+        public StatusModel QuotedStatus => this._status.QuotedStatus != null ? new StatusModel(this._status.QuotedStatus) : null;
 
         public StatusModel(StatusBase @base)
         {

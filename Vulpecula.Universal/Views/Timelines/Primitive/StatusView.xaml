@@ -14,43 +14,54 @@
             <ColumnDefinition Width="60" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
-            <Image Width="48"
-                   Height="48"
-                   Margin="6,4"
-                   VerticalAlignment="Top"
-                   Source="{Binding User.Icon,
-                                    TargetNullValue=../../../Assets/StoreLogo.png}" />
-            <Image Width="24"
-                   Height="24"
-                   Margin="6,26"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Top"
-                   Source="{Binding Recipient.Icon,
-                                    TargetNullValue=../../../Assets/StoreLogo.png}"
-                   Visibility="{Binding IsDirectMessage,
-                                        Converter={StaticResource BooleanToVisibilityConverter}}" />
-        </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="20" />
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="{Binding User.ScreenName, Converter={StaticResource StringFormatConverter}, ConverterParameter='@{0}'}" />
-                <TextBlock Margin="10,0"
-                           Text="{Binding User.Name}"
-                           TextTrimming="CharacterEllipsis"
-                           TextWrapping="NoWrap" />
-            </StackPanel>
-            <TextBlock Grid.Row="1"
-                       Text="{Binding Text}"
-                       TextWrapping="WrapWholeWords" />
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <TextBlock Text="{Binding Model.CreatedAt}" />
-            </StackPanel>
-        </Grid>
+        <StackPanel Grid.Column="0">
+            <FontIcon Margin="6,2"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Top"
+                      FontSize="18"
+                      Glyph="&#xE8EB;"
+                      Visibility="{Binding IsShare,
+                                           Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Grid>
+                <Image Width="48"
+                       Height="48"
+                       Margin="6,4"
+                       VerticalAlignment="Top"
+                       Source="{Binding User.Icon,
+                                        TargetNullValue=../../../Assets/StoreLogo.png}" />
+                <Image Width="24"
+                       Height="24"
+                       Margin="6,26"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       Source="{Binding Recipient.Icon,
+                                        TargetNullValue=../../../Assets/StoreLogo.png}"
+                       Visibility="{Binding IsDirectMessage,
+                                            Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="{Binding ShareUser.Name, Converter={StaticResource StringFormatConverter}, ConverterParameter=' {0}さんがシェアしました'}" Visibility="{Binding IsShare, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="{Binding User.ScreenName, Converter={StaticResource StringFormatConverter}, ConverterParameter='@{0}'}" />
+                    <TextBlock Margin="10,0"
+                               Text="{Binding User.Name}"
+                               TextTrimming="CharacterEllipsis"
+                               TextWrapping="NoWrap" />
+                </StackPanel>
+                <TextBlock Grid.Row="1"
+                           Text="{Binding Text}"
+                           TextWrapping="WrapWholeWords" />
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock Text="{Binding Model.CreatedAt}" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
     </Grid>
 </UserControl>

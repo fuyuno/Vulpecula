@@ -21,8 +21,8 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
                 return;
             }
 
-            this.IsShare = this.Model.IsSpread;
-            this.IsComment = this.Model.IsSpread && !string.IsNullOrWhiteSpace(this.Model.Text);
+            this.IsShare = this.Model.SpreadStatus != null;
+            this.IsComment = this.Model.QuotedStatus != null;
         }
 
         private UserViewModel CreateUserViewModel(User user)
@@ -35,7 +35,6 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         #region Text
 
         private string _text;
-
         public string Text => this._text ?? (this._text = this.IsShare ? this.Model.SpreadStatus.Text : this.Model.Text);
 
         #endregion
@@ -43,8 +42,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         #region User
 
         private UserViewModel _user;
-
-        public UserViewModel User => this._user ?? (this._user = CreateUserViewModel(this.Model.User));
+        public UserViewModel User => this._user ?? (this._user = CreateUserViewModel(this.IsShare ? this.Model.SpreadStatus.User : this.Model.User));
 
         #endregion
 
@@ -52,6 +50,13 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         private UserViewModel _recipient;
         public UserViewModel Recipient => this._recipient ?? (this._recipient = CreateUserViewModel(this.Model.Recipient));
+
+        #endregion
+
+        #region ShareUser
+
+        private UserViewModel _shareUser;
+        public UserViewModel ShareUser => this._shareUser ?? (this._shareUser = CreateUserViewModel(this.Model.User));
 
         #endregion
 
