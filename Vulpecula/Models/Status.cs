@@ -7,7 +7,7 @@ namespace Vulpecula.Models
     public class Status : StatusBase
     {
         [JsonProperty("favorited")]
-        public bool IsFavorites { get; set; }
+        public bool IsFavorited { get; set; }
 
         [JsonProperty("favorites_count")]
         public long FavoritedCount { get; set; }

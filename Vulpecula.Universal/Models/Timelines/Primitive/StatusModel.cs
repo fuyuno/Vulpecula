@@ -23,7 +23,7 @@ namespace Vulpecula.Universal.Models.Timelines.Primitive
 
         public Entities Entities => this._originalModel.Entities;
 
-        public bool IsFavorited => this._status.IsFavorites;
+        public bool IsFavorited => this._status.IsFavorited;
 
         public long FavoritedCount => this._status.FavoritedCount;
 
@@ -50,9 +50,9 @@ namespace Vulpecula.Universal.Models.Timelines.Primitive
             this._originalModel = @base;
             this.IsDirectMessage = (@base is SecretMail);
             if (this.IsDirectMessage)
-                this._secretMail = (SecretMail) @base;
+                this._secretMail = (SecretMail)@base;
             else
-                this._status = (Status) @base;
+                this._status = (Status)@base;
         }
     }
 }
