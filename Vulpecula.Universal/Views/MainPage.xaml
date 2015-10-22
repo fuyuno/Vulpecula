@@ -147,10 +147,10 @@
                 </RelativePanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <ScrollViewer HorizontalScrollMode="Auto"
-                              VerticalScrollBarVisibility="Hidden"
-                              VerticalScrollMode="Disabled">
-                    <StackPanel Orientation="Horizontal">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                    <StackPanel HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Orientation="Horizontal">
                         <ItemsControl ItemsSource="{x:Bind ViewModel.Columns}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>

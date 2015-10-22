@@ -31,15 +31,13 @@
                            FontSize="24"
                            Text="{Binding Name}" />
             </StackPanel>
-            <StackPanel Grid.Row="1">
-                <ListBox ItemsSource="{Binding Statuses}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <primitives:StatusView DataContext="{Binding}" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
+            <ListBox Grid.Row="1" ItemsSource="{Binding Statuses}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <primitives:StatusView DataContext="{Binding}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Border>
 </UserControl>
