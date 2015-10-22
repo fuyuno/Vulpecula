@@ -36,13 +36,13 @@ namespace Vulpecula.Models
         public long FavoritesCount { get; set; }
 
         [JsonProperty("follow_request_sent")]
-        public bool IsFollowRequestSent { get; set; }
+        public object IsFollowRequestSent { get; set; }
 
         [JsonProperty("followers_count")]
         public long FollowersCount { get; set; }
 
         [JsonProperty("following")]
-        public bool IsFollowing { get; set; }
+        public object IsFollowing { get; set; }
 
         [JsonProperty("friends_count")]
         public long FriendsCount { get; set; }

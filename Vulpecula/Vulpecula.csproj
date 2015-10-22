@@ -75,6 +75,7 @@
     <Compile Include="Rest\Trends.cs" />
     <Compile Include="Rest\Users.cs" />
     <Compile Include="Utilities\ImageMIME.cs" />
+    <Compile Include="Utilities\MediaTypeConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

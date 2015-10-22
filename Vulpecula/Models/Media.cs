@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
+using Vulpecula.Utilities;
+
 namespace Vulpecula.Models
 {
     public class Media
@@ -9,7 +11,8 @@ namespace Vulpecula.Models
         public string MediaUrlHttps { get; set; }
 
         [JsonProperty("type")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(MediaTypeConverter))]
+        //[JsonConverter(typeof (StringEnumConverter))]
         public MediaType Type { get; set; }
     }
 }

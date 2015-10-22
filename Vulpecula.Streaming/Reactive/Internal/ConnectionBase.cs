@@ -28,7 +28,8 @@ namespace Vulpecula.Streaming.Reactive.Internal
         /// </summary>
         public void Dispose()
         {
-            this.TokenSource.Cancel();
+            if (this.TokenSource != null)
+                this.DisposeToken();
         }
 
         protected void DisposeToken()
