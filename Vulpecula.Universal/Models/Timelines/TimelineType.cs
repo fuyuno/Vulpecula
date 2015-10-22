@@ -10,6 +10,11 @@ namespace Vulpecula.Universal.Models.Timelines
         Public,
 
         /// <summary>
+        /// Public timeline (all accounts)
+        /// </summary>
+        PublicAll,
+
+        /// <summary>
         /// Home timeline (/2/statuses/home_timeline.json)
         /// </summary>
         Home,
@@ -18,6 +23,11 @@ namespace Vulpecula.Universal.Models.Timelines
         /// Mentions timeline (/2/statuses/mentions.json)
         /// </summary>
         Mentions,
+
+        /// <summary>
+        /// Mentions timeline (all accounts)
+        /// </summary>
+        MentionsAll,
 
         /// <summary>
         /// User timeline (/2/statuses/user_timeline.json)
@@ -36,8 +46,18 @@ namespace Vulpecula.Universal.Models.Timelines
         DirectMessages,
 
         /// <summary>
+        /// Direct messages timeline (all accounts)
+        /// </summary>
+        DirectMessagesAll,
+
+        /// <summary>
         /// Event notification (UNDEFINED)
         /// </summary>
-        Event
+        Event,
+
+        /// <summary>
+        /// Event notification (all accounts)
+        /// </summary>
+        EventAll
     }
 }

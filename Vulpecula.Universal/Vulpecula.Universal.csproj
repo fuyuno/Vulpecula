@@ -113,16 +113,20 @@
     <Compile Include="Models\Purchase\InAppPurchase.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.MultipleAccounts.cs" />
     <Compile Include="Models\ColumnManager.cs" />
+    <Compile Include="Models\Services\Service.cs" />
+    <Compile Include="Models\Services\ServiceProvider.cs" />
+    <Compile Include="Models\Services\SuspendableService.cs" />
     <Compile Include="Models\Timelines\Column.cs" />
     <Compile Include="Models\Timelines\Primitive\StatusModel.cs" />
-    <Compile Include="Models\Timelines\Services\TimelineService.cs" />
+    <Compile Include="Models\Services\DirectMessageTimelineService.cs" />
+    <Compile Include="Models\Services\StatusTimelineService.cs" />
+    <Compile Include="Models\Services\TimelineServiceBase.cs" />
     <Compile Include="Models\Timelines\TimelineType.cs" />
     <Compile Include="Models\VulpeculaSettings.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
     <Compile Include="ViewModels\Timelines\ColumnViewModel.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\StatusViewModel.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\UserViewModel.cs" />
-    <Compile Include="ViewModels\Timelines\TimelineViewModelBase.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

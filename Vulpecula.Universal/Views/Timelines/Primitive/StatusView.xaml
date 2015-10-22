@@ -36,18 +36,14 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="25" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0"
-                        Orientation="Horizontal"
-                        Padding="10">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="{Binding Model.User.ScreenName, Converter={StaticResource StringFormatConverter}, ConverterParameter='@{0}'}" />
                 <TextBlock Text="{Binding Model.User.Name}" />
             </StackPanel>
             <TextBlock Grid.Row="1"
                        Text="{Binding Model.Text}"
                        TextWrapping="WrapWholeWords" />
-            <StackPanel Grid.Row="2"
-                        Orientation="Horizontal"
-                        Padding="10">
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="{Binding Model.CreatedAt}" />
             </StackPanel>
         </Grid>

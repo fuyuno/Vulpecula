@@ -32,7 +32,7 @@
                            Text="{Binding Name}" />
             </StackPanel>
             <StackPanel Grid.Row="1">
-                <ListBox>
+                <ListBox ItemsSource="{Binding Statuses}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <primitives:StatusView DataContext="{Binding}" />
