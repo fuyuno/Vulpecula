@@ -7,6 +7,7 @@ using Microsoft.ApplicationInsights;
 using Prism.Unity.Windows;
 
 using Vulpecula.Universal.Models;
+using Vulpecula.Universal.Models.Services;
 
 namespace Vulpecula.Universal
 {
@@ -31,6 +32,8 @@ namespace Vulpecula.Universal
                 WindowsCollectors.Metadata |
                 WindowsCollectors.Session);
             this.InitializeComponent();
+
+            this.Resuming += OnResuming;
             AppSettings.Initialize();
         }
 
@@ -42,6 +45,23 @@ namespace Vulpecula.Universal
         {
             this.NavigationService.Navigate("Main", null);
             return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Invoked when the application is suspending, but before the general suspension calls.
+        /// </summary>
+        /// <returns>
+        /// Task to complete.
+        /// </returns>
+        protected override Task OnSuspendingApplicationAsync()
+        {
+            ServiceProvider.SuspendService();
+            return base.OnSuspendingApplicationAsync();
+        }
+
+        private async void OnResuming(object sender, object o)
+        {
+            await Task.Run(() => ServiceProvider.StartService());
         }
     }
 }

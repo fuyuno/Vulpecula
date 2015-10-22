@@ -8,6 +8,7 @@ using Vulpecula.Models;
 using Vulpecula.Universal.Extensions;
 using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models;
+using Vulpecula.Universal.Models.Services;
 using Vulpecula.Universal.Models.Timelines;
 using Vulpecula.Universal.ViewModels.Primitives;
 using Vulpecula.Universal.ViewModels.Timelines;
@@ -78,6 +79,12 @@ namespace Vulpecula.Universal.ViewModels
         #region Events
 
         public async void OnLoaded() => await this.Initialize();
+
+        public void OnUnloaded()
+        {
+            ServiceProvider.SuspendService();
+            this.Dispose();
+        }
 
         public void OnChecked() => this.IsHamburgerChecked = true;
 

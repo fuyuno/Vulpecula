@@ -7,8 +7,8 @@ namespace Vulpecula.Streaming.Reactive.Internal
     public abstract class ConnectionBase<T, TV, TU> : IDisposable
     {
         protected readonly T Obj;
-        protected readonly TV Type;
         protected readonly Expression<Func<string, object>>[] Parameters;
+        protected readonly TV Type;
         protected IObserver<TU> Observer;
         protected CancellationTokenSource TokenSource;
 
@@ -21,16 +21,15 @@ namespace Vulpecula.Streaming.Reactive.Internal
             this.TokenSource = new CancellationTokenSource();
         }
 
-        internal abstract void Connection();
-
         /// <summary>
         /// アンマネージ リソースの解放およびリセットに関連付けられているアプリケーション定義のタスクを実行します。
         /// </summary>
         public void Dispose()
         {
-            if (this.TokenSource != null)
-                this.DisposeToken();
+            this.TokenSource?.Cancel();
         }
+
+        internal abstract void Connection();
 
         protected void DisposeToken()
         {

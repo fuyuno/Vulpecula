@@ -18,7 +18,14 @@ namespace Vulpecula.Universal.Models.Services
             LockObj = new object();
         }
 
-        public static void StopService()
+        public static void StartService()
+        {
+            foreach (var service in Service)
+                service.Start();
+            WorkQueue();
+        }
+
+        public static void SuspendService()
         {
             foreach (var service in Service)
             {
@@ -56,7 +63,8 @@ namespace Vulpecula.Universal.Models.Services
         {
             lock (LockObj)
             {
-                foreach (var service in Queue)
+                Service service;
+                while ((service = Queue.Dequeue()) != null)
                 {
                     service.Start();
                     service.Dispose();
