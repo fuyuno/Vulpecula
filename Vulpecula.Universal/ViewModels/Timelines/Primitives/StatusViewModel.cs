@@ -32,6 +32,14 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             return uvm;
         }
 
+        #region Text
+
+        private string _text;
+
+        public string Text => this._text ?? (this._text = this.IsShare ? this.Model.SpreadStatus.Text : this.Model.Text);
+
+        #endregion
+
         #region User
 
         private UserViewModel _user;
@@ -40,7 +48,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         #endregion
 
-        #region
+        #region Recipient
 
         private UserViewModel _recipient;
         public UserViewModel Recipient => this._recipient ?? (this._recipient = CreateUserViewModel(this.Model.Recipient));

@@ -20,14 +20,14 @@
                    Height="48"
                    Margin="6,4"
                    VerticalAlignment="Top"
-                   Source="{Binding Model.User.ProfileImageUrlHttps,
+                   Source="{Binding User.Icon,
                                     TargetNullValue=../../../Assets/StoreLogo.png}" />
             <Image Width="24"
                    Height="24"
                    Margin="6,26"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Top"
-                   Source="{Binding Model.Recipient.ProfileImageUrlHttps,
+                   Source="{Binding Recipient.Icon,
                                     TargetNullValue=../../../Assets/StoreLogo.png}"
                    Visibility="{Binding IsDirectMessage,
                                         Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -39,14 +39,14 @@
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="{Binding Model.User.ScreenName, Converter={StaticResource StringFormatConverter}, ConverterParameter='@{0}'}" />
+                <TextBlock Text="{Binding User.ScreenName, Converter={StaticResource StringFormatConverter}, ConverterParameter='@{0}'}" />
                 <TextBlock Margin="10,0"
-                           Text="{Binding Model.User.Name}"
+                           Text="{Binding User.Name}"
                            TextTrimming="CharacterEllipsis"
                            TextWrapping="NoWrap" />
             </StackPanel>
             <TextBlock Grid.Row="1"
-                       Text="{Binding Model.Text}"
+                       Text="{Binding Text}"
                        TextWrapping="WrapWholeWords" />
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="{Binding Model.CreatedAt}" />
