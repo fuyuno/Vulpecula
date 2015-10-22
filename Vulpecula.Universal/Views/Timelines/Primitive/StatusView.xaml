@@ -11,34 +11,39 @@
              mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="52" />
+            <ColumnDefinition Width="60" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
             <Image Width="48"
                    Height="48"
-                   Margin="2"
+                   Margin="6,4"
                    VerticalAlignment="Top"
-                   Source="{Binding Model.User.ProfileImageUrlHttps}" />
+                   Source="{Binding Model.User.ProfileImageUrlHttps,
+                                    TargetNullValue=../../../Assets/StoreLogo.png}" />
             <Image Width="24"
                    Height="24"
-                   Margin="2,26"
+                   Margin="6,26"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Top"
-                   Source="{Binding Model.Recipient.ProfileImageUrlHttps}"
+                   Source="{Binding Model.Recipient.ProfileImageUrlHttps,
+                                    TargetNullValue=../../../Assets/StoreLogo.png}"
                    Visibility="{Binding IsDirectMessage,
                                         Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="25" />
+                <RowDefinition Height="20" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="{Binding Model.User.ScreenName, Converter={StaticResource StringFormatConverter}, ConverterParameter='@{0}'}" />
-                <TextBlock Text="{Binding Model.User.Name}" />
+                <TextBlock Margin="10,0"
+                           Text="{Binding Model.User.Name}"
+                           TextTrimming="CharacterEllipsis"
+                           TextWrapping="NoWrap" />
             </StackPanel>
             <TextBlock Grid.Row="1"
                        Text="{Binding Model.Text}"
