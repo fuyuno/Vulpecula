@@ -4,6 +4,7 @@ using Windows.ApplicationModel.Activation;
 
 using Microsoft.ApplicationInsights;
 
+using Prism.Logging;
 using Prism.Unity.Windows;
 
 using Vulpecula.Universal.Models;
@@ -62,6 +63,19 @@ namespace Vulpecula.Universal
         private async void OnResuming(object sender, object o)
         {
             await ServiceProvider.StartService();
+        }
+
+        // おちる
+        // http://blog.okazuki.jp/entry/2015/10/24/114618
+        /// <summary>
+        /// Create the <see cref="T:Prism.Logging.ILoggerFacade" /> used by the bootstrapper.
+        /// </summary>
+        /// <remarks>
+        /// The base implementation returns a new DebugLogger.
+        /// </remarks>
+        protected override ILoggerFacade CreateLogger()
+        {
+            return new EmptyLogger();
         }
     }
 }

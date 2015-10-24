@@ -38,8 +38,8 @@ namespace Vulpecula.Universal.ViewModels
 
         private async Task Initialize()
         {
-            // this.AccountManager.ResetAccounts();
-            // this.ColumnManager.ClearColumns();
+            // this._accountManager.ResetAccounts();
+            // this._columnManager.ClearColumns();
 
             await this._accountManager.InitializeAccounts();
             this._columnManager.InitializeColumns();
@@ -145,7 +145,6 @@ namespace Vulpecula.Universal.ViewModels
         {
             foreach (var user in this.Users)
             {
-                // これは Model の役割
                 if (user.IsWhisperEnabled)
                     user.SendWhisper(this.Text);
             }
