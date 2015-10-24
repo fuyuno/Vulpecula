@@ -12,7 +12,6 @@ using Vulpecula.Universal.Models.Services;
 using Vulpecula.Universal.Models.Timelines;
 using Vulpecula.Universal.ViewModels.Primitives;
 using Vulpecula.Universal.ViewModels.Timelines;
-using Vulpecula.Universal.ViewModels.Timelines.Primitives;
 
 namespace Vulpecula.Universal.ViewModels
 {
@@ -26,12 +25,13 @@ namespace Vulpecula.Universal.ViewModels
         {
             this.IsHamburgerChecked = false;
             this.IsWhisperZoneOpened = false;
-            this.Users = new ObservableCollection<UserViewModel>();
+            this.Users = new ObservableCollection<UserAccountViewModel>();
             this.Columns = new ObservableCollection<ColumnViewModel>();
             this._accountManager = new AccountManager();
             this._columnManager = new ColumnManager();
 
-            ViewModelHelper.SubscribeNotifyCollectionChanged(this._accountManager.Users, this.Users, (User w) => new UserViewModel(w)).AddTo(this);
+            ViewModelHelper.SubscribeNotifyCollectionChanged(this._accountManager.Users, this.Users, (User w) =>
+                UserAccountViewModel.Create(this._accountManager.Providers, w)).AddTo(this);
             ViewModelHelper.SubscribeNotifyCollectionChanged(this._columnManager.Columns, this.Columns, (Column w) =>
                 ColumnViewModel.Create(this._accountManager.Providers, w)).AddTo(this);
         }
@@ -61,7 +61,7 @@ namespace Vulpecula.Universal.ViewModels
 
         public ObservableCollection<ColumnViewModel> Columns { get; }
 
-        public ObservableCollection<UserViewModel> Users { get; }
+        public ObservableCollection<UserAccountViewModel> Users { get; }
 
         #region IsHamburgerChecked
 
@@ -83,6 +83,18 @@ namespace Vulpecula.Universal.ViewModels
         {
             get { return this._isWhisperZoneOpended; }
             set { this.SetProperty(ref this._isWhisperZoneOpended, value); }
+        }
+
+        #endregion
+
+        #region Text
+
+        private string _text;
+
+        public string Text
+        {
+            get { return this._text; }
+            set { this.SetProperty(ref this._text, value); }
         }
 
         #endregion
@@ -127,7 +139,18 @@ namespace Vulpecula.Universal.ViewModels
         }
 
         public void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-            => ((ListBox)sender).SelectedIndex = -1;
+            => ((ListBox) sender).SelectedIndex = -1;
+
+        public void OnClickedSendWhisper()
+        {
+            foreach (var user in this.Users)
+            {
+                // これは Model の役割
+                if (user.IsWhisperEnabled)
+                    user.SendWhisper(this.Text);
+            }
+            this.Text = string.Empty;
+        }
 
         #endregion
     }

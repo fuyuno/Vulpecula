@@ -3,6 +3,7 @@ using System.Reactive.Linq;
 
 using Vulpecula.Models;
 using Vulpecula.Streaming.Reactive;
+using Vulpecula.Universal.Models.Services.Primitive;
 
 namespace Vulpecula.Universal.Models.Services
 {

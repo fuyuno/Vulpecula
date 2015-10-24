@@ -61,8 +61,6 @@ namespace Vulpecula.Universal.ViewModels.Timelines
         private async void AddTimeline(StatusBase status)
         {
             var vm = new StatusViewModel(new StatusModel(status));
-            if (this.Statuses.Any(w => w.Model.Id == vm.Model.Id))
-                return;
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.Statuses.Insert(0, vm));
         }
     }

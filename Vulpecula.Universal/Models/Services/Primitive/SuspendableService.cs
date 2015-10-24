@@ -1,4 +1,4 @@
-﻿namespace Vulpecula.Universal.Models.Services
+﻿namespace Vulpecula.Universal.Models.Services.Primitive
 {
     public abstract class SuspendableService : Service
     {

@@ -61,7 +61,7 @@ namespace Vulpecula.Universal
 
         private async void OnResuming(object sender, object o)
         {
-            await Task.Run(() => ServiceProvider.StartService());
+            await ServiceProvider.StartService();
         }
     }
 }

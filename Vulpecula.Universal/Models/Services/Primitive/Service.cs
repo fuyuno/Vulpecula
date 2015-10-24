@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vulpecula.Universal.Models.Services
+namespace Vulpecula.Universal.Models.Services.Primitive
 {
     /// <summary>
     /// </summary>

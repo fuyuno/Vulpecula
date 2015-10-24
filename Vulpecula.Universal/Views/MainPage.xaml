@@ -184,6 +184,9 @@
                                         <ToggleButton Width="48"
                                                       Height="48"
                                                       Background="Transparent"
+                                                      IsChecked="{Binding IsWhisperEnabled,
+                                                                          UpdateSourceTrigger=PropertyChanged,
+                                                                          Mode=TwoWay}"
                                                       Padding="0">
                                             <Grid Width="36"
                                                   Height="36"
@@ -209,10 +212,14 @@
                                      AcceptsReturn="True"
                                      BorderThickness="1"
                                      FontSize="18"
-                                     PlaceholderText="今何してる？" />
+                                     PlaceholderText="今何してる？"
+                                     Text="{Binding Text,
+                                                    UpdateSourceTrigger=PropertyChanged,
+                                                    Mode=TwoWay}" />
                             <Button Margin="10,0"
                                     HorizontalAlignment="Right"
-                                    Content="送信" />
+                                    Content="送信"
+                                    Tapped="{x:Bind ViewModel.OnClickedSendWhisper}" />
                         </StackPanel>
                     </StackPanel>
                     <!--  #endregion  -->
