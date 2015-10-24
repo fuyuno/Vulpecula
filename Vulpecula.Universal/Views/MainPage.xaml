@@ -176,7 +176,10 @@
                             <ItemsControl ItemsSource="{x:Bind ViewModel.Users}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <ItemsWrapGrid ItemHeight="48" ItemWidth="48" />
+                                        <ItemsWrapGrid Width="252"
+                                                       ItemHeight="48"
+                                                       ItemWidth="48"
+                                                       Orientation="Horizontal" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
