@@ -12,6 +12,12 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         public bool IsComment { get; }
         public bool IsDirectMessage { get; }
 
+        #region CreatedAt
+
+        public string CreatedAt => this.Model.CreatedAt.ToString("t");
+
+        #endregion
+
         public StatusViewModel(StatusModel statusModel)
         {
             this.Model = statusModel;

@@ -9,7 +9,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
     {
         private readonly User _user;
 
-        public string Name => this._user.Name;
+        public string Name => this._user.Name.Replace(Environment.NewLine, "");
 
         public string ScreenName => this._user.ScreenName;
 
@@ -21,7 +21,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public string Description => this._user.Description;
 
-        public string Location => this._user.Location;
+        public string Location => this._user.Location.Replace(Environment.NewLine, "");
 
         public bool IsProtected => this._user.IsProtected;
 

@@ -48,19 +48,26 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock Text="{Binding User.ScreenName, Converter={StaticResource StringFormatConverter}, ConverterParameter='@{0}'}" />
-                    <TextBlock Margin="10,0"
+                <RelativePanel Grid.Row="0">
+                    <TextBlock x:Name="ScreenName"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               Text="{Binding User.ScreenName,
+                                              Converter={StaticResource StringFormatConverter},
+                                              ConverterParameter='@{0}'}" />
+                    <TextBlock Margin="10,0,50,0"
+                               RelativePanel.RightOf="ScreenName"
                                Text="{Binding User.Name}"
                                TextTrimming="CharacterEllipsis"
                                TextWrapping="NoWrap" />
-                </StackPanel>
+                    <TextBlock Margin="10,0"
+                               HorizontalAlignment="Right"
+                               RelativePanel.AlignRightWithPanel="True"
+                               Text="{Binding CreatedAt}" />
+                </RelativePanel>
                 <TextBlock Grid.Row="1"
                            Text="{Binding Text}"
                            TextWrapping="WrapWholeWords" />
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <TextBlock Text="{Binding Model.CreatedAt}" />
-                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" />
             </Grid>
         </StackPanel>
     </Grid>

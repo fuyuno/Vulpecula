@@ -32,9 +32,14 @@
                            Text="{Binding Name}" />
             </StackPanel>
             <ListBox Grid.Row="1" ItemsSource="{Binding Statuses}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <primitives:StatusView DataContext="{Binding}" />
+                        <primitives:StatusView HorizontalAlignment="Stretch" DataContext="{Binding}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
