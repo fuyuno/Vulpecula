@@ -44,6 +44,24 @@
                 <RelativePanel>
                     <!--  #region Header of SplitView  -->
                     <StackPanel x:Name="Header" RelativePanel.AlignTopWithPanel="True">
+                        <ListBox SelectionChanged="{x:Bind ViewModel.OnSelectionChanged}">
+                            <ListBoxItem Padding="0" Tapped="{x:Bind ViewModel.OnTappedToggleWhisperZone}">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Width="48"
+                                              Height="48"
+                                              FontSize="24"
+                                              Glyph="&#xE70F;" />
+                                    <TextBlock Margin="10,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               Text="ささやく" />
+                                </StackPanel>
+                            </ListBoxItem>
+                        </ListBox>
+                    </StackPanel>
+                    <!--  #endregion  -->
+                    <!--  #region UpCenter Content of SplitView  -->
+                    <StackPanel x:Name="UpCenter" RelativePanel.Below="Header">
                         <ListBox ItemsSource="{x:Bind ViewModel.Users}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
@@ -72,10 +90,10 @@
                         </ListBox>
                     </StackPanel>
                     <!--  #endregion  -->
-                    <!--  #region Center Content of SplitView  -->
-                    <StackPanel RelativePanel.Below="Header">
+                    <!--  #region DownCenter Content of SplitView  -->
+                    <StackPanel x:Name="DownCenter" RelativePanel.Below="UpCenter">
                         <ListBox SelectionChanged="{x:Bind ViewModel.OnSelectionChanged}">
-                            <ListBoxItem Padding="0" Tapped="{x:Bind ViewModel.OnTapped}">
+                            <ListBoxItem Padding="0" Tapped="{x:Bind ViewModel.OnTappedAuthorization}">
                                 <StackPanel Orientation="Horizontal">
                                     <FontIcon Width="48"
                                               Height="48"
@@ -91,7 +109,7 @@
                     </StackPanel>
                     <!--  #endregion  -->
                     <!--  #region Footer of SplitView  -->
-                    <StackPanel RelativePanel.AlignBottomWithPanel="True">
+                    <StackPanel x:Name="Footer" RelativePanel.AlignBottomWithPanel="True">
                         <ListBox SelectionChanged="{x:Bind ViewModel.OnSelectionChanged}">
                             <ListBoxItem Padding="0">
                                 <StackPanel Orientation="Horizontal">
@@ -144,6 +162,60 @@
                         </StackPanel>
                     </StackPanel>
                     <!--  #endregion  -->
+
+                    <!--  #region Whisper Zone  -->
+                    <StackPanel x:Name="WhisperZone"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                RelativePanel.AlignTopWithPanel="True"
+                                Visibility="{Binding IsWhisperZoneOpened,
+                                                     UpdateSourceTrigger=PropertyChanged,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel Margin="48,0,0,0" Background="#FF171717">
+                            <TextBlock Margin="10" FontSize="16">From</TextBlock>
+                            <ItemsControl ItemsSource="{x:Bind ViewModel.Users}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <ItemsWrapGrid ItemHeight="48" ItemWidth="48" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ToggleButton Width="48"
+                                                      Height="48"
+                                                      Background="Transparent"
+                                                      Padding="0">
+                                            <Grid Width="36"
+                                                  Height="36"
+                                                  Margin="0,0,0,0"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Padding="0">
+                                                <Border CornerRadius="10">
+                                                    <Border.Background>
+                                                        <ImageBrush ImageSource="{Binding Icon}" />
+                                                    </Border.Background>
+                                                </Border>
+                                            </Grid>
+                                        </ToggleButton>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <TextBox Width="252"
+                                     Height="114"
+                                     Margin="10"
+                                     VerticalAlignment="Center"
+                                     AcceptsReturn="True"
+                                     BorderThickness="1"
+                                     FontSize="18"
+                                     PlaceholderText="今何してる？" />
+                            <Button Margin="10,0"
+                                    HorizontalAlignment="Right"
+                                    Content="送信" />
+                        </StackPanel>
+                    </StackPanel>
+                    <!--  #endregion  -->
                 </RelativePanel>
             </SplitView.Pane>
             <SplitView.Content>
@@ -154,7 +226,7 @@
                         <ItemsControl ItemsSource="{x:Bind ViewModel.Columns}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" />
+                                    <ItemsStackPanel Orientation="Horizontal" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>

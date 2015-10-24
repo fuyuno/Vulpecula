@@ -25,6 +25,7 @@ namespace Vulpecula.Universal.ViewModels
         public MainPageViewModel()
         {
             this.IsHamburgerChecked = false;
+            this.IsWhisperZoneOpened = false;
             this.Users = new ObservableCollection<UserViewModel>();
             this.Columns = new ObservableCollection<ColumnViewModel>();
             this._accountManager = new AccountManager();
@@ -74,6 +75,18 @@ namespace Vulpecula.Universal.ViewModels
 
         #endregion
 
+        #region IsWhisperZoneOpened
+
+        private bool _isWhisperZoneOpended;
+
+        public bool IsWhisperZoneOpened
+        {
+            get { return this._isWhisperZoneOpended; }
+            set { this.SetProperty(ref this._isWhisperZoneOpended, value); }
+        }
+
+        #endregion
+
         #endregion
 
         #region Events
@@ -86,16 +99,35 @@ namespace Vulpecula.Universal.ViewModels
             this.Dispose();
         }
 
-        public void OnChecked() => this.IsHamburgerChecked = true;
+        public void OnChecked()
+        {
+            this.IsHamburgerChecked = true;
+            this.IsWhisperZoneOpened = false;
+        }
 
-        public void OnUnchecked() => this.IsHamburgerChecked = false;
+        public void OnUnchecked()
+        {
+            this.IsHamburgerChecked = false;
+            this.IsWhisperZoneOpened = false;
+        }
 
-        public void PaneClosing() => this.IsHamburgerChecked = false;
+        public void PaneClosing()
+        {
+            this.IsHamburgerChecked = false;
+            this.IsWhisperZoneOpened = false;
+        }
 
-        public async void OnTapped(object sender, RoutedEventArgs e) => await this.Authorization();
+        public async void OnTappedAuthorization(object sender, RoutedEventArgs e) => await this.Authorization();
+
+        public void OnTappedToggleWhisperZone(object sender, RoutedEventArgs e)
+        {
+            this.IsWhisperZoneOpened = !this.IsWhisperZoneOpened;
+            if (this.IsWhisperZoneOpened && !this.IsHamburgerChecked)
+                this.IsHamburgerChecked = true;
+        }
 
         public void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-            => ((ListBox) sender).SelectedIndex = -1;
+            => ((ListBox)sender).SelectedIndex = -1;
 
         #endregion
     }
