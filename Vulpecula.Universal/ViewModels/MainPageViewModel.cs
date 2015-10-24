@@ -113,6 +113,8 @@ namespace Vulpecula.Universal.ViewModels
 
         public void OnChecked()
         {
+            if (this.IsHamburgerChecked)
+                return;
             this.IsHamburgerChecked = true;
             this.IsWhisperZoneOpened = false;
         }
@@ -139,7 +141,7 @@ namespace Vulpecula.Universal.ViewModels
         }
 
         public void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-            => ((ListBox) sender).SelectedIndex = -1;
+            => ((ListBox)sender).SelectedIndex = -1;
 
         public void OnClickedSendWhisper()
         {
