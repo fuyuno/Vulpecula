@@ -14,7 +14,12 @@ namespace Vulpecula.iPhone
     public partial class AppDelegate : UIApplicationDelegate
     {
         // class-level declarations
-        UIWindow window;
+
+        public override UIWindow Window
+        {
+            get;
+            set;
+        }
 
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -23,18 +28,32 @@ namespace Vulpecula.iPhone
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            // create a new window instance based on the screen size
-            window = new UIWindow(UIScreen.MainScreen.Bounds);
-
-            // If you have defined a view, add it here:
-            // window.RootViewController  = navigationController;
-
-            // make the window visible
-            window.MakeKeyAndVisible();
-
             return true;
+        }
+
+        // This method is invoked when the application is about to move from active to inactive state.
+        // OpenGL applications should use this method to pause.
+        public override void OnResignActivation(UIApplication application)
+        {
+        }
+
+        // This method should be used to release shared resources and it should store the application state.
+        // If your application supports background exection this method is called instead of WillTerminate
+        // when the user quits.
+        public override void DidEnterBackground(UIApplication application)
+        {
+        }
+
+        /// This method is called as part of the transiton from background to active state.
+        public override void WillEnterForeground(UIApplication application)
+        {
+        }
+
+        /// This method is called when the application is about to terminate. Save data, if needed. 
+        public override void WillTerminate(UIApplication application)
+        {
         }
     }
 }
