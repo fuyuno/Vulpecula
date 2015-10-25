@@ -108,6 +108,7 @@
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FirstViewController.cs" />
@@ -157,6 +158,7 @@
     <BundleResource Include="Resources\Icon-60%402x.png" />
     <BundleResource Include="Resources\Icon-60%403x.png" />
     <BundleResource Include="Resources\Icon-Small.png" />
+    <BundleResource Include="Resources\Launch.png" />
     <ITunesArtwork Include="Resources\iTunesArtwork%402x.png" />
     <ITunesArtwork Include="Resources\iTunesArtwork.png" />
   </ItemGroup>
