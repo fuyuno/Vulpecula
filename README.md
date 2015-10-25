@@ -19,4 +19,4 @@ Windows 8.1 or newer.(.NET Framework 4.6)
 Android Lollipop or newer.
 
 #### Vulpecula.iPhone
-iOS 9 or newer.
+iOS 9.1 or newer.
