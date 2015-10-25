@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Drawing;
-using System.Collections.Generic;
 
 using Foundation;
+
 using UIKit;
 
-namespace Vulpecula.iPhone
+namespace Vulpecula.iOS
 {
     public partial class SecondViewController : UIViewController
     {

@@ -4,15 +4,13 @@
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
-using Foundation;
-using System;
-using System.CodeDom.Compiler;
-using UIKit;
 
-namespace Vulpecula.iPhone
+using Foundation;
+
+namespace Vulpecula.iOS
 {
-	[Register ("FirstViewController")]
-	partial class FirstViewController
+	[Register ("SecondViewController")]
+	partial class SecondViewController
 	{
 		void ReleaseDesignerOutlets ()
 		{

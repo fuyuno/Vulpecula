@@ -6,9 +6,9 @@
     <ProjectGuid>{16AF3DA8-B0DF-496F-AAAA-A67795AA268F}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Vulpecula.iPhone</RootNamespace>
+    <RootNamespace>Vulpecula.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>VulpeculaiPhone</AssemblyName>
+    <AssemblyName>VulpeculaiOS</AssemblyName>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>

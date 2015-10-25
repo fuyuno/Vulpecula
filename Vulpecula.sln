@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Desktop", "Vulpec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Streaming", "Vulpecula.Streaming\Vulpecula.Streaming.csproj", "{2538124A-5DC4-4200-83FD-6EC643CCB7E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.iPhone", "Vulpecula.iPhone\Vulpecula.iPhone.csproj", "{16AF3DA8-B0DF-496F-AAAA-A67795AA268F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.iOS", "Vulpecula.iOS\Vulpecula.iOS.csproj", "{16AF3DA8-B0DF-496F-AAAA-A67795AA268F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
