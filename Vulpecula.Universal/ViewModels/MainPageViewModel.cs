@@ -38,8 +38,8 @@ namespace Vulpecula.Universal.ViewModels
 
         private async Task Initialize()
         {
-            // this._accountManager.ResetAccounts();
-            // this._columnManager.ClearColumns();
+            this._accountManager.ResetAccounts();
+            this._columnManager.ClearColumns();
 
             await this._accountManager.InitializeAccounts();
             this._columnManager.InitializeColumns();
@@ -141,7 +141,7 @@ namespace Vulpecula.Universal.ViewModels
         }
 
         public void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-            => ((ListBox)sender).SelectedIndex = -1;
+            => ((ListBox) sender).SelectedIndex = -1;
 
         public void OnClickedSendWhisper()
         {

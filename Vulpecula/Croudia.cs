@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -54,6 +55,8 @@ namespace Vulpecula
 
         public Users Users => new Users(this);
 
+        private readonly object _lockObj = new object();
+
         public Croudia(string consumerKey, string consumerSecret) : this(consumerKey, consumerSecret, "", "")
         {
         }
@@ -73,8 +76,11 @@ namespace Vulpecula
 
         public void SetTokens(Token token)
         {
-            this.AccessToken = token.AccessToken;
-            this.RefreshToken = token.RefreshToken;
+            lock (this._lockObj)
+            {
+                this.AccessToken = token.AccessToken;
+                this.RefreshToken = token.RefreshToken;
+            }
         }
 
         public async Task<T> GetAsync<T>(string url, params Expression<Func<string, object>>[] parameters)
@@ -89,7 +95,13 @@ namespace Vulpecula
                 url += "?" + string.Join("&", parameters.Select(w => $"{w.Key}={w.Value}"));
 
             var httpClient = new HttpClient(new OAuth2ClientHandler(this));
-            var responseString = await httpClient.GetStringAsync(url);
+            var response = await httpClient.GetAsync(url);
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                await this.OAuth.RefreshAsync();
+                return await this.GetAsync<T>(url, parameters);
+            }
+            var responseString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseString);
         }
 
@@ -132,6 +144,11 @@ namespace Vulpecula
                 content = new FormUrlEncodedContent(parameters.Select(w => new KeyValuePair<string, string>(w.Key, w.Value is bool ? w.Value.ToString().ToLower() : w.Value.ToString())));
 
             var response = await httpClient.PostAsync(url, content);
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                await this.OAuth.RefreshAsync();
+                return await this.PostAsync<T>(url, parameters);
+            }
             var responseString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseString);
         }
