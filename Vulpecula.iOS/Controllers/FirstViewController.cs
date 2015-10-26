@@ -4,14 +4,14 @@ using Foundation;
 
 using UIKit;
 
-namespace Vulpecula.iOS
+namespace Vulpecula.iOS.Controllers
 {
-    public partial class SecondViewController : UIViewController
+    public partial class FirstViewController : UIViewController
     {
-        public SecondViewController(IntPtr handle) : base(handle)
+        public FirstViewController(IntPtr handle) : base(handle)
         {
-            this.Title = NSBundle.MainBundle.LocalizedString("Second", "Second");
-            this.TabBarItem.Image = UIImage.FromBundle("Images/second");
+            this.Title = NSBundle.MainBundle.LocalizedString("First", "First");
+            this.TabBarItem.Image = UIImage.FromBundle("Images/first");
         }
 
         public override void DidReceiveMemoryWarning()
@@ -22,6 +22,12 @@ namespace Vulpecula.iOS
             // Release any cached data, images, etc that aren't in use.
         }
 
+        public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
+        {
+            // Return true for supported orientations
+            return true;
+        }
+
         #region View lifecycle
 
         public override void ViewDidLoad()
@@ -29,6 +35,18 @@ namespace Vulpecula.iOS
             base.ViewDidLoad();
 
             // Perform any additional setup after loading the view, typically from a nib.
+        }
+
+        public override void ViewDidUnload()
+        {
+            base.ViewDidUnload();
+
+            // Clear any references to subviews of the main view in order to
+            // allow the Garbage Collector to collect them sooner.
+            //
+            // e.g. myOutlet.Dispose (); myOutlet = null;
+
+            ReleaseDesignerOutlets();
         }
 
         public override void ViewWillAppear(bool animated)

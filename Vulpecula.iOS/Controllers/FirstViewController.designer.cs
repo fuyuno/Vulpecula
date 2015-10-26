@@ -9,10 +9,10 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 
-namespace Vulpecula.iOS
+namespace Vulpecula.iOS.Controllers
 {
-	[Register ("SecondViewController")]
-	partial class SecondViewController
+	[Register ("FirstViewController")]
+	partial class FirstViewController
 	{
 		void ReleaseDesignerOutlets ()
 		{
