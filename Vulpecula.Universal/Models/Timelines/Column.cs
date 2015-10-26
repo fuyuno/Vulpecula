@@ -22,18 +22,19 @@ namespace Vulpecula.Universal.Models.Timelines
         {
         }
 
-        private Column(TimelineType type, string id, string name, long userId, string query)
+        private Column(TimelineType type, string id, string name, long userId, int row, string query)
         {
             this.Type = type;
             this.ColumnId = id;
             this.Name = name;
             this.UserId = userId;
+            this.Row = row;
             this.Query = query;
         }
 
-        public static Column CreateColumnInfo(TimelineType type, string name, long userId, string query = null)
+        public static Column CreateColumnInfo(TimelineType type, string name, long userId, int row, string query = null)
         {
-            return new Column(type, $"Column-{Guid.NewGuid()}", name, userId, query);
+            return new Column(type, $"Column-{Guid.NewGuid()}", name, userId, row, query);
         }
 
         public static Column RestoreColumnInfo(ApplicationDataCompositeValue adcv)
@@ -47,8 +48,10 @@ namespace Vulpecula.Universal.Models.Timelines
                 ColumnId = adcv[nameof(ColumnId)].ToString(),
                 Name = adcv[nameof(Name)].ToString(),
                 UserId = long.Parse(adcv[nameof(UserId)].ToString()),
+                Row = int.Parse(adcv[nameof(Row)].ToString()),
                 Query = adcv[nameof(Query)]?.ToString()
             };
+
             Debug.WriteLine($"Restored column {{ID:{info.ColumnId}, Name:{info.Name}, Query:{info.Query}}}.");
             return info;
         }
@@ -88,6 +91,18 @@ namespace Vulpecula.Universal.Models.Timelines
         {
             get { return this._name; }
             set { this.SetProperty(ref this._name, value); }
+        }
+
+        #endregion
+
+        #region Row
+
+        private int _row;
+
+        public int Row
+        {
+            get { return this._row; }
+            set { this.SetProperty(ref this._row, value); }
         }
 
         #endregion

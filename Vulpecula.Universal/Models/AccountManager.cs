@@ -17,8 +17,6 @@ namespace Vulpecula.Universal.Models
     /// </summary>
     public class AccountManager
     {
-        private int _accountCounts;
-
         public ObservableCollection<CroudiaProvider> Providers { get; }
 
         public ObservableCollection<User> Users { get; }
@@ -27,7 +25,6 @@ namespace Vulpecula.Universal.Models
         {
             this.Providers = new ObservableCollection<CroudiaProvider>();
             this.Users = new ObservableCollection<User>();
-            this._accountCounts = 0;
         }
 
         [UsedImplicitly]
@@ -43,7 +40,6 @@ namespace Vulpecula.Universal.Models
                     vault.Remove(credential);
                 this.Providers.Clear();
                 this.Users.Clear();
-                this._accountCounts = 0;
             }
             catch (COMException)
             {
@@ -69,7 +65,6 @@ namespace Vulpecula.Universal.Models
                     }
                     this.Providers.Add(provider);
                     this.Users.Add(provider.User);
-                    this._accountCounts++;
                 }
             }
             catch (COMException e)
@@ -80,7 +75,7 @@ namespace Vulpecula.Universal.Models
 
         public async Task AuthorizationAccount(PasswordCredential credential = null)
         {
-            if (this._accountCounts >= 10)
+            if (this.Users.Count >= 10)
             {
                 await MessageDialogWrapper.ShowOkMessageDialogAsync("これ以上アカウントを追加することはできません。", "認証エラー");
                 return;
@@ -94,7 +89,6 @@ namespace Vulpecula.Universal.Models
             }
             this.Providers.Add(provider);
             this.Users.Add(provider.User);
-            this._accountCounts++;
         }
     }
 }

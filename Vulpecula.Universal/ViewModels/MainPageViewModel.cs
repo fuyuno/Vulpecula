@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
+using JetBrains.Annotations;
+
 using Vulpecula.Models;
 using Vulpecula.Universal.Extensions;
 using Vulpecula.Universal.Helpers;
@@ -15,6 +17,7 @@ using Vulpecula.Universal.ViewModels.Timelines;
 
 namespace Vulpecula.Universal.ViewModels
 {
+    [UsedImplicitly]
     public class MainPageViewModel : ViewModel
     {
         private readonly AccountManager _accountManager;
@@ -43,6 +46,8 @@ namespace Vulpecula.Universal.ViewModels
 
             await this._accountManager.InitializeAccounts();
             this._columnManager.InitializeColumns();
+
+            this._columnManager.SetupInitialColumns(this._accountManager.Users[0].Id);
 
             if (this._accountManager.Users.Count == 0)
             {

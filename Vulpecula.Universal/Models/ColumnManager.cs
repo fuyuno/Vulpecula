@@ -24,8 +24,14 @@ namespace Vulpecula.Universal.Models
         public void InitializeColumns()
         {
             var columns = App.AppSettings.Columns;
-            foreach (var column in columns)
-                this.Columns.Add(Column.RestoreColumnInfo(column));
+            foreach (var columnComposite in columns)
+            {
+                var column = Column.RestoreColumnInfo(columnComposite);
+                if (column.Row >= this.Columns.Count)
+                    this.Columns.Add(column);
+                else
+                    this.Columns.Insert(column.Row, column);
+            }
         }
 
         [UsedImplicitly]
@@ -42,9 +48,9 @@ namespace Vulpecula.Universal.Models
         /// <param name="userId"></param>
         public void SetupInitialColumns(long userId)
         {
-            this.AddColumn(Column.CreateColumnInfo(TimelineType.Public, "public", userId));
-            this.AddColumn(Column.CreateColumnInfo(TimelineType.Mentions, "mentions", userId));
-            this.AddColumn(Column.CreateColumnInfo(TimelineType.DirectMessages, "messages", userId));
+            this.AddColumn(Column.CreateColumnInfo(TimelineType.Public, "public", userId, 0));
+            this.AddColumn(Column.CreateColumnInfo(TimelineType.Mentions, "mentions", userId, 1));
+            this.AddColumn(Column.CreateColumnInfo(TimelineType.DirectMessages, "messages", userId, 2));
         }
 
         public void AddColumn(Column info)
@@ -58,6 +64,7 @@ namespace Vulpecula.Universal.Models
                 [nameof(Column.ColumnId)] = info.ColumnId,
                 [nameof(Column.Name)] = info.Name,
                 [nameof(Column.UserId)] = info.UserId,
+                [nameof(Column.Row)] = info.Row,
                 [nameof(Column.Query)] = info.Query
             };
 
