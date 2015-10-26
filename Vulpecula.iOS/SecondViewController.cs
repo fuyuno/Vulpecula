@@ -10,8 +10,8 @@ namespace Vulpecula.iOS
     {
         public SecondViewController(IntPtr handle) : base(handle)
         {
-            Title = NSBundle.MainBundle.LocalizedString("Second", "Second");
-            TabBarItem.Image = UIImage.FromBundle("Images/second");
+            this.Title = NSBundle.MainBundle.LocalizedString("Second", "Second");
+            this.TabBarItem.Image = UIImage.FromBundle("Images/second");
         }
 
         public override void DidReceiveMemoryWarning()

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Vulpecula.iPhone")]
+[assembly: AssemblyTitle("Vulpecula.iOS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Vulpecula.iPhone")]
+[assembly: AssemblyProduct("Vulpecula.iOS")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("16af3da8-b0df-496f-aaaa-a67795aa268f")]
+[assembly: Guid("8fd9baaa-4b22-4196-8a4f-07cbce1cb712")]
 
 // Version information for an assembly consists of the following four values:
 //
