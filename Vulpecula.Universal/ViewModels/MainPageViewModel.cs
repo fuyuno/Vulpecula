@@ -47,8 +47,6 @@ namespace Vulpecula.Universal.ViewModels
             await this._accountManager.InitializeAccounts();
             this._columnManager.InitializeColumns();
 
-            this._columnManager.SetupInitialColumns(this._accountManager.Users[0].Id);
-
             if (this._accountManager.Users.Count == 0)
             {
                 await this.Authorization();
@@ -146,7 +144,7 @@ namespace Vulpecula.Universal.ViewModels
         }
 
         public void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-            => ((ListBox)sender).SelectedIndex = -1;
+            => ((ListBox) sender).SelectedIndex = -1;
 
         public void OnClickedSendWhisper()
         {
