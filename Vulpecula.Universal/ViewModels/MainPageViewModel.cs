@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 using JetBrains.Annotations;
 
@@ -142,9 +141,6 @@ namespace Vulpecula.Universal.ViewModels
             if (this.IsWhisperZoneOpened && !this.IsHamburgerChecked)
                 this.IsHamburgerChecked = true;
         }
-
-        public void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-            => ((ListBox) sender).SelectedIndex = -1;
 
         public void OnClickedSendWhisper()
         {

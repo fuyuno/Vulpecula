@@ -9,7 +9,8 @@
     "Prism.Core": "6.1.0",
     "Prism.Unity": "6.1.1",
     "Prism.Windows": "6.0.1",
-    "Rx-Main": "2.2.5"
+    "Rx-Main": "2.2.5",
+    "WinRTXamlToolkit.UWP": "1.9.4"
   },
   "frameworks": {
     "uap10.0": {}
