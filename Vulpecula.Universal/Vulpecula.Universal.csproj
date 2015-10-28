@@ -111,6 +111,7 @@
     <Compile Include="Models\CroudiaProvider.cs" />
     <Compile Include="Models\Dialogs\DialogCommands.cs" />
     <Compile Include="Models\Dialogs\MessageDialogWrapper.cs" />
+    <Compile Include="Helpers\LocalizationHelper.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.MultipleAccounts.cs" />
     <Compile Include="Models\ColumnManager.cs" />
@@ -148,6 +149,8 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="Service References\Application Insights\ConnectedService.json" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\ja-JP\Resources.resw" />
     <None Include="Vulpecula.Universal_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

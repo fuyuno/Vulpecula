@@ -8,6 +8,7 @@ using Windows.Security.Credentials;
 using JetBrains.Annotations;
 
 using Vulpecula.Models;
+using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models.Dialogs;
 
 namespace Vulpecula.Universal.Models
@@ -82,14 +83,14 @@ namespace Vulpecula.Universal.Models
         {
             if (this.Users.Count >= 10)
             {
-                await MessageDialogWrapper.ShowOkMessageDialogAsync("これ以上アカウントを追加することはできません。", "認証エラー");
+                await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("CanNotAdd"), "Error");
                 return;
             }
 
             var provider = new CroudiaProvider();
             if (!await provider.Authorization(new PasswordVault(), credential))
             {
-                await MessageDialogWrapper.ShowOkMessageDialogAsync("認証に失敗しました。しばらくしてから、再度実行してください。", "認証エラー");
+                await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("FailAuth"), "Error");
                 return;
             }
             this.Providers.Add(provider);

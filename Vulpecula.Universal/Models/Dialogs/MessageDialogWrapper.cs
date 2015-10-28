@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 
 using Windows.UI.Popups;
 
+using Vulpecula.Universal.Helpers;
+
 namespace Vulpecula.Universal.Models.Dialogs
 {
     public static class MessageDialogWrapper
@@ -13,7 +15,7 @@ namespace Vulpecula.Universal.Models.Dialogs
         public static async Task ShowOkMessageDialogAsync(string content, string title = "")
         {
             var dialog = new MessageDialog(content, title);
-            dialog.Commands.Add(new UICommand("OK"));
+            dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("Ok")));
             await dialog.ShowAsync();
         }
 
@@ -23,11 +25,11 @@ namespace Vulpecula.Universal.Models.Dialogs
         public static async Task<DialogCommands> ShowOkCalcelMessageDialogAsync(string content, string title = "")
         {
             var dialog = new MessageDialog(content, title);
-            dialog.Commands.Add(new UICommand("OK") { Id = DialogCommands.Ok });
-            dialog.Commands.Add(new UICommand("キャンセル") { Id = DialogCommands.Cancel });
+            dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("Ok")) { Id = DialogCommands.Ok });
+            dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("Cancel")) { Id = DialogCommands.Cancel });
 
             var result = await dialog.ShowAsync();
-            return (DialogCommands)result.Id;
+            return (DialogCommands) result.Id;
         }
 
         /// <summary>
@@ -36,11 +38,11 @@ namespace Vulpecula.Universal.Models.Dialogs
         public static async Task<DialogCommands> ShowYesNoMessageDialogAsync(string content, string title = "")
         {
             var dialog = new MessageDialog(content, title);
-            dialog.Commands.Add(new UICommand("はい") { Id = DialogCommands.Yes });
-            dialog.Commands.Add(new UICommand("いいえ") { Id = DialogCommands.No });
+            dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("Yes")) { Id = DialogCommands.Yes });
+            dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("No")) { Id = DialogCommands.No });
 
             var result = await dialog.ShowAsync();
-            return (DialogCommands)result.Id;
+            return (DialogCommands) result.Id;
         }
 
         /// <summary>
@@ -49,12 +51,12 @@ namespace Vulpecula.Universal.Models.Dialogs
         public static async Task<DialogCommands> ShowYesNoCancelMessageDialogAsync(string content, string title = "")
         {
             var dialog = new MessageDialog(content, title);
-            dialog.Commands.Add(new UICommand("はい") { Id = DialogCommands.Yes });
-            dialog.Commands.Add(new UICommand("いいえ") { Id = DialogCommands.No });
-            dialog.Commands.Add(new UICommand("キャンセル") { Id = DialogCommands.Cancel });
+            dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("Yes")) { Id = DialogCommands.Yes });
+            dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("No")) { Id = DialogCommands.No });
+            dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("Cancel")) { Id = DialogCommands.Cancel });
 
             var result = await dialog.ShowAsync();
-            return (DialogCommands)result.Id;
+            return (DialogCommands) result.Id;
         }
     }
 }

@@ -41,7 +41,7 @@
             </Grid>
         </StackPanel>
         <StackPanel Grid.Column="1">
-            <TextBlock Text="{Binding ShareUser.Name, Converter={StaticResource StringFormatConverter}, ConverterParameter=' {0}さんがシェアしました'}" Visibility="{Binding IsShare, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBlock Text="{Binding ShareUser.Name, Converter={StaticResource StringFormatConverter}, ConverterParameter='StatusViewXaml_Shared'}" Visibility="{Binding IsShare, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20" />
@@ -53,7 +53,7 @@
                                RelativePanel.AlignLeftWithPanel="True"
                                Text="{Binding User.ScreenName,
                                               Converter={StaticResource StringFormatConverter},
-                                              ConverterParameter='@{0}'}" />
+                                              ConverterParameter='StatusViewXaml_ScreenName'}" />
                     <TextBlock Margin="10,0,50,0"
                                RelativePanel.RightOf="ScreenName"
                                Text="{Binding User.Name}"

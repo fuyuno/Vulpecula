@@ -4,19 +4,25 @@ using System.Reactive.Disposables;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 
+using Microsoft.Practices.ServiceLocation;
+
+using Prism.Windows.AppModel;
 using Prism.Windows.Mvvm;
 
 namespace Vulpecula.Universal.ViewModels.Primitives
 {
     public class ViewModel : ViewModelBase, IDisposable
     {
+        private readonly IResourceLoader _resource;
+
         public CompositeDisposable CompositeDisposable { get; }
-        public CoreDispatcher Dispatcher { get; }
+        protected CoreDispatcher Dispatcher { get; }
 
         public ViewModel()
         {
             this.CompositeDisposable = new CompositeDisposable();
             this.Dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
+            this._resource = ServiceLocator.Current.GetInstance<IResourceLoader>();
         }
 
         /// <summary>
@@ -25,6 +31,11 @@ namespace Vulpecula.Universal.ViewModels.Primitives
         public void Dispose()
         {
             this.CompositeDisposable.Dispose();
+        }
+
+        public string GetLocalizedString(string key)
+        {
+            return this._resource.GetString($"{this.GetType().Name}_{key}/Text");
         }
     }
 }

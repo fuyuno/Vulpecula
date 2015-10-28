@@ -50,7 +50,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
 
         public static ColumnViewModel Create(Column column)
         {
-            if (AccountManager.Instance.Providers.Any(w => w.User.Id == column.UserId))
+            if (AccountManager.Instance.Providers.All(w => w.User.Id != column.UserId))
                 throw new KeyNotFoundException($"UserId:{column.UserId} is not found in users that loading.");
             return new ColumnViewModel(column, AccountManager.Instance.Providers.Single(w => w.User.Id == column.UserId));
         }

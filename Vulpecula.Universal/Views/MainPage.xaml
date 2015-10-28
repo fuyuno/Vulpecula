@@ -56,10 +56,10 @@
                                               Height="48"
                                               FontSize="24"
                                               Glyph="&#xE70F;" />
-                                    <TextBlock Margin="10,0"
+                                    <TextBlock x:Uid="MainPageXaml_Whisper"
+                                               Margin="10,0"
                                                VerticalAlignment="Center"
-                                               FontSize="18"
-                                               Text="ささやく" />
+                                               FontSize="18" />
                                 </StackPanel>
                             </ListBoxItem>
                         </ListBox>
@@ -88,7 +88,7 @@
                                                    FontSize="18"
                                                    Text="{Binding ScreenName,
                                                                   Converter={StaticResource StringFormatConverter},
-                                                                  ConverterParameter='@{0}'}" />
+                                                                  ConverterParameter='MainPageXaml_ScreenName'}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -107,10 +107,10 @@
                                               Height="48"
                                               FontSize="24"
                                               Glyph="&#xE109;" />
-                                    <TextBlock Margin="10,0"
+                                    <TextBlock x:Uid="MainPageXaml_NewAccount"
+                                               Margin="10,0"
                                                VerticalAlignment="Center"
-                                               FontSize="18"
-                                               Text="アカウントを追加" />
+                                               FontSize="18" />
                                 </StackPanel>
                             </ListBoxItem>
                         </ListBox>
@@ -128,13 +128,13 @@
                                               Height="48"
                                               FontSize="24"
                                               Glyph="&#xE094;" />
-                                    <SearchBox Width="252"
+                                    <SearchBox x:Uid="MainPageXaml_SearchBox"
+                                               Width="252"
                                                Height="38"
                                                Margin="10,0"
                                                VerticalAlignment="Center"
                                                BorderThickness="1"
-                                               FontSize="18"
-                                               PlaceholderText="ささやき / ユーザー を検索" />
+                                               FontSize="18" />
                                 </StackPanel>
                             </ListBoxItem>
                             <ListBoxItem Padding="0">
@@ -143,10 +143,10 @@
                                               Height="48"
                                               FontSize="24"
                                               Glyph="&#xE125;" />
-                                    <TextBlock Margin="10,0"
+                                    <TextBlock x:Uid="MainPageXaml_Account"
+                                               Margin="10,0"
                                                VerticalAlignment="Center"
-                                               FontSize="18"
-                                               Text="アカウント" />
+                                               FontSize="18" />
                                 </StackPanel>
                             </ListBoxItem>
                             <ListBoxItem Padding="0">
@@ -155,10 +155,10 @@
                                               Height="48"
                                               FontSize="24"
                                               Glyph="&#xE115;" />
-                                    <TextBlock Margin="10,0"
+                                    <TextBlock x:Uid="MainPageXaml_Settings"
+                                               Margin="10,0"
                                                VerticalAlignment="Center"
-                                               FontSize="18"
-                                               Text="設定" />
+                                               FontSize="18" />
                                 </StackPanel>
                             </ListBoxItem>
                         </ListBox>
@@ -219,20 +219,20 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
 
-                            <TextBox Width="252"
+                            <TextBox x:Uid="MainPageXaml_WhatsHappening"
+                                     Width="252"
                                      Height="114"
                                      Margin="10"
                                      VerticalAlignment="Center"
                                      AcceptsReturn="True"
                                      BorderThickness="1"
                                      FontSize="18"
-                                     PlaceholderText="今何してる？"
                                      Text="{Binding Text,
                                                     UpdateSourceTrigger=PropertyChanged,
                                                     Mode=TwoWay}" />
-                            <Button Margin="10,0"
+                            <Button x:Uid="MainPageXaml_Send"
+                                    Margin="10,0"
                                     HorizontalAlignment="Right"
-                                    Content="送信"
                                     Tapped="{x:Bind ViewModel.OnClickedSendWhisper}" />
                         </StackPanel>
                     </StackPanel>

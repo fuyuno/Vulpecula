@@ -1,11 +1,14 @@
 ﻿using System.Threading.Tasks;
 
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Resources;
 
 using Microsoft.ApplicationInsights;
+using Microsoft.Practices.Unity;
 
 using Prism.Logging;
 using Prism.Unity.Windows;
+using Prism.Windows.AppModel;
 
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.Models.Services;
@@ -35,7 +38,18 @@ namespace Vulpecula.Universal
             this.InitializeComponent();
 
             this.Resuming += OnResuming;
+        }
+
+        /// <summary>
+        /// Override this method with the initialization logic of your application. Here you can initialize services, repositories, and so on.
+        /// </summary>
+        /// <param name="args">The <see cref="T:Windows.ApplicationModel.Activation.IActivatedEventArgs" /> instance containing the event data.</param>
+        protected override Task OnInitializeAsync(IActivatedEventArgs args)
+        {
             AppSettings.Initialize();
+
+            this.Container.RegisterInstance<IResourceLoader>(new ResourceLoaderAdapter(new ResourceLoader()), new ContainerControlledLifetimeManager());
+            return base.OnInitializeAsync(args);
         }
 
         /// <summary>
