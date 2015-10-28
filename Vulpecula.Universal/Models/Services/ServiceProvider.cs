@@ -21,7 +21,7 @@ namespace Vulpecula.Universal.Models.Services
         private static IDisposable _disposable1;
         private static IDisposable _disposable2;
 
-        public static ReadOnlyCollection<SuspendableService> RegisteredServices => Service.AsReadOnly();
+        public static ReadOnlyCollection<SuspendableService> SuspendableServices => Service.AsReadOnly();
 
         static ServiceProvider()
         {
@@ -30,6 +30,7 @@ namespace Vulpecula.Universal.Models.Services
             QueueAsync = new Queue<AsyncService>();
             LockObj = new object();
             _flag1 = false;
+            _flag2 = false;
 
             StartWatchers();
         }
