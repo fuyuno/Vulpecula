@@ -20,11 +20,11 @@ namespace Vulpecula.Universal.ViewModels
             this.IsWhisperEnabled = false;
         }
 
-        public static UserAccountViewModel Create(IEnumerable<CroudiaProvider> providers, User user)
+        public static UserAccountViewModel Create(User user)
         {
-            if (providers.All(w => w.User.Id != user.Id))
-                throw new KeyNotFoundException(user.Id.ToString());
-            return new UserAccountViewModel(user, providers.Single(w => w.User.Id == user.Id));
+            if (AccountManager.Instance.Providers.All(w => w.User.Id != user.Id))
+                throw new KeyNotFoundException($"UserId:{user.Id} is not found in users that loading.");
+            return new UserAccountViewModel(user, AccountManager.Instance.Providers.Single(w => w.User.Id == user.Id));
         }
 
         public void SendWhisper(string text)

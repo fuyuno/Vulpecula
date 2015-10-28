@@ -1,14 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Vulpecula.Universal.Models.Services.Primitive
 {
-    public abstract class AsyncService : Service
+    public abstract class AsyncService : IDisposable
     {
-        public abstract Task StartAsync();
+        public abstract void Dispose();
 
-        public override void Start()
-        {
-            // This method is not called by drivers.
-        }
+        public abstract Task StartAsync();
     }
 }

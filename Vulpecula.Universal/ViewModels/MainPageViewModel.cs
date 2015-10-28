@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Windows.UI.Xaml;
@@ -19,8 +20,6 @@ namespace Vulpecula.Universal.ViewModels
     [UsedImplicitly]
     public class MainPageViewModel : ViewModel
     {
-        private readonly AccountManager _accountManager;
-
         private readonly ColumnManager _columnManager;
 
         public MainPageViewModel()
@@ -29,13 +28,12 @@ namespace Vulpecula.Universal.ViewModels
             this.IsWhisperZoneOpened = false;
             this.Users = new ObservableCollection<UserAccountViewModel>();
             this.Columns = new ObservableCollection<ColumnViewModel>();
-            this._accountManager = new AccountManager();
             this._columnManager = new ColumnManager();
 
-            ViewModelHelper.SubscribeNotifyCollectionChanged(this._accountManager.Users, this.Users, (User w) =>
-                UserAccountViewModel.Create(this._accountManager.Providers, w)).AddTo(this);
+            ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, this.Users, (User w) =>
+                UserAccountViewModel.Create(w)).AddTo(this);
             ViewModelHelper.SubscribeNotifyCollectionChanged(this._columnManager.Columns, this.Columns, (Column w) =>
-                ColumnViewModel.Create(this._accountManager.Providers, w)).AddTo(this);
+                ColumnViewModel.Create(w)).AddTo(this);
         }
 
         private async Task Initialize()
@@ -43,20 +41,20 @@ namespace Vulpecula.Universal.ViewModels
             // this._accountManager.ResetAccounts();
             // this._columnManager.ClearColumns();
 
-            await this._accountManager.InitializeAccounts();
+            await AccountManager.Instance.InitializeAccounts();
             this._columnManager.InitializeColumns();
 
-            if (this._accountManager.Users.Count == 0)
+            if (AccountManager.Instance.Users.Count == 0)
             {
                 await this.Authorization();
-                if (this._accountManager.Users.Count > 0)
-                    this._columnManager.SetupInitialColumns(this._accountManager.Users[0].Id);
+                if (AccountManager.Instance.Users.Count > 0)
+                    this._columnManager.SetupInitialColumns(AccountManager.Instance.Users.First().Id);
             }
         }
 
         private async Task Authorization()
         {
-            await this._accountManager.AuthorizationAccount();
+            await AccountManager.Instance.AuthorizationAccount();
         }
 
         #region Properties

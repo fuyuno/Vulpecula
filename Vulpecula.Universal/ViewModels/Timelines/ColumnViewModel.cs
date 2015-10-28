@@ -48,14 +48,11 @@ namespace Vulpecula.Universal.ViewModels.Timelines
             }
         }
 
-        public static ColumnViewModel Create(IEnumerable<CroudiaProvider> providers, Column column)
+        public static ColumnViewModel Create(Column column)
         {
-            if (providers.Any(w => w.User.Id == column.UserId))
-            {
-                var provider = providers.Single(w => w.User.Id == column.UserId);
-                return new ColumnViewModel(column, provider);
-            }
-            throw new KeyNotFoundException($"UserId:{column.UserId} is not found in users that already loading.");
+            if (AccountManager.Instance.Providers.Any(w => w.User.Id == column.UserId))
+                throw new KeyNotFoundException($"UserId:{column.UserId} is not found in users that loading.");
+            return new ColumnViewModel(column, AccountManager.Instance.Providers.Single(w => w.User.Id == column.UserId));
         }
 
         private async void AddTimeline(StatusBase status)

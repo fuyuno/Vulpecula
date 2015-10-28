@@ -12,16 +12,21 @@ using Vulpecula.Universal.Models.Dialogs;
 
 namespace Vulpecula.Universal.Models
 {
+    // TODO: static
     /// <summary>
     /// アカウントを管理します。
     /// </summary>
-    public class AccountManager
+    public sealed class AccountManager
     {
+        private static AccountManager _instance;
+
+        public static AccountManager Instance => _instance ?? (_instance = new AccountManager());
+
         public ObservableCollection<CroudiaProvider> Providers { get; }
 
         public ObservableCollection<User> Users { get; }
 
-        public AccountManager()
+        private AccountManager()
         {
             this.Providers = new ObservableCollection<CroudiaProvider>();
             this.Users = new ObservableCollection<User>();
