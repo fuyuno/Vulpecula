@@ -123,6 +123,9 @@
   <data name="AccountManager_FailAuth.Text" xml:space="preserve">
     <value>Authorization failure. Please try again latar.</value>
   </data>
+  <data name="ColumnManager_CanNotRestored.Text" xml:space="preserve">
+    <value>Some columns could not restore because an error occured while loading.</value>
+  </data>
   <data name="MainPageXaml_Account.Text" xml:space="preserve">
     <value>Accounts</value>
   </data>

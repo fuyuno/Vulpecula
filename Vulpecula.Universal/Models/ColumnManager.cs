@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 using Windows.Storage;
 
 using JetBrains.Annotations;
 
+using Vulpecula.Universal.Helpers;
+using Vulpecula.Universal.Models.Dialogs;
 using Vulpecula.Universal.Models.Timelines;
 
 namespace Vulpecula.Universal.Models
@@ -21,16 +25,31 @@ namespace Vulpecula.Universal.Models
             this.Columns = new ObservableCollection<Column>();
         }
 
-        public void InitializeColumns()
+        public async Task InitializeColumns()
         {
-            var columns = App.AppSettings.Columns;
-            foreach (var columnComposite in columns)
+            try
             {
-                var column = Column.RestoreColumnInfo(columnComposite);
-                if (column.Row >= this.Columns.Count)
-                    this.Columns.Add(column);
-                else
-                    this.Columns.Insert(column.Row, column);
+                var columns = App.AppSettings.Columns;
+                foreach (var columnComposite in columns)
+                {
+                    var column = Column.RestoreColumnInfo(columnComposite);
+                    if (column.Row >= this.Columns.Count)
+                        this.Columns.Add(column);
+                    else
+                        this.Columns.Insert(column.Row, column);
+                    Debug.WriteLine($"Restored column {{ID:{column.ColumnId}, Name:{column.Name}, Query:{column.Query}}}.");
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("CanNotRestored"), "Error");
+                var columns = App.AppSettings.Columns;
+                foreach (var columnComposite in columns)
+                {
+                    this.Columns.Clear();
+                    App.AppSettings.RemoveValue(columnComposite[nameof(Column.ColumnId)].ToString());
+                }
             }
         }
 
@@ -76,6 +95,7 @@ namespace Vulpecula.Universal.Models
         {
             this.Columns.Remove(info);
             App.AppSettings.RemoveValue(info.ColumnId);
+            Debug.WriteLine($"Removed column {{ID:{info.ColumnId}, Name:{info.Name}, Query:{info.Query}}}.");
         }
     }
 }

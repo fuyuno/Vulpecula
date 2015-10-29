@@ -22,15 +22,15 @@ namespace Vulpecula.Universal.Helpers
                 switch (w.EventArgs.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        target.Insert(w.EventArgs.NewStartingIndex, (T) w.EventArgs.NewItems[0]);
+                        target.Insert(w.EventArgs.NewStartingIndex, (T)w.EventArgs.NewItems[0]);
                         break;
 
                     case NotifyCollectionChangedAction.Remove:
-                        target.Remove((T) w.EventArgs.NewItems[0]);
+                        target.Remove((T)w.EventArgs.NewItems[0]);
                         break;
 
                     case NotifyCollectionChangedAction.Replace:
-                        target[w.EventArgs.NewStartingIndex] = (T) w.EventArgs.NewItems[0];
+                        target[w.EventArgs.NewStartingIndex] = (T)w.EventArgs.NewItems[0];
                         break;
 
                     case NotifyCollectionChangedAction.Move:
@@ -61,15 +61,15 @@ namespace Vulpecula.Universal.Helpers
                 switch (w.EventArgs.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        target.Insert(w.EventArgs.NewStartingIndex, castFunc.Invoke((TModel) w.EventArgs.NewItems[0]));
+                        target.Insert(w.EventArgs.NewStartingIndex, castFunc.Invoke((TModel)w.EventArgs.NewItems[0]));
                         break;
 
                     case NotifyCollectionChangedAction.Remove:
-                        target.Remove(castFunc.Invoke((TModel) w.EventArgs.NewItems[0]));
+                        target.Remove(castFunc.Invoke((TModel)w.EventArgs.OldItems[0]));
                         break;
 
                     case NotifyCollectionChangedAction.Replace:
-                        target[w.EventArgs.NewStartingIndex] = castFunc.Invoke((TModel) w.EventArgs.NewItems[0]);
+                        target[w.EventArgs.NewStartingIndex] = castFunc.Invoke((TModel)w.EventArgs.NewItems[0]);
                         break;
 
                     case NotifyCollectionChangedAction.Move:

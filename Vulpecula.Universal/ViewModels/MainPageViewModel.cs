@@ -42,7 +42,7 @@ namespace Vulpecula.Universal.ViewModels
             // this._columnManager.ClearColumns();
 
             await AccountManager.Instance.InitializeAccounts();
-            this._columnManager.InitializeColumns();
+            await this._columnManager.InitializeColumns();
 
             if (AccountManager.Instance.Users.Count == 0)
             {

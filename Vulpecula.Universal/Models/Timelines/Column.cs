@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 
 using Windows.Storage;
@@ -52,7 +51,6 @@ namespace Vulpecula.Universal.Models.Timelines
                 Query = adcv[nameof(Query)]?.ToString()
             };
 
-            Debug.WriteLine($"Restored column {{ID:{info.ColumnId}, Name:{info.Name}, Query:{info.Query}}}.");
             return info;
         }
 
