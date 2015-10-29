@@ -68,6 +68,9 @@
                     <!--  #region UpCenter Content of SplitView  -->
                     <StackPanel x:Name="UpCenter" RelativePanel.Below="Header">
                         <ListBox ItemsSource="{x:Bind ViewModel.Users}">
+                            <i:Interaction.Behaviors>
+                                <behaviors:UnSelectableListBoxBehavior />
+                            </i:Interaction.Behaviors>
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="Padding" Value="0" />
