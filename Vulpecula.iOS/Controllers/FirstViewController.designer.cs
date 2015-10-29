@@ -4,26 +4,16 @@
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
-using Foundation;
-using System;
-using System.CodeDom.Compiler;
-using UIKit;
 
-namespace Vulpecula.iOS
+using Foundation;
+
+namespace Vulpecula.iOS.Controllers
 {
 	[Register ("FirstViewController")]
-	partial class FirstViewController
+	sealed partial class FirstViewController
 	{
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel Label1 { get; set; }
-
 		void ReleaseDesignerOutlets ()
 		{
-			if (Label1 != null) {
-				Label1.Dispose ();
-				Label1 = null;
-			}
 		}
 	}
 }

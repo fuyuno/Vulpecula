@@ -11,6 +11,7 @@ Supported Platform is:
 ## Projects
 * Vulpecula.Android
 * Vulpecula.Desktop
+* Vulpecula.Mobile (Shared)
 * Vulpecula.Streaming (Shared)
 * Vulpecula.Universal
 * Vulpecula.iOS

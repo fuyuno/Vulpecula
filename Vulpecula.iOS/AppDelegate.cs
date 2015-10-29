@@ -2,13 +2,18 @@
 
 using UIKit;
 
+using Vulpecula.Mobile;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
+
 namespace Vulpecula.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the
     // User Interface of the application, as well as listening (and optionally responding) to
     // application events from iOS.
     [Register("AppDelegate")]
-    public class AppDelegate : UIApplicationDelegate
+    public class AppDelegate : FormsApplicationDelegate
     {
         // class-level declarations
 
@@ -23,7 +28,9 @@ namespace Vulpecula.iOS
         //
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            return true;
+            Forms.Init();
+            this.LoadApplication(new ExampleView());
+            return base.FinishedLaunching(application, launchOptions);
         }
 
         // This method is invoked when the application is about to move from active to inactive state.
