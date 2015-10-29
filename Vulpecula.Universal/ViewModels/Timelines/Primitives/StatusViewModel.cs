@@ -11,10 +11,11 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         public bool IsShare { get; }
         public bool IsComment { get; }
         public bool IsDirectMessage { get; }
+        public bool HasImage { get; }
 
         #region CreatedAt
 
-        public string CreatedAt => this.Model.CreatedAt.ToString("t");
+        public string CreatedAt => this.Model.CreatedAt.ToString("hh:mm");
 
         #endregion
 
@@ -29,6 +30,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
             this.IsShare = this.Model.SpreadStatus != null;
             this.IsComment = this.Model.QuotedStatus != null;
+            this.HasImage = this.Model.Entities?.Media != null;
         }
 
         private UserViewModel CreateUserViewModel(User user)
@@ -42,6 +44,13 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         private string _text;
         public string Text => this._text ?? (this._text = this.IsShare ? this.Model.SpreadStatus.Text : this.Model.Text);
+
+        #endregion
+
+        #region Image
+
+        private string _imageUrl;
+        public string ImageUrl => this._imageUrl ?? (this._imageUrl = this.HasImage ? this.Model.Entities.Media.MediaUrlHttps : "");
 
         #endregion
 
