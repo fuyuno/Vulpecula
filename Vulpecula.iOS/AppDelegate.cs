@@ -29,7 +29,7 @@ namespace Vulpecula.iOS
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             Forms.Init();
-            this.LoadApplication(new ExampleView());
+            this.LoadApplication(new ApplicationMain());
             return base.FinishedLaunching(application, launchOptions);
         }
 
