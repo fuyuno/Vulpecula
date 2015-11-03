@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Vulpecula.Mobile
+namespace Vulpecula.Mobile.ViewModels
 {
-	public class MainPageViewModel
-	{
-		public MainPageViewModel ()
-		{
-		}
-	}
+    public class MainPageViewModel
+    {
+        public MainPageViewModel()
+        {
+        }
+    }
 }
 

@@ -4,22 +4,22 @@ using Foundation;
 
 using Vulpecula.Mobile.Models;
 
-namespace Vulpecula.iOS
+namespace Vulpecula.iOS.Models
 {
-	public class Localization : ILocalization
-	{
-		public Localization ()
-		{
-		}
-
-		public string GetString(string key)
-		{
-			return NSBundle.MainBundle.LocalizedString (key, key);
+    public class Localization : ILocalization
+    {
+        public Localization()
+        {
         }
 
-		public string GetStringByFullName(string name)
-		{
-			return NSBundle.MainBundle.LocalizedString (name, name);
-		}
-	}
+        public string GetString(string key)
+        {
+            return NSBundle.MainBundle.LocalizedString(key, key);
+        }
+
+        public string GetStringByFullName(string name)
+        {
+            return NSBundle.MainBundle.LocalizedString(name, name);
+        }
+    }
 }

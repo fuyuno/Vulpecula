@@ -7,28 +7,29 @@ using Vulpecula.Mobile.Models;
 
 namespace Vulpecula.Mobile.ViewModels.Primitives
 {
-	public class ViewModel : BindableBase, IDisposable
-	{
-		public CompositeDisposable CompositeDisposable { get; }
-		protected ILocalization Localization { get; }
+    public class ViewModel : BindableBase, IDisposable
+    {
+        public CompositeDisposable CompositeDisposable { get; }
 
-		public ViewModel()
-		{
-			this.CompositeDisposable = new CompositeDisposable();
-			this.Localization = MobileCross.Localization;
-		}
+        protected ILocalization Localization { get; }
 
-		/// <summary>
-		/// アンマネージ リソースの解放またはリセットに関連付けられているアプリケーション定義のタスクを実行します。
-		/// </summary>
-		public void Dispose()
-		{
-			this.CompositeDisposable.Dispose();
-		}
+        public ViewModel()
+        {
+            this.CompositeDisposable = new CompositeDisposable();
+            this.Localization = MobileCross.Localization;
+        }
 
-		public string GetLocalizedString(string key)
-		{
-			return this.Localization.GetString (key);
-		}
-	}
+        /// <summary>
+        /// アンマネージ リソースの解放またはリセットに関連付けられているアプリケーション定義のタスクを実行します。
+        /// </summary>
+        public void Dispose()
+        {
+            this.CompositeDisposable.Dispose();
+        }
+
+        public string GetLocalizedString(string key)
+        {
+            return this.Localization.GetString(key);
+        }
+    }
 }
