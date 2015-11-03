@@ -93,15 +93,17 @@
     <Compile Include="AppDelegate.cs" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <None Include="packages.config" />
     <BundleResource Include="Resources\en.lproj\InfoPlist.strings" />
     <BundleResource Include="Resources\ja.lproj\InfoPlist.strings" />
     <BundleResource Include="Resources\en.lproj\Localizable.strings" />
     <BundleResource Include="Resources\ja.lproj\Localizable.strings" />
-    <BundleResource Include="Resources\first%402x.png" />
-    <BundleResource Include="Resources\second%402x.png" />
-    <Compile Include="Models\Localization.cs" />
+    <ImageAsset Include="Resources\Image.xcassets\AppIcons.appiconset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Image.xcassets\LaunchImages.launchimage\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\first.png" />
@@ -152,15 +154,40 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entitlements.plist" />
-    <BundleResource Include="Resources\Icon-Small%402x.png" />
-    <BundleResource Include="Resources\Icon-Small-40.png" />
-    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
     <BundleResource Include="Resources\Launch.png" />
     <BundleResource Include="Resources\Icon.png" />
     <BundleResource Include="Resources\Icon%402x.png" />
-    <BundleResource Include="Resources\Icon-60%402x.png" />
-    <BundleResource Include="Resources\Icon-60%403x.png" />
     <BundleResource Include="Resources\Icon-Small.png" />
+    <ImageAsset Include="Resources\Image.xcassets\LaunchImages.launchimage\Default.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Image.xcassets\LaunchImages.launchimage\Default-736h%403x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Image.xcassets\LaunchImages.launchimage\Default-667h%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Image.xcassets\LaunchImages.launchimage\Default%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Image.xcassets\LaunchImages.launchimage\Default-568h%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Image.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Image.xcassets\AppIcons.appiconset\Icon-Small-40%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Image.xcassets\AppIcons.appiconset\Icon-Small-40.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Image.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Image.xcassets\AppIcons.appiconset\Icon-60%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
     <ITunesArtwork Include="Resources\iTunesArtwork%402x.png" />
     <ITunesArtwork Include="Resources\iTunesArtwork.png" />
   </ItemGroup>
@@ -180,6 +207,35 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources/Image.xcassets/AppIcons.appiconset/Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources/Image.xcassets/AppIcons.appiconset/Icon-60@2x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources/Image.xcassets/AppIcons.appiconset/Icon-60@3x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources/Image.xcassets/AppIcons.appiconset/Icon-Small-40.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources/Image.xcassets/AppIcons.appiconset/Icon-Small-40@2x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources/Image.xcassets/AppIcons.appiconset/Icon-Small@2x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources/Image.xcassets/LaunchImages.launchimage/Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources/Image.xcassets/LaunchImages.launchimage/Default-568h@2x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources/Image.xcassets/LaunchImages.launchimage/Default@2x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.1.6471\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
