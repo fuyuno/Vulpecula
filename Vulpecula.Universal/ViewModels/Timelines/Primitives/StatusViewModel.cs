@@ -15,7 +15,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         #region CreatedAt
 
-        public string CreatedAt => this.Model.CreatedAt.ToString("hh:mm");
+        public string CreatedAt => this.Model.CreatedAt.ToString("HH:mm");
 
         #endregion
 
