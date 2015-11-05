@@ -35,21 +35,21 @@
             </StackPanel>
             <Grid Grid.Row="1">
                 <ProgressBar x:Name="ProgressBar" IsIndeterminate="True" />
-                <ListBox ItemsSource="{Binding Statuses}">
+                <ListView ItemsSource="{Binding Statuses}">
                     <i:Interaction.Behaviors>
                         <behaviors:EmptyListBehavior Target="ProgressBar" />
                     </i:Interaction.Behaviors>
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
-                    </ListBox.ItemContainerStyle>
-                    <ListBox.ItemTemplate>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
                         <DataTemplate>
                             <primitives:StatusView HorizontalAlignment="Stretch" DataContext="{Binding}" />
                         </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
         </Grid>
     </Border>

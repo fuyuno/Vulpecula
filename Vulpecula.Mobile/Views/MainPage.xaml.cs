@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Vulpecula.Mobile.Views
 {
-	public partial class MainPage : ContentPage
-	{
-		public MainPage ()
-		{
-			InitializeComponent ();
-		}
-	}
+    public partial class MainPage : ContentPage
+    {
+        public MainPage()
+        {
+            InitializeComponent();
+        }
+    }
 }
-

@@ -13,13 +13,13 @@ namespace Vulpecula.Universal.Behaviors
     /// <summary>
     /// ItemsSource が空の時、同一ネスト以下にある Target に指定されたコントロールを表示します。
     /// </summary>
-    public class EmptyListBehavior : Behavior<ListBox>
+    public class EmptyListBehavior : Behavior<ListView>
     {
         public static readonly DependencyProperty TargetProperty =
             DependencyProperty.Register(
                 nameof(Target),
-                typeof(string),
-                typeof(EmptyListBehavior),
+                typeof (string),
+                typeof (EmptyListBehavior),
                 new PropertyMetadata(string.Empty));
 
         private int _count;

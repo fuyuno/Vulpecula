@@ -18,7 +18,7 @@ namespace Vulpecula.Universal.ViewModels.Primitives
         public CompositeDisposable CompositeDisposable { get; }
         protected CoreDispatcher Dispatcher { get; }
 
-        public ViewModel()
+        protected ViewModel()
         {
             this.CompositeDisposable = new CompositeDisposable();
             this.Dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
