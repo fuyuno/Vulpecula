@@ -7,10 +7,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:Vulpecula.Mobile.ViewModels;assembly=Vulpecula.Mobile"
-             d:DataContext="{d:DesignInstance vm:MainPageViewModel}"
-             mc:Ignorable="d">
+             xmlns:vm="clr-namespace:Vulpecula.Mobile.ViewModels;assembly=Vulpecula.Mobile">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel />
+    </ContentPage.BindingContext>
+
     <Label HorizontalOptions="Center"
            Text="{Binding Message}"
            VerticalOptions="Center" />
+
 </ContentPage>
