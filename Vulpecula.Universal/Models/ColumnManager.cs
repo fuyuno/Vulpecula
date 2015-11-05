@@ -18,9 +18,12 @@ namespace Vulpecula.Universal.Models
     /// </summary>
     public class ColumnManager
     {
+        private static ColumnManager _instance;
+        public static ColumnManager Instance => _instance ?? (_instance = new ColumnManager());
+
         public ObservableCollection<Column> Columns { get; }
 
-        public ColumnManager()
+        private ColumnManager()
         {
             this.Columns = new ObservableCollection<Column>();
         }

@@ -20,19 +20,16 @@ namespace Vulpecula.Universal.ViewModels
     [UsedImplicitly]
     public class MainPageViewModel : ViewModel
     {
-        private readonly ColumnManager _columnManager;
-
         public MainPageViewModel()
         {
             this.IsHamburgerChecked = false;
             this.IsWhisperZoneOpened = false;
             this.Users = new ObservableCollection<UserAccountViewModel>();
             this.Columns = new ObservableCollection<ColumnViewModel>();
-            this._columnManager = new ColumnManager();
 
             ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, this.Users, (User w) =>
                 UserAccountViewModel.Create(w)).AddTo(this);
-            ViewModelHelper.SubscribeNotifyCollectionChanged(this._columnManager.Columns, this.Columns, (Column w) =>
+            ViewModelHelper.SubscribeNotifyCollectionChanged(ColumnManager.Instance.Columns, this.Columns, (Column w) =>
                 ColumnViewModel.Create(w)).AddTo(this);
         }
 
@@ -42,13 +39,13 @@ namespace Vulpecula.Universal.ViewModels
             // this._columnManager.ClearColumns();
 
             await AccountManager.Instance.InitializeAccounts();
-            await this._columnManager.InitializeColumns();
+            await ColumnManager.Instance.InitializeColumns();
 
             if (AccountManager.Instance.Users.Count == 0)
             {
                 await this.Authorization();
                 if (AccountManager.Instance.Users.Count > 0)
-                    this._columnManager.SetupInitialColumns(AccountManager.Instance.Users.First().Id);
+                    ColumnManager.Instance.SetupInitialColumns(AccountManager.Instance.Users.First().Id);
             }
         }
 
