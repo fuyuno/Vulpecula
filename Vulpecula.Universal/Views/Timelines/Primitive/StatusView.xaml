@@ -31,7 +31,7 @@
                                         TargetNullValue=../../../Assets/StoreLogo.png}" />
                 <Image Width="24"
                        Height="24"
-                       Margin="6,26"
+                       Margin="6,28"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Top"
                        Source="{Binding Recipient.Icon,
