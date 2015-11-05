@@ -7,6 +7,11 @@ namespace Vulpecula.Mobile.ViewModels
     [UsedImplicitly]
     public class MainPageViewModel : ViewModel
     {
+        public MainPageViewModel()
+        {
+            Message = "Hello Xamarin.Forms with MVVM!";
+        }
+
         #region Message
 
         private string _message;
