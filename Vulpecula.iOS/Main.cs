@@ -1,7 +1,10 @@
-﻿using UIKit;
+﻿using JetBrains.Annotations;
+
+using UIKit;
 
 namespace Vulpecula.iOS
 {
+    [UsedImplicitly]
     public class Application
     {
         // This is the main entry point of the application.
