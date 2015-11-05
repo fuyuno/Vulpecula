@@ -1,0 +1,41 @@
+﻿<SettingsFlyout x:Class="Vulpecula.Universal.Views.Flyouts.UserFlyout"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:local="using:Vulpecula.Universal.Views.Flyouts"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:vm="using:Vulpecula.Universal.ViewModels.Flyouts"
+                Title="@ScreenName"
+                HeaderBackground="SkyBlue"
+                HeaderForeground="White"
+                d:DataContext="{d:DesignInstance vm:UserFlyoutViewModel}"
+                d:DesignHeight="300"
+                d:DesignWidth="400"
+                mc:Ignorable="d">
+
+    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+        <!--  以下の StackPanel では個々のコンテンツ セクションを定義します  -->
+
+        <!--  コンテンツ セクション 1  -->
+        <StackPanel Style="{StaticResource SettingsFlyoutSectionStyle}">
+
+            <!--  セクション 1 ヘッダー  -->
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Lorem ipsum" />
+
+            <!--  セクション 1 ボディ  -->
+            <TextBlock Margin="0,0,0,25"
+                       Style="{StaticResource BodyTextBlockStyle}"
+                       TextWrapping="Wrap">
+                <TextBlock.Text>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </TextBlock.Text>
+            </TextBlock>
+
+        </StackPanel>
+
+        <!--  必要に応じてコンテンツ セクションを以下でさらに定義します  -->
+
+    </StackPanel>
+</SettingsFlyout>
