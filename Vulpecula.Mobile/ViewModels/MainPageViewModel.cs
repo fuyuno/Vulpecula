@@ -1,12 +1,22 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+
+using Vulpecula.Mobile.ViewModels.Primitives;
 
 namespace Vulpecula.Mobile.ViewModels
 {
-    public class MainPageViewModel
+    [UsedImplicitly]
+    public class MainPageViewModel : ViewModel
     {
-        public MainPageViewModel()
+        #region Message
+
+        private string _message;
+
+        public string Message
         {
+            get { return this._message; }
+            set { this.SetProperty(ref _message, value); }
         }
+
+        #endregion
     }
 }
-
