@@ -37,7 +37,7 @@ namespace Vulpecula.Universal.Models.Timelines.Primitive
 
         public long? InReplyToUserId => this._status.InReplyToUserId;
 
-        public Source Source => this._status.Source;
+        public Source Source => this._status?.Source;
 
         public User User => this.IsDirectMessage ? this._secretMail.Sender : this._status.User;
 
@@ -50,7 +50,7 @@ namespace Vulpecula.Universal.Models.Timelines.Primitive
         public StatusModel(StatusBase @base)
         {
             this._originalModel = @base;
-            this.IsDirectMessage = (@base is SecretMail);
+            this.IsDirectMessage = @base is SecretMail;
             if (this.IsDirectMessage)
                 this._secretMail = (SecretMail)@base;
             else

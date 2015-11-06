@@ -19,6 +19,8 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         #endregion
 
+        public string Via => Model.Source == null ? "" : $"via {Model.Source.Name}";
+
         public StatusViewModel(StatusModel statusModel)
         {
             this.Model = statusModel;

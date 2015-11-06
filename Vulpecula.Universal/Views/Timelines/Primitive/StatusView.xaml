@@ -9,7 +9,7 @@
              d:DesignHeight="150"
              d:DesignWidth="360"
              mc:Ignorable="d">
-    <Grid>
+    <Grid Padding="0,10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60" />
             <ColumnDefinition Width="*" />
@@ -76,7 +76,11 @@
                            Visibility="{Binding HasImage,
                                                 Converter={StaticResource BooleanToVisibilityConverter}}" />
                 </StackPanel>
-                <StackPanel Grid.Row="3" Orientation="Horizontal" />
+                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                    <TextBlock FontSize="11"
+                               Foreground="{StaticResource HyperlinkDisabledThemeBrush}"
+                               Text="{Binding Via}" />
+                </StackPanel>
             </Grid>
         </StackPanel>
     </Grid>
