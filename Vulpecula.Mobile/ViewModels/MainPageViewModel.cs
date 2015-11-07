@@ -1,27 +1,26 @@
 ﻿using JetBrains.Annotations;
 
 using Vulpecula.Mobile.ViewModels.Primitives;
+using Vulpecula.Mobile.ViewModels.Timelines;
 
 namespace Vulpecula.Mobile.ViewModels
 {
     [UsedImplicitly]
     public class MainPageViewModel : ViewModel
     {
+        public StatusTimelineViewModel PublicTimelineViewModel { get; }
+        public StatusTimelineViewModel HomeTimelineViewModel { get; }
+        public StatusTimelineViewModel MentionsTimelineViewModel { get; }
+        public DirectMessagePageViewModel MessageTimelineViewModel { get; }
+        public MyselfUserPageViewModel MyselfUserPageViewModel { get; }
+
         public MainPageViewModel()
         {
-            Message = this.GetLocalizedString("HelloLabel");
+            PublicTimelineViewModel = new StatusTimelineViewModel("Public", "public", "Public Timeline");
+            HomeTimelineViewModel = new StatusTimelineViewModel("Home", "home", "Home Timeline");
+            MentionsTimelineViewModel = new StatusTimelineViewModel("Mentions", "mention", "Mentions");
+            MessageTimelineViewModel = new DirectMessagePageViewModel();
+            MyselfUserPageViewModel = new MyselfUserPageViewModel();
         }
-
-        #region
-
-        private string _message;
-
-        public string Message
-        {
-            get { return _message; }
-            set { this.SetProperty(ref _message, value); }
-        }
-
-        #endregion
     }
 }

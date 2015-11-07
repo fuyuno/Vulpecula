@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\CurrentPageBehavior.cs" />
     <Compile Include="Extensions\ObservableCollectionEx.cs" />
     <Compile Include="Extensions\ViewModelEx.cs" />
     <Compile Include="Models\ModelLocator.cs" />
@@ -44,11 +45,25 @@
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
     <Compile Include="MobileCross.cs" />
     <Compile Include="ApplicationMain.cs" />
+    <Compile Include="ViewModels\Timelines\DirectMessagePageViewModel.cs" />
+    <Compile Include="ViewModels\MyselfUserPageViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\Primitives\NavigationalViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\Primitives\TabbedViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\StatusTimelineViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MyselfUserPage.xaml.cs">
+      <DependentUpon>MyselfUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RootPage.xaml.cs">
       <DependentUpon>RootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Timelines\DirectMessageTimeline.xaml.cs">
+      <DependentUpon>DirectMessageTimeline.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Timelines\StatusTimeline.xaml.cs">
+      <DependentUpon>StatusTimeline.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +144,27 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\RootPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Timelines\DirectMessageTimeline.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Timelines\StatusTimeline.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Popups\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MyselfUserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

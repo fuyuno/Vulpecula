@@ -1,21 +1,35 @@
 ﻿<TabbedPage x:Class="Vulpecula.Mobile.Views.MainPage"
             xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:b="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
             xmlns:m="clr-namespace:Vulpecula.Mobile.Models;assembly=Vulpecula.Mobile"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:v="clr-namespace:Vulpecula.Mobile.Views;assembly=Vulpecula.Mobile"
             xmlns:vm="clr-namespace:Vulpecula.Mobile.ViewModels;assembly=Vulpecula.Mobile"
-            Title="Navigation Bar Title">
+            xmlns:vt="clr-namespace:Vulpecula.Mobile.Views.Timelines;assembly=Vulpecula.Mobile">
+    <TabbedPage.BindingContext>
+        <vm:MainPageViewModel />
+    </TabbedPage.BindingContext>
+    <TabbedPage.Behaviors>
+        <b:CurrentPageBehavior />
+    </TabbedPage.Behaviors>
     <TabbedPage.Children>
-        <ContentPage Title="Public" Icon="public">
-            <Label HorizontalOptions="CenterAndExpand"
-                   Text="Public Timeline"
-                   VerticalOptions="CenterAndExpand" />
-        </ContentPage>
-        <ContentPage Title="Home" Icon="home" />
-        <ContentPage Title="Mentions" Icon="mention" />
-        <ContentPage Title="Messages" Icon="message" />
-        <ContentPage Title="Me" Icon="user" />
+        <!--  タブの種類は固定だから、 XAML 内で直接指定でもいいかも？  -->
+
+        <!--  Public Timeline  -->
+        <vt:StatusTimeline BindingContext="{Binding PublicTimelineViewModel}" />
+
+        <!--  Home Timeline  -->
+        <vt:StatusTimeline BindingContext="{Binding HomeTimelineViewModel}" />
+
+        <!--  Mentions  -->
+        <vt:StatusTimeline BindingContext="{Binding MentionsTimelineViewModel}" />
+
+        <!--  Messages  -->
+        <vt:DirectMessageTimeline BindingContext="{Binding MessageTimelineViewModel}" />
+
+        <!--  Me  -->
+        <v:MyselfUserPage BindingContext="{Binding MyselfUserPageViewModel}" />
     </TabbedPage.Children>
 </TabbedPage>
