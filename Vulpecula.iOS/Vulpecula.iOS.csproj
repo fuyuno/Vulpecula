@@ -158,6 +158,16 @@
     <BundleResource Include="Resources\Icon.png" />
     <BundleResource Include="Resources\Icon%402x.png" />
     <BundleResource Include="Resources\Icon-Small.png" />
+    <BundleResource Include="Resources\mention%402x.png" />
+    <BundleResource Include="Resources\mention.png" />
+    <BundleResource Include="Resources\public%402x.png" />
+    <BundleResource Include="Resources\public.png" />
+    <BundleResource Include="Resources\user.png" />
+    <BundleResource Include="Resources\user%402x.png" />
+    <BundleResource Include="Resources\message%402x.png" />
+    <BundleResource Include="Resources\message.png" />
+    <BundleResource Include="Resources\home%402x.png" />
+    <BundleResource Include="Resources\home.png" />
     <ImageAsset Include="Resources\Image.xcassets\LaunchImages.launchimage\Default.png">
       <InProject>false</InProject>
     </ImageAsset>

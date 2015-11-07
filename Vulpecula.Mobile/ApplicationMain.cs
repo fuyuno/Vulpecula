@@ -8,7 +8,7 @@ namespace Vulpecula.Mobile
     {
         public ApplicationMain()
         {
-            this.MainPage = new MainPage();
+            this.MainPage = new RootPage();
         }
     }
 }

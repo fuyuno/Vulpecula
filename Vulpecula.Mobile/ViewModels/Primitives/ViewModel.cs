@@ -9,14 +9,13 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
 {
     public class ViewModel : BindableBase, IDisposable
     {
+        private readonly ILocalization _localization;
         public CompositeDisposable CompositeDisposable { get; }
-
-        protected ILocalization Localization { get; }
 
         protected ViewModel()
         {
             this.CompositeDisposable = new CompositeDisposable();
-            this.Localization = MobileCross.ModelLocator.GetModel<ILocalization>();
+            this._localization = MobileCross.ModelLocator.GetModel<ILocalization>();
         }
 
         /// <summary>
@@ -27,9 +26,9 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
             this.CompositeDisposable.Dispose();
         }
 
-        public string GetLocalizedString(string key)
+        protected string GetLocalizedString(string key)
         {
-            return this.Localization.GetString(key);
+            return this._localization.GetString(key);
         }
     }
 }
