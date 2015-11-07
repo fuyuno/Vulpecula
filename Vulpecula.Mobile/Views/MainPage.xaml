@@ -1,19 +1,17 @@
-﻿
-<!--  !!WARNING!!  -->
-<!--  Please remove d:DataContext before compile/build.  -->
-<!--  Xamarin.Forms cannot use d:DataContext.  -->
-<ContentPage x:Class="Vulpecula.Mobile.Views.MainPage"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:Vulpecula.Mobile.ViewModels;assembly=Vulpecula.Mobile">
-    <ContentPage.BindingContext>
-        <vm:MainPageViewModel />
-    </ContentPage.BindingContext>
-
-    <Label HorizontalOptions="Center"
-           Text="{Binding Message}"
-           VerticalOptions="Center" />
-
-</ContentPage>
+﻿<TabbedPage x:Class="Vulpecula.Mobile.Views.MainPage"
+            xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:m="clr-namespace:Vulpecula.Mobile.Models;assembly=Vulpecula.Mobile"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:v="clr-namespace:Vulpecula.Mobile.Views;assembly=Vulpecula.Mobile"
+            xmlns:vm="clr-namespace:Vulpecula.Mobile.ViewModels;assembly=Vulpecula.Mobile">
+    <TabbedPage.Children>
+        <ContentPage Title="Public">
+            <Label HorizontalOptions="CenterAndExpand"
+                   Text="Public Timeline"
+                   VerticalOptions="CenterAndExpand" />
+        </ContentPage>
+        <ContentPage Title="Mentions" />
+    </TabbedPage.Children>
+</TabbedPage>

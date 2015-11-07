@@ -1,6 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using Vulpecula.Mobile.Views;
 
-using Vulpecula.Mobile.Views;
+using Xamarin.Forms;
 
 namespace Vulpecula.Mobile
 {

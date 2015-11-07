@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Vulpecula.Mobile.Models
+﻿namespace Vulpecula.Mobile.Models.Interfaces
 {
     /// <summary>
     /// OS ごとの Localization インターフェースの違いを吸収するクラスです
@@ -22,4 +20,3 @@ namespace Vulpecula.Mobile.Models
         string GetStringByFullName(string name);
     }
 }
-

@@ -9,16 +9,16 @@ namespace Vulpecula.Mobile.ViewModels
     {
         public MainPageViewModel()
         {
-            Message = "Hello Xamarin.Forms with MVVM!";
+            Message = this.GetLocalizedString("HelloLabel");
         }
 
-        #region Message
+        #region
 
         private string _message;
 
         public string Message
         {
-            get { return this._message; }
+            get { return _message; }
             set { this.SetProperty(ref _message, value); }
         }
 

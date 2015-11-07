@@ -3,6 +3,6 @@
 <plist version="1.0">
   <dict>
     <key>HelloLabel</key>
-    <string>Hello!</string>
+    <string>Hello Xamarin.Forms with MVVM! (en-US)</string>
   </dict>
 </plist>

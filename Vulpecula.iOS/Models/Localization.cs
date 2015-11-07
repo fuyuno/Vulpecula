@@ -1,17 +1,14 @@
-﻿using System;
+﻿using Foundation;
 
-using Foundation;
+using JetBrains.Annotations;
 
-using Vulpecula.Mobile.Models;
+using Vulpecula.Mobile.Models.Interfaces;
 
 namespace Vulpecula.iOS.Models
 {
+    [UsedImplicitly]
     public class Localization : ILocalization
     {
-        public Localization()
-        {
-        }
-
         public string GetString(string key)
         {
             return NSBundle.MainBundle.LocalizedString(key, key);

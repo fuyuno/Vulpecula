@@ -3,7 +3,7 @@ using System.Reactive.Disposables;
 
 using Prism.Mvvm;
 
-using Vulpecula.Mobile.Models;
+using Vulpecula.Mobile.Models.Interfaces;
 
 namespace Vulpecula.Mobile.ViewModels.Primitives
 {
@@ -13,10 +13,10 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
 
         protected ILocalization Localization { get; }
 
-        public ViewModel()
+        protected ViewModel()
         {
             this.CompositeDisposable = new CompositeDisposable();
-            this.Localization = MobileCross.Localization;
+            this.Localization = MobileCross.ModelLocator.GetModel<ILocalization>();
         }
 
         /// <summary>
