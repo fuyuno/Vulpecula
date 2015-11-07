@@ -4,5 +4,25 @@
   <dict>
     <key>HelloLabel</key>
     <string>Hello Xamarin.Forms with MVVM! (en-US)</string>
+    <key>Public</key>
+    <string>Public</string>
+    <key>PublicTimeline</key>
+    <string>Public Timeline</string>
+    <key>Home</key>
+    <string>Home</string>
+    <key>HomeTimeline</key>
+    <string>Home Timeline</string>
+    <key>Mentions</key>
+    <string>Mentions</string>
+    <key>MentionsTimeline</key>
+    <string>Mentions</string>
+    <key>Messages</key>
+    <string>Messages</string>
+    <key>MessagesTimeline</key>
+    <string>Messages</string>
+    <key>Me</key>
+    <string>Me</string>
+    <key>MePage</key>
+    <string>Me</string>
   </dict>
 </plist>

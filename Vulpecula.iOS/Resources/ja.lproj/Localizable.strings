@@ -3,6 +3,26 @@
 <plist version="1.0">
   <dict>
     <key>HelloLabel</key>
-    <string>Hello Xamarin.Forms with MVVM! (ja-JP)</string>
+    <string>Hello Xamarin.Forms with MVVM! (en-US)</string>
+    <key>Public</key>
+    <string>Public</string>
+    <key>PublicTimeline</key>
+    <string>Public Timeline</string>
+    <key>Home</key>
+    <string>ホーム</string>
+    <key>HomeTimeline</key>
+    <string>ホーム タイムライン</string>
+    <key>Mentions</key>
+    <string>@返信</string>
+    <key>MentionsTimeline</key>
+    <string>@返信</string>
+    <key>Messages</key>
+    <string>メッセージ</string>
+    <key>MessagesTimeline</key>
+    <string>メッセージ</string>
+    <key>Me</key>
+    <string>私</string>
+    <key>MePage</key>
+    <string>プロフィール</string>
   </dict>
 </plist>

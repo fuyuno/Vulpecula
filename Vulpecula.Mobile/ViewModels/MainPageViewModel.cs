@@ -16,7 +16,7 @@ namespace Vulpecula.Mobile.ViewModels
 
         public MainPageViewModel()
         {
-            PublicTimelineViewModel = new StatusTimelineViewModel("Public", "public", "Public Timeline");
+            PublicTimelineViewModel = new StatusTimelineViewModel(this.GetLocalizedString("Public"), "public", this.GetLocalizedString("PublicTimeline"));
             HomeTimelineViewModel = new StatusTimelineViewModel("Home", "home", "Home Timeline");
             MentionsTimelineViewModel = new StatusTimelineViewModel("Mentions", "mention", "Mentions");
             MessageTimelineViewModel = new DirectMessagePageViewModel();
