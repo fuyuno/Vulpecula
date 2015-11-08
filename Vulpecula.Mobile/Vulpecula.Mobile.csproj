@@ -36,23 +36,29 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Behaviors\CurrentPageBehavior.cs" />
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Extensions\ObservableCollectionEx.cs" />
     <Compile Include="Extensions\ViewModelEx.cs" />
     <Compile Include="Models\ModelLocator.cs" />
+    <Compile Include="Models\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Interfaces\ILocalization.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\Popups\StatusPageViewModel.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
-    <Compile Include="ApplicationMain.cs" />
-    <Compile Include="ViewModels\Timelines\DirectMessagePageViewModel.cs" />
-    <Compile Include="ViewModels\MyselfUserPageViewModel.cs" />
-    <Compile Include="ViewModels\Timelines\Primitives\NavigationalViewModel.cs" />
-    <Compile Include="ViewModels\Timelines\Primitives\TabbedViewModel.cs" />
+    <Compile Include="App.cs" />
+    <Compile Include="ViewModels\Timelines\DirectMessageTimelineViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\MyselfUserPageViewModel.cs" />
+    <Compile Include="ViewModels\Primitives\NavigationalViewModel.cs" />
+    <Compile Include="ViewModels\Primitives\TabbedViewModel.cs" />
     <Compile Include="ViewModels\Timelines\StatusTimelineViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MyselfUserPage.xaml.cs">
+    <Compile Include="Views\Popups\StatusPage.xaml.cs">
+      <DependentUpon>StatusPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Timelines\MyselfUserPage.xaml.cs">
       <DependentUpon>MyselfUserPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RootPage.xaml.cs">
@@ -70,11 +76,16 @@
       <HintPath>..\packages\JetBrains.Annotations.10.0.0\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\JetBrains.Annotations.PCL328.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\portable-net45+wp80+win8+wpa81+MonoAndroid10+MonoTouch10\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Prism">
       <HintPath>..\packages\Prism.Core.6.1.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Prism.Forms, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Forms.6.0.1\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.Forms.dll</HintPath>
@@ -159,11 +170,15 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Views\Popups\" />
+    <EmbeddedResource Include="Views\Timelines\MyselfUserPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\MyselfUserPage.xaml">
+    <EmbeddedResource Include="Views\Popups\StatusPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -5,12 +5,11 @@
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
             xmlns:m="clr-namespace:Vulpecula.Mobile.Models;assembly=Vulpecula.Mobile"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
             xmlns:v="clr-namespace:Vulpecula.Mobile.Views;assembly=Vulpecula.Mobile"
             xmlns:vm="clr-namespace:Vulpecula.Mobile.ViewModels;assembly=Vulpecula.Mobile"
-            xmlns:vt="clr-namespace:Vulpecula.Mobile.Views.Timelines;assembly=Vulpecula.Mobile">
-    <TabbedPage.BindingContext>
-        <vm:MainPageViewModel />
-    </TabbedPage.BindingContext>
+            xmlns:vt="clr-namespace:Vulpecula.Mobile.Views.Timelines;assembly=Vulpecula.Mobile"
+            mvvm:ViewModelLocator.AutowireViewModel="True">
     <TabbedPage.Behaviors>
         <b:CurrentPageBehavior />
     </TabbedPage.Behaviors>
@@ -27,9 +26,9 @@
         <vt:StatusTimeline BindingContext="{Binding MentionsTimelineViewModel}" />
 
         <!--  Messages  -->
-        <vt:DirectMessageTimeline BindingContext="{Binding MessageTimelineViewModel}" />
+        <vt:DirectMessageTimeline />
 
         <!--  Me  -->
-        <v:MyselfUserPage BindingContext="{Binding MyselfUserPageViewModel}" />
+        <vt:MyselfUserPage />
     </TabbedPage.Children>
 </TabbedPage>

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace Vulpecula.Mobile.Views
+namespace Vulpecula.Mobile.Views.Popups
 {
-    public partial class MyselfUserPage : ContentPage
+    public partial class StatusPage : ContentPage
     {
-        public MyselfUserPage()
+        public StatusPage()
         {
             InitializeComponent();
         }

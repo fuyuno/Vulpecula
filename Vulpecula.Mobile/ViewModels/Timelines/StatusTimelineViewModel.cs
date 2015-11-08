@@ -1,10 +1,14 @@
-﻿using Vulpecula.Mobile.ViewModels.Timelines.Primitives;
+﻿using Prism.Navigation;
+
+using Vulpecula.Mobile.Models.Interfaces;
+using Vulpecula.Mobile.ViewModels.Primitives;
 
 namespace Vulpecula.Mobile.ViewModels.Timelines
 {
     public class StatusTimelineViewModel : TabbedViewModel
     {
-        public StatusTimelineViewModel(string title, string icon, string navigationTitle = "")
+        public StatusTimelineViewModel(ILocalization localization, INavigationService navigationService, string title, string icon, string navigationTitle = "")
+            : base(localization, navigationService)
         {
             Title = title;
             Icon = icon;

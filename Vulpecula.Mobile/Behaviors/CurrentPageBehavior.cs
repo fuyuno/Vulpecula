@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Vulpecula.Mobile.ViewModels.Timelines.Primitives;
+using Vulpecula.Mobile.ViewModels.Primitives;
 
 using Xamarin.Forms;
 

@@ -1,12 +1,14 @@
 ﻿using Foundation;
 
-using JetBrains.Annotations;
-
+using Vulpecula.iOS.Models;
 using Vulpecula.Mobile.Models.Interfaces;
+
+using Xamarin.Forms;
+
+[assembly: Dependency(typeof (Localization))]
 
 namespace Vulpecula.iOS.Models
 {
-    [UsedImplicitly]
     public class Localization : ILocalization
     {
         public string GetStringByFullName(string name)

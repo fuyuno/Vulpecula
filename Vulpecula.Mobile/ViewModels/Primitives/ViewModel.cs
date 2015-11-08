@@ -12,10 +12,10 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
         private readonly ILocalization _localization;
         public CompositeDisposable CompositeDisposable { get; }
 
-        protected ViewModel()
+        protected ViewModel(ILocalization localization)
         {
             this.CompositeDisposable = new CompositeDisposable();
-            this._localization = ApplicationMain.ModelLocator.GetModel<ILocalization>();
+            this._localization = localization;
         }
 
         /// <summary>

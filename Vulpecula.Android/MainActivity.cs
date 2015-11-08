@@ -23,7 +23,7 @@ namespace Vulpecula.Android
 
             Forms.Init(this, bundle);
             var asm = Assembly.GetExecutingAssembly();
-            this.LoadApplication(new ApplicationMain(new ModelLocator("Vulpecula.Android.Models", asm.FullName)));
+            this.LoadApplication(new App(new ModelLocator("Vulpecula.Android.Models", asm.FullName)));
         }
     }
 }

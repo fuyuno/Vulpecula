@@ -34,7 +34,7 @@ namespace Vulpecula.iOS
             Forms.Init();
 
             var asm = Assembly.GetExecutingAssembly();
-            this.LoadApplication(new ApplicationMain(new ModelLocator("Vulpecula.iOS.Models", asm.FullName)));
+            this.LoadApplication(new App(new ModelLocator("Vulpecula.iOS.Models", asm.FullName)));
             return base.FinishedLaunching(application, launchOptions);
         }
 
