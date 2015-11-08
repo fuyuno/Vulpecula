@@ -1,12 +1,13 @@
 # Vulpecula.Streaming
-Vulpecula.Streaming ‚ÍAVulpecula ‚Ì‹[Ž—ƒXƒgƒŠ[ƒ~ƒ“ƒOŠg’£‚Å‚·B  
-Croudia ‚ÌƒXƒe[ƒ^ƒXŽæ“¾Œn API ‚ðA Twitter ‚Ì Streaming API ‚Ì‚æ‚¤‚Éˆµ‚¦‚Ü‚·B
+[![License](https://img.shields.io/github/license/fuyuno/vulpecula.svg?style=flat-square)](https://github.com/fuyuno/Vulpecula/blob/develop/LICENSE.txt)  
+Vulpecula.Streaming ã¯ã€Vulpecula ã®æ“¬ä¼¼ã‚¹ãƒˆãƒªãƒ¼ãƒŸãƒ³ã‚°æ‹¡å¼µã§ã™ã€‚  
+Croudia ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹å–å¾—ç³» API ã‚’ã€ Twitter ã® Streaming API ã®ã‚ˆã†ã«æ‰±ãˆã¾ã™ã€‚
 
 Sample
 ```csharp
 var croudia = new Croudia("xxxxx", "xxxxx", "xxxxx", "xxxxx");
 
-// 10•bƒXƒpƒ“(ƒfƒtƒHƒ‹ƒg‚Í5•b)
+// 10 sec span.
 CroudiaStreaming.TimeSpan = TimeSpan.FromSeconds(10); 
 
 // foreach

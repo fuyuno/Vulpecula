@@ -1,6 +1,7 @@
 # Vulpecula
-Vulpecula �́ACroudia API�̃��b�p�[���C�u�����ł��B  
-�����y�є񓯊��̗�����(�ꉞ)�T�|�[�g���Ă��܂��B
+[![License](https://img.shields.io/github/license/fuyuno/vulpecula.svg?style=flat-square)](https://github.com/fuyuno/Vulpecula/blob/develop/LICENSE.txt)  
+Vulpecula は、Croudia APIのラッパーライブラリです。  
+同期及び非同期の両方を(一応)サポートしています。
 
 Sample
 ```csharp
@@ -15,4 +16,4 @@ var statuses = await croudia.Statuses.GetHomeTimelineAsync();
 // use parameters
 var statuses = await croudia.Statuses.GetHomeTimelineAsync(trim_user => true, include_entities => false);
 ```
-�Ȃ��A�������\�b�h�̎g�p�͔񐄏��ł���A�܂������I�ɂ͔񓯊����\�b�h���g�p���Ă��܂��B
+なお、同期メソッドの使用は非推奨であり、また内部的には非同期メソッドを使用しています。
