@@ -15,7 +15,7 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
         protected ViewModel()
         {
             this.CompositeDisposable = new CompositeDisposable();
-            this._localization = MobileCross.ModelLocator.GetModel<ILocalization>();
+            this._localization = ApplicationMain.ModelLocator.GetModel<ILocalization>();
         }
 
         /// <summary>

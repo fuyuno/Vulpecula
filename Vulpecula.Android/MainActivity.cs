@@ -21,11 +21,9 @@ namespace Vulpecula.Android
         {
             base.OnCreate(bundle);
 
-            var asm = Assembly.GetExecutingAssembly();
-            MobileCross.ModelLocator = new ModelLocator("Vulpecula.Android.Models", asm.FullName);
-
             Forms.Init(this, bundle);
-            this.LoadApplication(new ApplicationMain());
+            var asm = Assembly.GetExecutingAssembly();
+            this.LoadApplication(new ApplicationMain(new ModelLocator("Vulpecula.Android.Models", asm.FullName)));
         }
     }
 }

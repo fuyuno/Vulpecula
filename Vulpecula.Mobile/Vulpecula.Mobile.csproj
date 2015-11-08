@@ -43,7 +43,6 @@
     <Compile Include="Models\Interfaces\ILocalization.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
-    <Compile Include="MobileCross.cs" />
     <Compile Include="ApplicationMain.cs" />
     <Compile Include="ViewModels\Timelines\DirectMessagePageViewModel.cs" />
     <Compile Include="ViewModels\MyselfUserPageViewModel.cs" />

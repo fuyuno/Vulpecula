@@ -1,8 +1,11 @@
-﻿using Foundation;
+﻿using System.Reflection;
+
+using Foundation;
 
 using UIKit;
 
 using Vulpecula.Mobile;
+using Vulpecula.Mobile.Models;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -29,7 +32,9 @@ namespace Vulpecula.iOS
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             Forms.Init();
-            this.LoadApplication(new ApplicationMain());
+
+            var asm = Assembly.GetExecutingAssembly();
+            this.LoadApplication(new ApplicationMain(new ModelLocator("Vulpecula.iOS.Models", asm.FullName)));
             return base.FinishedLaunching(application, launchOptions);
         }
 
