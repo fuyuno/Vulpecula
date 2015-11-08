@@ -2,7 +2,7 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             Title="{Binding Title}"
+             Title="{Binding NavigationTitle}"
              mvvm:ViewModelLocator.AutowireViewModel="True">
 
     <Label HorizontalOptions="Center"

@@ -9,6 +9,7 @@ namespace Vulpecula.Mobile.ViewModels.Popups
     {
         public StatusPageViewModel(ILocalization localization, INavigationService navigationService) : base(localization, navigationService)
         {
+            NavigationTitle = "StatusPage";
         }
 
         /// <summary>

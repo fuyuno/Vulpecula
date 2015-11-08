@@ -25,7 +25,7 @@ namespace Vulpecula.Mobile.Models
         /// <param name="animated">If <c>true</c> the transition is animated, if <c>false</c> there is no animation on transition.</param>
         public void GoBack(bool useModalNavigation = true, bool animated = true)
         {
-            RootPage.PopAsync();
+            Pop(useModalNavigation, animated);
             PrepareNavigation(RootPage.CurrentPage, null);
         }
 
@@ -41,7 +41,7 @@ namespace Vulpecula.Mobile.Models
             var page = Activator.CreateInstance(typeof (T)) as Page;
             if (page == null)
                 throw new InvalidCastException("T cannot cast to Xamarin.Forms.Page.");
-            RootPage.PushAsync(page, animated);
+            Push(page, useModalNavigation, animated);
             PrepareNavigation(page, parameters);
         }
 
@@ -58,7 +58,7 @@ namespace Vulpecula.Mobile.Models
             var page = Activator.CreateInstance(type) as Page;
             if (page == null)
                 throw new InvalidCastException("T cannot cast to Xamarin.Forms.Page.");
-            RootPage.PushAsync(page, animated);
+            Push(page, useModalNavigation, animated);
             PrepareNavigation(page, parameters);
         }
 
@@ -71,6 +71,24 @@ namespace Vulpecula.Mobile.Models
         public static void Configure(NavigationPage rootPage)
         {
             RootPage = rootPage;
+        }
+
+        private static async void Push(Page page, bool useModalNavigation, bool animated)
+        {
+            var navigation = RootPage.Navigation;
+            if (useModalNavigation)
+                await navigation.PushModalAsync(page, animated);
+            else
+                await navigation.PushAsync(page, animated);
+        }
+
+        private static async void Pop(bool useModalNavigation, bool animated)
+        {
+            var navigation = RootPage.Navigation;
+            if (useModalNavigation)
+                await navigation.PopModalAsync(animated);
+            else
+                await navigation.PopAsync(animated);
         }
 
         private static void PrepareNavigation(Page page, NavigationParameters parameters)
