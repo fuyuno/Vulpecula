@@ -10,9 +10,9 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
         public StatusTimelineViewModel(ILocalization localization, INavigationService navigationService, string title, string icon, string navigationTitle = "")
             : base(localization, navigationService)
         {
-            Title = title;
-            Icon = icon;
-            NavigationTitle = string.IsNullOrWhiteSpace(navigationTitle) ? title : navigationTitle;
+            Title = this.GetLocalizedString(title);
+            Icon = GetLocalizedString(icon);
+            NavigationTitle = GetLocalizedString(string.IsNullOrWhiteSpace(navigationTitle) ? title : navigationTitle);
         }
     }
 }

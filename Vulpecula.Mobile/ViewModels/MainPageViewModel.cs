@@ -17,9 +17,9 @@ namespace Vulpecula.Mobile.ViewModels
 
         public MainPageViewModel(ILocalization localization, INavigationService navigationService) : base(localization, navigationService)
         {
-            PublicTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, this.GetLocalizedString("Public"), "public", this.GetLocalizedString("PublicTimeline"));
-            HomeTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Home", "home", "Home Timeline");
-            MentionsTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Mentions", "mention", "Mentions");
+            PublicTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Public", "public", "PublicTimeline");
+            HomeTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Home", "home", "HomeTimeline");
+            MentionsTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Mentions", "mention", "MentionsTimeline");
         }
     }
 }
