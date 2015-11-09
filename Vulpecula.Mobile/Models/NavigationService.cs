@@ -16,7 +16,7 @@ namespace Vulpecula.Mobile.Models
     [UsedImplicitly]
     public class NavigationService : INavigationService
     {
-        public static NavigationPage RootPage { get; private set; }
+        public static Page RootPage { get; private set; }
 
         /// <summary>
         /// Navigates to the most recent entry in the back navigation history by popping the calling Page off the navigation stack.
@@ -26,7 +26,6 @@ namespace Vulpecula.Mobile.Models
         public void GoBack(bool useModalNavigation = true, bool animated = true)
         {
             Pop(useModalNavigation, animated);
-            PrepareNavigation(RootPage.CurrentPage, null);
         }
 
         /// <summary>
@@ -64,11 +63,10 @@ namespace Vulpecula.Mobile.Models
 
         public async void GoHome(bool animated = true)
         {
-            await RootPage.PopToRootAsync(animated);
-            PrepareNavigation(RootPage.CurrentPage, null);
+            await RootPage.Navigation.PopToRootAsync(animated);
         }
 
-        public static void Configure(NavigationPage rootPage)
+        public static void Configure(Page rootPage)
         {
             RootPage = rootPage;
         }

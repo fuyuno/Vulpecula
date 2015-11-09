@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Vulpecula.Mobile.ViewModels.Primitives;
+using Vulpecula.Mobile.Models;
 
 using Xamarin.Forms;
 
@@ -37,12 +37,10 @@ namespace Vulpecula.Mobile.Behaviors
         private void BindableOnCurrentPageChanged(object sender, EventArgs eventArgs)
         {
             var tabbedPage = sender as TabbedPage;
-            var context = tabbedPage?.CurrentPage.BindingContext;
-            if (!(context is TabbedViewModel))
+            var context = tabbedPage?.CurrentPage; // CurrentPage is NavgationBar?
+            if (context == null)
                 return;
-
-            var viewModel = (TabbedViewModel)context;
-            tabbedPage.Title = viewModel.NavigationTitle;
+            NavigationService.Configure(context);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Vulpecula.Mobile
             // AppContext モデルをシングルトンで↓
             // Container.RegisterType<AppContext>(new ContainerControlledLifetimeManager());
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
-            NavigationService.Configure(new RootPage());
+            NavigationService.Configure(new MainPage());
         }
 
         /// <summary>

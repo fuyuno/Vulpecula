@@ -3,6 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:b="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:intermediate="clr-namespace:Vulpecula.Mobile.Views.Intermediate;assembly=Vulpecula.Mobile"
             xmlns:m="clr-namespace:Vulpecula.Mobile.Models;assembly=Vulpecula.Mobile"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
@@ -17,18 +18,38 @@
         <!--  タブの種類は固定だから、 XAML 内で直接指定でもいいかも？  -->
 
         <!--  Public Timeline  -->
-        <vt:StatusTimeline BindingContext="{Binding PublicTimelineViewModel}" />
+        <intermediate:NavPage>
+            <x:Arguments>
+                <vt:StatusTimeline BindingContext="{Binding PublicTimelineViewModel}" />
+            </x:Arguments>
+        </intermediate:NavPage>
 
         <!--  Home Timeline  -->
-        <vt:StatusTimeline BindingContext="{Binding HomeTimelineViewModel}" />
+        <intermediate:NavPage>
+            <x:Arguments>
+                <vt:StatusTimeline BindingContext="{Binding HomeTimelineViewModel}" />
+            </x:Arguments>
+        </intermediate:NavPage>
 
         <!--  Mentions  -->
-        <vt:StatusTimeline BindingContext="{Binding MentionsTimelineViewModel}" />
+        <intermediate:NavPage>
+            <x:Arguments>
+                <vt:StatusTimeline BindingContext="{Binding MentionsTimelineViewModel}" />
+            </x:Arguments>
+        </intermediate:NavPage>
 
         <!--  Messages  -->
-        <vt:DirectMessageTimeline />
+        <intermediate:NavPage>
+            <x:Arguments>
+                <vt:DirectMessageTimeline />
+            </x:Arguments>
+        </intermediate:NavPage>
 
         <!--  Me  -->
-        <vt:MyselfUserPage />
+        <intermediate:NavPage>
+            <x:Arguments>
+                <vt:MyselfUserPage />
+            </x:Arguments>
+        </intermediate:NavPage>
     </TabbedPage.Children>
 </TabbedPage>

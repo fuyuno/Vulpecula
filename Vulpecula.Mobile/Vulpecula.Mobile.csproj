@@ -52,6 +52,9 @@
     <Compile Include="ViewModels\Primitives\NavigationalViewModel.cs" />
     <Compile Include="ViewModels\Primitives\TabbedViewModel.cs" />
     <Compile Include="ViewModels\Timelines\StatusTimelineViewModel.cs" />
+    <Compile Include="Views\Intermediate\NavPage.xaml.cs">
+      <DependentUpon>NavPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -170,7 +173,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Intermediate\NavPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Timelines\MyselfUserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
