@@ -1,7 +1,10 @@
 ﻿<UserControl x:Class="Vulpecula.Universal.Views.Timelines.Primitive.StatusView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:behaviors="using:Vulpecula.Universal.Behaviors"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:flyouts="using:Vulpecula.Universal.Views.Flyouts"
+             xmlns:interactivity="using:WinRTXamlToolkit.Interactivity"
              xmlns:local="using:Vulpecula.Universal.Views.Timelines.Primitive"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Vulpecula.Universal.ViewModels.Timelines.Primitives"
@@ -10,6 +13,14 @@
              d:DesignWidth="360"
              mc:Ignorable="d">
     <Grid Padding="0,10">
+        <interactivity:Interaction.Behaviors>
+            <behaviors:SettingsFlyoutOpenBehavior IsOpen="{Binding IsFlyoutOpened, Mode=TwoWay}" FlyoutDataContext="{Binding UserProfile}">
+                <behaviors:SettingsFlyoutOpenBehavior.Flyout>
+                    <flyouts:UserFlyout />
+                </behaviors:SettingsFlyoutOpenBehavior.Flyout>
+            </behaviors:SettingsFlyoutOpenBehavior>
+        </interactivity:Interaction.Behaviors>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60" />
             <ColumnDefinition Width="*" />
@@ -28,7 +39,8 @@
                        Margin="6,4"
                        VerticalAlignment="Top"
                        Source="{Binding User.Icon,
-                                        TargetNullValue=../../../Assets/StoreLogo.png}" />
+                                        TargetNullValue=../../../Assets/StoreLogo.png}"
+                       Tapped="{x:Bind ViewModel.OnTappedOpenUserProfile}" />
                 <Image Width="24"
                        Height="24"
                        Margin="6,28"

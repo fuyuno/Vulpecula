@@ -41,9 +41,9 @@ namespace Vulpecula.Universal.DesignViewModels
 
         public string UserName => _user.Name;
 
-        public string IconUrl => _user.ProfileImageUrlHttps;
+        public string IconUrl => _user.ProfileImageUrlHttps.EndsWith("default.png") ? "ms-appx:///Assets/Icon.png" : _user.ProfileImageUrlHttps;
 
-        public string CoverUrl => _user.CoverImageUrlHttps;
+        public string CoverUrl => _user.CoverImageUrlHttps.EndsWith("default.png") ? "ms-appx:///Assets/Header.png" : _user.CoverImageUrlHttps;
 
         public string Bio => _user.Description;
 

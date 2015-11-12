@@ -17,7 +17,10 @@
     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <StackPanel Style="{StaticResource SettingsFlyoutSectionStyle}">
             <Grid>
-                <Image Source="{Binding CoverUrl}" Stretch="Uniform" />
+                <Border BorderBrush="{StaticResource TextBoxBorderThemeBrush}"
+                        BorderThickness="1">
+                    <Image Source="{Binding CoverUrl}" Stretch="UniformToFill" />
+                </Border>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Width="48"
                            Height="48"

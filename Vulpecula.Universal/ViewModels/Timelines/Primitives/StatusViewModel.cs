@@ -1,5 +1,10 @@
-﻿using Vulpecula.Models;
+﻿using System.Diagnostics;
+
+using Windows.UI.Xaml;
+
+using Vulpecula.Models;
 using Vulpecula.Universal.Models.Timelines.Primitive;
+using Vulpecula.Universal.ViewModels.Flyouts;
 using Vulpecula.Universal.ViewModels.Primitives;
 
 namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
@@ -15,7 +20,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         #region CreatedAt
 
-        public string CreatedAt => this.Model.CreatedAt.ToString("HH:mm");
+        public string CreatedAt => Model.CreatedAt.ToString("HH:mm");
 
         #endregion
 
@@ -23,57 +28,78 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public StatusViewModel(StatusModel statusModel)
         {
-            this.Model = statusModel;
-            if (this.Model.IsDirectMessage)
+            Model = statusModel;
+            if (Model.IsDirectMessage)
             {
-                this.IsDirectMessage = this.Model.IsDirectMessage;
+                IsDirectMessage = Model.IsDirectMessage;
                 return;
             }
 
-            this.IsShare = this.Model.SpreadStatus != null;
-            this.IsComment = this.Model.QuotedStatus != null;
-            this.HasImage = this.Model.Entities?.Media != null;
+            IsShare = Model.SpreadStatus != null;
+            IsComment = Model.QuotedStatus != null;
+            HasImage = Model.Entities?.Media != null;
+            IsFlyoutOpened = false;
+        }
+
+        public void OnTappedOpenUserProfile(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Called");
+            IsFlyoutOpened = true;
         }
 
         private UserViewModel CreateUserViewModel(User user)
         {
             var uvm = new UserViewModel(user);
-            this.CompositeDisposable.Add(uvm);
+            CompositeDisposable.Add(uvm);
             return uvm;
+        }
+
+        private UserFlyoutViewModel CreateUserFlyoutViewModel(User user)
+        {
+            var ufvm = new UserFlyoutViewModel(user);
+            CompositeDisposable.Add(ufvm);
+            return ufvm;
         }
 
         #region Text
 
         private string _text;
-        public string Text => this._text ?? (this._text = this.IsShare ? this.Model.SpreadStatus.Text : this.Model.Text);
+        public string Text => _text ?? (_text = IsShare ? Model.SpreadStatus.Text : Model.Text);
 
         #endregion
 
         #region Image
 
         private string _imageUrl;
-        public string ImageUrl => this._imageUrl ?? (this._imageUrl = this.HasImage ? this.Model.Entities.Media.MediaUrlHttps : "");
+        public string ImageUrl => _imageUrl ?? (_imageUrl = HasImage ? Model.Entities.Media.MediaUrlHttps : "");
 
         #endregion
 
         #region User
 
         private UserViewModel _user;
-        public UserViewModel User => this._user ?? (this._user = CreateUserViewModel(this.IsShare ? this.Model.SpreadStatus.User : this.Model.User));
+        public UserViewModel User => _user ?? (_user = CreateUserViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
+
+        #endregion
+
+        #region UserProfile
+
+        private UserFlyoutViewModel _userProfile;
+        public UserFlyoutViewModel UserProfile => _userProfile ?? (_userProfile = CreateUserFlyoutViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
 
         #endregion
 
         #region Recipient
 
         private UserViewModel _recipient;
-        public UserViewModel Recipient => this._recipient ?? (this._recipient = CreateUserViewModel(this.Model.Recipient));
+        public UserViewModel Recipient => _recipient ?? (_recipient = CreateUserViewModel(Model.Recipient));
 
         #endregion
 
         #region ShareUser
 
         private UserViewModel _shareUser;
-        public UserViewModel ShareUser => this._shareUser ?? (this._shareUser = CreateUserViewModel(this.Model.User));
+        public UserViewModel ShareUser => _shareUser ?? (_shareUser = CreateUserViewModel(Model.User));
 
         #endregion
 
@@ -83,8 +109,8 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public bool IsFavorited
         {
-            get { return this._isFavorited; }
-            set { this.SetProperty(ref this._isFavorited, value); }
+            get { return _isFavorited; }
+            set { SetProperty(ref _isFavorited, value); }
         }
 
         #endregion
@@ -95,8 +121,8 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public bool IsShared
         {
-            get { return this._isShared; }
-            set { this.SetProperty(ref this._isShared, value); }
+            get { return _isShared; }
+            set { SetProperty(ref _isShared, value); }
         }
 
         #endregion
@@ -107,8 +133,20 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public bool IsCommented
         {
-            get { return this._isCommented; }
-            set { this.SetProperty(ref this._isCommented, value); }
+            get { return _isCommented; }
+            set { SetProperty(ref _isCommented, value); }
+        }
+
+        #endregion
+
+        #region IsFlyoutOpened
+
+        private bool _isFlyoutOpened;
+
+        public bool IsFlyoutOpened
+        {
+            get { return _isFlyoutOpened; }
+            set { SetProperty(ref _isFlyoutOpened, value); }
         }
 
         #endregion

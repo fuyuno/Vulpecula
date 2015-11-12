@@ -101,6 +101,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\EmptyListBehavior.cs" />
+    <Compile Include="Behaviors\SettingsFlyoutOpenBehavior.cs" />
     <Compile Include="Behaviors\UnSelectableListBoxBehavior.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
@@ -161,6 +162,7 @@
     <None Include="Vulpecula.Universal_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Header.png" />
     <Content Include="Assets\Icon.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

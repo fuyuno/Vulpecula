@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Vulpecula.Models;
+﻿using Vulpecula.Models;
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.ViewModels.Primitives;
 
@@ -16,7 +14,7 @@ namespace Vulpecula.Universal.ViewModels.Flyouts
         {
             _user = user;
             FollowType = FollowTypes.Loading;
-
+            /*
             var me = AccountManager.Instance.Users.First();
             AccountManager.Instance.Providers.First().Croudia.FriendShips
                 .ShowAsync(source_id => me.Id, target_id => user.Id)
@@ -50,6 +48,7 @@ namespace Vulpecula.Universal.ViewModels.Flyouts
                     }
                     FollowType = b2.Value ? FollowTypes.Following : FollowTypes.NoFollowing;
                 });
+                */
         }
 
         #region Properties
@@ -58,21 +57,21 @@ namespace Vulpecula.Universal.ViewModels.Flyouts
 
         public string UserName => _user.Name;
 
-        public string IconUrl => _user.ProfileImageUrlHttps;
+        public string IconUrl => _user.ProfileImageUrlHttps.EndsWith("default.jpeg") ? "ms-appx:///Assets/Icon.png" : _user.ProfileImageUrlHttps;
 
-        public string CoverUrl => _user.CoverImageUrlHttps;
+        public string CoverUrl => _user.CoverImageUrlHttps.EndsWith("default.jpeg") ? "ms-appx:///Assets/Header.png" : _user.CoverImageUrlHttps;
 
         public string Bio => _user.Description;
 
         public string Location => _user.Location;
 
-        public long Followings => _user.FriendsCount;
+        public string Followings => $"{_user.FriendsCount:N0}";
 
-        public long Followers => _user.FollowersCount;
+        public string Followers => $"{_user.FollowersCount:N0}";
 
-        public long Favorites => _user.FavoritesCount;
+        public string Favorites => $"{_user.FavoritesCount:N0}";
 
-        public long Whispers => _user.StatusesCount;
+        public string Whispers => $"{_user.StatusesCount:N0}";
 
         #region FollowType
 

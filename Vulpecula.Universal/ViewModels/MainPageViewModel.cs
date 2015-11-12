@@ -35,8 +35,8 @@ namespace Vulpecula.Universal.ViewModels
 
         private async Task Initialize()
         {
-            // this._accountManager.ResetAccounts();
-            // this._columnManager.ClearColumns();
+            // AccountManager.Instance.ResetAccounts();
+            // ColumnManager.Instance.ClearColumns();
 
             await AccountManager.Instance.InitializeAccounts();
             await ColumnManager.Instance.InitializeColumns();
@@ -74,12 +74,12 @@ namespace Vulpecula.Universal.ViewModels
 
         #region IsWhisperZoneOpened
 
-        private bool _isWhisperZoneOpended;
+        private bool _isWhisperZoneOpened;
 
         public bool IsWhisperZoneOpened
         {
-            get { return this._isWhisperZoneOpended; }
-            set { this.SetProperty(ref this._isWhisperZoneOpended, value); }
+            get { return this._isWhisperZoneOpened; }
+            set { this.SetProperty(ref this._isWhisperZoneOpened, value); }
         }
 
         #endregion
