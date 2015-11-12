@@ -8,16 +8,21 @@
              xmlns:local="using:Vulpecula.Universal.Views.Timelines.Primitive"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Vulpecula.Universal.ViewModels.Timelines.Primitives"
+             x:Name="RootPanel"
              d:DataContext="{d:DesignInstance vm:StatusViewModel}"
              d:DesignHeight="150"
              d:DesignWidth="360"
              mc:Ignorable="d">
     <Grid Padding="0,10">
         <interactivity:Interaction.Behaviors>
-            <behaviors:SettingsFlyoutOpenBehavior IsOpen="{Binding IsFlyoutOpened, Mode=TwoWay}" FlyoutDataContext="{Binding UserProfile}">
-                <behaviors:SettingsFlyoutOpenBehavior.Flyout>
-                    <flyouts:UserFlyout />
-                </behaviors:SettingsFlyoutOpenBehavior.Flyout>
+            <!--  なんでかわかんないけど、それなりの割合で IsFlyoutOpened がバインドされていない  -->
+            <!--
+            <behaviors:SettingsFlyoutOpenBehavior FlyoutDataContext="{Binding UserProfile}" IsOpen="{Binding IsFlyoutOpened, Mode=TwoWay}">
+                <flyouts:UserFlyout x:Name="Flyout" />
+            </behaviors:SettingsFlyoutOpenBehavior>
+            -->
+            <behaviors:SettingsFlyoutOpenBehavior FlyoutDataContext="{Binding UserProfile}">
+                <flyouts:UserFlyout x:Name="Flyout" />
             </behaviors:SettingsFlyoutOpenBehavior>
         </interactivity:Interaction.Behaviors>
 

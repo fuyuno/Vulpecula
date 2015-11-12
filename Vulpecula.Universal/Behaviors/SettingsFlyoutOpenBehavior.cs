@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
-
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Markup;
 
 using WinRTXamlToolkit.Interactivity;
 
 namespace Vulpecula.Universal.Behaviors
 {
     // SettingsFlyout is deprecated.
+    [ContentProperty(Name = "Flyout")]
     public class SettingsFlyoutOpenBehavior : Behavior<FrameworkElement>
     {
         /// <summary>
@@ -56,7 +56,6 @@ namespace Vulpecula.Universal.Behaviors
 
             if ((bool)e.NewValue)
             {
-                Debug.WriteLine("Shown");
                 behavior.Flyout.ShowIndependent();
             }
             else

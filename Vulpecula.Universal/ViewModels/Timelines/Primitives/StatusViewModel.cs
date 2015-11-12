@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
-
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 using Vulpecula.Models;
 using Vulpecula.Universal.Models.Timelines.Primitive;
 using Vulpecula.Universal.ViewModels.Flyouts;
 using Vulpecula.Universal.ViewModels.Primitives;
+using Vulpecula.Universal.Views.Timelines.Primitive;
 
 namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 {
@@ -43,8 +43,14 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public void OnTappedOpenUserProfile(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("Called");
-            IsFlyoutOpened = true;
+            // TODO: ヤバイので、Behavior でなんとかする。
+            var uc = (StatusView)((Grid)((StackPanel)((Grid)((Image)sender).Parent).Parent).Parent).Parent;
+            var flyout = uc.FindName("Flyout") as SettingsFlyout;
+            if (flyout != null)
+            {
+                flyout.DataContext = UserProfile;
+                flyout.ShowIndependent();
+            }
         }
 
         private UserViewModel CreateUserViewModel(User user)
