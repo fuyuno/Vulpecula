@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:behaviors="using:Vulpecula.Universal.Behaviors"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dvm="using:Vulpecula.Universal.DesignViewModels"
              xmlns:flyouts="using:Vulpecula.Universal.Views.Flyouts"
              xmlns:interactivity="using:WinRTXamlToolkit.Interactivity"
              xmlns:local="using:Vulpecula.Universal.Views.Timelines.Primitive"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Vulpecula.Universal.ViewModels.Timelines.Primitives"
              x:Name="RootPanel"
-             d:DataContext="{d:DesignInstance vm:StatusViewModel}"
+             d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True,
+                                              Type=dvm:StatusViewDesignViewModel}"
              d:DesignHeight="150"
              d:DesignWidth="360"
              mc:Ignorable="d">
@@ -69,9 +71,7 @@
                 <RelativePanel Grid.Row="0">
                     <TextBlock x:Name="ScreenName"
                                RelativePanel.AlignLeftWithPanel="True"
-                               Text="{Binding User.ScreenName,
-                                              Converter={StaticResource StringFormatConverter},
-                                              ConverterParameter='StatusViewXaml_ScreenName'}" />
+                               Text="{Binding User.ScreenName}" />
                     <TextBlock Margin="10,0,50,0"
                                RelativePanel.RightOf="ScreenName"
                                Text="{Binding User.Name}"

@@ -9,27 +9,27 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
     {
         private readonly User _user;
 
-        public string Name => this._user.Name.Replace(Environment.NewLine, "");
+        public string Name => _user.Name.Replace(Environment.NewLine, "");
 
-        public string ScreenName => this._user.ScreenName;
+        public string ScreenName => $"@{_user.ScreenName}";
 
-        public string Icon => this._user.ProfileImageUrlHttps;
+        public string Icon => _user.ProfileImageUrlHttps;
 
-        public string CoverImageUrl => this._user.CoverImageUrlHttps;
+        public string CoverImageUrl => _user.CoverImageUrlHttps;
 
-        public DateTime CreatedAt => this._user.CreatedAt;
+        public DateTime CreatedAt => _user.CreatedAt;
 
-        public string Description => this._user.Description;
+        public string Description => _user.Description;
 
-        public string Location => this._user.Location.Replace(Environment.NewLine, "");
+        public string Location => _user.Location.Replace(Environment.NewLine, "");
 
-        public bool IsProtected => this._user.IsProtected;
+        public bool IsProtected => _user.IsProtected;
 
-        public string Url => this._user.Url;
+        public string Url => _user.Url;
 
         public UserViewModel(User user)
         {
-            this._user = user;
+            _user = user;
         }
     }
 }
