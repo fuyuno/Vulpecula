@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Windows.Storage;
@@ -53,6 +54,8 @@ namespace Vulpecula.Universal.Models
                     this.Columns.Clear();
                     App.AppSettings.RemoveValue(columnComposite[nameof(Column.ColumnId)].ToString());
                 }
+                // 初期化
+                this.SetupInitialColumns(AccountManager.Instance.Users.First().Id);
             }
         }
 
