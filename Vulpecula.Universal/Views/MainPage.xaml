@@ -90,9 +90,7 @@
                                         <TextBlock Margin="10,0"
                                                    VerticalAlignment="Center"
                                                    FontSize="18"
-                                                   Text="{Binding ScreenName,
-                                                                  Converter={StaticResource StringFormatConverter},
-                                                                  ConverterParameter='MainPageXaml_ScreenName'}" />
+                                                   Text="{Binding ScreenName}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
