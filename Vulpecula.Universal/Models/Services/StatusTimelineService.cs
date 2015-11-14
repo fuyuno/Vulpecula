@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 
 using Vulpecula.Models;
 using Vulpecula.Streaming.Reactive;
@@ -11,6 +12,7 @@ namespace Vulpecula.Universal.Models.Services
     public class StatusTimelineService : TimelineServiceBase<Status>
     {
         private readonly TimelineType _type;
+        private IConnectableObservable<Status> _connectableObservable;
         private IDisposable _disposable;
 
         public StatusTimelineService(CroudiaProvider provider, TimelineType type) : base(provider)
@@ -30,10 +32,19 @@ namespace Vulpecula.Universal.Models.Services
 
         public override void Start()
         {
-            var observer = this.ConnectTimeline().Publish();
+            _connectableObservable = this.ConnectTimeline().Publish();
             foreach (var subscriber in this.Subscribers)
-                observer.Subscribe(w => subscriber.Invoke(w));
-            this._disposable = observer.Connect();
+                _connectableObservable.Subscribe(w => subscriber.Invoke(w));
+            this._disposable = _connectableObservable.Connect();
+            StartSubscriberRequest();
+        }
+
+        protected override void SubscriberAdded(Action<Status> obj)
+        {
+            if (obj != null)
+            {
+                _connectableObservable.Subscribe(obj);
+            }
         }
 
         private IObservable<Status> ConnectTimeline()

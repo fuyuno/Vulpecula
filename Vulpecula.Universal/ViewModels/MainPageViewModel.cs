@@ -35,8 +35,8 @@ namespace Vulpecula.Universal.ViewModels
 
         private async Task Initialize()
         {
-            // AccountManager.Instance.ResetAccounts();
-            // ColumnManager.Instance.ClearColumns();
+            AccountManager.Instance.ResetAccounts();
+            ColumnManager.Instance.ClearColumns();
 
             await AccountManager.Instance.InitializeAccounts();
             await ColumnManager.Instance.InitializeColumns();
@@ -47,6 +47,9 @@ namespace Vulpecula.Universal.ViewModels
                 if (AccountManager.Instance.Users.Count > 0)
                     ColumnManager.Instance.SetupInitialColumns(AccountManager.Instance.Users.First().Id);
             }
+
+            // ためしに
+            ColumnManager.Instance.AddColumn(Column.CreateColumnInfo(TimelineType.Public, "public 2", AccountManager.Instance.Users.First().Id, 0));
         }
 
         private async Task Authorization()

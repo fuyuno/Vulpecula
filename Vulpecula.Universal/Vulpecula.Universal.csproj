@@ -126,6 +126,7 @@
     <Compile Include="Models\Services\ServiceProvider.cs" />
     <Compile Include="Models\Services\Primitive\SuspendableService.cs" />
     <Compile Include="Models\Services\StatusService.cs" />
+    <Compile Include="Models\Services\Tags\TimelineTag.cs" />
     <Compile Include="Models\Timelines\Column.cs" />
     <Compile Include="Models\Timelines\Primitive\StatusModel.cs" />
     <Compile Include="Models\Services\DirectMessageTimelineService.cs" />

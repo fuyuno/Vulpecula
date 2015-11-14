@@ -9,6 +9,8 @@ using Vulpecula.Models;
 using Vulpecula.Models.Base;
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.Models.Services;
+using Vulpecula.Universal.Models.Services.Primitive;
+using Vulpecula.Universal.Models.Services.Tags;
 using Vulpecula.Universal.Models.Timelines;
 using Vulpecula.Universal.Models.Timelines.Primitive;
 using Vulpecula.Universal.ViewModels.Primitives;
@@ -21,30 +23,50 @@ namespace Vulpecula.Universal.ViewModels.Timelines
     public class ColumnViewModel : ViewModel
     {
         private readonly Column _column;
+
+        private readonly Func<SuspendableService, TimelineType, long, bool> _cond = (w, t, i) => ((TimelineTag)w.Tag).Id == i && ((TimelineTag)w.Tag).Type == t;
         private readonly User _user;
 
-        public string Name => this._column.Name;
+        public string Name => _column.Name;
 
-        public string Icon => this._user.ProfileImageUrlHttps;
+        public string Icon => _user.ProfileImageUrlHttps;
         public ObservableCollection<StatusViewModel> Statuses { get; }
 
         private ColumnViewModel(Column column, CroudiaProvider provider)
         {
-            this._column = column;
-            this._user = provider.User;
-            this.Statuses = new ObservableCollection<StatusViewModel>();
+            _column = column;
+            _user = provider.User;
+            Statuses = new ObservableCollection<StatusViewModel>();
 
-            if (this._column.Type == TimelineType.DirectMessages || this._column.Type == TimelineType.DirectMessagesAll)
+            if (_column.Type == TimelineType.DirectMessages || _column.Type == TimelineType.DirectMessagesAll)
             {
-                var service = new DirectMessageTimelineService(provider);
-                service.Subscribers.Add(this.AddTimeline);
-                ServiceProvider.RegisterService(service);
+                if (ServiceProvider.SuspendableServices.Any(w => _cond(w, column.Type, provider.User.Id)))
+                {
+                    var s = ServiceProvider.SuspendableServices.Single(w => _cond(w, column.Type, provider.User.Id)) as DirectMessageTimelineService;
+                    s?.Subscribers.Add(AddTimeline);
+                }
+                else
+                {
+                    var service = new DirectMessageTimelineService(provider);
+                    service.Subscribers.Add(AddTimeline);
+                    service.Tag = new TimelineTag { Type = _column.Type, Id = provider.User.Id };
+                    ServiceProvider.RegisterService(service);
+                }
             }
             else
             {
-                var service = new StatusTimelineService(provider, this._column.Type);
-                service.Subscribers.Add(this.AddTimeline);
-                ServiceProvider.RegisterService(service);
+                if (ServiceProvider.SuspendableServices.Any(w => _cond(w, column.Type, provider.User.Id)))
+                {
+                    var s = ServiceProvider.SuspendableServices.Single(w => _cond(w, column.Type, provider.User.Id)) as StatusTimelineService;
+                    s?.Subscribers.Add(AddTimeline);
+                }
+                else
+                {
+                    var service = new StatusTimelineService(provider, _column.Type);
+                    service.Subscribers.Add(AddTimeline);
+                    service.Tag = new TimelineTag { Type = _column.Type, Id = provider.User.Id };
+                    ServiceProvider.RegisterService(service);
+                }
             }
         }
 
@@ -58,7 +80,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
         private async void AddTimeline(StatusBase status)
         {
             var vm = new StatusViewModel(new StatusModel(status));
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.Statuses.Insert(0, vm));
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => Statuses.Insert(0, vm));
         }
     }
 }

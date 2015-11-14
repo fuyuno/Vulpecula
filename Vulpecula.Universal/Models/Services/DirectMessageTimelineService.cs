@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 
 using Vulpecula.Models;
 using Vulpecula.Streaming.Reactive;
@@ -9,6 +10,7 @@ namespace Vulpecula.Universal.Models.Services
 {
     public class DirectMessageTimelineService : TimelineServiceBase<SecretMail>
     {
+        private IConnectableObservable<SecretMail> _connectableObservable;
         private IDisposable _disposable;
 
         public DirectMessageTimelineService(CroudiaProvider provider) : base(provider)
@@ -33,10 +35,19 @@ namespace Vulpecula.Universal.Models.Services
             var observable = this.Provider.Croudia.SecretMails.SentAsObservable();
             observable.Merge(this.Provider.Croudia.SecretMails.ReceivedAsObservable());
 
-            var observer = observable.Publish();
+            _connectableObservable = observable.Publish();
             foreach (var action in this.Subscribers)
-                observer.Subscribe(w => action.Invoke(w));
-            this._disposable = observer.Connect();
+                _connectableObservable.Subscribe(w => action.Invoke(w));
+            this._disposable = _connectableObservable.Connect();
+            StartSubscriberRequest();
+        }
+
+        protected override void SubscriberAdded(Action<SecretMail> obj)
+        {
+            if (obj != null)
+            {
+                _connectableObservable.Subscribe(obj);
+            }
         }
     }
 }
