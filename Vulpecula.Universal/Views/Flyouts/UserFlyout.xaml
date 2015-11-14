@@ -12,6 +12,7 @@
                                                  Type=dvm:UserFlyoutDesignViewModel}"
                 d:DesignHeight="300"
                 d:DesignWidth="400"
+                Width="400"
                 mc:Ignorable="d">
 
     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
