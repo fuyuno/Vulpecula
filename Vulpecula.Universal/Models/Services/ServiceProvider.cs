@@ -39,13 +39,13 @@ namespace Vulpecula.Universal.Models.Services
         {
             // 500ms ごとに、 Queue に登録されたサービスを実行。
             _disposable1 = Observable.Interval(TimeSpan.FromMilliseconds(500)).Select(w => _flag1)
-                .Distinct()
+                .DistinctUntilChanged()
                 .Where(w => w)
                 .Repeat()
                 .Subscribe(w => WorkQueue());
 
             _disposable2 = Observable.Interval(TimeSpan.FromMilliseconds(500)).Select(w => _flag2)
-                .Distinct()
+                .DistinctUntilChanged()
                 .Where(w => w)
                 .Repeat()
                 .Subscribe(async w => await WorkQueueAsync());
@@ -127,12 +127,12 @@ namespace Vulpecula.Universal.Models.Services
                         service.Start();
                         service.Dispose();
                     }
-                    _flag1 = false;
                 }
                 catch
                 {
                     // ignored
                 }
+                _flag1 = false;
             }
         }
 
@@ -149,12 +149,12 @@ namespace Vulpecula.Universal.Models.Services
                     await service.StartAsync();
                     service.Dispose();
                 }
-                _flag2 = false;
             }
             catch
             {
                 // ignored
             }
+            _flag2 = false;
         }
     }
 }
