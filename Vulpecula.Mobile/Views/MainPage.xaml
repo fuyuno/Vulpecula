@@ -2,15 +2,22 @@
             xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:b="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
+            xmlns:commands="clr-namespace:Prism.Commands;assembly=Prism"
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
             xmlns:intermediate="clr-namespace:Vulpecula.Mobile.Views.Intermediate;assembly=Vulpecula.Mobile"
             xmlns:m="clr-namespace:Vulpecula.Mobile.Models;assembly=Vulpecula.Mobile"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+            xmlns:triggers="clr-namespace:Vulpecula.Mobile.Triggers;assembly=Vulpecula.Mobile"
             xmlns:v="clr-namespace:Vulpecula.Mobile.Views;assembly=Vulpecula.Mobile"
             xmlns:vm="clr-namespace:Vulpecula.Mobile.ViewModels;assembly=Vulpecula.Mobile"
             xmlns:vt="clr-namespace:Vulpecula.Mobile.Views.Timelines;assembly=Vulpecula.Mobile"
             mvvm:ViewModelLocator.AutowireViewModel="True">
+    <TabbedPage.Triggers>
+        <EventTrigger Event="Appearing">
+            <triggers:CallMethodAction MethodName="Initialize" TargetObject="{Binding}" />
+        </EventTrigger>
+    </TabbedPage.Triggers>
     <TabbedPage.Behaviors>
         <b:CurrentPageBehavior />
     </TabbedPage.Behaviors>

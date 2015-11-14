@@ -43,6 +43,8 @@
     <Compile Include="Models\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Interfaces\ILocalization.cs" />
+    <Compile Include="Triggers\CallMethodAction.cs" />
+    <Compile Include="Triggers\InvokeCommandAction.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\Popups\StatusPageViewModel.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />

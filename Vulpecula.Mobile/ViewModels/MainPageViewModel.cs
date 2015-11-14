@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using System.Diagnostics;
+
+using JetBrains.Annotations;
 
 using Prism.Navigation;
 
@@ -20,6 +22,11 @@ namespace Vulpecula.Mobile.ViewModels
             PublicTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Public", "public", "PublicTimeline");
             HomeTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Home", "home", "HomeTimeline");
             MentionsTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Mentions", "mention", "MentionsTimeline");
+        }
+
+        public void Initialize()
+        {
+            Debug.WriteLine("Fuga");
         }
     }
 }
