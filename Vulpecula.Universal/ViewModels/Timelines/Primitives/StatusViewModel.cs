@@ -1,7 +1,13 @@
-﻿using Windows.UI.Xaml;
+﻿using System.Windows.Input;
+
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
+using Prism.Commands;
+
 using Vulpecula.Models;
+using Vulpecula.Universal.Models;
+using Vulpecula.Universal.Models.Services;
 using Vulpecula.Universal.Models.Timelines.Primitive;
 using Vulpecula.Universal.ViewModels.Flyouts;
 using Vulpecula.Universal.ViewModels.Primitives;
@@ -11,6 +17,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 {
     public class StatusViewModel : ViewModel
     {
+        private readonly CroudiaProvider _provider;
         public StatusModel Model { get; }
 
         public bool IsShare { get; }
@@ -18,17 +25,15 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         public bool IsDirectMessage { get; }
         public bool HasImage { get; }
 
-        #region CreatedAt
-
         public string CreatedAt => Model.CreatedAt.ToString("HH:mm");
-
-        #endregion
 
         public string Via => Model.Source == null ? "" : $"via {Model.Source.Name}";
 
-        public StatusViewModel(StatusModel statusModel)
+        public StatusViewModel(StatusModel statusModel, CroudiaProvider provider)
         {
             Model = statusModel;
+            _provider = provider;
+
             if (Model.IsDirectMessage)
             {
                 IsDirectMessage = Model.IsDirectMessage;
@@ -153,6 +158,47 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         {
             get { return _isFlyoutOpened; }
             set { SetProperty(ref _isFlyoutOpened, value); }
+        }
+
+        #endregion
+
+        #region SpreadCommand
+
+        private ICommand _spreadCommand;
+
+        public ICommand SpreadCommand => _spreadCommand ?? (_spreadCommand = new DelegateCommand(Spread));
+
+        private void Spread()
+        {
+            ServiceProvider.RegisterService(new SpreadService(_provider, Model.Id, IsShared));
+            IsShared = !IsShared;
+        }
+
+        #endregion
+
+        #region FavoriteCommand
+
+        private ICommand _favoriteCommand;
+
+        public ICommand FavoriteCommand => _favoriteCommand ?? (_favoriteCommand = new DelegateCommand(Favorite));
+
+        private void Favorite()
+        {
+            ServiceProvider.RegisterService(new FavoriteService(_provider, Model.Id, IsFavorited));
+            IsFavorited = !IsFavorited;
+        }
+
+        #endregion
+
+        #region DeleteCommand
+
+        private ICommand _deleteCommand;
+
+        public ICommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new DelegateCommand(Delete));
+
+        private void Delete()
+        {
+            ServiceProvider.RegisterService(new StatusDeleteService(_provider, Model.Id, IsDirectMessage));
         }
 
         #endregion

@@ -25,6 +25,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
         private readonly Column _column;
 
         private readonly Func<SuspendableService, TimelineType, long, bool> _cond = (w, t, i) => ((TimelineTag)w.Tag).Id == i && ((TimelineTag)w.Tag).Type == t;
+        private readonly CroudiaProvider _provider;
         private readonly User _user;
 
         public string Name => _column.Name;
@@ -35,6 +36,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
         private ColumnViewModel(Column column, CroudiaProvider provider)
         {
             _column = column;
+            _provider = provider;
             _user = provider.User;
             Statuses = new ObservableCollection<StatusViewModel>();
 
@@ -79,7 +81,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
 
         private async void AddTimeline(StatusBase status)
         {
-            var vm = new StatusViewModel(new StatusModel(status));
+            var vm = new StatusViewModel(new StatusModel(status), _provider);
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => Statuses.Insert(0, vm));
         }
     }

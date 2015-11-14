@@ -122,10 +122,13 @@
     <Compile Include="Models\Purchase\InAppPurchase.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.MultipleAccounts.cs" />
     <Compile Include="Models\ColumnManager.cs" />
+    <Compile Include="Models\Services\FavoriteService.cs" />
     <Compile Include="Models\Services\Primitive\AsyncService.cs" />
     <Compile Include="Models\Services\Primitive\Service.cs" />
     <Compile Include="Models\Services\ServiceProvider.cs" />
     <Compile Include="Models\Services\Primitive\SuspendableService.cs" />
+    <Compile Include="Models\Services\SpreadService.cs" />
+    <Compile Include="Models\Services\StatusDeleteService.cs" />
     <Compile Include="Models\Services\StatusService.cs" />
     <Compile Include="Models\Services\Tags\TimelineTag.cs" />
     <Compile Include="Models\Timelines\Column.cs" />

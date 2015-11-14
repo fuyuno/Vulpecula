@@ -118,6 +118,7 @@
                                   Glyph="&#xE90A;" />
                     </Button>
                     <Button Margin="5,0"
+                            Command="{Binding SpreadCommand}"
                             Padding="0"
                             Visibility="{Binding User.IsProtected,
                                                  Converter={StaticResource NotBooleanToVisibilityConverter}}">
@@ -135,13 +136,18 @@
                                   FontSize="16"
                                   Glyph="&#xE91C;" />
                     </Button>
-                    <Button Margin="5,0" Padding="0">
+                    <Button Margin="5,0"
+                            Command="{Binding FavoriteCommand}"
+                            Padding="0"
+                            Visibility="{Binding IsDirectMessage,
+                                                 Converter={StaticResource NotBooleanToVisibilityConverter}}">
                         <FontIcon Width="32"
                                   Height="16"
                                   FontSize="16"
                                   Glyph="&#xE735;" />
                     </Button>
                     <Button Margin="5,0"
+                            Command="{Binding DeleteCommand}"
                             Padding="0"
                             Visibility="{Binding User.IsOwn,
                                                  Converter={StaticResource BooleanToVisibilityConverter}}">

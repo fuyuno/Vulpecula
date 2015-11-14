@@ -11,13 +11,13 @@ namespace Vulpecula.Universal.Models.Services
 
         public StatusService(CroudiaProvider provider, string text)
         {
-            this._provider = provider;
-            this._text = text;
+            _provider = provider;
+            _text = text;
         }
 
         public override async Task StartAsync()
         {
-            await this._provider.Croudia.Statuses.UpdateAsync(status => this._text);
+            await _provider.Croudia.Statuses.UpdateAsync(status => _text);
         }
 
         /// <summary>
