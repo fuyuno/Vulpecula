@@ -12,7 +12,7 @@
              x:Name="RootPanel"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True,
                                               Type=dvm:StatusViewDesignViewModel}"
-             d:DesignHeight="150"
+             d:DesignHeight="180"
              d:DesignWidth="360"
              mc:Ignorable="d">
     <Grid Padding="0,10">
@@ -66,7 +66,8 @@
                     <RowDefinition Height="20" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="20" />
+                    <RowDefinition Height="16" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <RelativePanel Grid.Row="0">
                     <TextBlock x:Name="ScreenName"
@@ -97,6 +98,9 @@
                     <TextBlock FontSize="11"
                                Foreground="{StaticResource HyperlinkDisabledThemeBrush}"
                                Text="{Binding Via}" />
+                </StackPanel>
+                <StackPanel Grid.Row="4">
+                    
                 </StackPanel>
             </Grid>
         </StackPanel>

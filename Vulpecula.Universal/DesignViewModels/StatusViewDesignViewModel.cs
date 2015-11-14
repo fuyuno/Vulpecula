@@ -81,7 +81,7 @@ namespace Vulpecula.Universal.DesignViewModels
 
             IsShare = Model.SpreadStatus != null;
             IsComment = Model.QuotedStatus != null;
-            HasImage = Model.Entities?.Media != null;
+            HasImage = IsShare ? Model.SpreadStatus?.Entities?.Media != null : Model.Entities?.Media != null;
 
             User = new UserDesignViewModel();
             //User = new UserViewModel(IsShare ? Model.SpreadStatus?.User : Model.User);

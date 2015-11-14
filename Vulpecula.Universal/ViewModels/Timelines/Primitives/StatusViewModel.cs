@@ -37,7 +37,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
             IsShare = Model.SpreadStatus != null;
             IsComment = Model.QuotedStatus != null;
-            HasImage = Model.Entities?.Media != null;
+            HasImage = IsShare ? Model.SpreadStatus?.Entities?.Media != null : Model.Entities?.Media != null;
             IsFlyoutOpened = false;
         }
 
@@ -77,7 +77,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         #region Image
 
         private string _imageUrl;
-        public string ImageUrl => _imageUrl ?? (_imageUrl = HasImage ? Model.Entities.Media.MediaUrlHttps : "");
+        public string ImageUrl => _imageUrl ?? (_imageUrl = HasImage ? IsShare ? Model.SpreadStatus.Entities.Media.MediaUrlHttps : Model.Entities.Media.MediaUrlHttps : "");
 
         #endregion
 
