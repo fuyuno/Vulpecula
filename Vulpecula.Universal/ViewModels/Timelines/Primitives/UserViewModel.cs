@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 
 using Vulpecula.Models;
+using Vulpecula.Universal.Models;
 using Vulpecula.Universal.ViewModels.Primitives;
 
 namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
@@ -26,6 +28,8 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         public bool IsProtected => _user.IsProtected;
 
         public string Url => _user.Url;
+
+        public bool IsOwn => AccountManager.Instance.Users.Any(w => w.Id == _user.Id);
 
         public UserViewModel(User user)
         {

@@ -8,5 +8,6 @@
     <Application.Resources>
         <converters:StringFormatConverter x:Key="StringFormatConverter" />
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:NotBooleanToVisibilityConverter x:Key="NotBooleanToVisibilityConverter" />
     </Application.Resources>
 </prism:PrismUnityApplication>

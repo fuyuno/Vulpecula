@@ -26,6 +26,8 @@ namespace Vulpecula.Universal.DesignViewModels
 
         public string Url => this._user.Url;
 
+        public bool IsOwn => true;
+
         public UserDesignViewModel()
         {
             this._user = new User

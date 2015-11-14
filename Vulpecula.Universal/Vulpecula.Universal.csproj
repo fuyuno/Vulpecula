@@ -104,6 +104,7 @@
     <Compile Include="Behaviors\SettingsFlyoutOpenBehavior.cs" />
     <Compile Include="Behaviors\UnSelectableListBoxBehavior.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\NotBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="DesignViewModels\StatusViewDesignViewModel.cs" />
     <Compile Include="DesignViewModels\UserDesignViewModel.cs" />
