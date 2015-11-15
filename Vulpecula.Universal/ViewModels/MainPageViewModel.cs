@@ -35,8 +35,8 @@ namespace Vulpecula.Universal.ViewModels
 
         private async Task Initialize()
         {
-            // AccountManager.Instance.ResetAccounts();
-            // ColumnManager.Instance.ClearColumns();
+            AccountManager.Instance.ResetAccounts();
+            ColumnManager.Instance.ClearColumns();
 
             await AccountManager.Instance.InitializeAccounts();
             await ColumnManager.Instance.InitializeColumns();

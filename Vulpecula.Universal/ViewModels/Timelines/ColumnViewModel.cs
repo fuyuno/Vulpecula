@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Reactive.Linq;
 
 using Windows.UI.Core;
 
 using Vulpecula.Models;
 using Vulpecula.Models.Base;
+using Vulpecula.Streaming;
 using Vulpecula.Universal.Models;
+using Vulpecula.Universal.Models.Notifications;
 using Vulpecula.Universal.Models.Services;
 using Vulpecula.Universal.Models.Services.Primitive;
 using Vulpecula.Universal.Models.Services.Tags;
@@ -27,6 +31,8 @@ namespace Vulpecula.Universal.ViewModels.Timelines
         private readonly Func<SuspendableService, TimelineType, long, bool> _cond = (w, t, i) => ((TimelineTag)w.Tag).Id == i && ((TimelineTag)w.Tag).Type == t;
         private readonly CroudiaProvider _provider;
         private readonly User _user;
+
+        private int _counter = -100;
 
         public string Name => _column.Name;
 
@@ -70,6 +76,49 @@ namespace Vulpecula.Universal.ViewModels.Timelines
                     ServiceProvider.RegisterService(service);
                 }
             }
+
+            if (!_column.EnableNotity)
+            {
+                return;
+            }
+            CompositeDisposable.Add(Observable.FromEventPattern<NotifyCollectionChangedEventArgs>(Statuses, "CollectionChanged")
+                .Throttle(TimeSpan.FromSeconds(CroudiaStreaming.TimeSpan.Seconds * 0.3))
+                .Subscribe(w =>
+                {
+                    if (_counter > 0)
+                    {
+                        switch (_column.Type)
+                        {
+                            case TimelineType.Home:
+                            case TimelineType.Public:
+                            case TimelineType.PublicAll:
+                            case TimelineType.User:
+                                // case TimelineType.Favorite:
+                                ToastNotificationWrapper.PopToast($"新着通知 ({Name})", $"{_counter}件の新しいささやきがあります。");
+                                break;
+
+                            case TimelineType.Mentions:
+                            case TimelineType.MentionsAll:
+                                foreach (var item in w.EventArgs.NewItems)
+                                {
+                                    var status = (StatusViewModel)item;
+                                    ToastNotificationWrapper.PopQuickReplyToast($"新着返信通知 ({Name})", status.Text, status.User, NotificationSounds.Mail);
+                                }
+                                break;
+
+                            case TimelineType.DirectMessages:
+                            case TimelineType.DirectMessagesAll:
+                                ToastNotificationWrapper.PopToast($"新着通知 ({Name})", $"{_counter}件の新しいメールがあります。", NotificationSounds.SMS);
+                                break;
+
+                            case TimelineType.Event:
+                            case TimelineType.EventAll:
+                                ToastNotificationWrapper.PopToast($"新着通知 ({Name})", $"{_counter}件の新しいイベントがあります。", NotificationSounds.Mail);
+                                break;
+                        }
+                    }
+                    _counter = 0;
+                }));
         }
 
         public static ColumnViewModel Create(Column column)
@@ -83,6 +132,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
         {
             var vm = new StatusViewModel(new StatusModel(status), _provider);
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => Statuses.Insert(0, vm));
+            _counter++;
         }
     }
 }

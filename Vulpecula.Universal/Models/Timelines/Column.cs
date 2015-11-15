@@ -21,19 +21,20 @@ namespace Vulpecula.Universal.Models.Timelines
         {
         }
 
-        private Column(TimelineType type, string id, string name, long userId, int row, string query)
+        private Column(TimelineType type, string id, string name, long userId, int row, string query, bool enableNotity)
         {
-            this.Type = type;
-            this.ColumnId = id;
-            this.Name = name;
-            this.UserId = userId;
-            this.Row = row;
-            this.Query = query;
+            Type = type;
+            ColumnId = id;
+            Name = name;
+            UserId = userId;
+            Row = row;
+            Query = query;
+            EnableNotity = enableNotity;
         }
 
-        public static Column CreateColumnInfo(TimelineType type, string name, long userId, int row, string query = null)
+        public static Column CreateColumnInfo(TimelineType type, string name, long userId, int row, string query = null, bool enableNotity = true)
         {
-            return new Column(type, $"Column-{Guid.NewGuid()}", name, userId, row, query);
+            return new Column(type, $"Column-{Guid.NewGuid()}", name, userId, row, query, enableNotity);
         }
 
         public static Column RestoreColumnInfo(ApplicationDataCompositeValue adcv)
@@ -49,6 +50,7 @@ namespace Vulpecula.Universal.Models.Timelines
                 UserId = long.Parse(adcv[nameof(UserId)].ToString()),
                 Row = int.Parse(adcv[nameof(Row)].ToString()),
                 Query = adcv[nameof(Query)]?.ToString()
+                // EnableNotity = bool.Parse(adcv[nameof(EnableNotity)].ToString())
             };
 
             return info;
@@ -66,7 +68,7 @@ namespace Vulpecula.Universal.Models.Timelines
             var info = obj as Column;
             if (info == null)
                 return false;
-            return info.ColumnId == this.ColumnId;
+            return info.ColumnId == ColumnId;
         }
 
         /// <summary>
@@ -78,7 +80,7 @@ namespace Vulpecula.Universal.Models.Timelines
         public override int GetHashCode()
         {
             // ReSharper disable once NonReadonlyMemberInGetHashCode
-            return this.ColumnId.GetHashCode();
+            return ColumnId.GetHashCode();
         }
 
         #region Name
@@ -87,8 +89,8 @@ namespace Vulpecula.Universal.Models.Timelines
 
         public string Name
         {
-            get { return this._name; }
-            set { this.SetProperty(ref this._name, value); }
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
         }
 
         #endregion
@@ -99,8 +101,20 @@ namespace Vulpecula.Universal.Models.Timelines
 
         public int Row
         {
-            get { return this._row; }
-            set { this.SetProperty(ref this._row, value); }
+            get { return _row; }
+            set { SetProperty(ref _row, value); }
+        }
+
+        #endregion
+
+        #region EnableNotity
+
+        private bool _enableNotify;
+
+        public bool EnableNotity
+        {
+            get { return _enableNotify; }
+            set { SetProperty(ref _enableNotify, value); }
         }
 
         #endregion

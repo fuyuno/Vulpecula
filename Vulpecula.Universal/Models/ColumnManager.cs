@@ -73,7 +73,7 @@ namespace Vulpecula.Universal.Models
         /// <param name="userId"></param>
         public void SetupInitialColumns(long userId)
         {
-            this.AddColumn(Column.CreateColumnInfo(TimelineType.Public, "public", userId, 0));
+            this.AddColumn(Column.CreateColumnInfo(TimelineType.Public, "public", userId, 0, enableNotity: false));
             this.AddColumn(Column.CreateColumnInfo(TimelineType.Mentions, "mentions", userId, 1));
             this.AddColumn(Column.CreateColumnInfo(TimelineType.DirectMessages, "messages", userId, 2));
         }
@@ -90,7 +90,8 @@ namespace Vulpecula.Universal.Models
                 [nameof(Column.Name)] = info.Name,
                 [nameof(Column.UserId)] = info.UserId,
                 [nameof(Column.Row)] = info.Row,
-                [nameof(Column.Query)] = info.Query
+                [nameof(Column.Query)] = info.Query,
+                [nameof(Column.EnableNotity)] = info.EnableNotity
             };
 
             this.Columns.Add(info);

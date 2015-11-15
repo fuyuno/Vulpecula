@@ -119,6 +119,8 @@
     <Compile Include="Models\Dialogs\MessageDialogWrapper.cs" />
     <Compile Include="Helpers\LocalizationHelper.cs" />
     <Compile Include="Models\FollowTypes.cs" />
+    <Compile Include="Models\Notifications\NotificationSounds.cs" />
+    <Compile Include="Models\Notifications\ToastNotificationWrapper.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.MultipleAccounts.cs" />
     <Compile Include="Models\ColumnManager.cs" />
