@@ -20,6 +20,14 @@
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="Vulpecula.Universal.BgTask.QuickReplyBackgroundTask">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
+        <!-- Background Task by Toast Notification -->
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>

@@ -11,6 +11,7 @@ using Prism.Unity.Windows;
 using Prism.Windows.AppModel;
 
 using Vulpecula.Universal.Models;
+using Vulpecula.Universal.Models.Notifications;
 using Vulpecula.Universal.Models.Services;
 
 namespace Vulpecula.Universal
@@ -18,7 +19,7 @@ namespace Vulpecula.Universal
     /// <summary>
     /// 既定の Application クラスを補完するアプリケーション固有の動作を提供します。
     /// </summary>
-    sealed partial class App : PrismUnityApplication
+    public sealed partial class App : PrismUnityApplication
     {
         #region Statics
 
@@ -47,6 +48,7 @@ namespace Vulpecula.Universal
         protected override Task OnInitializeAsync(IActivatedEventArgs args)
         {
             AppSettings.Initialize();
+            NotificationRegistry.Initialize();
 
             this.Container.RegisterInstance<IResourceLoader>(new ResourceLoaderAdapter(new ResourceLoader()), new ContainerControlledLifetimeManager());
             return base.OnInitializeAsync(args);

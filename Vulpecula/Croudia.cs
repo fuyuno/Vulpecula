@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -21,6 +22,7 @@ namespace Vulpecula
 {
     public class Croudia
     {
+        private readonly object _lockObj = new object();
         public string ConsumerKey { get; }
 
         public string ConsumerSecret { get; }
@@ -54,8 +56,6 @@ namespace Vulpecula
         public Trends Trends => new Trends(this);
 
         public Users Users => new Users(this);
-
-        private readonly object _lockObj = new object();
 
         public Croudia(string consumerKey, string consumerSecret) : this(consumerKey, consumerSecret, "", "")
         {
@@ -93,6 +93,7 @@ namespace Vulpecula
         {
             if (parameters != null)
                 url += "?" + string.Join("&", parameters.Select(w => $"{w.Key}={w.Value}"));
+            Debug.WriteLine("GET :" + url);
 
             var httpClient = new HttpClient(new OAuth2ClientHandler(this));
             var response = await httpClient.GetAsync(url);
@@ -113,6 +114,8 @@ namespace Vulpecula
 
         private async Task<T> PostAsync<T>(string url, IEnumerable<KeyValuePair<string, object>> parameters)
         {
+            Debug.WriteLine("POST:" + url);
+
             var httpClient = new HttpClient(new OAuth2ClientHandler(this));
             HttpContent content;
             if (parameters.Any(w => w.Key == "media" || w.Key == "image"))

@@ -119,6 +119,7 @@
     <Compile Include="Models\Dialogs\MessageDialogWrapper.cs" />
     <Compile Include="Helpers\LocalizationHelper.cs" />
     <Compile Include="Models\FollowTypes.cs" />
+    <Compile Include="Models\Notifications\NotificationRegistry.cs" />
     <Compile Include="Models\Notifications\NotificationSounds.cs" />
     <Compile Include="Models\Notifications\ToastNotificationWrapper.cs" />
     <Compile Include="Models\Purchase\InAppPurchase.cs" />
@@ -211,6 +212,10 @@
     <ProjectReference Include="..\Vulpecula.Streaming\Vulpecula.Streaming.csproj">
       <Project>{2538124a-5dc4-4200-83fd-6ec643ccb7e8}</Project>
       <Name>Vulpecula.Streaming</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vulpecula.Universal.BgTask\Vulpecula.Universal.BgTask.csproj">
+      <Project>{263f65ef-0771-4501-bd7b-1d10e2f5284a}</Project>
+      <Name>Vulpecula.Universal.BgTask</Name>
     </ProjectReference>
     <ProjectReference Include="..\Vulpecula\Vulpecula.csproj">
       <Project>{2d3b73ce-6c79-400c-9454-42f652d73eb7}</Project>

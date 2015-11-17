@@ -102,7 +102,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
                                 foreach (var item in w.EventArgs.NewItems)
                                 {
                                     var status = (StatusViewModel)item;
-                                    ToastNotificationWrapper.PopQuickReplyToast($"新着返信通知 ({Name})", status.Text, status.User, NotificationSounds.Mail);
+                                    ToastNotificationWrapper.PopQuickReplyToast($"新着返信通知 ({Name})", status.Model, status.User.User, NotificationSounds.Mail);
                                 }
                                 break;
 

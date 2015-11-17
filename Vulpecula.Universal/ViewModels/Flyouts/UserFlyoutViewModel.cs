@@ -21,7 +21,7 @@ namespace Vulpecula.Universal.ViewModels.Flyouts
                 .ContinueWith(task =>
                 {
                     var relation = task.Result;
-                    if (AccountManager.Instance.Users.Any(w => w.Id == _user.Id))
+                    if (AccountManager.Instance.Users.Any(w => w.Id == User.Id))
                     {
                         FollowType = FollowTypes.Me;
                         return;
@@ -33,14 +33,14 @@ namespace Vulpecula.Universal.ViewModels.Flyouts
                         return;
                     }
 
-                    var b1 = _user.IsFollowRequestSent as bool?;
+                    var b1 = User.IsFollowRequestSent as bool?;
                     if (b1 != null && b1.Value)
                     {
                         FollowType = FollowTypes.Pending;
                         return;
                     }
 
-                    var b2 = _user.IsFollowing as bool?;
+                    var b2 = User.IsFollowing as bool?;
                     if (b2 == null)
                     {
                         FollowType = FollowTypes.Unknown;

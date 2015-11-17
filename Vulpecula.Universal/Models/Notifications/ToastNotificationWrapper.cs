@@ -1,7 +1,12 @@
-﻿using Windows.Data.Xml.Dom;
+﻿using System.Collections.Generic;
+using System.Linq;
+
+using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
-using Vulpecula.Universal.ViewModels.Timelines.Primitives;
+using Vulpecula.Models;
+using Vulpecula.Universal.BgTask;
+using Vulpecula.Universal.Models.Timelines.Primitive;
 
 namespace Vulpecula.Universal.Models.Notifications
 {
@@ -35,7 +40,7 @@ namespace Vulpecula.Universal.Models.Notifications
         }
 
         // Vulpecula.Models.User がほしい
-        public static ToastNotification PopQuickReplyToast(string title, string content, UserViewModel user, NotificationSounds sound = NotificationSounds.Default)
+        public static ToastNotification PopQuickReplyToast(string title, StatusModel status, User user, NotificationSounds sound = NotificationSounds.Default)
         {
             ToastNotificationManager.History.Clear();
 
@@ -44,25 +49,31 @@ namespace Vulpecula.Universal.Models.Notifications
             {
                 notifySound = "Looping." + notifySound;
             }
+            var arguments = new[]
+            {
+                new KeyValuePair<string, object>("access_token", AccountManager.Instance.Providers.Single(w => w.User.Id == user.Id).Croudia.AccessToken),
+                new KeyValuePair<string, object>("in_reply_to_status_id", status.Id),
+                new KeyValuePair<string, object>("in_reply_to_screen_name", status.User.ScreenName)
+            };
             var payload =
-                $@"<toast activationType='foreground' launch='args'>
+                $@"<toast activationType='background' launch='args'>
     <visual>
         <binding template='ToastGeneric'>
-            <image placement='appLogoOverride' src='{user.Icon}' />
+            <image placement='appLogoOverride' src='{user.ProfileImageUrlHttps}' />
             <text>{title}</text>
-            <text>{content}</text>
+            <text>{status.Text}</text>
         </binding>
     </visual>
     <actions>
         <input id='status'
                type='text'
-               title='Reply to {user.ScreenName}'
+               title='Reply to @{user.ScreenName}'
                placeHolderContent='Hello!' />
-        <action activetionType='foreground'
-                arguments='quickReply'
+        <action activationType='background'
+                arguments='{QueryString.Query(arguments)}'
                 content='Whisper' />
-        <action activationType='foreground'
-                arguments='cancel'
+        <action activationType='system'
+                arguments='dismiss'
                 content='Dismiss' />
     </actions>
     <audio src='ms-winsoundevent:Notification.{notifySound}' />

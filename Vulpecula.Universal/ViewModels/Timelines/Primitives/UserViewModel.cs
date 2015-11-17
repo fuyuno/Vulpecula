@@ -9,31 +9,31 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 {
     public class UserViewModel : ViewModel
     {
-        private readonly User _user;
+        public User User { get; }
 
-        public string Name => _user.Name.Replace(Environment.NewLine, "");
+        public string Name => User.Name.Replace(Environment.NewLine, "");
 
-        public string ScreenName => $"@{_user.ScreenName}";
+        public string ScreenName => $"@{User.ScreenName}";
 
-        public string Icon => _user.ProfileImageUrlHttps;
+        public string Icon => User.ProfileImageUrlHttps;
 
-        public string CoverImageUrl => _user.CoverImageUrlHttps;
+        public string CoverImageUrl => User.CoverImageUrlHttps;
 
-        public DateTime CreatedAt => _user.CreatedAt;
+        public DateTime CreatedAt => User.CreatedAt;
 
-        public string Description => _user.Description;
+        public string Description => User.Description;
 
-        public string Location => _user.Location.Replace(Environment.NewLine, "");
+        public string Location => User.Location.Replace(Environment.NewLine, "");
 
-        public bool IsProtected => _user.IsProtected;
+        public bool IsProtected => User.IsProtected;
 
-        public string Url => _user.Url;
+        public string Url => User.Url;
 
-        public bool IsOwn => AccountManager.Instance.Users.Any(w => w.Id == _user.Id);
+        public bool IsOwn => AccountManager.Instance.Users.Any(w => w.Id == User.Id);
 
         public UserViewModel(User user)
         {
-            _user = user;
+            User = user;
         }
     }
 }

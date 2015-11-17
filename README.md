@@ -14,5 +14,6 @@ Supported Platform is:
 * Vulpecula.Mobile (Shared)
 * Vulpecula.Streaming (Shared)
 * Vulpecula.Universal
+* Vulpecula.Universal.BgTask
 * Vulpecula.iOS
 * Vulpecula (Shared)

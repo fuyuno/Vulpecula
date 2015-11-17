@@ -37,6 +37,8 @@ namespace Vulpecula.Universal.Models.Timelines.Primitive
 
         public long? InReplyToUserId => this._status.InReplyToUserId;
 
+        public string InReplyToScreenName => this._status.InReplyToScreenName;
+
         public Source Source => this._status?.Source;
 
         public User User => this.IsDirectMessage ? this._secretMail.Sender : this._status.User;
