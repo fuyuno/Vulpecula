@@ -87,7 +87,10 @@ namespace Vulpecula.Universal.Models.Services
         public static void RegisterService(Service service)
         {
             Queue.Enqueue(service);
-            _flag1 = true;
+            if (!_flag1)
+            {
+                _flag1 = true;
+            }
         }
 
         /// <summary>
@@ -98,7 +101,10 @@ namespace Vulpecula.Universal.Models.Services
         public static void RegisterService(AsyncService service)
         {
             QueueAsync.Enqueue(service);
-            _flag2 = true;
+            if (!_flag2)
+            {
+                _flag2 = true;
+            }
         }
 
         /// <summary>
@@ -121,9 +127,10 @@ namespace Vulpecula.Universal.Models.Services
 
                 try
                 {
-                    Service service;
-                    while ((service = Queue.Dequeue()) != null)
+                    var queue = Queue;
+                    while (queue.Count > 0)
                     {
+                        var service = queue.Dequeue();
                         service.Start();
                         service.Dispose();
                     }
@@ -143,9 +150,10 @@ namespace Vulpecula.Universal.Models.Services
 
             try
             {
-                AsyncService service;
-                while ((service = QueueAsync.Dequeue()) != null)
+                var quque = QueueAsync;
+                while (quque.Count > 0)
                 {
+                    var service = quque.Dequeue();
                     await service.StartAsync();
                     service.Dispose();
                 }
