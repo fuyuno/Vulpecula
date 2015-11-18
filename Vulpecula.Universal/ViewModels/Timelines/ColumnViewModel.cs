@@ -26,27 +26,24 @@ namespace Vulpecula.Universal.ViewModels.Timelines
 {
     public class ColumnViewModel : ViewModel
     {
-        private readonly Column _column;
-
         private readonly Func<SuspendableService, TimelineType, long, bool> _cond = (w, t, i) => ((TimelineTag)w.Tag).Id == i && ((TimelineTag)w.Tag).Type == t;
         private readonly CroudiaProvider _provider;
         private readonly User _user;
 
         private int _counter = -100;
-
-        public string Name => _column.Name;
+        public Column Column { get; }
 
         public string Icon => _user.ProfileImageUrlHttps;
         public ObservableCollection<StatusViewModel> Statuses { get; }
 
         private ColumnViewModel(Column column, CroudiaProvider provider)
         {
-            _column = column;
+            Column = column;
             _provider = provider;
             _user = provider.User;
             Statuses = new ObservableCollection<StatusViewModel>();
 
-            if (_column.Type == TimelineType.DirectMessages || _column.Type == TimelineType.DirectMessagesAll)
+            if (Column.Type == TimelineType.DirectMessages || Column.Type == TimelineType.DirectMessagesAll)
             {
                 if (ServiceProvider.SuspendableServices.Any(w => _cond(w, column.Type, provider.User.Id)))
                 {
@@ -57,7 +54,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
                 {
                     var service = new DirectMessageTimelineService(provider);
                     service.Subscribers.Add(AddTimeline);
-                    service.Tag = new TimelineTag { Type = _column.Type, Id = provider.User.Id };
+                    service.Tag = new TimelineTag { Type = Column.Type, Id = provider.User.Id };
                     ServiceProvider.RegisterService(service);
                 }
             }
@@ -70,50 +67,63 @@ namespace Vulpecula.Universal.ViewModels.Timelines
                 }
                 else
                 {
-                    var service = new StatusTimelineService(provider, _column.Type);
+                    var service = new StatusTimelineService(provider, Column.Type);
                     service.Subscribers.Add(AddTimeline);
-                    service.Tag = new TimelineTag { Type = _column.Type, Id = provider.User.Id };
+                    service.Tag = new TimelineTag { Type = Column.Type, Id = provider.User.Id };
                     ServiceProvider.RegisterService(service);
                 }
             }
 
-            if (!_column.EnableNotity)
-            {
-                return;
-            }
             CompositeDisposable.Add(Observable.FromEventPattern<NotifyCollectionChangedEventArgs>(Statuses, "CollectionChanged")
                 .Throttle(TimeSpan.FromSeconds(CroudiaStreaming.TimeSpan.Seconds * 0.3))
                 .Subscribe(w =>
                 {
                     if (_counter > 0)
                     {
-                        switch (_column.Type)
+                        switch (Column.Type)
                         {
                             case TimelineType.Home:
                             case TimelineType.Public:
                             case TimelineType.PublicAll:
                             case TimelineType.User:
                                 // case TimelineType.Favorite:
-                                ToastNotificationWrapper.PopToast($"新着通知 ({Name})", $"{_counter}件の新しいささやきがあります。");
+                                if (this.Column.EnableNotity)
+                                {
+                                    ToastNotificationWrapper.PopToast($"新着通知 ({this.Column.Name})", $"{_counter}件の新しいささやきがあります。");
+                                }
                                 break;
 
                             case TimelineType.Mentions:
                             case TimelineType.MentionsAll:
-                                foreach (var item in w.EventArgs.NewItems)
+                                if (!this.Column.EnableNotity)
                                 {
-                                    var status = (StatusViewModel)item;
-                                    ToastNotificationWrapper.PopQuickReplyToast($"新着返信通知 ({Name})", status.Model, status.User.User, NotificationSounds.Mail);
+                                    break;
+                                }
+                                if (w.EventArgs.NewItems.Count > 1)
+                                {
+                                    ToastNotificationWrapper.PopToast($"新着返信通知 ({this.Column.Name})", $"{_counter}件の新しい返信があります。");
+                                }
+                                else
+                                {
+                                    var status = (StatusViewModel)w.EventArgs.NewItems[0];
+                                    ToastNotificationWrapper.PopQuickReplyToast($"新着返信通知 ({this.Column.Name})", status.Model, status.User.User, NotificationSounds.Mail);
                                 }
                                 break;
 
                             case TimelineType.DirectMessages:
                             case TimelineType.DirectMessagesAll:
-                                ToastNotificationWrapper.PopToast($"新着通知 ({Name})", $"{_counter}件の新しいメールがあります。", NotificationSounds.SMS);
+                                if (this.Column.EnableNotity)
+                                {
+                                    ToastNotificationWrapper.PopToast($"新着通知 ({this.Column.Name})", $"{_counter}件の新しいメールがあります。", NotificationSounds.SMS);
+                                }
                                 break;
 
                             case TimelineType.Event:
                             case TimelineType.EventAll:
-                                ToastNotificationWrapper.PopToast($"新着通知 ({Name})", $"{_counter}件の新しいイベントがあります。", NotificationSounds.Mail);
+                                if (this.Column.EnableNotity)
+                                {
+                                    ToastNotificationWrapper.PopToast($"新着通知 ({this.Column.Name})", $"{_counter}件の新しいイベントがあります。", NotificationSounds.Mail);
+                                }
                                 break;
                         }
                     }

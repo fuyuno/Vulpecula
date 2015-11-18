@@ -25,11 +25,11 @@ namespace Vulpecula.Universal.Models.Timelines
         {
             Type = type;
             ColumnId = id;
-            Name = name;
+            this._name = name;
             UserId = userId;
-            Row = row;
+            this._row = row;
             Query = query;
-            EnableNotity = enableNotity;
+            this._enableNotify = enableNotity;
         }
 
         public static Column CreateColumnInfo(TimelineType type, string name, long userId, int row, string query = null, bool enableNotity = true)
@@ -49,11 +49,16 @@ namespace Vulpecula.Universal.Models.Timelines
                 Name = adcv[nameof(Name)].ToString(),
                 UserId = long.Parse(adcv[nameof(UserId)].ToString()),
                 Row = int.Parse(adcv[nameof(Row)].ToString()),
-                Query = adcv[nameof(Query)]?.ToString()
-                // EnableNotity = bool.Parse(adcv[nameof(EnableNotity)].ToString())
+                Query = adcv[nameof(Query)]?.ToString(),
+                EnableNotity = bool.Parse(adcv[nameof(EnableNotity)].ToString())
             };
 
             return info;
+        }
+
+        private void Resave()
+        {
+            ColumnManager.Instance.RewriteColumn(this);
         }
 
         /// <summary>
@@ -90,7 +95,13 @@ namespace Vulpecula.Universal.Models.Timelines
         public string Name
         {
             get { return _name; }
-            set { SetProperty(ref _name, value); }
+            set
+            {
+                if (SetProperty(ref _name, value))
+                {
+                    this.Resave();
+                }
+            }
         }
 
         #endregion
@@ -102,7 +113,13 @@ namespace Vulpecula.Universal.Models.Timelines
         public int Row
         {
             get { return _row; }
-            set { SetProperty(ref _row, value); }
+            set
+            {
+                if (SetProperty(ref _row, value))
+                {
+                    this.Resave();
+                }
+            }
         }
 
         #endregion
@@ -114,7 +131,13 @@ namespace Vulpecula.Universal.Models.Timelines
         public bool EnableNotity
         {
             get { return _enableNotify; }
-            set { SetProperty(ref _enableNotify, value); }
+            set
+            {
+                if (SetProperty(ref _enableNotify, value))
+                {
+                    this.Resave();
+                }
+            }
         }
 
         #endregion

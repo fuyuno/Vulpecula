@@ -104,5 +104,21 @@ namespace Vulpecula.Universal.Models
             App.AppSettings.RemoveValue(info.ColumnId);
             Debug.WriteLine($"Removed column {{ID:{info.ColumnId}, Name:{info.Name}, Query:{info.Query}}}.");
         }
+
+        public void RewriteColumn(Column info)
+        {
+            var composite = new ApplicationDataCompositeValue
+            {
+                [nameof(Column.Type)] = info.Type.ToString(),
+                [nameof(Column.ColumnId)] = info.ColumnId,
+                [nameof(Column.Name)] = info.Name,
+                [nameof(Column.UserId)] = info.UserId,
+                [nameof(Column.Row)] = info.Row,
+                [nameof(Column.Query)] = info.Query,
+                [nameof(Column.EnableNotity)] = info.EnableNotity
+            };
+
+            App.AppSettings.RewriteValue(info.ColumnId, composite);
+        }
     }
 }

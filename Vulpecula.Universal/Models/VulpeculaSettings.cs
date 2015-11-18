@@ -40,5 +40,11 @@ namespace Vulpecula.Universal.Models
         {
             this._roamingContainer.Values.Remove(key);
         }
+
+        public void RewriteValue(string key, object value)
+        {
+            this._roamingContainer.Values.Remove(key);
+            this._roamingContainer.Values.Add(key, value);
+        }
     }
 }
