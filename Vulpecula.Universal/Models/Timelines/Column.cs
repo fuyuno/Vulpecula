@@ -9,11 +9,11 @@ namespace Vulpecula.Universal.Models.Timelines
 {
     public class Column : BindableBase
     {
-        public TimelineType Type { get; set; }
+        public TimelineType Type { get; private set; }
 
-        public string ColumnId { get; set; }
+        public string ColumnId { get; private set; }
 
-        public long UserId { get; set; }
+        public long UserId { get; private set; }
 
         public string Query { get; set; }
 
