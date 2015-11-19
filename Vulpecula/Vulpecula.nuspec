@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Vulpecula</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/fuyuno/Vulpecula/blob/develop/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/fuyuno/Vulpecula/tree/develop/Vulpecula</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Minor changes.</releaseNotes>
+    <copyright>Copyright (C) 2015 Mikazuki</copyright>
+    <tags>Croudia</tags>
+    <dependencies> 
+      <dependency id="Newtonsoft.Json" version="7.0.1"/> 
+    </dependencies>
+  </metadata>
+</package>

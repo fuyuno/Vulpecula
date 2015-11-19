@@ -6,9 +6,9 @@ using System.Resources;
 // これらの属性値を変更してください。
 
 [assembly: AssemblyTitle("Vulpecula")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Croudia API wrapper library.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Mikazuki")]
 [assembly: AssemblyProduct("Vulpecula")]
 [assembly: AssemblyCopyright("Copyright (C) Mikazuki 2015")]
 [assembly: AssemblyTrademark("")]
@@ -26,5 +26,5 @@ using System.Resources;
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.1")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
