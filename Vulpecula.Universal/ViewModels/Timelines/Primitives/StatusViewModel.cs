@@ -75,7 +75,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         #region Text
 
         private string _text;
-        public string Text => _text ?? (_text = IsShare ? Model.SpreadStatus.Text : Model.Text);
+        public string Text => _text ?? (_text = IsShare ? Model.SpreadStatus.Text.Trim() : Model.Text.Trim());
 
         #endregion
 
