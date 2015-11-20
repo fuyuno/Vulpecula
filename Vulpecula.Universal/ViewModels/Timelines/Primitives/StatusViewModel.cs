@@ -53,7 +53,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             var flyout = uc.FindName("Flyout") as SettingsFlyout;
             if (flyout != null)
             {
-                flyout.DataContext = UserProfile;
+                flyout.DataContext = ((Grid)((Image)sender).Parent).Children[0] == (Image)sender ? UserProfile : CreateUserFlyoutViewModel(this.Model.Recipient);
                 flyout.ShowIndependent();
             }
         }

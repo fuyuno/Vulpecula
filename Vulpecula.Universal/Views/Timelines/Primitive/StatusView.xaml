@@ -55,6 +55,7 @@
                        VerticalAlignment="Top"
                        Source="{Binding Recipient.Icon,
                                         TargetNullValue=../../../Assets/StoreLogo.png}"
+                       Tapped="{x:Bind ViewModel.OnTappedOpenUserProfile}"
                        Visibility="{Binding IsDirectMessage,
                                             Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
