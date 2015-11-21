@@ -24,5 +24,7 @@
     <string>私</string>
     <key>MePage</key>
     <string>プロフィール</string>
+    <key>AuthorizationPage</key>
+    <string>Croudia で認証</string>
   </dict>
 </plist>

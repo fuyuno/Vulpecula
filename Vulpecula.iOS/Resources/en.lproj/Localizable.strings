@@ -24,5 +24,7 @@
     <string>Me</string>
     <key>MePage</key>
     <string>Me</string>
+    <key>AuthorizationPage</key>
+    <string>Authorization with Croudia</string>
   </dict>
 </plist>

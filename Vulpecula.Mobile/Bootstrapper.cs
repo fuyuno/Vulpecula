@@ -29,8 +29,8 @@ namespace Vulpecula.Mobile
         /// </summary>
         protected override void RegisterTypes()
         {
-            // AppContext モデルをシングルトンで↓
-            // Container.RegisterType<AppContext>(new ContainerControlledLifetimeManager());
+            // AccountManager モデルをシングルトンで↓
+            Container.RegisterType<AccountManager>(new ContainerControlledLifetimeManager());
             Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
             NavigationService.Configure(new MainPage());
         }

@@ -1,0 +1,11 @@
+﻿<ContentPage x:Class="Vulpecula.Mobile.Views.AuthorizationPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:intermediate="clr-namespace:Vulpecula.Mobile.Views.Intermediate;assembly=Vulpecula.Mobile"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             Title="{Binding Title}"
+             mvvm:ViewModelLocator.AutowireViewModel="True">
+    <ContentView>
+        <WebView Source="{Binding Source}" />
+    </ContentView>
+</ContentPage>

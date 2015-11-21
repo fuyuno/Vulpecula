@@ -78,6 +78,7 @@ namespace Vulpecula.Mobile.Models
                 await navigation.PushModalAsync(page, animated);
             else
                 await navigation.PushAsync(page, animated);
+            NavigationPage.SetHasNavigationBar(page, true);
         }
 
         private static async void Pop(bool useModalNavigation, bool animated)
