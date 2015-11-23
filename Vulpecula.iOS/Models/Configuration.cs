@@ -23,6 +23,7 @@ namespace Vulpecula.iOS.Models
         public void SetString(string key, string value)
         {
             this._userDefaults.SetString(value, key);
+            this._userDefaults.Synchronize();
         }
 
         public string GetString(string key)
@@ -33,6 +34,7 @@ namespace Vulpecula.iOS.Models
         public void SetInt(string key, int value)
         {
             this._userDefaults.SetInt(value, key);
+            this._userDefaults.Synchronize();
         }
 
         public int GetInt(string key)
@@ -43,6 +45,7 @@ namespace Vulpecula.iOS.Models
         public void SetDouble(string key, double value)
         {
             this._userDefaults.SetDouble(value, key);
+            this._userDefaults.Synchronize();
         }
 
         public double GetDouble(string key)
@@ -53,6 +56,7 @@ namespace Vulpecula.iOS.Models
         public void SetBool(string key, bool value)
         {
             this._userDefaults.SetBool(value, key);
+            this._userDefaults.Synchronize();
         }
 
         public bool GetBool(string key)
@@ -68,6 +72,7 @@ namespace Vulpecula.iOS.Models
                 array.Add(new NSString(o));
             }
             this._userDefaults.SetValueForKey(array, new NSString(key));
+            this._userDefaults.Synchronize();
         }
 
         public string[] GetArray(string key)
