@@ -1,10 +1,10 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 using JetBrains.Annotations;
 
 using Prism.Navigation;
 
+using Vulpecula.Mobile.Models;
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
 using Vulpecula.Mobile.ViewModels.Timelines;
@@ -15,26 +15,33 @@ namespace Vulpecula.Mobile.ViewModels
     [UsedImplicitly]
     public class MainPageViewModel : NavigationalViewModel
     {
+        private readonly AccountManager _accountManager;
         public StatusTimelineViewModel PublicTimelineViewModel { get; }
         public StatusTimelineViewModel HomeTimelineViewModel { get; }
         public StatusTimelineViewModel MentionsTimelineViewModel { get; }
 
-        public MainPageViewModel(ILocalization localization, INavigationService navigationService) : base(localization, navigationService)
+        public MainPageViewModel(ILocalization localization, INavigationService navigationService, AccountManager accountManager) : base(localization, navigationService)
         {
+            this._accountManager = accountManager;
             PublicTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Public", "public", "PublicTimeline");
             HomeTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Home", "home", "HomeTimeline");
             MentionsTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Mentions", "mention", "MentionsTimeline");
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
-            try
+            await this._accountManager.InitializeAccounts();
+
+            if (this._accountManager.Providers.Count == 0)
             {
-                NavigationService.Navigate<AuthorizationPage>();
+                this.NavigationService.Navigate<AuthorizationPage>();
             }
-            catch (Exception e)
+            else
             {
-                Debug.WriteLine(e.Message);
+                foreach (var user in this._accountManager.Users)
+                {
+                    Debug.WriteLine(user.ScreenName);
+                }
             }
         }
     }

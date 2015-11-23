@@ -6,6 +6,6 @@
              Title="{Binding Title}"
              mvvm:ViewModelLocator.AutowireViewModel="True">
     <ContentView>
-        <WebView Source="{Binding Source}" />
+        <WebView Source="{Binding Source}" Navigating="WebView_OnNavigating" />
     </ContentView>
 </ContentPage>

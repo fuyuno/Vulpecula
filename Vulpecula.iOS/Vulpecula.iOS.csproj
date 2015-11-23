@@ -92,7 +92,11 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Info.plist" />
+    <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\Localization.cs" />
+    <Compile Include="Models\PasswordCredentials.cs" />
+    <Compile Include="Models\PasswordVault.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
     <BundleResource Include="Resources\en.lproj\InfoPlist.strings" />
