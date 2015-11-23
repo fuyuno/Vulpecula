@@ -5,8 +5,9 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula", "Vulpecula\Vulpecula.csproj", "{2D3B73CE-6C79-400C-9454-42F652D73EB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Android", "Vulpecula.Android\Vulpecula.Android.csproj", "{FE0CD16A-7D3B-457A-AB46-8AE6165CEBA7}"
-EndProject
+# If exist Xamarin.Android project in solution, Visual Studio is Busy.
+# Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Android", "Vulpecula.Android\Vulpecula.Android.csproj", "{FE0CD16A-7D3B-457A-AB46-8AE6165CEBA7}"
+# EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Universal", "Vulpecula.Universal\Vulpecula.Universal.csproj", "{3F75469F-3817-4B7D-B7FD-2EA6E90D27F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Desktop", "Vulpecula.Desktop\Vulpecula.Desktop.csproj", "{7D429577-208A-420D-AD97-D7188BCB1EA6}"
