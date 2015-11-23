@@ -37,7 +37,7 @@ namespace Vulpecula.Mobile.Models
         /// <param name="animated">If <c>true</c> the transition is animated, if <c>false</c> there is no animation on transition.</param>
         public void Navigate<T>(NavigationParameters parameters = null, bool useModalNavigation = true, bool animated = true)
         {
-            var page = Activator.CreateInstance(typeof (T)) as Page;
+            var page = Activator.CreateInstance(typeof(T)) as Page;
             if (page == null)
                 throw new InvalidCastException("T cannot cast to Xamarin.Forms.Page.");
             Push(page, useModalNavigation, animated);
@@ -75,10 +75,9 @@ namespace Vulpecula.Mobile.Models
         {
             var navigation = RootPage.Navigation;
             if (useModalNavigation)
-                await navigation.PushModalAsync(page, animated);
+                await navigation.PushModalAsync(new NavigationPage(page), animated);
             else
                 await navigation.PushAsync(page, animated);
-            NavigationPage.SetHasNavigationBar(page, true);
         }
 
         private static async void Pop(bool useModalNavigation, bool animated)
