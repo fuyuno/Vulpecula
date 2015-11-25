@@ -16,14 +16,23 @@
             <RowDefinition Height="48" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <ToggleButton Width="48"
-                      Height="48"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Top"
-                      AutomationProperties.Name="Menu"
-                      Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
-            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
-        </ToggleButton>
+        <StackPanel Background="{StaticResource AppBarItemBackgroundThemeBrush}" Orientation="Horizontal">
+            <ToggleButton Width="48"
+                          Height="48"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          AutomationProperties.Name="Menu"
+                          Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+                          IsChecked="{Binding ElementName=RootSplitView,
+                                              Path=IsPaneOpen,
+                                              Mode=TwoWay}">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
+            </ToggleButton>
+            <TextBlock Margin="10,0"
+                       VerticalAlignment="Center"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       Text="Vulpecula" />
+        </StackPanel>
         <SplitView x:Name="RootSplitView"
                    Grid.Row="1"
                    DisplayMode="CompactOverlay">
@@ -32,6 +41,7 @@
             </SplitView.Pane>
             <SplitView.Content>
                 <Frame x:Name="RootFrame"
+                       Margin="0,-48,0,0"
                        HorizontalContentAlignment="Stretch"
                        VerticalContentAlignment="Stretch" />
             </SplitView.Content>

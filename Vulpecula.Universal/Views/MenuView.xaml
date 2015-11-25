@@ -11,40 +11,52 @@
              d:DataContext="{d:DesignInstance viewModels:MenuViewModel}"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-
-    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel>
         <!--  Whisper Button  -->
+        <RelativePanel.Resources>
+            <Style TargetType="Button">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+            <Style TargetType="ListBox">
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            </Style>
+        </RelativePanel.Resources>
         <StackPanel x:Name="Header" RelativePanel.AlignTopWithPanel="True">
             <ListBox>
                 <i:Interaction.Behaviors>
                     <behaviors:UnSelectableListBoxBehavior />
                 </i:Interaction.Behaviors>
-                <ListBoxItem Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Width="48"
-                                  Height="48"
-                                  FontSize="24"
-                                  Glyph="&#xE70F;" />
-                        <TextBlock x:Uid="MainPageXaml_Whisper"
-                                   Margin="10,0"
-                                   VerticalAlignment="Center"
-                                   FontSize="18" />
-                    </StackPanel>
+                <ListBoxItem>
+                    <Button>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48"
+                                      Height="48"
+                                      FontSize="24"
+                                      Glyph="&#xE70F;" />
+                            <TextBlock x:Uid="MainPageXaml_Whisper"
+                                       Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18" />
+                        </StackPanel>
+                    </Button>
                 </ListBoxItem>
             </ListBox>
         </StackPanel>
         <!--  Accounts  -->
         <StackPanel x:Name="UpCenter" RelativePanel.Below="Header">
-            <ListBox ItemsSource="{x:Bind ViewModel.Accounts}">
-                <i:Interaction.Behaviors>
-                    <behaviors:UnSelectableListBoxBehavior />
-                </i:Interaction.Behaviors>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Padding" Value="0" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.ItemTemplate>
+            <ItemsControl ItemsSource="{x:Bind ViewModel.Accounts}">
+                <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <Grid Width="48" Height="48">
@@ -60,8 +72,9 @@
                                        Text="{Binding ScreenName}" />
                         </StackPanel>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
         </StackPanel>
         <!--  Add Accounts Button  -->
         <StackPanel x:Name="DownCenter" RelativePanel.Below="UpCenter">
@@ -69,17 +82,19 @@
                 <i:Interaction.Behaviors>
                     <behaviors:UnSelectableListBoxBehavior />
                 </i:Interaction.Behaviors>
-                <ListBoxItem Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Width="48"
-                                  Height="48"
-                                  FontSize="24"
-                                  Glyph="&#xE109;" />
-                        <TextBlock x:Uid="MainPageXaml_NewAccount"
-                                   Margin="10,0"
-                                   VerticalAlignment="Center"
-                                   FontSize="18" />
-                    </StackPanel>
+                <ListBoxItem>
+                    <Button Command="{Binding AuthorizationCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48"
+                                      Height="48"
+                                      FontSize="24"
+                                      Glyph="&#xE109;" />
+                            <TextBlock x:Uid="MainPageXaml_NewAccount"
+                                       Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18" />
+                        </StackPanel>
+                    </Button>
                 </ListBoxItem>
             </ListBox>
         </StackPanel>
@@ -89,44 +104,50 @@
                 <i:Interaction.Behaviors>
                     <behaviors:UnSelectableListBoxBehavior />
                 </i:Interaction.Behaviors>
-                <ListBoxItem Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Width="48"
-                                  Height="48"
-                                  FontSize="24"
-                                  Glyph="&#xE094;" />
-                        <SearchBox x:Uid="MainPageXaml_SearchBox"
-                                   Width="252"
-                                   Height="38"
-                                   Margin="10,0"
-                                   VerticalAlignment="Center"
-                                   BorderThickness="1"
-                                   FontSize="18" />
-                    </StackPanel>
+                <ListBoxItem>
+                    <Button>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48"
+                                      Height="48"
+                                      FontSize="24"
+                                      Glyph="&#xE094;" />
+                            <SearchBox x:Uid="MainPageXaml_SearchBox"
+                                       Width="252"
+                                       Height="38"
+                                       Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       BorderThickness="1"
+                                       FontSize="18" />
+                        </StackPanel>
+                    </Button>
                 </ListBoxItem>
-                <ListBoxItem Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Width="48"
-                                  Height="48"
-                                  FontSize="24"
-                                  Glyph="&#xE125;" />
-                        <TextBlock x:Uid="MainPageXaml_Account"
-                                   Margin="10,0"
-                                   VerticalAlignment="Center"
-                                   FontSize="18" />
-                    </StackPanel>
+                <ListBoxItem>
+                    <Button>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48"
+                                      Height="48"
+                                      FontSize="24"
+                                      Glyph="&#xE125;" />
+                            <TextBlock x:Uid="MainPageXaml_Account"
+                                       Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18" />
+                        </StackPanel>
+                    </Button>
                 </ListBoxItem>
-                <ListBoxItem Padding="0">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Width="48"
-                                  Height="48"
-                                  FontSize="24"
-                                  Glyph="&#xE115;" />
-                        <TextBlock x:Uid="MainPageXaml_Settings"
-                                   Margin="10,0"
-                                   VerticalAlignment="Center"
-                                   FontSize="18" />
-                    </StackPanel>
+                <ListBoxItem>
+                    <Button>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48"
+                                      Height="48"
+                                      FontSize="24"
+                                      Glyph="&#xE115;" />
+                            <TextBlock x:Uid="MainPageXaml_Settings"
+                                       Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18" />
+                        </StackPanel>
+                    </Button>
                 </ListBoxItem>
             </ListBox>
             <StackPanel Orientation="Horizontal">

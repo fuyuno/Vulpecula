@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 using JetBrains.Annotations;
+
+using Prism.Commands;
 
 using Vulpecula.Models;
 using Vulpecula.Universal.Helpers;
@@ -45,6 +48,20 @@ namespace Vulpecula.Universal.ViewModels
             get { return this._isWhisperZoneOpened; }
             set { this.SetProperty(ref this._isWhisperZoneOpened, value); }
         }
+
+        #endregion
+
+        #endregion
+
+        #region Commands
+
+        #region AuthorizationCommand
+
+        private ICommand _authorizationCommand;
+
+        public ICommand AuthorizationCommand => this._authorizationCommand ?? (this._authorizationCommand = new DelegateCommand(Authorization));
+
+        private async void Authorization() => await AccountManager.Instance.AuthorizationAccount();
 
         #endregion
 
