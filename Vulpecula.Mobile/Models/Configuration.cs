@@ -23,15 +23,18 @@ namespace Vulpecula.Mobile.Models
             set { this._configuration.SetArray("Accounts", value.ToArray()); }
         }
 
-        public ObservableCollection<string> Accounts => new ObservableCollection<string>(this._Accounts);
+        public ObservableCollection<string> Accounts { get; }
 
         public Configuration()
         {
             this._configuration = App.ModelLocator.GetModel<IConfiguration>();
+            this.Accounts = new ObservableCollection<string>(this._Accounts);
+
             if (this._Accounts == null)
             {
                 this._Accounts = new List<string>();
             }
+
             this.Accounts.ToObservable().Subscribe(w =>
             {
                 List<string> temp;
@@ -47,6 +50,10 @@ namespace Vulpecula.Mobile.Models
                         temp = this._Accounts;
                         temp.Remove(w.EventArgs.NewItems[0].ToString());
                         this._Accounts = new List<string>(temp);
+                        break;
+
+                    case NotifyCollectionChangedAction.Reset:
+                        this._Accounts = new List<string>();
                         break;
                 }
             });
