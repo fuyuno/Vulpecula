@@ -7,9 +7,12 @@ using Prism.Mvvm;
 
 namespace Vulpecula.Universal.Models
 {
-    public class VulpeculaSettings : BindableBase
+    public class Configuration : BindableBase
     {
+        private static Configuration _instance;
+
         private readonly ApplicationDataContainer _roamingContainer;
+        public static Configuration Instance => _instance ?? (_instance = new Configuration());
 
         /// <summary>
         /// 設定に保存されているカラムを取得します。
@@ -19,7 +22,7 @@ namespace Vulpecula.Universal.Models
             get { return this._roamingContainer.Values.Where(w => w.Key.StartsWith("Column-")).Select(w => (ApplicationDataCompositeValue)w.Value).ToList(); }
         }
 
-        public VulpeculaSettings()
+        private Configuration()
         {
             this._roamingContainer = ApplicationData.Current.RoamingSettings;
         }

@@ -1,0 +1,40 @@
+﻿<Page x:Class="Vulpecula.Universal.AppShell"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:behaviors="using:Vulpecula.Universal.Behaviors"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:interactivity="using:WinRTXamlToolkit.Interactivity"
+      xmlns:local="using:Vulpecula.Universal"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:mvvm="using:Prism.Windows.Mvvm"
+      xmlns:viewModels="using:Vulpecula.Universal.ViewModels"
+      xmlns:views="using:Vulpecula.Universal.Views"
+      mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ToggleButton Width="48"
+                      Height="48"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      AutomationProperties.Name="Menu"
+                      Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
+        </ToggleButton>
+        <SplitView x:Name="RootSplitView"
+                   Grid.Row="1"
+                   DisplayMode="CompactOverlay">
+            <SplitView.Pane>
+                <views:MenuView />
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Frame x:Name="RootFrame"
+                       HorizontalContentAlignment="Stretch"
+                       VerticalContentAlignment="Stretch" />
+            </SplitView.Content>
+        </SplitView>
+    </Grid>
+</Page>
