@@ -37,6 +37,7 @@ namespace Vulpecula.Mobile.Models
                 }
                 catch
                 {
+                    vault.Remove(credentials);
                     return false;
                 }
             }

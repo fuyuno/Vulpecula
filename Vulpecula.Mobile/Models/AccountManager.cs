@@ -32,6 +32,12 @@ namespace Vulpecula.Mobile.Models
             this._constants = App.ModelLocator.GetModel<IConstants>();
         }
 
+        [UsedImplicitly]
+        public void ResetAccounts()
+        {
+            this._configuration.Accounts.Clear();
+        }
+
         public async Task InitializeAccounts()
         {
             if (this._isInit)
@@ -41,17 +47,15 @@ namespace Vulpecula.Mobile.Models
             var vault = App.ModelLocator.GetModel<IPasswordVault>();
             foreach (var account in _configuration.Accounts)
             {
-                foreach (var credentials in vault.FindAllByUserName(account))
+                var credential = vault.FindByUserName(account);
+                var provider = new CroudiaProvider(_constants.ConsumerKey, _constants.ConsumerSecret);
+                if (!await provider.ReAuthorization(credential))
                 {
-                    var provider = new CroudiaProvider(_constants.ConsumerKey, _constants.ConsumerSecret);
-                    if (!await provider.ReAuthorization(credentials))
-                    {
-                        vault.Remove(credentials);
-                        continue;
-                    }
-                    this.Providers.Add(provider);
-                    this.Users.Add(provider.User);
+                    vault.Remove(credential);
+                    continue;
                 }
+                this.Providers.Add(provider);
+                this.Users.Add(provider.User);
             }
             this._isInit = true;
         }

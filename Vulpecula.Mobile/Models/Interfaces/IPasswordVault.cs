@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace Vulpecula.Mobile.Models.Interfaces
+﻿namespace Vulpecula.Mobile.Models.Interfaces
 {
     public interface IPasswordVault
     {
         void Add(IPasswordCredentials credentials);
 
-        IReadOnlyList<IPasswordCredentials> FindAllByUserName(string username);
+        IPasswordCredentials FindByUserName(string username);
 
         // Cannot used
         // IReadOnlyList<IPasswordCredentials> FindAllByResource(string resource);

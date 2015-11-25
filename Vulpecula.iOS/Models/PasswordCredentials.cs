@@ -24,7 +24,10 @@ namespace Vulpecula.iOS.Models
         // Used from Vulpecula.Mobile
         public PasswordCredentials()
         {
-            this._secRecord = new SecRecord(SecKind.InternetPassword) { Server = "croudia.com" };
+            this._secRecord = new SecRecord(SecKind.InternetPassword)
+            {
+                Server = "croudia.com"
+            };
         }
 
         public string UserName

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 
 using JetBrains.Annotations;
 
@@ -16,6 +17,7 @@ namespace Vulpecula.Mobile.ViewModels
     public class MainPageViewModel : NavigationalViewModel
     {
         private readonly AccountManager _accountManager;
+        private bool _isFirst;
         public StatusTimelineViewModel PublicTimelineViewModel { get; }
         public StatusTimelineViewModel HomeTimelineViewModel { get; }
         public StatusTimelineViewModel MentionsTimelineViewModel { get; }
@@ -26,22 +28,44 @@ namespace Vulpecula.Mobile.ViewModels
             PublicTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Public", "public", "PublicTimeline");
             HomeTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Home", "home", "HomeTimeline");
             MentionsTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Mentions", "mention", "MentionsTimeline");
+
+            if (false)
+            {
+                // リセット用
+                this._accountManager.ResetAccounts();
+
+                var vault = App.ModelLocator.GetModel<IPasswordVault>();
+                var credential = App.ModelLocator.GetModel<IPasswordCredentials>();
+                credential.UserName = "MikazukiFuyuno";
+                vault.Remove(credential);
+            }
+
+            var task = Task.Factory.StartNew(
+                async () =>
+                {
+                    await this._accountManager.InitializeAccounts();
+                    if (this._accountManager.Providers.Count == 0)
+                    {
+                        // なんか良い方法ないかね
+                        this._isFirst = true;
+                    }
+                    else
+                    {
+                        foreach (var user in this._accountManager.Users)
+                        {
+                            Debug.WriteLine(user.ScreenName);
+                        }
+                    }
+                });
+            task.Wait();
         }
 
-        public async void Initialize()
+        public void Initialize()
         {
-            await this._accountManager.InitializeAccounts();
-
-            if (this._accountManager.Providers.Count == 0)
+            if (this._isFirst)
             {
                 this.NavigationService.Navigate<AuthorizationPage>();
-            }
-            else
-            {
-                foreach (var user in this._accountManager.Users)
-                {
-                    Debug.WriteLine(user.ScreenName);
-                }
+                this._isFirst = false;
             }
         }
     }

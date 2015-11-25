@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Diagnostics;
+
+using Foundation;
 
 using Security;
 
@@ -16,37 +17,58 @@ namespace Vulpecula.iOS.Models
     {
         public void Add(IPasswordCredentials credentials)
         {
-            SecKeyChain.Add(((PasswordCredentials)credentials).AsSecRecord());
-        }
-
-        public IReadOnlyList<IPasswordCredentials> FindAllByUserName(string username)
-        {
-            var record = new SecRecord(SecKind.InternetPassword)
-            {
-                Service = new Constants().AppKey,
-                Server = "croudia.com",
-                Account = username,
-                Accessible = SecAccessible.Always
-            };
-            SecStatusCode code;
-            var secRecords = SecKeyChain.QueryAsRecord(record, int.MaxValue, out code);
+            var record = ((PasswordCredentials)credentials).AsSecRecord();
+            record.Accessible = SecAccessible.Always;
+            var code = SecKeyChain.Add(record);
             if (code != SecStatusCode.Success)
             {
-                return new List<IPasswordCredentials>();
+                Debug.WriteLine($"Adding failure : {code}");
             }
+        }
 
-            var list = secRecords.Select(secRecord => new PasswordCredentials(secRecord)).Cast<IPasswordCredentials>().ToList();
-            return list.AsReadOnly();
+        public IPasswordCredentials FindByUserName(string username)
+        {
+            var query = new SecRecord(SecKind.InternetPassword)
+            {
+                Server = "croudia.com",
+                Account = username
+            };
+            SecStatusCode code;
+            var password = SecKeyChain.QueryAsData(query, false, out code);
+            if (code != SecStatusCode.Success)
+            {
+                return null;
+            }
+            return new PasswordCredentials
+            {
+                UserName = username,
+                Password = NSString.FromData(password, NSStringEncoding.UTF8)
+            };
         }
 
         public void Remove(IPasswordCredentials credentials)
         {
-            SecKeyChain.Remove(((PasswordCredentials)credentials).AsSecRecord());
+            var code = SecKeyChain.Remove(((PasswordCredentials)credentials).AsSecRecord());
+            if (code != SecStatusCode.Success)
+            {
+                Debug.WriteLine($"Remove failure : {code}");
+            }
         }
 
         public void Update(IPasswordCredentials oldCredentials, IPasswordCredentials newCredentials)
         {
-            SecKeyChain.Update(((PasswordCredentials)oldCredentials).AsSecRecord(), ((PasswordCredentials)newCredentials).AsSecRecord());
+            var code = SecKeyChain.Remove(((PasswordCredentials)oldCredentials).AsSecRecord());
+            if (code == SecStatusCode.Success)
+            {
+                var record = ((PasswordCredentials)newCredentials).AsSecRecord();
+                record.Accessible = SecAccessible.Always;
+                code = SecKeyChain.Add(record);
+                if (code == SecStatusCode.Success)
+                {
+                    return;
+                }
+            }
+            Debug.WriteLine($"Update failure : {code}");
         }
     }
 }
