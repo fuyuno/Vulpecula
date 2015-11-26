@@ -9,7 +9,9 @@
       d:DataContext="{d:DesignInstance vm:MainPageViewModel}"
       prism:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  Loaded="{x:Bind ViewModel.Initialize}"
+                  VerticalScrollBarVisibility="Disabled">
         <StackPanel HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Orientation="Horizontal">

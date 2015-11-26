@@ -5,6 +5,7 @@ using System.Windows.Input;
 using JetBrains.Annotations;
 
 using Prism.Commands;
+using Prism.Windows.Navigation;
 
 using Vulpecula.Models;
 using Vulpecula.Universal.Helpers;
@@ -16,8 +17,11 @@ namespace Vulpecula.Universal.ViewModels
     [UsedImplicitly]
     public class MenuViewModel : ViewModel
     {
-        public MenuViewModel()
+        private readonly INavigationService _navigationService;
+
+        public MenuViewModel(INavigationService navigationService)
         {
+            this._navigationService = navigationService;
             this.Accounts = new ObservableCollection<UserAccountViewModel>();
             this.Text = string.Empty;
             this.IsWhisperZoneOpened = false;
@@ -118,6 +122,18 @@ namespace Vulpecula.Universal.ViewModels
         private void SelectAccount()
         {
             ((DelegateCommand)this.SendTweetCommand).RaiseCanExecuteChanged();
+        }
+
+        #endregion
+
+        #region NavigateToSettingsPageCommand
+
+        private ICommand _navigateToSettingsPageCommand;
+        public ICommand NavigateToSettingsPageCommand => this._navigateToSettingsPageCommand ?? (this._navigateToSettingsPageCommand = new DelegateCommand(NavigateToSettingsPage));
+
+        private void NavigateToSettingsPage()
+        {
+            this._navigationService.Navigate("Settings.SettingsGeneral", null);
         }
 
         #endregion

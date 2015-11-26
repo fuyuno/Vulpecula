@@ -136,7 +136,7 @@
                     </Button>
                 </ListBoxItem>
                 <ListBoxItem>
-                    <Button>
+                    <Button Command="{Binding NavigateToSettingsPageCommand}">
                         <StackPanel Orientation="Horizontal">
                             <FontIcon Width="48"
                                       Height="48"
