@@ -38,7 +38,7 @@
                     <behaviors:UnSelectableListBoxBehavior />
                 </i:Interaction.Behaviors>
                 <ListBoxItem>
-                    <Button>
+                    <Button Command="{Binding ToggleTweetAreaCommand}">
                         <StackPanel Orientation="Horizontal">
                             <FontIcon Width="48"
                                       Height="48"
@@ -183,6 +183,8 @@
                             <ToggleButton Width="48"
                                           Height="48"
                                           Background="Transparent"
+                                          Command="{Binding DataContext.SelectAccountCommand,
+                                                            ElementName=Header}"
                                           IsChecked="{Binding IsWhisperEnabled,
                                                               UpdateSourceTrigger=PropertyChanged,
                                                               Mode=TwoWay}"
@@ -217,7 +219,9 @@
                                         Mode=TwoWay}" />
                 <Button x:Uid="MainPageXaml_Send"
                         Margin="10,0"
-                        HorizontalAlignment="Right" />
+                        HorizontalAlignment="Right"
+                        Command="{Binding SendTweetCommand}"
+                        Style="{x:Null}" />
             </StackPanel>
         </StackPanel>
         <!--  #endregion  -->

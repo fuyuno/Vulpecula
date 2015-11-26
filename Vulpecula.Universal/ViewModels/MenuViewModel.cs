@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 using JetBrains.Annotations;
@@ -34,7 +35,13 @@ namespace Vulpecula.Universal.ViewModels
         public string Text
         {
             get { return this._text; }
-            set { this.SetProperty(ref this._text, value); }
+            set
+            {
+                if (this.SetProperty(ref this._text, value))
+                {
+                    ((DelegateCommand)this.SendTweetCommand).RaiseCanExecuteChanged();
+                }
+            }
         }
 
         #endregion
@@ -62,6 +69,56 @@ namespace Vulpecula.Universal.ViewModels
         public ICommand AuthorizationCommand => this._authorizationCommand ?? (this._authorizationCommand = new DelegateCommand(Authorization));
 
         private async void Authorization() => await AccountManager.Instance.AuthorizationAccount();
+
+        #endregion
+
+        #region ToggleTweetAreaCommand
+
+        private ICommand _toggleTweetAreaCommand;
+        public ICommand ToggleTweetAreaCommand => this._toggleTweetAreaCommand ?? (this._toggleTweetAreaCommand = new DelegateCommand(ToggleTweetArea));
+
+        private void ToggleTweetArea()
+        {
+            this.IsWhisperZoneOpened = !this.IsWhisperZoneOpened;
+        }
+
+        #endregion
+
+        #region SendTweetCommand
+
+        private ICommand _sendTweetCommand;
+        public ICommand SendTweetCommand => this._sendTweetCommand ?? (this._sendTweetCommand = new DelegateCommand(SendTweet, CanSendTweet));
+
+        private void SendTweet()
+        {
+            foreach (var account in this.Accounts.Where(w => w.IsWhisperEnabled))
+            {
+                account.SendWhisper(this.Text);
+            }
+            this.Text = "";
+            ((DelegateCommand)this.SendTweetCommand).RaiseCanExecuteChanged();
+        }
+
+        private bool CanSendTweet()
+        {
+            if (this.Accounts.All(w => !w.IsWhisperEnabled) || string.IsNullOrWhiteSpace(this.Text))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
+
+        #region SelectAccountCommand
+
+        private ICommand _selectAccountCommand;
+        public ICommand SelectAccountCommand => this._selectAccountCommand ?? (this._selectAccountCommand = new DelegateCommand(SelectAccount));
+
+        private void SelectAccount()
+        {
+            ((DelegateCommand)this.SendTweetCommand).RaiseCanExecuteChanged();
+        }
 
         #endregion
 
