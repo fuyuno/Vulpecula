@@ -40,6 +40,13 @@ namespace Vulpecula.Universal.Behaviors
         {
             base.OnLoaded();
             var source = this.AssociatedObject.ItemsSource as INotifyCollectionChanged;
+            var items = this.AssociatedObject.Items;
+            if (items != null)
+            {
+                this._count = items.Count;
+                this.Action();
+            }
+
             if (source != null)
             {
                 this._disposable = source.ToObservable().Subscribe(w =>

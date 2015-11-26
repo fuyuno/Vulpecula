@@ -104,6 +104,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppShell.xaml.cs">
+      <DependentUpon>AppShell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Behaviors\EmptyListBehavior.cs" />
     <Compile Include="Behaviors\SettingsFlyoutOpenBehavior.cs" />
     <Compile Include="Behaviors\UnSelectableListBoxBehavior.cs" />
@@ -144,9 +147,11 @@
     <Compile Include="Models\Services\StatusTimelineService.cs" />
     <Compile Include="Models\Services\Primitive\TimelineServiceBase.cs" />
     <Compile Include="Models\Timelines\TimelineType.cs" />
-    <Compile Include="Models\VulpeculaSettings.cs" />
+    <Compile Include="Models\Configuration.cs" />
     <Compile Include="ViewModels\Flyouts\UserFlyoutViewModel.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingsGeneralPageViewModel.cs" />
     <Compile Include="ViewModels\Timelines\ColumnViewModel.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\StatusViewModel.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\UserViewModel.cs" />
@@ -159,6 +164,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Views\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsGeneralPage.xaml.cs">
+      <DependentUpon>SettingsGeneralPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Timelines\Column.xaml.cs">
       <DependentUpon>Column.xaml</DependentUpon>
     </Compile>
@@ -194,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AppShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Flyouts\UserFlyout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -201,6 +216,14 @@
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\SettingsGeneralPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Timelines\Column.xaml">
       <SubType>Designer</SubType>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 
@@ -49,6 +50,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
                 {
                     var s = ServiceProvider.SuspendableServices.Single(w => _cond(w, column.Type, provider.User.Id)) as DirectMessageTimelineService;
                     s?.Subscribers.Add(AddTimeline);
+                    Debug.WriteLine("Aattached to exist service.");
                 }
                 else
                 {
@@ -64,6 +66,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
                 {
                     var s = ServiceProvider.SuspendableServices.Single(w => _cond(w, column.Type, provider.User.Id)) as StatusTimelineService;
                     s?.Subscribers.Add(AddTimeline);
+                    Debug.WriteLine("Aattached to exist service.");
                 }
                 else
                 {

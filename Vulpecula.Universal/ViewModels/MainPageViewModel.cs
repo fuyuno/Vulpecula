@@ -1,16 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
-
-using Windows.UI.Xaml;
 
 using JetBrains.Annotations;
 
-using Vulpecula.Models;
-using Vulpecula.Universal.Extensions;
+using Prism.Windows.Navigation;
+
 using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models;
-using Vulpecula.Universal.Models.Services;
 using Vulpecula.Universal.Models.Timelines;
 using Vulpecula.Universal.ViewModels.Primitives;
 using Vulpecula.Universal.ViewModels.Timelines;
@@ -20,133 +17,54 @@ namespace Vulpecula.Universal.ViewModels
     [UsedImplicitly]
     public class MainPageViewModel : ViewModel
     {
+        #region Properties
+
+        public ObservableCollection<ColumnViewModel> Colmuns { get; private set; }
+
+        #endregion
+
         public MainPageViewModel()
         {
-            this.IsHamburgerChecked = false;
-            this.IsWhisperZoneOpened = false;
-            this.Users = new ObservableCollection<UserAccountViewModel>();
-            this.Columns = new ObservableCollection<ColumnViewModel>();
-
-            ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, this.Users, (User w) =>
-                UserAccountViewModel.Create(w)).AddTo(this);
-            ViewModelHelper.SubscribeNotifyCollectionChanged(ColumnManager.Instance.Columns, this.Columns, (Column w) =>
-                ColumnViewModel.Create(w)).AddTo(this);
+            this.Colmuns = new ObservableCollection<ColumnViewModel>();
+            ViewModelHelper.SubscribeNotifyCollectionChanged(ColumnManager.Instance.Columns, this.Colmuns, (Column w) => ColumnViewModel.Create(w));
         }
 
-        private async Task Initialize()
+        #region Events
+
+        public async void Initialize()
         {
-            // AccountManager.Instance.ResetAccounts();
-            // ColumnManager.Instance.ClearColumns();
-
-            await AccountManager.Instance.InitializeAccounts();
-            await ColumnManager.Instance.InitializeColumns();
-
             if (AccountManager.Instance.Users.Count == 0)
             {
-                await this.Authorization();
+                await AccountManager.Instance.AuthorizationAccount();
                 if (AccountManager.Instance.Users.Count > 0)
                     ColumnManager.Instance.SetupInitialColumns(AccountManager.Instance.Users.First().Id);
             }
         }
 
-        private async Task Authorization()
-        {
-            await AccountManager.Instance.AuthorizationAccount();
-        }
-
-        #region Properties
-
-        public ObservableCollection<ColumnViewModel> Columns { get; }
-
-        public ObservableCollection<UserAccountViewModel> Users { get; }
-
-        #region IsHamburgerChecked
-
-        private bool _isHamburgerChecked;
-
-        public bool IsHamburgerChecked
-        {
-            get { return this._isHamburgerChecked; }
-            set { this.SetProperty(ref this._isHamburgerChecked, value); }
-        }
-
         #endregion
 
-        #region IsWhisperZoneOpened
-
-        private bool _isWhisperZoneOpened;
-
-        public bool IsWhisperZoneOpened
+        /// <summary>
+        /// Called when navigation is performed to a page. You can use this method to load state if it is available.
+        /// </summary>
+        /// <param name="e">The <see cref="T:Prism.Windows.Navigation.NavigatedToEventArgs" /> instance containing the event data.</param>
+        /// <param name="viewModelState">The state of the view model.</param>
+        public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)
         {
-            get { return this._isWhisperZoneOpened; }
-            set { this.SetProperty(ref this._isWhisperZoneOpened, value); }
-        }
-
-        #endregion
-
-        #region Text
-
-        private string _text;
-
-        public string Text
-        {
-            get { return this._text; }
-            set { this.SetProperty(ref this._text, value); }
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Events
-
-        public async void OnLoaded() => await this.Initialize();
-
-        public void OnUnloaded()
-        {
-            ServiceProvider.SuspendService();
-            this.Dispose();
-        }
-
-        public void OnChecked()
-        {
-            if (this.IsHamburgerChecked)
-                return;
-            this.IsHamburgerChecked = true;
-            this.IsWhisperZoneOpened = false;
-        }
-
-        public void OnUnchecked()
-        {
-            this.IsHamburgerChecked = false;
-            this.IsWhisperZoneOpened = false;
-        }
-
-        public void PaneClosing()
-        {
-            this.IsHamburgerChecked = false;
-            this.IsWhisperZoneOpened = false;
-        }
-
-        public async void OnTappedAuthorization(object sender, RoutedEventArgs e) => await this.Authorization();
-
-        public void OnTappedToggleWhisperZone(object sender, RoutedEventArgs e)
-        {
-            this.IsWhisperZoneOpened = !this.IsWhisperZoneOpened;
-            if (this.IsWhisperZoneOpened && !this.IsHamburgerChecked)
-                this.IsHamburgerChecked = true;
-        }
-
-        public void OnClickedSendWhisper()
-        {
-            foreach (var user in this.Users)
+            if (viewModelState.ContainsKey("TimelineState"))
             {
-                if (user.IsWhisperEnabled)
-                    user.SendWhisper(this.Text);
+                this.Colmuns = viewModelState["TimelineState"] as ObservableCollection<ColumnViewModel>;
             }
-            this.Text = string.Empty;
         }
 
-        #endregion
+        /// <summary>
+        /// This method will be called when navigating away from a page. You can use this method to save your view model data in case of a suspension event.
+        /// </summary>
+        /// <param name="e">The <see cref="T:Prism.Windows.Navigation.NavigatingFromEventArgs" /> instance containing the event data.</param>
+        /// <param name="viewModelState">The state of the view model.</param>
+        /// <param name="suspending">if set to <c>true</c> you are navigating away from this viewmodel due to a suspension event.</param>
+        public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
+        {
+            viewModelState["TimelineState"] = this.Colmuns;
+        }
     }
 }
