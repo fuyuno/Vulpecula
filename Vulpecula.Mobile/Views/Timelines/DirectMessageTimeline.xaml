@@ -4,4 +4,11 @@
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              Title="{Binding Title}"
              Icon="{Binding Icon}"
-             mvvm:ViewModelLocator.AutowireViewModel="True" />
+             mvvm:ViewModelLocator.AutowireViewModel="True">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding NavigateCommand,
+                                       Mode=OneWay}"
+                     Icon="sent"
+                     Priority="1" />
+    </ContentPage.ToolbarItems>
+</ContentPage>

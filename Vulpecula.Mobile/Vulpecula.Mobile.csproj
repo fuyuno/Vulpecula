@@ -77,9 +77,6 @@
     <Compile Include="Views\Timelines\MyselfUserPage.xaml.cs">
       <DependentUpon>MyselfUserPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RootPage.xaml.cs">
-      <DependentUpon>RootPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Timelines\DirectMessageTimeline.xaml.cs">
       <DependentUpon>DirectMessageTimeline.xaml</DependentUpon>
     </Compile>
@@ -166,12 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\RootPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

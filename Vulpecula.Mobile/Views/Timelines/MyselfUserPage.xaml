@@ -5,5 +5,13 @@
              Title="{Binding Title}"
              Icon="{Binding Icon}"
              mvvm:ViewModelLocator.AutowireViewModel="True">
-    <Button Command="{Binding NavigateCommand, Mode=OneWay}" Text="Navigate to StatusPage" />
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding NavigateCommand,
+                                       Mode=OneWay}"
+                     Icon="sent"
+                     Priority="1" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <Label Text="Hello!" />
+    </Grid>
 </ContentPage>

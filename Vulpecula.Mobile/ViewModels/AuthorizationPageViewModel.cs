@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 using Prism.Navigation;
 
 using Vulpecula.Mobile.Models;
@@ -10,6 +12,7 @@ using Xamarin.Forms;
 
 namespace Vulpecula.Mobile.ViewModels
 {
+    [UsedImplicitly]
     public class AuthorizationPageViewModel : ViewModel
     {
         private readonly AccountManager _accountManager;

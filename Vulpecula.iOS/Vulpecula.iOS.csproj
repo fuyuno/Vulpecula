@@ -180,6 +180,8 @@
     <BundleResource Include="Resources\message.png" />
     <BundleResource Include="Resources\home%402x.png" />
     <BundleResource Include="Resources\home.png" />
+    <BundleResource Include="Resources\sent.png" />
+    <BundleResource Include="Resources\sent%402x.png" />
     <ImageAsset Include="Resources\Image.xcassets\LaunchImages.launchimage\Default.png">
       <InProject>false</InProject>
     </ImageAsset>

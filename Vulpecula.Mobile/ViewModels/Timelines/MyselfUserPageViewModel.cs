@@ -25,7 +25,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
 
         private void Navigate()
         {
-            NavigationService.Navigate<StatusPage>(useModalNavigation: true);
+            NavigationService.Navigate<StatusPage>();
         }
 
         #endregion
