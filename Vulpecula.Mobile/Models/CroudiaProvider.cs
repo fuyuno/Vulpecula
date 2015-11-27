@@ -18,7 +18,7 @@ namespace Vulpecula.Mobile.Models
             this._constants = App.ModelLocator.GetModel<IConstants>();
         }
 
-        public async Task<bool> ReAuthorization(IPasswordCredentials credentials)
+        public bool ReAuthorization(IPasswordCredentials credentials)
         {
             var vault = App.ModelLocator.GetModel<IPasswordVault>();
             if (credentials != null)
@@ -26,8 +26,8 @@ namespace Vulpecula.Mobile.Models
                 this.Croudia.RefreshToken = credentials.Password;
                 try
                 {
-                    await this.Croudia.OAuth.RefreshAsync();
-                    this.User = await this.Croudia.Account.VerifyCredentialsAsync();
+                    this.Croudia.OAuth.Refresh();
+                    this.User = this.Croudia.Account.VerifyCredentials();
 
                     var newCredentials = App.ModelLocator.GetModel<IPasswordCredentials>();
                     newCredentials.UserName = credentials.UserName;

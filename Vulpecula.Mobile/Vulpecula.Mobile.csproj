@@ -54,11 +54,11 @@
     <Compile Include="Triggers\InvokeCommandAction.cs" />
     <Compile Include="ViewModels\AuthorizationPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\Pages\UserDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\Popups\StatusPageViewModel.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
     <Compile Include="App.cs" />
     <Compile Include="ViewModels\Timelines\DirectMessageTimelineViewModel.cs" />
-    <Compile Include="ViewModels\Timelines\MyselfUserPageViewModel.cs" />
     <Compile Include="ViewModels\Primitives\NavigationalViewModel.cs" />
     <Compile Include="ViewModels\Primitives\TabbedViewModel.cs" />
     <Compile Include="ViewModels\Timelines\StatusTimelineViewModel.cs" />
@@ -71,11 +71,11 @@
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\UserDetailsPage.xaml.cs">
+      <DependentUpon>UserDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Popups\StatusPage.xaml.cs">
       <DependentUpon>StatusPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Timelines\MyselfUserPage.xaml.cs">
-      <DependentUpon>MyselfUserPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Timelines\DirectMessageTimeline.xaml.cs">
       <DependentUpon>DirectMessageTimeline.xaml</DependentUpon>
@@ -186,12 +186,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Timelines\MyselfUserPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Views\Popups\StatusPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -203,5 +197,10 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Pages\UserDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

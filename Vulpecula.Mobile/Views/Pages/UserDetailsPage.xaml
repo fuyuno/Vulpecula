@@ -1,0 +1,42 @@
+﻿<ContentPage x:Class="Vulpecula.Mobile.Views.Pages.UserDetailsPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             Title="{Binding Title}"
+             Icon="{Binding Icon}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding NavigateCommand,
+                                       Mode=OneWay}"
+                     Icon="sent"
+                     Priority="1" />
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <Grid>
+            <Label HorizontalOptions="CenterAndExpand" Text="ここにアイコンとバナー、SN" />
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0">
+                <Label Text="WHISPERS" />
+                <Label Text="{Binding Whispers}" />
+            </StackLayout>
+            <StackLayout Grid.Column="1">
+                <Label Text="FOLLOWINGS" />
+                <Label Text="{Binding Followings}" />
+            </StackLayout>
+            <StackLayout Grid.Column="2">
+                <Label Text="FOLLOWERS" />
+                <Label Text="{Binding Followers}" />
+            </StackLayout>
+            <StackLayout Grid.Column="3">
+                <Label Text="FAVOURITES" />
+                <Label Text="{Binding Favorites}" />
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+</ContentPage>

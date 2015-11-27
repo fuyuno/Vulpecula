@@ -8,6 +8,7 @@
             xmlns:m="clr-namespace:Vulpecula.Mobile.Models;assembly=Vulpecula.Mobile"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+            xmlns:pages="clr-namespace:Vulpecula.Mobile.Views.Pages;assembly=Vulpecula.Mobile"
             xmlns:triggers="clr-namespace:Vulpecula.Mobile.Triggers;assembly=Vulpecula.Mobile"
             xmlns:v="clr-namespace:Vulpecula.Mobile.Views;assembly=Vulpecula.Mobile"
             xmlns:vm="clr-namespace:Vulpecula.Mobile.ViewModels;assembly=Vulpecula.Mobile"
@@ -15,7 +16,7 @@
             mvvm:ViewModelLocator.AutowireViewModel="True">
     <TabbedPage.Triggers>
         <EventTrigger Event="Appearing">
-            <triggers:CallMethodAction MethodName="Initialize" TargetObject="{Binding}" />
+            <triggers:CallMethodAction MethodName="OnAppearing" TargetObject="{Binding}" />
         </EventTrigger>
     </TabbedPage.Triggers>
     <TabbedPage.Behaviors>
@@ -55,7 +56,7 @@
         <!--  Me  -->
         <intermediate:NavPage>
             <x:Arguments>
-                <vt:MyselfUserPage />
+                <pages:UserDetailsPage BindingContext="{Binding UserDetailsPageViewModel}" />
             </x:Arguments>
         </intermediate:NavPage>
     </TabbedPage.Children>

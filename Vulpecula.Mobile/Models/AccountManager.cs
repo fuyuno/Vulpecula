@@ -21,7 +21,9 @@ namespace Vulpecula.Mobile.Models
         // Initialize は1度だけ
         private bool _isInit;
 
+        // 現状シングルアカウントなので
         public ObservableCollection<CroudiaProvider> Providers { get; }
+
         public ObservableCollection<User> Users { get; }
 
         public AccountManager(Configuration configuration)
@@ -38,7 +40,7 @@ namespace Vulpecula.Mobile.Models
             this._configuration.Accounts.Clear();
         }
 
-        public async Task InitializeAccounts()
+        public void InitializeAccounts()
         {
             if (this._isInit)
             {
@@ -49,9 +51,8 @@ namespace Vulpecula.Mobile.Models
             {
                 var credential = vault.FindByUserName(account);
                 var provider = new CroudiaProvider(_constants.ConsumerKey, _constants.ConsumerSecret);
-                if (!await provider.ReAuthorization(credential))
+                if (!provider.ReAuthorization(credential))
                 {
-                    vault.Remove(credential);
                     continue;
                 }
                 this.Providers.Add(provider);

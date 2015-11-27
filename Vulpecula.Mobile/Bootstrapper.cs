@@ -5,6 +5,7 @@ using Prism.Navigation;
 using Prism.Unity;
 
 using Vulpecula.Mobile.Models;
+using Vulpecula.Mobile.ViewModels;
 using Vulpecula.Mobile.Views;
 
 using Xamarin.Forms;
@@ -42,6 +43,13 @@ namespace Vulpecula.Mobile
         protected override void ConfigureViewModelLocator()
         {
             ViewModelLocationProvider.SetDefaultViewModelFactory(type => Container.Resolve(type));
+        }
+
+        protected override void InitializeMainPage()
+        {
+            var main = NavigationService.RootPage as MainPage;
+            var viewModel = main?.BindingContext;
+            ((MainPageViewModel)viewModel)?.Initialize();
         }
     }
 }
