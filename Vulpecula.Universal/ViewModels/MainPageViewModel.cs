@@ -53,6 +53,7 @@ namespace Vulpecula.Universal.ViewModels
             if (viewModelState.ContainsKey("TimelineState"))
             {
                 this.Colmuns = viewModelState["TimelineState"] as ObservableCollection<ColumnViewModel>;
+                viewModelState.Remove("TimelineState");
             }
         }
 
@@ -64,7 +65,10 @@ namespace Vulpecula.Universal.ViewModels
         /// <param name="suspending">if set to <c>true</c> you are navigating away from this viewmodel due to a suspension event.</param>
         public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
         {
-            viewModelState["TimelineState"] = this.Colmuns;
+            if (!suspending)
+            {
+                viewModelState["TimelineState"] = this.Colmuns;
+            }
         }
     }
 }
