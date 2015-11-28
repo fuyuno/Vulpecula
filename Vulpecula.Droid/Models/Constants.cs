@@ -1,11 +1,10 @@
-using Vulpecula.Android.Models;
+using Vulpecula.Droid.Models;
 using Vulpecula.Mobile.Models.Interfaces;
 
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof (Constants))]
-
-namespace Vulpecula.Android.Models
+namespace Vulpecula.Droid.Models
 {
     public class Constants : IConstants
     {

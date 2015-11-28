@@ -11,7 +11,7 @@ using Vulpecula.Mobile.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-namespace Vulpecula.Android
+namespace Vulpecula.Droid
 {
     [UsedImplicitly]
     [Activity(Label = "Vulpecula.Android", MainLauncher = true, Icon = "@drawable/icon")]

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ApplicationName">Vulpecula for Android</string>
+  <string name="Public">Public</string>
+  <string name="PublicTimeline">Public Timeline</string>
+  <string name="Home">Home</string>
+  <string name="HomeTimeline">Home Timeline</string>
+  <string name="Mentions">Mentions</string>
+  <string name="MentionsTimeline">Mentions</string>
+  <string name="Messages">Messages</string>
+  <string name="MessagesTimeline">Messages</string>
+  <string name="Me">Me</string>
+  <string name="MePage">Profile</string>
+  <string name="AuthorizationPage">Authorization with Croudia</string>
+</resources>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ApplicationName">Vulpecula for Android</string>
+  <string name="Public">Public</string>
+  <string name="PublicTimeline">Public Timeline</string>
+  <string name="Home">ホーム</string>
+  <string name="HomeTimeline">ホーム タイムライン</string>
+  <string name="Mentions">＠返信</string>
+  <string name="MentionsTimeline">＠返信</string>
+  <string name="Messages">メッセージ</string>
+  <string name="MessagesTimeline">メッセージ</string>
+  <string name="Me">私</string>
+  <string name="MePage">プロフィール</string>
+  <string name="AuthorizationPage">Croudia で認証</string>
+</resources>
