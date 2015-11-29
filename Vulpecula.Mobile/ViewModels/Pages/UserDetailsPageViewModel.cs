@@ -50,6 +50,30 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string Whispers => $"{this._user.StatusesCount:N0}";
 
+        #region Image does not fit width of screen that saving scaling.
+        #region Height
+        private double _height;
+        public double Height {
+            get{return this._height;}
+            set{this.SetProperty(ref this._height, value);}
+        }
+        #endregion
+
+        #region Width
+        private double _width;
+        public double Width{
+            get{return this._width;}
+            set{
+                if (this.SetProperty(ref this._width, value))
+                {
+                    var a = this._width * 200 / 550;
+                    this.Height = this._width * 200 / 550;
+                }
+            }
+        }
+        #endregion
+        #endregion
+
         #endregion
 
         #region Commands

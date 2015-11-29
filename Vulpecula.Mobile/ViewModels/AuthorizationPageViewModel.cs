@@ -18,15 +18,17 @@ namespace Vulpecula.Mobile.ViewModels
         private readonly AccountManager _accountManager;
         private readonly IConstants _constants;
         private readonly INavigationService _navigationService;
+
         public string Title { get; set; }
 
-        public AuthorizationPageViewModel(ILocalization localization, INavigationService navigationService, IConstants constants, AccountManager accountManager) : base(localization)
+        public AuthorizationPageViewModel(ILocalization localization, INavigationService navigationService, IConstants constants, AccountManager accountManager)
+            : base(localization)
         {
             this._navigationService = navigationService;
             this._accountManager = accountManager;
             this._constants = constants;
 
-            this.Title = this.GetLocalizedString("Authorization with Croudia");
+            this.Title = this.GetLocalizedString("AuthorizationPage");
 
             var croudia = new Croudia(constants.ConsumerKey, constants.ConsumerSecret);
             this.Source = croudia.OAuth.GetAuthorizeUrl();

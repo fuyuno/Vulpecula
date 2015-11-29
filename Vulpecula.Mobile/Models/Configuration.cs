@@ -28,13 +28,12 @@ namespace Vulpecula.Mobile.Models
         public Configuration()
         {
             this._configuration = App.ModelLocator.GetModel<IConfiguration>();
-            this.Accounts = new ObservableCollection<string>(this._Accounts);
 
             if (this._Accounts == null)
             {
                 this._Accounts = new List<string>();
             }
-
+            this.Accounts = new ObservableCollection<string>(this._Accounts);
             this.Accounts.ToObservable().Subscribe(w =>
             {
                 List<string> temp;
