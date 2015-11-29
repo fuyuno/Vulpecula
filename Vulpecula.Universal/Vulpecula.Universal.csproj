@@ -252,6 +252,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DeviceFamily-Mobile\" />
     <Folder Include="Models\Migrate\" />
   </ItemGroup>
   <ItemGroup>
