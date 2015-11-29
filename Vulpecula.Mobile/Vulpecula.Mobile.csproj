@@ -61,6 +61,7 @@
     <Compile Include="ViewModels\Timelines\DirectMessageTimelineViewModel.cs" />
     <Compile Include="ViewModels\Primitives\NavigationalViewModel.cs" />
     <Compile Include="ViewModels\Primitives\TabbedViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\Primitives\StatusViewModel.cs" />
     <Compile Include="ViewModels\Timelines\StatusTimelineViewModel.cs" />
     <Compile Include="Views\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>

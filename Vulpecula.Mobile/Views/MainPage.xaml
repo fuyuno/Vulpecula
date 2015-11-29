@@ -49,7 +49,7 @@
         <!--  Messages  -->
         <intermediate:NavPage>
             <x:Arguments>
-                <vt:DirectMessageTimeline />
+                <vt:DirectMessageTimeline BindingContext="{Binding MessagesTimelineViewModel}" />
             </x:Arguments>
         </intermediate:NavPage>
 

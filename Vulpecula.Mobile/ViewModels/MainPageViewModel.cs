@@ -24,9 +24,6 @@ namespace Vulpecula.Mobile.ViewModels
         public MainPageViewModel(ILocalization localization, INavigationService navigationService, AccountManager accountManager) : base(localization, navigationService)
         {
             this._accountManager = accountManager;
-            PublicTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Public", "public", "PublicTimeline");
-            HomeTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Home", "home", "HomeTimeline");
-            MentionsTimelineViewModel = new StatusTimelineViewModel(localization, navigationService, "Mentions", "mention", "MentionsTimeline");
 
             if (false)
             {
@@ -52,6 +49,10 @@ namespace Vulpecula.Mobile.ViewModels
                     this._isFirst = true;
                     return;
                 }
+                this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Public", "public");
+                this.HomeTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Home", "home");
+                this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Mentions", "mention");
+                this.MessagesTimelineViewModel = new DirectMessageTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First());
                 this.UserDetailsPageViewModel = new UserDetailsPageViewModel(this.Localization, this.NavigationService, this._accountManager, this._accountManager.Users.First());
             }
             catch (Exception)
@@ -70,15 +71,63 @@ namespace Vulpecula.Mobile.ViewModels
             }
             if (this.UserDetailsPageViewModel == null && this._accountManager.Users.Count != 0)
             {
+                this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Public", "public");
+                this.HomeTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Home", "home");
+                this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Mentions", "mention");
+                this.MessagesTimelineViewModel = new DirectMessageTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First());
                 this.UserDetailsPageViewModel = new UserDetailsPageViewModel(this.Localization, this.NavigationService, this._accountManager, this._accountManager.Users.First());
             }
         }
 
         #region Properties
 
-        public StatusTimelineViewModel PublicTimelineViewModel { get; }
-        public StatusTimelineViewModel HomeTimelineViewModel { get; }
-        public StatusTimelineViewModel MentionsTimelineViewModel { get; }
+        #region PublicTimelineViewModel
+
+        private StatusTimelineViewModel _publicTimelineViewModel;
+
+        public StatusTimelineViewModel PublicTimelineViewModel
+        {
+            get { return this._publicTimelineViewModel; }
+            set { this.SetProperty(ref this._publicTimelineViewModel, value); }
+        }
+
+        #endregion
+
+        #region HomeTimelineViewModel
+
+        private StatusTimelineViewModel _homeTimelineViewModel;
+
+        public StatusTimelineViewModel HomeTimelineViewModel
+        {
+            get { return this._homeTimelineViewModel; }
+            set { this.SetProperty(ref this._homeTimelineViewModel, value); }
+        }
+
+        #endregion
+
+        #region MentionsTimelineViewModel
+
+        private StatusTimelineViewModel _mentionsTimelineViewModel;
+
+        public StatusTimelineViewModel MentionsTimelineViewModel
+        {
+            get { return this._mentionsTimelineViewModel; }
+            set { this.SetProperty(ref this._mentionsTimelineViewModel, value); }
+        }
+
+        #endregion
+
+        #region MessagesTimelineViewModel
+
+        private DirectMessageTimelineViewModel _messagesTimelineViewModel;
+
+        public DirectMessageTimelineViewModel MessagesTimelineViewModel
+        {
+            get { return this._messagesTimelineViewModel; }
+            set { this.SetProperty(ref this._messagesTimelineViewModel, value); }
+        }
+
+        #endregion
 
         #region UserDetailsPageViewModel
 
