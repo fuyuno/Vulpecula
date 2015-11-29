@@ -1,42 +1,176 @@
-﻿<ContentPage x:Class="Vulpecula.Mobile.Views.Pages.UserDetailsPage"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             Title="{Binding Title}"
-             Icon="{Binding Icon}">
+﻿<ContentPage
+    x:Class   ="Vulpecula.Mobile.Views.Pages.UserDetailsPage"
+    xmlns    ="http://xamarin.com/schemas/2014/forms"
+    xmlns:x   ="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title     ="{Binding Title}"
+    Icon      ="{Binding Icon}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding NavigateCommand,
-                                       Mode=OneWay}"
-                     Icon="sent"
-                     Priority="1" />
+        <ToolbarItem
+            Command ="{Binding NavigateCommand,Mode=OneWay}"
+            Icon    ="sent"
+            Priority="1" />
     </ContentPage.ToolbarItems>
-    <StackLayout>
+    <StackLayout
+        Spacing="0">
         <Grid>
-            <Label HorizontalOptions="CenterAndExpand" Text="ここにアイコンとバナー、SN" />
+            <Image
+                Source              ="{Binding Cover}"
+                HorizontalOptions   ="Fill"
+                Aspect              ="AspectFill"
+                VerticalOptions     ="Fill"
+                MinimumHeightRequest="{Binding Height, Mode=OneWay}"
+                HeightRequest       ="{Binding Height, Mode=OneWay}"
+                Width               ="{Binding Width}" />
+            <StackLayout
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions  ="CenterAndExpand"
+                Spacing          ="0">
+                <ContentView
+                    Padding="10">
+                    <Image
+                        Source           ="{Binding UserIcon}"
+                        HorizontalOptions="CenterAndExpand"
+                        HeightRequest    ="64"
+                        WidthRequest     ="64" />
+                </ContentView>
+                <ContentView
+                    Padding          ="5,1"
+                    HorizontalOptions="Center"
+                    BackgroundColor  ="#66000000">
+                    <Label
+                        Text             ="{Binding Username}"
+                        HorizontalOptions="CenterAndExpand"
+                        FontSize         ="14"
+                        FontAttributes   ="Bold"
+                        TextColor        ="White" />
+                </ContentView>
+                <ContentView
+                    Padding          ="5,1"
+                    HorizontalOptions="Center"
+                    BackgroundColor  ="#66000000">
+                    <Label
+                        Text             ="{Binding ScreenName}"
+                        HorizontalOptions="CenterAndExpand"
+                        FontSize         ="12"
+                        TextColor        ="White" />
+                </ContentView>
+            </StackLayout>
         </Grid>
-        <Grid>
+        <Grid
+            ColumnSpacing="0"
+            RowSpacing   ="0">
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <Style
+                        TargetType="Label"
+                        x:Key     ="TitleLabelStyle">
+                        <Setter
+                            Property="FontSize"
+                            Value   ="16" />
+                        <Setter
+                            Property="HorizontalOptions"
+                            Value   ="End" />
+                    </Style>
+                    <Style
+                        TargetType="Label"
+                        x:Key     ="ContentLabelStyle">
+                        <Setter
+                            Property="FontSize"
+                            Value   ="14" />
+                        <Setter
+                            Property="TextColor"
+                            Value   ="Gray" />
+                        <Setter
+                            Property="HorizontalOptions"
+                            Value   ="End" />
+                    </Style>
+                </ResourceDictionary>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="*" />
             </Grid.ColumnDefinitions>
-            <StackLayout Grid.Column="0">
-                <Label Text="WHISPERS" />
-                <Label Text="{Binding Whispers}" />
-            </StackLayout>
-            <StackLayout Grid.Column="1">
-                <Label Text="FOLLOWINGS" />
-                <Label Text="{Binding Followings}" />
-            </StackLayout>
-            <StackLayout Grid.Column="2">
-                <Label Text="FOLLOWERS" />
-                <Label Text="{Binding Followers}" />
-            </StackLayout>
-            <StackLayout Grid.Column="3">
-                <Label Text="FAVOURITES" />
-                <Label Text="{Binding Favorites}" />
-            </StackLayout>
+            <ContentView
+                Grid.Column    ="0"
+                BackgroundColor="Gray"
+                Padding        ="2,2,1,2">
+                <StackLayout
+                    Spacing        ="0"
+                    Grid.Column    ="0"
+                    BackgroundColor="White"
+                    Padding        ="2">
+                    <Label
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text ="Whispers" />
+                    <Label
+                        Style="{StaticResource ContentLabelStyle}"
+                        Text ="{Binding Whispers}" />
+                </StackLayout>
+            </ContentView>
+            <ContentView
+                Grid.Column    ="1"
+                BackgroundColor="Gray"
+                Padding        ="1,2">
+                <StackLayout
+                    Spacing        ="0"
+                    Grid.Column    ="0"
+                    BackgroundColor="White"
+                    Padding        ="2">
+                    <Label
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text ="Followings" />
+                    <Label
+                        Style="{StaticResource ContentLabelStyle}"
+                        Text ="{Binding Followings}" />
+                </StackLayout>
+            </ContentView>
+            <ContentView
+                Grid.Column    ="2"
+                BackgroundColor="Gray"
+                Padding        ="1,2">
+                <StackLayout
+                    Spacing        ="0"
+                    Grid.Column    ="0"
+                    BackgroundColor="White"
+                    Padding        ="2">
+                    <Label
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text ="Followers" />
+                    <Label
+                        Style="{StaticResource ContentLabelStyle}"
+                        Text ="{Binding Followers}" />
+                </StackLayout>
+            </ContentView>
+            <ContentView
+                Grid.Column    ="3"
+                BackgroundColor="Gray"
+                Padding        ="1,2,2,2">
+                <StackLayout
+                    Spacing        ="0"
+                    Grid.Column    ="0"
+                    BackgroundColor="White"
+                    Padding        ="2">
+                    <Label
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text ="Favourites" />
+                    <Label
+                        Style="{StaticResource ContentLabelStyle}"
+                        Text ="{Binding Favorites}" />
+                </StackLayout>
+            </ContentView>
         </Grid>
+        <ContentView
+            Padding="5">
+            <Label
+                Text    ="{Binding Bio}"
+                FontSize="14" />
+        </ContentView>
     </StackLayout>
 </ContentPage>
