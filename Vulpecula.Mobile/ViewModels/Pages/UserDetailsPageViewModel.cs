@@ -34,7 +34,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string Username => this._user.Name;
 
-        public string ScreenName => $"@{this._user.Name}";
+        public string ScreenName => $"@{this._user.ScreenName}";
 
         public string Bio => this._user.Description;
 
@@ -66,7 +66,6 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             set{
                 if (this.SetProperty(ref this._width, value))
                 {
-                    var a = this._width * 200 / 550;
                     this.Height = this._width * 200 / 550;
                 }
             }
