@@ -14,6 +14,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
     public class StatusTimelineViewModel : TabbedViewModel
     {
         private readonly CroudiaProvider _provider;
+
         public ObservableCollection<StatusViewModel> Statuses { get; }
 
         public StatusTimelineViewModel(ILocalization localization, INavigationService navigationService, CroudiaProvider provider, string title, string icon, string navigationTitle = "")
@@ -24,6 +25,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
             NavigationTitle = GetLocalizedString(string.IsNullOrWhiteSpace(navigationTitle) ? title : navigationTitle);
             this.Statuses = new ObservableCollection<StatusViewModel>();
             this._provider = provider;
+
 
             this.CompositeDisposable.Add(this._provider.Croudia.Statuses.GetPublicTimelineAsObservable().Subscribe(w => 
                 this.Statuses.Insert(0, new StatusViewModel(this.Localization, w))));

@@ -1,55 +1,58 @@
 ﻿<ContentPage x:Class="Vulpecula.Mobile.Views.Timelines.StatusTimeline"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Title="{Binding Title}"
-             Icon="{Binding Icon}">
+     xmlns="http://xamarin.com/schemas/2014/forms"
+     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     Title="{Binding Title}" Icon="{Binding Icon}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding NavigateCommand,
-                                       Mode=OneWay}"
-                     Icon="sent"
-                     Priority="1" />
+        <ToolbarItem Command="{Binding NavigateCommand, Mode=OneWay}"
+             Icon="sent" Priority="1" />
     </ContentPage.ToolbarItems>
-
     <ListView HasUnevenRows="True" ItemsSource="{Binding Statuses}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <Grid>
-                            <Grid.Resources>
-                                <ResourceDictionary>
-                                    <Style TargetType="Label">
-                                        <Setter Property="FontSize" Value="14" />
-                                    </Style>
-                                </ResourceDictionary>
-                            </Grid.Resources>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="56" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ContentView Grid.Column="0" Padding="4">
-                                <Image HeightRequest="48"
-                                       HorizontalOptions="Start"
-                                       Source="{Binding Icon}"
-                                       VerticalOptions="Start"
-                                       WidthRequest="48" />
-
-                            </ContentView>
-                            <Grid Grid.Column="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackLayout Grid.Row="0" Orientation="Horizontal">
-                                    <Label Text="{Binding UserName}" />
-                                    <Label Text="{Binding ScreenName}" TextColor="Silver" />
-                                </StackLayout>
-                                <Label Grid.Row="1" Text="{Binding Text}" />
-                                <Label Grid.Row="2" Text="{Binding CreatedAt}" />
+                        <ContentView Padding="5">
+                            <Grid ColumnSpacing="0">
+                                <Grid.Resources>
+                                    <ResourceDictionary>
+                                        <Style TargetType="Label">
+                                            <Setter Property="FontSize"
+                                                 Value="14" />
+                                        </Style>
+                                    </ResourceDictionary>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="56" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <ContentView Grid.Column="0" Padding="4">
+                                    <Image HeightRequest="48"
+                                         HorizontalOptions="Start"
+                                         Source="{Binding Icon}"
+                                         VerticalOptions="Start"
+                                         WidthRequest="48" />
+                                </ContentView>
+                                <Grid Grid.Column="1" RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackLayout Grid.Row="0"
+                                         Orientation="Horizontal" Spacing="5">
+                                        <Label Text="{Binding UserName}"
+                                             Font="Bold" FontSize="13" />
+                                        <Label Text="{Binding ScreenName}"
+                                             TextColor="Silver" FontSize="12"
+                                            VerticalOptions="End" />
+                                        <Label Text="{Binding CreatedAt}"
+                                             HorizontalOptions="EndAndExpand" />
+                                    </StackLayout>
+                                    <Label Grid.Row="1" Text="{Binding Text}" />
+                                    <Label Grid.Row="2" Text="{Binding Via}" />
+                                </Grid>
                             </Grid>
-                        </Grid>
-
+                        </ContentView>
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>

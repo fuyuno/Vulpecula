@@ -22,6 +22,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         public string Text => this._model.Text.Trim();
         public string Icon => this._model.User.ProfileImageUrlHttps;
         public string CreatedAt => this._model.CreatedAt.ToString("HH:mm");
+        public string Via => this._model.Source.Name;
 
         #endregion
     }
