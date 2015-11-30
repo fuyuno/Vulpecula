@@ -18,7 +18,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         #region Properties
 
         public string ScreenName => $"@{this._model.User.ScreenName}";
-        public string UserName => this._model.User.Name.Replace(Environment.NewLine, "");
+        public string UserName => this._model.User.Name.Trim().Replace(Environment.NewLine, "");
         public string Text => this._model.Text.Trim();
         public string Icon => this._model.User.ProfileImageUrlHttps;
         public string CreatedAt => this._model.CreatedAt.ToString("HH:mm");
