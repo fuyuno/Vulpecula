@@ -8,7 +8,6 @@ using Prism.Navigation;
 
 using Vulpecula.Mobile.Models;
 using Vulpecula.Mobile.Models.Interfaces;
-using Vulpecula.Mobile.ViewModels.Pages;
 using Vulpecula.Mobile.ViewModels.Primitives;
 using Vulpecula.Mobile.ViewModels.Timelines;
 using Vulpecula.Mobile.Views;
@@ -21,7 +20,8 @@ namespace Vulpecula.Mobile.ViewModels
         private readonly AccountManager _accountManager;
         private bool _isFirst;
 
-        public MainPageViewModel(ILocalization localization, INavigationService navigationService, AccountManager accountManager) : base(localization, navigationService)
+        public MainPageViewModel(ILocalization localization, INavigationService navigationService, AccountManager accountManager)
+            : base(localization, navigationService)
         {
             this._accountManager = accountManager;
 
@@ -53,7 +53,6 @@ namespace Vulpecula.Mobile.ViewModels
                 this.HomeTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Home", "home");
                 this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Mentions", "mention");
                 this.MessagesTimelineViewModel = new DirectMessageTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First());
-                this.UserDetailsPageViewModel = new UserDetailsPageViewModel(this.Localization, this.NavigationService, this._accountManager, this._accountManager.Users.First());
             }
             catch (Exception)
             {
@@ -69,13 +68,12 @@ namespace Vulpecula.Mobile.ViewModels
                 this.NavigationService.Navigate<AuthorizationPage>();
                 this._isFirst = false;
             }
-            if (this.UserDetailsPageViewModel == null && this._accountManager.Users.Count != 0)
+            if (this.PublicTimelineViewModel == null && this._accountManager.Users.Count != 0)
             {
                 this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Public", "public");
                 this.HomeTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Home", "home");
                 this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Mentions", "mention");
                 this.MessagesTimelineViewModel = new DirectMessageTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First());
-                this.UserDetailsPageViewModel = new UserDetailsPageViewModel(this.Localization, this.NavigationService, this._accountManager, this._accountManager.Users.First());
             }
         }
 
@@ -125,18 +123,6 @@ namespace Vulpecula.Mobile.ViewModels
         {
             get { return this._messagesTimelineViewModel; }
             set { this.SetProperty(ref this._messagesTimelineViewModel, value); }
-        }
-
-        #endregion
-
-        #region UserDetailsPageViewModel
-
-        private UserDetailsPageViewModel _userDetailsPageViewModel;
-
-        public UserDetailsPageViewModel UserDetailsPageViewModel
-        {
-            get { return this._userDetailsPageViewModel; }
-            private set { this.SetProperty(ref this._userDetailsPageViewModel, value); }
         }
 
         #endregion

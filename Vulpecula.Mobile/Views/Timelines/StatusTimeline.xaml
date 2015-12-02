@@ -1,6 +1,7 @@
 ﻿<ContentPage x:Class="Vulpecula.Mobile.Views.Timelines.StatusTimeline"
      xmlns="http://xamarin.com/schemas/2014/forms"
      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     xmlns:triggers="clr-namespace:Vulpecula.Mobile.Triggers;assembly=Vulpecula.Mobile"
      Title="{Binding Title}" Icon="{Binding Icon}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding NavigateCommand, Mode=OneWay}"
@@ -30,7 +31,11 @@
                                          HorizontalOptions="Start"
                                          Source="{Binding Icon}"
                                          VerticalOptions="Start"
-                                         WidthRequest="48" />
+                                         WidthRequest="48">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OnTappedCommand}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                 </ContentView>
                                 <Grid Grid.Column="1" RowSpacing="0">
                                     <Grid.RowDefinitions>

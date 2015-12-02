@@ -10,7 +10,8 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
 
         protected INavigationService NavigationService { get; }
 
-        protected NavigationalViewModel(ILocalization localization, INavigationService navigationService) : base(localization)
+        protected NavigationalViewModel(ILocalization localization, INavigationService navigationService)
+            : base(localization)
         {
             NavigationService = navigationService;
         }

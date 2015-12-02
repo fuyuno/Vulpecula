@@ -28,7 +28,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
 
 
             this.CompositeDisposable.Add(this._provider.Croudia.Statuses.GetPublicTimelineAsObservable().Subscribe(w => 
-                this.Statuses.Insert(0, new StatusViewModel(this.Localization, w))));
+                this.Statuses.Insert(0, new StatusViewModel(this.Localization, this.NavigationService, w))));
         }
 
         /// <summary>

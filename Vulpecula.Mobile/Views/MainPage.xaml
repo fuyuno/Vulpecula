@@ -1,22 +1,23 @@
 ﻿<TabbedPage x:Class="Vulpecula.Mobile.Views.MainPage"
-            xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:b="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
-            xmlns:commands="clr-namespace:Prism.Commands;assembly=Prism"
-            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-            xmlns:intermediate="clr-namespace:Vulpecula.Mobile.Views.Intermediate;assembly=Vulpecula.Mobile"
-            xmlns:m="clr-namespace:Vulpecula.Mobile.Models;assembly=Vulpecula.Mobile"
-            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-            xmlns:pages="clr-namespace:Vulpecula.Mobile.Views.Pages;assembly=Vulpecula.Mobile"
-            xmlns:triggers="clr-namespace:Vulpecula.Mobile.Triggers;assembly=Vulpecula.Mobile"
-            xmlns:v="clr-namespace:Vulpecula.Mobile.Views;assembly=Vulpecula.Mobile"
-            xmlns:vm="clr-namespace:Vulpecula.Mobile.ViewModels;assembly=Vulpecula.Mobile"
-            xmlns:vt="clr-namespace:Vulpecula.Mobile.Views.Timelines;assembly=Vulpecula.Mobile"
-            mvvm:ViewModelLocator.AutowireViewModel="True">
+     xmlns="http://xamarin.com/schemas/2014/forms"
+     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     xmlns:b="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
+     xmlns:commands="clr-namespace:Prism.Commands;assembly=Prism"
+     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+     xmlns:intermediate="clr-namespace:Vulpecula.Mobile.Views.Intermediate;assembly=Vulpecula.Mobile"
+     xmlns:m="clr-namespace:Vulpecula.Mobile.Models;assembly=Vulpecula.Mobile"
+     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+     xmlns:pages="clr-namespace:Vulpecula.Mobile.Views.Pages;assembly=Vulpecula.Mobile"
+     xmlns:triggers="clr-namespace:Vulpecula.Mobile.Triggers;assembly=Vulpecula.Mobile"
+     xmlns:v="clr-namespace:Vulpecula.Mobile.Views;assembly=Vulpecula.Mobile"
+     xmlns:vm="clr-namespace:Vulpecula.Mobile.ViewModels;assembly=Vulpecula.Mobile"
+     xmlns:vt="clr-namespace:Vulpecula.Mobile.Views.Timelines;assembly=Vulpecula.Mobile"
+     mvvm:ViewModelLocator.AutowireViewModel="True">
     <TabbedPage.Triggers>
         <EventTrigger Event="Appearing">
-            <triggers:CallMethodAction MethodName="OnAppearing" TargetObject="{Binding}" />
+            <triggers:CallMethodAction MethodName="OnAppearing"
+                 TargetObject="{Binding}" />
         </EventTrigger>
     </TabbedPage.Triggers>
     <TabbedPage.Behaviors>
@@ -24,39 +25,34 @@
     </TabbedPage.Behaviors>
     <TabbedPage.Children>
         <!--  タブの種類は固定だから、 XAML 内で直接指定でもいいかも？  -->
-
         <!--  Public Timeline  -->
         <intermediate:NavPage>
             <x:Arguments>
                 <vt:StatusTimeline BindingContext="{Binding PublicTimelineViewModel}" />
             </x:Arguments>
         </intermediate:NavPage>
-
         <!--  Home Timeline  -->
         <intermediate:NavPage>
             <x:Arguments>
                 <vt:StatusTimeline BindingContext="{Binding HomeTimelineViewModel}" />
             </x:Arguments>
         </intermediate:NavPage>
-
         <!--  Mentions  -->
         <intermediate:NavPage>
             <x:Arguments>
                 <vt:StatusTimeline BindingContext="{Binding MentionsTimelineViewModel}" />
             </x:Arguments>
         </intermediate:NavPage>
-
         <!--  Messages  -->
         <intermediate:NavPage>
             <x:Arguments>
                 <vt:DirectMessageTimeline BindingContext="{Binding MessagesTimelineViewModel}" />
             </x:Arguments>
         </intermediate:NavPage>
-
         <!--  Me  -->
         <intermediate:NavPage>
             <x:Arguments>
-                <pages:UserDetailsPage BindingContext="{Binding UserDetailsPageViewModel}" />
+                <pages:UserDetailsPage />
             </x:Arguments>
         </intermediate:NavPage>
     </TabbedPage.Children>

@@ -18,6 +18,8 @@ namespace Vulpecula.Mobile.Models
     {
         public static Page RootPage { get; private set; }
 
+        private static Page CurrentPage{ get; set; }
+
         /// <summary>
         /// Navigates to the most recent entry in the back navigation history by popping the calling Page off the navigation stack.
         /// </summary>
@@ -37,7 +39,7 @@ namespace Vulpecula.Mobile.Models
         /// <param name="animated">If <c>true</c> the transition is animated, if <c>false</c> there is no animation on transition.</param>
         public void Navigate<T>(NavigationParameters parameters = null, bool useModalNavigation = true, bool animated = true)
         {
-            var page = Activator.CreateInstance(typeof (T)) as Page;
+            var page = Activator.CreateInstance(typeof(T)) as Page;
             if (page == null)
                 throw new InvalidCastException("T cannot cast to Xamarin.Forms.Page.");
             Push(page, useModalNavigation, animated);
@@ -63,7 +65,7 @@ namespace Vulpecula.Mobile.Models
 
         public async void GoHome(bool animated = true)
         {
-            await RootPage.Navigation.PopToRootAsync(animated);
+            await (CurrentPage ?? RootPage).Navigation.PopToRootAsync(animated);
         }
 
         public static void Configure(Page rootPage)
@@ -71,9 +73,14 @@ namespace Vulpecula.Mobile.Models
             RootPage = rootPage;
         }
 
+        public static void ConfigureCurrent(Page currentPage)
+        {
+            CurrentPage = currentPage;
+        }
+
         private static async void Push(Page page, bool useModalNavigation, bool animated)
         {
-            var navigation = RootPage.Navigation;
+            var navigation = (CurrentPage ?? RootPage).Navigation;
             if (useModalNavigation)
             {
                 await navigation.PushModalAsync(new NavigationPage(page), animated);
@@ -86,7 +93,7 @@ namespace Vulpecula.Mobile.Models
 
         private static async void Pop(bool useModalNavigation, bool animated)
         {
-            var navigation = RootPage.Navigation;
+            var navigation = (CurrentPage ?? RootPage).Navigation;
             if (useModalNavigation)
             {
                 await navigation.PopModalAsync(animated);
@@ -95,6 +102,7 @@ namespace Vulpecula.Mobile.Models
             {
                 await navigation.PopAsync(animated);
             }
+            CurrentPage = null;
         }
 
         private static void PrepareNavigation(Page page, NavigationParameters parameters)

@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Vulpecula.Mobile.Models;
+using Vulpecula.Mobile.ViewModels.Primitives;
 
 using Xamarin.Forms;
 
@@ -8,6 +9,8 @@ namespace Vulpecula.Mobile.Behaviors
 {
     public class CurrentPageBehavior : Behavior<TabbedPage>
     {
+        private Page _currentPage;
+
         /// <param name="bindable">To be added.</param>
         /// <summary>
         /// Attaches to the superclass and then calls the <see cref="M:Xamarin.Forms.Behavior`1.OnAttachedTo(T)" /> method on this object.
@@ -18,6 +21,7 @@ namespace Vulpecula.Mobile.Behaviors
         protected override void OnAttachedTo(TabbedPage bindable)
         {
             bindable.CurrentPageChanged += BindableOnCurrentPageChanged;
+            this._currentPage = bindable.CurrentPage;
             base.OnAttachedTo(bindable);
         }
 
@@ -36,11 +40,18 @@ namespace Vulpecula.Mobile.Behaviors
 
         private void BindableOnCurrentPageChanged(object sender, EventArgs eventArgs)
         {
+            if (this._currentPage != null)
+            {
+                (this._currentPage.BindingContext as TabbedViewModel)?.OnTabNavigatedFrom();
+                this._currentPage = null;
+            }
             var tabbedPage = sender as TabbedPage;
             var context = tabbedPage?.CurrentPage; // CurrentPage is NavgationBar?
             if (context == null)
                 return;
-            NavigationService.Configure(context);
+            NavigationService.ConfigureCurrent(context);
+            this._currentPage = ((context as NavigationPage).CurrentPage);
+            (this._currentPage.BindingContext as TabbedViewModel)?.OnTabNavigatedTo();
         }
     }
 }
