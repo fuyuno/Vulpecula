@@ -26,5 +26,7 @@
     <string>Me</string>
     <key>AuthorizationPage</key>
     <string>Authorization with Croudia</string>
+    <key>SharedMessage</key>
+    <string>{0} shared.</string>
   </dict>
 </plist>

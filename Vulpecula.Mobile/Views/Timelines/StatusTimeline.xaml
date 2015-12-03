@@ -26,24 +26,46 @@
                                     <ColumnDefinition Width="56" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <ContentView Grid.Column="0" Padding="4">
-                                    <Image HeightRequest="48"
-                                         HorizontalOptions="Start"
-                                         Source="{Binding Icon}"
-                                         VerticalOptions="Start"
-                                         WidthRequest="48">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding OnTappedCommand}" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                </ContentView>
+                                <Grid Grid.Column="0" RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="Spacing"
+                                        FontSize="12" Opacity="0"
+                                        IsVisible="{Binding IsSpread}" />
+                                    <ContentView Padding="4,0" Grid.Row="1">
+                                        <Grid>
+                                            <Image HeightRequest="48"
+                                                 HorizontalOptions="Start"
+                                                 Source="{Binding Icon}"
+                                                 VerticalOptions="Start"
+                                                 WidthRequest="48">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding OnTappedCommand}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <Image Source="share"
+                                                 HeightRequest="24"
+                                                 WidthRequest="24"
+                                                 VerticalOptions="End"
+                                                 HorizontalOptions="End"
+                                                 IsVisible="{Binding IsSpread}" />
+                                        </Grid>
+                                    </ContentView>
+                                </Grid>
                                 <Grid Grid.Column="1" RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0" ColumnSpacing="5">
+                                    <Label Text="{Binding SharedMessage}"
+                                         IsVisible="{Binding IsSpread}"
+                                         FontSize="12" Grid.Row="0"
+                                        TextColor="Silver" />
+                                    <Grid Grid.Row="1" ColumnSpacing="5">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
@@ -63,8 +85,8 @@
                                             VerticalOptions="End"
                                              HorizontalOptions="EndAndExpand" />
                                     </Grid>
-                                    <Label Grid.Row="1" Text="{Binding Text}" />
-                                    <Label Grid.Row="2" Text="{Binding Via}" />
+                                    <Label Grid.Row="2" Text="{Binding Text}" />
+                                    <Label Grid.Row="3" Text="{Binding Via}" />
                                 </Grid>
                             </Grid>
                         </ContentView>

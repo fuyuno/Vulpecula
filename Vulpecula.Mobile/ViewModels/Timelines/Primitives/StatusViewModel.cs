@@ -16,21 +16,25 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
     {
         private readonly INavigationService _navigationService;
         private readonly Status _model;
+        private readonly Status _originalStatus;
 
         public StatusViewModel(ILocalization localization, INavigationService navigation, Status status) : base(localization)
         {
             this._navigationService = navigation;
             this._model = status;
+            this._originalStatus = this._model.SpreadStatus ?? this._model;
         }
 
         #region Properties
 
-        public string ScreenName => $"@{this._model.User.ScreenName}";
-        public string UserName => this._model.User.Name.Trim().Replace(Environment.NewLine, "");
-        public string Text => this._model.Text.Trim();
-        public string Icon => this._model.User.ProfileImageUrlHttps;
-        public string CreatedAt => this._model.CreatedAt.ToString("HH:mm");
-        public string Via => this._model.Source.Name;
+        public bool IsSpread => this._model.SpreadStatus != null;
+        public string SharedMessage => string.Format(this.GetLocalizedString("SharedMessage"), this._model.User.Name.Trim());
+        public string ScreenName => $"@{this._originalStatus.User.ScreenName}";
+        public string UserName => this._originalStatus.User.Name.Trim().Replace(Environment.NewLine, "");
+        public string Text => this._originalStatus.Text.Trim();
+        public string Icon => this._originalStatus.User.ProfileImageUrlHttps;
+        public string CreatedAt => this._originalStatus.CreatedAt.ToString("HH:mm");
+        public string Via => this._originalStatus.Source.Name;
 
         #endregion
 
@@ -42,7 +46,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         private void OnTapped()
         {
             var param = new NavigationParameters();
-            param.Add("user", this._model.User);
+            param.Add("user", this._originalStatus.User);
             this._navigationService.Navigate<UserDetailsPage>(param, false);
         }
 

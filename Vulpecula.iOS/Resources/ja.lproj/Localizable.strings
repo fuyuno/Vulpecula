@@ -26,5 +26,7 @@
     <string>プロフィール</string>
     <key>AuthorizationPage</key>
     <string>Croudia で認証</string>
+    <key>SharedMessage</key>
+    <string>{0}  さんがシェアしました</string>
   </dict>
 </plist>
