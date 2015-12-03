@@ -49,9 +49,9 @@ namespace Vulpecula.Mobile.ViewModels
                     this._isFirst = true;
                     return;
                 }
-                this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Public", "public");
-                this.HomeTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Home", "home");
-                this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Mentions", "mention");
+                this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Public);
+                this.HomeTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Home);
+                this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Mentions);
                 this.MessagesTimelineViewModel = new DirectMessageTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First());
             }
             catch (Exception)
@@ -70,9 +70,9 @@ namespace Vulpecula.Mobile.ViewModels
             }
             if (this.PublicTimelineViewModel == null && this._accountManager.Users.Count != 0)
             {
-                this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Public", "public");
-                this.HomeTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Home", "home");
-                this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), "Mentions", "mention");
+                this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Public);
+                this.HomeTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Home);
+                this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Mentions);
                 this.MessagesTimelineViewModel = new DirectMessageTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First());
             }
         }
