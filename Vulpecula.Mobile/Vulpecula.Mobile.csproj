@@ -85,6 +85,7 @@
       <DependentUpon>StatusTimeline.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\TimelineTypes.cs" />
+    <Compile Include="ViewModels\Timelines\Primitives\DirectMailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Prism">

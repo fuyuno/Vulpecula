@@ -1,5 +1,4 @@
 ﻿using System;
-
 using System.Windows.Input;
 
 using Prism.Navigation;
@@ -8,8 +7,8 @@ using Xamarin.Forms;
 
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
-using Vulpecula.Models;
 using Vulpecula.Mobile.Views.Pages;
+using Vulpecula.Models;
 
 namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
 {
