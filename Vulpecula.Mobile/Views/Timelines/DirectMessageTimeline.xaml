@@ -1,6 +1,7 @@
 ﻿<ContentPage x:Class="Vulpecula.Mobile.Views.Timelines.DirectMessageTimeline"
      xmlns="http://xamarin.com/schemas/2014/forms"
      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
      xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
      Title="{Binding Title}" Icon="{Binding Icon}">
     <ContentPage.ToolbarItems>
@@ -8,6 +9,9 @@
              Icon="sent" Priority="1" />
     </ContentPage.ToolbarItems>
     <ListView HasUnevenRows="True" ItemsSource="{Binding Statuses}">
+        <ListView.Behaviors>
+            <behaviors:ListViewDisableSelectionBehavior />
+        </ListView.Behaviors>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>

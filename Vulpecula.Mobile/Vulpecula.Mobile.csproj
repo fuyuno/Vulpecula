@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Models\TimelineTypes.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\DirectMailViewModel.cs" />
+    <Compile Include="Behaviors\ListViewDisableSelectionBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Prism">
