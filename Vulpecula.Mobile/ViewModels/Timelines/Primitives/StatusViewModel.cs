@@ -34,7 +34,6 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         public string Text => this._originalStatus.Text.Trim();
         public string Icon => this._originalStatus.User.ProfileImageUrlHttps;
         public string CreatedAt => this._originalStatus.CreatedAt.ToString("HH:mm");
-        public string Via => this._originalStatus.Source.Name;
 
         #endregion
 

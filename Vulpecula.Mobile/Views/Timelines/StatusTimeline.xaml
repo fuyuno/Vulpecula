@@ -66,7 +66,6 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Label Text="{Binding SharedMessage}"
                                          IsVisible="{Binding IsSpread}"
@@ -93,7 +92,6 @@
                                              HorizontalOptions="EndAndExpand" />
                                     </Grid>
                                     <Label Grid.Row="2" Text="{Binding Text}" />
-                                    <Label Grid.Row="3" Text="{Binding Via}" />
                                 </Grid>
                             </Grid>
                         </ContentView>
