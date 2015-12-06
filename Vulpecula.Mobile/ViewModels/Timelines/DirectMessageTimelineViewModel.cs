@@ -18,7 +18,8 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
         public ObservableCollection<DirectMailViewModel> Statuses { get; set; }
 
         private readonly CroudiaProvider _provider;
-        private long _lastId = 0;
+        private long _receivedLastId = 0;
+        private long _sentLastId = 0;
         private IDisposable _disposable;
 
         public DirectMessageTimelineViewModel(ILocalization localization, INavigationService navigationService, CroudiaProvider provider)
@@ -38,12 +39,19 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
 
         public override void OnTabNavigatedTo()
         {
-            var obs = this._provider.Croudia.SecretMails.ReceivedAsObservable(since_id => this._lastId);
-            obs.Merge(this._provider.Croudia.SecretMails.SentAsObservable(since_id => this._lastId));
+            var obs = this._provider.Croudia.SecretMails.ReceivedAsObservable(since_id => this._receivedLastId);
+            obs.Merge(this._provider.Croudia.SecretMails.SentAsObservable(since_id => this._sentLastId));
             this._disposable = obs.Subscribe(w =>
             {
                 this.Statuses.Insert(0, new DirectMailViewModel(this.Localization, this.NavigationService, w));
-                this._lastId = w.Id;
+                if (w.SenderId == this._provider.User.Id)
+                {
+                    this._sentLastId = w.Id;
+                }
+                else
+                {
+                    this._receivedLastId = w.Id;
+                }
             });
         }
     }
