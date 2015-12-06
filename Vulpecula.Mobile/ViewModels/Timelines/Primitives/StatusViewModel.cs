@@ -40,15 +40,35 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
 
         #region Commands
 
-        private ICommand _onTappedCommand;
-        public ICommand OnTappedCommand => _onTappedCommand ?? (_onTappedCommand = new Command(OnTapped));
+        #region OnTappedShowUserDetailsCommand
 
-        private void OnTapped()
+        private ICommand _onTappedShowUserDetailsCommand;
+        public ICommand OnTappedShowUserDetailsCommand => 
+            _onTappedShowUserDetailsCommand ?? (_onTappedShowUserDetailsCommand = new Command(OnTappedShowUserDetails));
+
+        private void OnTappedShowUserDetails()
         {
             var param = new NavigationParameters();
             param.Add("user", this._originalStatus.User);
             this._navigationService.Navigate<UserDetailsPage>(param, false);
         }
+
+        #endregion
+
+        #region OnTappedShowStatusDetailsCommand
+
+        private ICommand _onTappedShowStatusDetailsCommand;
+        public ICommand OnTappedShowStatusDetailsCommand =>
+            _onTappedShowStatusDetailsCommand ?? (_onTappedShowStatusDetailsCommand = new Command(OnTappedShowStatusDetails));
+
+        private void OnTappedShowStatusDetails()
+        {
+            var param = new NavigationParameters();
+            param.Add("status", this._originalStatus);
+            this._navigationService.Navigate<StatusDetailsPage>(param, false);
+        }
+
+        #endregion
 
         #endregion
     }

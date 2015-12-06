@@ -30,6 +30,16 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
             this.Statuses = new ObservableCollection<StatusViewModel>();
             this._provider = provider;
             this._type = type;
+            if (this._type == TimelineTypes.Public)
+            {
+                // If first load this VM, OnTabNavigatedTo does not call.
+                this._disposable = this._provider.Croudia.Statuses.GetPublicTimelineAsObservable()
+                    .Subscribe(w =>
+                    {
+                        this.Statuses.Insert(0, new StatusViewModel(this.Localization, this.NavigationService, w));
+                        this._lastId = w.Id;
+                    });
+            }
         }
 
         public override void OnTabNavigatedFrom()
@@ -40,10 +50,10 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
         public override void OnTabNavigatedTo()
         {
             this._disposable = this.ConnectTimeline().Subscribe(w =>
-            {
-                this.Statuses.Insert(0, new StatusViewModel(this.Localization, this.NavigationService, w));
-                this._lastId = w.Id;
-            });
+                {
+                    this.Statuses.Insert(0, new StatusViewModel(this.Localization, this.NavigationService, w));
+                    this._lastId = w.Id;
+                });
         }
 
         private IObservable<Status> ConnectTimeline()

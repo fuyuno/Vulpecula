@@ -27,6 +27,8 @@
     <key>AuthorizationPage</key>
     <string>Croudia で認証</string>
     <key>SharedMessage</key>
-    <string>{0}  さんがシェアしました</string>
+    <string>{0} さんがシェアしました</string>
+    <key>TweetDetailsPage</key>
+    <string>詳細</string>
   </dict>
 </plist>

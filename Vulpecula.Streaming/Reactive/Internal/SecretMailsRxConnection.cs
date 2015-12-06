@@ -11,7 +11,7 @@ namespace Vulpecula.Streaming.Reactive.Internal
     internal class SecretMailsRxConnection : ConnectionBase<SecretMails, StreamTypes.SecretMails, SecretMail>
     {
         public SecretMailsRxConnection(SecretMails obj, StreamTypes.SecretMails type,
-            Expression<Func<string, object>>[] parameters, IObserver<SecretMail> observer)
+                                       Expression<Func<string, object>>[] parameters, IObserver<SecretMail> observer)
             : base(obj, type, parameters, observer)
         {
         }

@@ -17,6 +17,9 @@
                 <ViewCell>
                     <ViewCell.View>
                         <ContentView Padding="5">
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OnTappedShowStatusDetailsCommand}" />
+                            </ContentView.GestureRecognizers>
                             <Grid ColumnSpacing="0">
                                 <Grid.Resources>
                                     <ResourceDictionary>
@@ -46,7 +49,7 @@
                                                  VerticalOptions="Start"
                                                  WidthRequest="48">
                                                 <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding OnTappedCommand}" />
+                                                    <TapGestureRecognizer Command="{Binding OnTappedShowUserDetailsCommand}" />
                                                 </Image.GestureRecognizers>
                                             </Image>
                                             <Image Source="share"

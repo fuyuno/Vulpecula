@@ -87,6 +87,10 @@
     <Compile Include="Models\TimelineTypes.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\DirectMailViewModel.cs" />
     <Compile Include="Behaviors\ListViewDisableSelectionBehavior.cs" />
+    <Compile Include="Views\Pages\StatusDetailsPage.xaml.cs">
+      <DependentUpon>StatusDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Pages\StatusDetailsPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Prism">
@@ -154,6 +158,9 @@
     <EmbeddedResource Include="Views\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Pages\StatusDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
