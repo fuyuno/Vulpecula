@@ -30,5 +30,11 @@
     <string>{0} さんがシェアしました</string>
     <key>TweetDetailsPage</key>
     <string>詳細</string>
+    <key>Error</key>
+    <string>エラー</string>
+    <key>InvalidStatusError</key>
+    <string>不正なステータスです。</string>
+    <key>OK</key>
+    <string>了解</string>
   </dict>
 </plist>

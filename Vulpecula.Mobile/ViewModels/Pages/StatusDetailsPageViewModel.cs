@@ -31,7 +31,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             else
             {
                 // Error Dialog
-                await this._dialogService.DisplayAlert("Error", "Invalid status.", "OK");
+                await this._dialogService.DisplayAlert(
+                    this.GetLocalizedString("Error"), this.GetLocalizedString("InvalidStatusError"), this.GetLocalizedString("OK"));
                 return;
             }
 

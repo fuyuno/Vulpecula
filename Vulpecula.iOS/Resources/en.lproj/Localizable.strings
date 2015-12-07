@@ -30,5 +30,11 @@
     <string>{0} shared.</string>
     <key>TweetDetailsPage</key>
     <string>Details</string>
+    <key>Error</key>
+    <string>Error</string>
+    <key>InvalidStatusError</key>
+    <string>Invalid Status.</string>
+    <key>OK</key>
+    <string>OK</string>
   </dict>
 </plist>
