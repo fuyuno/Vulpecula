@@ -5,20 +5,23 @@ using Vulpecula.Mobile.ViewModels.Primitives;
 using Vulpecula.Mobile.Models.Interfaces;
 using Prism.Navigation;
 using Vulpecula.Models;
+using Prism.Services;
 
 namespace Vulpecula.Mobile.ViewModels.Pages
 {
     public class StatusDetailsPageViewModel : TabbedViewModel
     {
+        private readonly IPageDialogService _dialogService;
         private Status _status;
 
-        public StatusDetailsPageViewModel(ILocalization localization, INavigationService navigationService)
+        public StatusDetailsPageViewModel(ILocalization localization, INavigationService navigationService, IPageDialogService dialogService)
             : base(localization, navigationService)
         {
+            this._dialogService = dialogService;
             this.Title = this.GetLocalizedString("TweetDetailsPage");
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public override async void OnNavigatedTo(NavigationParameters parameters)
         {
             // Navigated from View
             if (parameters.ContainsKey("status"))
@@ -28,6 +31,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             else
             {
                 // Error Dialog
+                await this._dialogService.DisplayAlert("Error", "Invalid status.", "OK");
                 return;
             }
 
