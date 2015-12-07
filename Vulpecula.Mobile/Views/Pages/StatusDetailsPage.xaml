@@ -37,9 +37,9 @@
         <StackLayout Grid.Column="1" Grid.Row="0"
             VerticalOptions="CenterAndExpand">
             <Label Text="{Binding UserName}" Font="Bold"
-                FontSize="13" LineBreakMode="NoWrap" />
+                FontSize="15" LineBreakMode="NoWrap" />
             <Label Text="{Binding ScreenName}" LineBreakMode="TailTruncation"
-                TextColor="Silver" FontSize="12"
+                TextColor="Silver" FontSize="14"
                 VerticalOptions="End" />
         </StackLayout>
         <Grid Grid.Column="0" Grid.Row="1"
@@ -55,7 +55,7 @@
                 </Grid.ColumnDefinitions>
             </Grid>
             <Label Grid.Row="1" Text="{Binding Text}"
-                FontSize="16" />
+                FontSize="18" />
         </Grid>
         <Grid Grid.Row="2" Grid.Column="0"
             Grid.ColumnSpan="2" RowSpacing="0">
@@ -63,7 +63,7 @@
                 <ResourceDictionary>
                     <Style TargetType="Label">
                         <Setter Property="TextColor" Value="Silver" />
-                        <Setter Property="FontSize" Value="10" />
+                        <Setter Property="FontSize" Value="12" />
                     </Style>
                 </ResourceDictionary>
             </Grid.Resources>

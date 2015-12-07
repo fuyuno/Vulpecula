@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Input;
+
+using Prism.Navigation;
+using Prism.Services;
+
+using Vulpecula.Mobile.Models;
+using Vulpecula.Mobile.Models.Interfaces;
+using Vulpecula.Mobile.ViewModels.Primitives;
+using Vulpecula.Mobile.Views.Pages;
+using Vulpecula.Models;
 
 using Xamarin.Forms;
-using Vulpecula.Mobile.ViewModels.Primitives;
-using Vulpecula.Mobile.Models.Interfaces;
-using Prism.Navigation;
-using Vulpecula.Models;
-using Prism.Services;
-using Vulpecula.Mobile.Models;
 
 namespace Vulpecula.Mobile.ViewModels.Pages
 {
@@ -150,6 +154,23 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         #endregion
 
+        #endregion
+
+        #region Commands
+        #region OnTappedShowUserDetailsCommand
+
+        private ICommand _onTappedShowUserDetailsCommand;
+        public ICommand OnTappedShowUserDetailsCommand => 
+        _onTappedShowUserDetailsCommand ?? (_onTappedShowUserDetailsCommand = new Command(OnTappedShowUserDetails));
+
+        private void OnTappedShowUserDetails()
+        {
+            var param = new NavigationParameters();
+            param.Add("user", this._status.User);
+            this.NavigationService.Navigate<UserDetailsPage>(param, false);
+        }
+
+        #endregion
         #endregion
 
     }
