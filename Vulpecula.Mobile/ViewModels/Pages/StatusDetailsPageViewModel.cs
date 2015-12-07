@@ -12,6 +12,7 @@ using Vulpecula.Mobile.Views.Pages;
 using Vulpecula.Models;
 
 using Xamarin.Forms;
+using System.Reflection;
 
 namespace Vulpecula.Mobile.ViewModels.Pages
 {
@@ -157,6 +158,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         #endregion
 
         #region Commands
+
         #region OnTappedShowUserDetailsCommand
 
         private ICommand _onTappedShowUserDetailsCommand;
@@ -171,6 +173,25 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         }
 
         #endregion
+
+        #region OnTappedOpenViaAppCommand
+
+        private ICommand _onTappedOpenViaAppCommand;
+        public ICommand OnTappedOpenViaAppCommand => 
+        _onTappedOpenViaAppCommand ?? (_onTappedOpenViaAppCommand = new Command(OnTappedOpenViaApp));
+
+        private void OnTappedOpenViaApp()
+        {
+            // TODO: Move to another class(Browser.cs ?)
+            if(string.IsNullOrWhiteSpace(this._status.Source.Url)) 
+            {
+                return;
+            }
+            Device.OpenUri(new Uri(this._status.Source.Url));
+        }
+
+        #endregion
+
         #endregion
 
     }

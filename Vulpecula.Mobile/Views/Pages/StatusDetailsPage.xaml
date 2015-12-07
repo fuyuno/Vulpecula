@@ -75,7 +75,11 @@
                 Orientation="Horizontal">
                 <Label Text="{Binding CreatedAt}" />
                 <Label Text="- via" />
-                <Label Text="{Binding Via}" />
+                <Label Text="{Binding Via}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnTappedOpenViaAppCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
             </StackLayout>
             <StackLayout Grid.Row="1" Orientation="Horizontal"
                 HorizontalOptions="StartAndExpand">
