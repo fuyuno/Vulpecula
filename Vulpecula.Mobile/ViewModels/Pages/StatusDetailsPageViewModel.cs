@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using Xamarin.Forms;
 using Vulpecula.Mobile.ViewModels.Primitives;
@@ -6,18 +7,21 @@ using Vulpecula.Mobile.Models.Interfaces;
 using Prism.Navigation;
 using Vulpecula.Models;
 using Prism.Services;
+using Vulpecula.Mobile.Models;
 
 namespace Vulpecula.Mobile.ViewModels.Pages
 {
     public class StatusDetailsPageViewModel : TabbedViewModel
     {
         private readonly IPageDialogService _dialogService;
+        private readonly AccountManager _accountManager;
         private Status _status;
 
-        public StatusDetailsPageViewModel(ILocalization localization, INavigationService navigationService, IPageDialogService dialogService)
+        public StatusDetailsPageViewModel(ILocalization localization, INavigationService navigationService, IPageDialogService dialogService, AccountManager accountManager)
             : base(localization, navigationService)
         {
             this._dialogService = dialogService;
+            this._accountManager = accountManager;
             this.Title = this.GetLocalizedString("TweetDetailsPage");
         }
 
@@ -43,6 +47,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             this.CreatedAt = this._status.CreatedAt.ToString("G");
             this.Via = this._status.Source.Name;
             this.FavoritedCount = this._status.FavoritedCount;
+            this.SpreadCount = this._status.SpreadCount;
 
             base.OnNavigatedTo(parameters);
         }
