@@ -9,8 +9,9 @@ using Vulpecula.Mobile.Models.Interfaces;
 using Xamarin.Forms;
 
 using Application = Android.App.Application;
+using System;
 
-[assembly: Dependency(typeof (Configuration))]
+[assembly: Dependency(typeof(Configuration))]
 
 namespace Vulpecula.Droid.Models
 {
