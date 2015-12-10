@@ -7,7 +7,7 @@ Android 6.0 Marshmallow 以上を搭載した Android 端末で動作します�
 ### 動作環境
 * Android 6.0 Marshmallow 以上
 
-(予定です)
+動作確認は Android Marshmallow, Nexus 4 で行っています。
 
 
 ### ライセンス
