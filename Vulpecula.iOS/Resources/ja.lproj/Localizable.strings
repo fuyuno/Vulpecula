@@ -2,28 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>HelloLabel</key>
-    <string>Hello Xamarin.Forms with MVVM! (en-US)</string>
     <key>Public</key>
-    <string>Public</string>
-    <key>PublicTimeline</key>
-    <string>Public Timeline</string>
+    <string>パブリック</string>
     <key>Home</key>
     <string>ホーム</string>
-    <key>HomeTimeline</key>
-    <string>ホーム タイムライン</string>
     <key>Mentions</key>
-    <string>@返信</string>
-    <key>MentionsTimeline</key>
     <string>@返信</string>
     <key>Messages</key>
     <string>メッセージ</string>
-    <key>MessagesTimeline</key>
-    <string>メッセージ</string>
     <key>Me</key>
-    <string>私</string>
-    <key>MePage</key>
-    <string>プロフィール</string>
+    <string>自分</string>
     <key>AuthorizationPage</key>
     <string>Croudia で認証</string>
     <key>SharedMessage</key>
@@ -36,7 +24,23 @@
     <string>不正なステータスです。</string>
     <key>OK</key>
     <string>了解</string>
-    <key>StatusPage</key>
-    <string>ささやき構成</string>
+    <key>Status</key>
+    <string>ささやき</string>
+    <key>Cancel</key>
+    <string>キャンセル</string>
+    <key>Whisper</key>
+    <string>ささやく</string>
+    <key>Followings</key>
+    <string>フォロー</string>
+    <key>Followers</key>
+    <string>フォロワー</string>
+    <key>Whispers</key>
+    <string>ささやき</string>
+    <key>Favorites</key>
+    <string>お気に入り</string>
+    <key>Favs</key>
+    <string>お気に入り</string>
+    <key>Shares</key>
+    <string>シェア</string>
   </dict>
 </plist>

@@ -27,7 +27,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         {
             this._dialogService = dialogService;
             this._accountManager = accountManager;
-            this.Title = this.GetLocalizedString("TweetDetailsPage");
+            this.Title = this.GetLocalizedString("Details");
         }
 
         public override async void OnNavigatedTo(NavigationParameters parameters)

@@ -2,41 +2,45 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>HelloLabel</key>
-    <string>Hello Xamarin.Forms with MVVM! (en-US)</string>
     <key>Public</key>
     <string>Public</string>
-    <key>PublicTimeline</key>
-    <string>Public Timeline</string>
     <key>Home</key>
     <string>Home</string>
-    <key>HomeTimeline</key>
-    <string>Home Timeline</string>
     <key>Mentions</key>
-    <string>Mentions</string>
-    <key>MentionsTimeline</key>
     <string>Mentions</string>
     <key>Messages</key>
     <string>Messages</string>
-    <key>MessagesTimeline</key>
-    <string>Messages</string>
     <key>Me</key>
-    <string>Me</string>
-    <key>MePage</key>
     <string>Me</string>
     <key>AuthorizationPage</key>
     <string>Authorization with Croudia</string>
     <key>SharedMessage</key>
     <string>{0} shared.</string>
-    <key>TweetDetailsPage</key>
+    <key>Details</key>
     <string>Details</string>
     <key>Error</key>
     <string>Error</string>
     <key>InvalidStatusError</key>
-    <string>Invalid Status.</string>
+    <string>Invalid Status</string>
     <key>OK</key>
     <string>OK</string>
-    <key>StatusPage</key>
+    <key>Status</key>
     <string>Compose</string>
+    <key>Cancel</key>
+    <string>Cancel</string>
+    <key>Whisper</key>
+    <string>Whisper</string>
+    <key>Followings</key>
+    <string>Followings</string>
+    <key>Followers</key>
+    <string>Followers</string>
+    <key>Whispers</key>
+    <string>Whispers</string>
+    <key>Favorites</key>
+    <string>Favourites</string>
+    <key>Favs</key>
+    <string>Favs</string>
+    <key>Shares</key>
+    <string>Shares</string>
   </dict>
 </plist>

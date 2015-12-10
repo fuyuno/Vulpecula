@@ -2,6 +2,7 @@
      xmlns="http://xamarin.com/schemas/2014/forms"
      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
      xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+     xmlns:i18n="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
      Title="{Binding Title}" Icon="{Binding Icon}"
     mvvm:ViewModelLocator.AutowireViewModel="True">
     <ContentPage.ToolbarItems>
@@ -60,7 +61,7 @@
                 <StackLayout Grid.Column="0" BackgroundColor="White"
                     Padding="2" Spacing="0">
                     <Label Style="{StaticResource TitleLabelStyle}"
-                         Text="Whispers" />
+                         Text="{i18n:Translate Whispers}" />
                     <Label Style="{StaticResource ContentLabelStyle}"
                          Text="{Binding Whispers}" />
                 </StackLayout>
@@ -70,7 +71,7 @@
                 <StackLayout Grid.Column="0" BackgroundColor="White"
                     Padding="2" Spacing="0">
                     <Label Style="{StaticResource TitleLabelStyle}"
-                         Text="Followings" />
+                         Text="{i18n:Translate Followings}" />
                     <Label Style="{StaticResource ContentLabelStyle}"
                          Text="{Binding Followings}" />
                 </StackLayout>
@@ -80,7 +81,7 @@
                 <StackLayout Grid.Column="0" BackgroundColor="White"
                     Padding="2" Spacing="0">
                     <Label Style="{StaticResource TitleLabelStyle}"
-                         Text="Followers" />
+                         Text="{i18n:Translate Followers}" />
                     <Label Style="{StaticResource ContentLabelStyle}"
                          Text="{Binding Followers}" />
                 </StackLayout>
@@ -90,7 +91,7 @@
                 <StackLayout Grid.Column="0" BackgroundColor="White"
                     Padding="2" Spacing="0">
                     <Label Style="{StaticResource TitleLabelStyle}"
-                         Text="Favourites" />
+                         Text="{i18n:Translate Favorites}" />
                     <Label Style="{StaticResource ContentLabelStyle}"
                          Text="{Binding Favorites}" />
                 </StackLayout>

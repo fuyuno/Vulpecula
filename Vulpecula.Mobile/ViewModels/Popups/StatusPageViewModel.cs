@@ -20,23 +20,10 @@ namespace Vulpecula.Mobile.ViewModels.Popups
             : base(localization, navigationService)
         {
             this._accountManager = accountManager;
-            NavigationTitle = this.GetLocalizedString("StatusPage");
-            this.MainText = "Hello!";
+            NavigationTitle = this.GetLocalizedString("Status");
         }
 
         #region Properties
-
-        #region MainText
-
-        private string _mainText;
-
-        public string MainText
-        {
-            get { return _mainText; }
-            set { this.SetProperty(ref _mainText, value); }
-        }
-
-        #endregion
 
         #region Text
 

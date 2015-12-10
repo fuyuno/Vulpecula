@@ -91,6 +91,7 @@
       <DependentUpon>StatusDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Pages\StatusDetailsPageViewModel.cs" />
+    <Compile Include="Extensions\TranslateExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Prism">

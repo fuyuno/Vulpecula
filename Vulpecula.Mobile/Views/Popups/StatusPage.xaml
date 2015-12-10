@@ -2,13 +2,14 @@
      xmlns="http://xamarin.com/schemas/2014/forms"
      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
      xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+     xmlns:i18n="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
      Title="{Binding NavigationTitle}"
      mvvm:ViewModelLocator.AutowireViewModel="True">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding CloseCommand, Mode=OneWay}" Text="Close"
-            Priority="-1" />
-        <ToolbarItem Command="{Binding SendCommand, Mode=OneWay}" Text="Send"
-            Priority="1" />
+        <ToolbarItem Command="{Binding CloseCommand, Mode=OneWay}"
+             Text="{i18n:Translate Cancel}" Priority="-1" />
+        <ToolbarItem Command="{Binding SendCommand, Mode=OneWay}"
+             Text="{i18n:Translate Whisper}" Priority="1" />
     </ContentPage.ToolbarItems>
     <Editor Text="{Binding Text}" HorizontalOptions="FillAndExpand"
         Keyboard="Default" />
