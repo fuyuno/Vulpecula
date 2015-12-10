@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="ApplicationName">Vulpecula for Android</string>
-  <string name="Public">Public</string>
-  <string name="PublicTimeline">Public Timeline</string>
-  <string name="Home">Home</string>
-  <string name="HomeTimeline">Home Timeline</string>
-  <string name="Mentions">Mentions</string>
-  <string name="MentionsTimeline">Mentions</string>
-  <string name="Messages">Messages</string>
-  <string name="MessagesTimeline">Messages</string>
-  <string name="Me">Me</string>
-  <string name="MePage">Profile</string>
-  <string name="AuthorizationPage">Authorization with Croudia</string>
+    <string name="ApplicationName">Vulpecula for Android</string>
+    <string name="Public">Public</string>
+    <string name="Home">Home</string>
+    <string name="Mentions">Mentions</string>
+    <string name="Messages">Messages</string>
+    <string name="Me">Me</string>
+    <string name="AuthorizationPage">Authorization with Croudia</string>
+    <string name="SharedMessage">{0} shared.</string>
+    <string name="Details">Details</string>
+    <string name="Error">Error</string>
+    <string name="InvalidStatusError">Invalid Status</string>
+    <string name="OK">OK</string>
+    <string name="Status">Compose</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Whisper">Whisper</string>
+    <string name="Followings">Followings</string>
+    <string name="Followers">Followers</string>
+    <string name="Whispers">Whispers</string>
+    <string name="Favorites">Favourites</string>
+    <string name="Favs">Favs</string>
+    <string name="Shares">Shares</string>
 </resources>

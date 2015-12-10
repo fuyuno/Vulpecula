@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Windows.Input;
 
 using Prism.Navigation;
 
+using Vulpecula.Mobile.Extensions;
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
+using Vulpecula.Mobile.Views.Pages;
 using Vulpecula.Models;
 
-using System.Windows.Input;
-using Vulpecula.Mobile.Views.Pages;
 using Xamarin.Forms;
 
 namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
@@ -27,7 +28,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         #region Properties
 
         public string ScreenName => $"@{this._model.Sender.ScreenName}";
-        public string UserName => this._model.Sender.Name.Trim().Replace(Environment.NewLine, "");
+        public string UserName => this._model.Sender.Name.ToSingleLine();
         public string Text => this._model.Text.Trim();
         public string Icon => this._model.Sender.ProfileImageUrlHttps;
         public string RecipientIcon => this._model.Recipient.ProfileImageUrlHttps;

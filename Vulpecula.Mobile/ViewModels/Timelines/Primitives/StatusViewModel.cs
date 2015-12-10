@@ -5,6 +5,7 @@ using Prism.Navigation;
 
 using Xamarin.Forms;
 
+using Vulpecula.Mobile.Extensions;
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
 using Vulpecula.Mobile.Views.Pages;
@@ -28,9 +29,9 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         #region Properties
 
         public bool IsSpread => this._model.SpreadStatus != null;
-        public string SharedMessage => string.Format(this.GetLocalizedString("SharedMessage"), this._model.User.Name.Trim());
+        public string SharedMessage => string.Format(this.GetLocalizedString("SharedMessage"), this._model.User.Name.ToSingleLine());
         public string ScreenName => $"@{this._originalStatus.User.ScreenName}";
-        public string UserName => this._originalStatus.User.Name.Trim().Replace(Environment.NewLine, "");
+        public string UserName => this._originalStatus.User.Name.ToSingleLine();
         public string Text => this._originalStatus.Text.Trim();
         public string Icon => this._originalStatus.User.ProfileImageUrlHttps;
         public string CreatedAt => this._originalStatus.CreatedAt.ToString("HH:mm");

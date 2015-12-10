@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 using Prism.Commands;
 using Prism.Navigation;
 
+using Vulpecula.Mobile.Extensions;
 using Vulpecula.Mobile.Models;
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
@@ -21,7 +23,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             this._accountManager= accountManager;
             Title = this.GetLocalizedString("Me");
             Icon = "user";
-            NavigationTitle = this.GetLocalizedString("MePage");
+            NavigationTitle = this.GetLocalizedString("Me");
         }
            
         // Tab
@@ -52,11 +54,11 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         {
             this.Cover = user.CoverImageUrlHttps;
             this.UserIcon = user.ProfileImageUrlHttps;
-            this.Username = user.Name;
+            this.Username = user.Name.ToSingleLine();
             this.ScreenName = $"@{user.ScreenName}";
             this.Bio = user.Description;
-            this.Location = user.Location;
-            this.Url = user.Url;
+            this.Location = user.Location.ToSingleLine();
+            this.Url = user.Url.ToSingleLine();
             this.Followings = $"{user.FriendsCount:N0}";
             this.Followers = $"{user.FollowersCount:N0}";
             this.Favorites = $"{user.FavoritesCount:N0}";

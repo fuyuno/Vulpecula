@@ -3309,8 +3309,11 @@ namespace Vulpecula.Droid
 			// aapt resource value: 0x7f020062
 			public const int mr_ic_settings_light = 2130837602;
 			
+			// aapt resource value: 0x7f020064
+			public const int notification_template_icon_bg = 2130837604;
+			
 			// aapt resource value: 0x7f020063
-			public const int notification_template_icon_bg = 2130837603;
+			public const int sent = 2130837603;
 			
 			static Drawable()
 			{
@@ -3916,41 +3919,68 @@ namespace Vulpecula.Droid
 			// aapt resource value: 0x7f05001f
 			public const int ApplicationName = 2131034143;
 			
-			// aapt resource value: 0x7f05002a
-			public const int AuthorizationPage = 2131034154;
+			// aapt resource value: 0x7f050025
+			public const int AuthorizationPage = 2131034149;
+			
+			// aapt resource value: 0x7f05002c
+			public const int Cancel = 2131034156;
+			
+			// aapt resource value: 0x7f050027
+			public const int Details = 2131034151;
+			
+			// aapt resource value: 0x7f050028
+			public const int Error = 2131034152;
+			
+			// aapt resource value: 0x7f050031
+			public const int Favorites = 2131034161;
+			
+			// aapt resource value: 0x7f050032
+			public const int Favs = 2131034162;
+			
+			// aapt resource value: 0x7f05002f
+			public const int Followers = 2131034159;
+			
+			// aapt resource value: 0x7f05002e
+			public const int Followings = 2131034158;
 			
 			// aapt resource value: 0x7f05001e
 			public const int Hello = 2131034142;
 			
-			// aapt resource value: 0x7f050022
-			public const int Home = 2131034146;
-			
-			// aapt resource value: 0x7f050023
-			public const int HomeTimeline = 2131034147;
-			
-			// aapt resource value: 0x7f050028
-			public const int Me = 2131034152;
+			// aapt resource value: 0x7f050021
+			public const int Home = 2131034145;
 			
 			// aapt resource value: 0x7f050029
-			public const int MePage = 2131034153;
+			public const int InvalidStatusError = 2131034153;
 			
 			// aapt resource value: 0x7f050024
-			public const int Mentions = 2131034148;
+			public const int Me = 2131034148;
 			
-			// aapt resource value: 0x7f050025
-			public const int MentionsTimeline = 2131034149;
+			// aapt resource value: 0x7f050022
+			public const int Mentions = 2131034146;
 			
-			// aapt resource value: 0x7f050026
-			public const int Messages = 2131034150;
+			// aapt resource value: 0x7f050023
+			public const int Messages = 2131034147;
 			
-			// aapt resource value: 0x7f050027
-			public const int MessagesTimeline = 2131034151;
+			// aapt resource value: 0x7f05002a
+			public const int OK = 2131034154;
 			
 			// aapt resource value: 0x7f050020
 			public const int Public = 2131034144;
 			
-			// aapt resource value: 0x7f050021
-			public const int PublicTimeline = 2131034145;
+			// aapt resource value: 0x7f050026
+			public const int SharedMessage = 2131034150;
+			
+			// aapt resource value: 0x7f050033
+			public const int Shares = 2131034163;
+			
+			// aapt resource value: 0x7f05002b
+			public const int Status = 2131034155;
+			
+			// aapt resource value: 0x7f05002d
+			public const int Whisper = 2131034157;
+			
+			// aapt resource value: 0x7f050030
+			public const int Whispers = 2131034160;
 			
 			// aapt resource value: 0x7f05000b
 			public const int abc_action_bar_home_description = 2131034123;

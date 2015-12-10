@@ -14,7 +14,7 @@ using Xamarin.Forms.Platform.Android;
 namespace Vulpecula.Droid
 {
     [UsedImplicitly]
-    [Activity(Label = "Vulpecula.Android", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Vulpecula", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : FormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -23,7 +23,7 @@ namespace Vulpecula.Droid
 
             Forms.Init(this, bundle);
             var asm = Assembly.GetExecutingAssembly();
-            this.LoadApplication(new App(new ModelLocator("Vulpecula.Android.Models", asm.FullName)));
+            this.LoadApplication(new App(new ModelLocator("Vulpecula.Droid.Models", asm.FullName)));
         }
     }
 }

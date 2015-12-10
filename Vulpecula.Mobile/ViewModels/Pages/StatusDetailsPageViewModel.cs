@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Input;
 
 using Prism.Navigation;
 using Prism.Services;
 
+using Vulpecula.Mobile.Extensions;
 using Vulpecula.Mobile.Models;
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
@@ -12,7 +14,6 @@ using Vulpecula.Mobile.Views.Pages;
 using Vulpecula.Models;
 
 using Xamarin.Forms;
-using System.Reflection;
 
 namespace Vulpecula.Mobile.ViewModels.Pages
 {
@@ -46,11 +47,11 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             }
 
             this.ScreenName = $"@{this._status.User.ScreenName}";
-            this.UserName = this._status.User.Name;
+            this.UserName = this._status.User.Name.ToSingleLine();
             this.Text = this._status.Text;
             this.UserIcon = this._status.User.ProfileImageUrlHttps;
             this.CreatedAt = this._status.CreatedAt.ToString("G");
-            this.Via = this._status.Source.Name;
+            this.Via = this._status.Source.Name.ToSingleLine();
             this.FavoritedCount = this._status.FavoritedCount;
             this.SpreadCount = this._status.SpreadCount;
 

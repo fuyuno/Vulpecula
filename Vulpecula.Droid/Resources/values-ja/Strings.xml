@@ -1,15 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="ApplicationName">Vulpecula for Android</string>
-  <string name="Public">Public</string>
-  <string name="PublicTimeline">Public Timeline</string>
-  <string name="Home">ホーム</string>
-  <string name="HomeTimeline">ホーム タイムライン</string>
-  <string name="Mentions">＠返信</string>
-  <string name="MentionsTimeline">＠返信</string>
-  <string name="Messages">メッセージ</string>
-  <string name="MessagesTimeline">メッセージ</string>
-  <string name="Me">私</string>
-  <string name="MePage">プロフィール</string>
-  <string name="AuthorizationPage">Croudia で認証</string>
+    <string name="ApplicationName">Vulpecula for Android</string>
+    <string name="Public">パブリック</string>
+    <string name="Home">ホーム</string>
+    <string name="Mentions">＠返信</string>
+    <string name="Messages">メッセージ</string>
+    <string name="Me">自分</string>
+    <string name="AuthorizationPage">Croudia で認証</string>
+    <string name="SharedMessage">{0} さんがシェアしました</string>
+    <string name="Details">詳細</string>
+    <string name="Error">エラー</string>
+    <string name="InvalidStatusError">不正なステータスです。</string>
+    <string name="OK">OK</string>
+    <string name="Status">ささやき</string>
+    <string name="Cancel">キャンセル</string>
+    <string name="Whisper">ささやく</string>
+    <string name="Followings">フォロー</string>
+    <string name="Followers">フォロワー</string>
+    <string name="Whispers">ささやき</string>
+    <string name="Favorites">お気に入り</string>
+    <string name="Favs">お気に入り</string>
+    <string name="Shares">シェア</string>
 </resources>

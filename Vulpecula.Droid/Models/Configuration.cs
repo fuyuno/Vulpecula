@@ -80,7 +80,7 @@ namespace Vulpecula.Droid.Models
 
         public string[] GetArray(string key)
         {
-            return this._preferences.GetStringSet(key, null).ToArray();
+            return this._preferences.GetStringSet(key, new string[]{ })?.ToArray();
         }
     }
 }

@@ -16,14 +16,14 @@
     <string>Croudia で認証</string>
     <key>SharedMessage</key>
     <string>{0} さんがシェアしました</string>
-    <key>TweetDetailsPage</key>
+    <key>Details</key>
     <string>詳細</string>
     <key>Error</key>
     <string>エラー</string>
     <key>InvalidStatusError</key>
     <string>不正なステータスです。</string>
     <key>OK</key>
-    <string>了解</string>
+    <string>OK</string>
     <key>Status</key>
     <string>ささやき</string>
     <key>Cancel</key>
