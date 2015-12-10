@@ -9,7 +9,6 @@ using Vulpecula.Mobile.Models.Interfaces;
 using Xamarin.Forms;
 
 using Application = Android.App.Application;
-using System;
 
 [assembly: Dependency(typeof(Configuration))]
 
