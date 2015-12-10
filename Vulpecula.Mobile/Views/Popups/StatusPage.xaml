@@ -5,8 +5,10 @@
      Title="{Binding NavigationTitle}"
      mvvm:ViewModelLocator.AutowireViewModel="True">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding NavigateCommand,Mode=OneWay}"
-             Text="Hello" Priority="-1" />
+        <ToolbarItem Command="{Binding CloseCommand, Mode=OneWay}" Text="Close"
+            Priority="-1" />
+        <ToolbarItem Command="{Binding SendCommand, Mode=OneWay}" Text="Send"
+            Priority="1" />
     </ContentPage.ToolbarItems>
     <Label HorizontalOptions="Center" Text="{Binding MainText}"
         VerticalOptions="Center" />
