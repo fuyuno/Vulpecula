@@ -31,12 +31,6 @@
                 <vt:StatusTimeline BindingContext="{Binding PublicTimelineViewModel}" />
             </x:Arguments>
         </intermediate:NavPage>
-        <!--  Home Timeline  -->
-        <intermediate:NavPage>
-            <x:Arguments>
-                <vt:StatusTimeline BindingContext="{Binding HomeTimelineViewModel}" />
-            </x:Arguments>
-        </intermediate:NavPage>
         <!--  Mentions  -->
         <intermediate:NavPage>
             <x:Arguments>

@@ -50,7 +50,6 @@ namespace Vulpecula.Mobile.ViewModels
                     return;
                 }
                 this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Public);
-                this.HomeTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Home);
                 this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Mentions);
                 this.MessagesTimelineViewModel = new DirectMessageTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First());
             }
@@ -71,7 +70,6 @@ namespace Vulpecula.Mobile.ViewModels
             if (this.PublicTimelineViewModel == null && this._accountManager.Users.Count != 0)
             {
                 this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Public);
-                this.HomeTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Home);
                 this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Mentions);
                 this.MessagesTimelineViewModel = new DirectMessageTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First());
             }
@@ -87,18 +85,6 @@ namespace Vulpecula.Mobile.ViewModels
         {
             get { return this._publicTimelineViewModel; }
             set { this.SetProperty(ref this._publicTimelineViewModel, value); }
-        }
-
-        #endregion
-
-        #region HomeTimelineViewModel
-
-        private StatusTimelineViewModel _homeTimelineViewModel;
-
-        public StatusTimelineViewModel HomeTimelineViewModel
-        {
-            get { return this._homeTimelineViewModel; }
-            set { this.SetProperty(ref this._homeTimelineViewModel, value); }
         }
 
         #endregion
