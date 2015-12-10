@@ -10,6 +10,6 @@
         <ToolbarItem Command="{Binding SendCommand, Mode=OneWay}" Text="Send"
             Priority="1" />
     </ContentPage.ToolbarItems>
-    <Label HorizontalOptions="Center" Text="{Binding MainText}"
-        VerticalOptions="Center" />
+    <Editor Text="{Binding Text}" HorizontalOptions="FillAndExpand"
+        Keyboard="Default" />
 </ContentPage>

@@ -8,10 +8,10 @@ using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
 
 using Xamarin.Forms;
-using Vulpecula.Models;
 
 namespace Vulpecula.Mobile.ViewModels.Popups
 {
+    // TODO: Draft
     public class StatusPageViewModel : NavigationalViewModel
     {
         private readonly AccountManager _accountManager;
@@ -20,29 +20,8 @@ namespace Vulpecula.Mobile.ViewModels.Popups
             : base(localization, navigationService)
         {
             this._accountManager = accountManager;
-            NavigationTitle = "StatusPage";
+            NavigationTitle = this.GetLocalizedString("StatusPage");
             this.MainText = "Hello!";
-        }
-
-        public override void OnNavigatedFrom(NavigationParameters parameters)
-        {
-            if (!string.IsNullOrWhiteSpace(this.Text))
-            {
-                parameters["draft"] = this.Text;
-            }
-        }
-
-        public override void OnNavigatedTo(NavigationParameters parameters)
-        {
-            if (parameters == null)
-            {
-                return;
-            }
-            if (parameters.ContainsKey("draft"))
-            {
-                this.Text = parameters["draft"].ToString();
-                parameters.Remove("draft");
-            }
         }
 
         #region Properties
@@ -115,7 +94,7 @@ namespace Vulpecula.Mobile.ViewModels.Popups
 
         private async void Send()
         {
-            await this._accountManager.Providers.First().Croudia.Statuses.UpdateAsync(text => this.Text);
+            await this._accountManager.Providers.First().Croudia.Statuses.UpdateAsync(status => this.Text);
             this.Text = string.Empty;
             this.NavigationService.GoBack();
         }

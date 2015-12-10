@@ -36,5 +36,7 @@
     <string>Invalid Status.</string>
     <key>OK</key>
     <string>OK</string>
+    <key>StatusPage</key>
+    <string>Compose</string>
   </dict>
 </plist>

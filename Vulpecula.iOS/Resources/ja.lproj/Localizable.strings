@@ -36,5 +36,7 @@
     <string>不正なステータスです。</string>
     <key>OK</key>
     <string>了解</string>
+    <key>StatusPage</key>
+    <string>ささやき構成</string>
   </dict>
 </plist>
