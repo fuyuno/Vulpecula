@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using System.Collections.Generic;
 using UIKit;
+using Vulpecula.Mobile.ViewModels.Primitives;
 
 [assembly: ExportRenderer(typeof(ContentPage), typeof(NavigationPageRenderer))]
 
@@ -13,10 +14,6 @@ namespace Vulpecula.iOS.Renderers
 {
     public class NavigationPageRenderer : PageRenderer
     {
-        public NavigationPageRenderer()
-        {
-        }
-
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);

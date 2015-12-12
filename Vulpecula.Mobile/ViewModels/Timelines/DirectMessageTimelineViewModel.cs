@@ -10,6 +10,8 @@ using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
 using Vulpecula.Mobile.ViewModels.Timelines.Primitives;
 using Vulpecula.Streaming.Reactive;
+using Prism.Commands;
+using Vulpecula.Mobile.Views.Popups;
 
 namespace Vulpecula.Mobile.ViewModels.Timelines
 {
@@ -54,5 +56,18 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
                 }
             });
         }
+
+        #region NavigateCommand
+
+        private DelegateCommand _navigateCommand;
+
+        public DelegateCommand NavigateCommand => _navigateCommand ?? (_navigateCommand = new DelegateCommand(Navigate));
+
+        private void Navigate()
+        {
+            NavigationService.Navigate<StatusPage>();
+        }
+
+        #endregion
     }
 }

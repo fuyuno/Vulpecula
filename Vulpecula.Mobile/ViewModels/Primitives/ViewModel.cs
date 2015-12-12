@@ -10,6 +10,7 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
     public class ViewModel : BindableBase, IDisposable
     {
         protected ILocalization Localization { get; }
+
         public CompositeDisposable CompositeDisposable { get; }
 
         protected ViewModel(ILocalization localization)

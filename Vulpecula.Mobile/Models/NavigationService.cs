@@ -102,7 +102,6 @@ namespace Vulpecula.Mobile.Models
             {
                 await navigation.PopAsync(animated);
             }
-            CurrentPage = null;
         }
 
         private static void PrepareNavigation(Page page, NavigationParameters parameters)

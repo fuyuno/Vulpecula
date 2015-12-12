@@ -14,6 +14,8 @@ using Vulpecula.Mobile.Views.Pages;
 using Vulpecula.Models;
 
 using Xamarin.Forms;
+using Prism.Commands;
+using Vulpecula.Mobile.Views.Popups;
 
 namespace Vulpecula.Mobile.ViewModels.Pages
 {
@@ -189,6 +191,19 @@ namespace Vulpecula.Mobile.ViewModels.Pages
                 return;
             }
             Device.OpenUri(new Uri(this._status.Source.Url));
+        }
+
+        #endregion
+
+        #region NavigateCommand
+
+        private DelegateCommand _navigateCommand;
+
+        public DelegateCommand NavigateCommand => _navigateCommand ?? (_navigateCommand = new DelegateCommand(Navigate));
+
+        private void Navigate()
+        {
+            NavigationService.Navigate<StatusPage>();
         }
 
         #endregion
