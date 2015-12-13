@@ -5,12 +5,13 @@ Supported Platform is:
 * Windows Desktop
 * Android
 * iOS
-* Mac (TBI)
+* Mac
 
 
 ## Projects
 * Vulpecula.Desktop
 * Vulpecula.Droid
+* Vulpecula.Mac
 * Vulpecula.Mobile (Shared)
 * Vulpecula.Streaming (Shared)
 * Vulpecula.Universal
