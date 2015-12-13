@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Vulpecula.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Vulpecula for Mac</AssemblyName>
+    <AssemblyName>VulpeculaiOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
