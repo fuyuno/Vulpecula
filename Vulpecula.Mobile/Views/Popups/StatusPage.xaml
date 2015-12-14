@@ -4,13 +4,24 @@
      xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
      xmlns:i18n="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
      Title="{Binding NavigationTitle}"
+     xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
+     xmlns:e="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
      mvvm:ViewModelLocator.AutowireViewModel="True">
+    <Grid>
+        <Grid.Behaviors>
+            <behaviors:PlatformBehavior />
+        </Grid.Behaviors>
+        <!--<Editor Text="{Binding Text}" HorizontalOptions="StartAndExpand"
+            Keyboard="Default" HeightRequest="200" />-->
+        <Label Text="iOS Only" HorizontalOptions="StartAndExpand"
+            e:PlatformControl.iOS="True" e:PlatformControl.Android="False" />
+        <Label Text="Android Only" HorizontalOptions="StartAndExpand"
+            e:PlatformControl.iOS="False" e:PlatformControl.Android="True" />
+    </Grid>
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding CloseCommand, Mode=OneWay}"
              Text="{i18n:Translate Cancel}" Priority="-1" />
         <ToolbarItem Command="{Binding SendCommand, Mode=OneWay}"
              Text="{i18n:Translate Whisper}" Priority="1" />
     </ContentPage.ToolbarItems>
-    <Editor Text="{Binding Text}" HorizontalOptions="FillAndExpand"
-        Keyboard="Default" />
 </ContentPage>

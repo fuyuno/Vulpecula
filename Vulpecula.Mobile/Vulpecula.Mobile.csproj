@@ -93,6 +93,8 @@
     <Compile Include="ViewModels\Pages\StatusDetailsPageViewModel.cs" />
     <Compile Include="Extensions\TranslateExtension.cs" />
     <Compile Include="Extensions\StringEx.cs" />
+    <Compile Include="Extensions\PlatformControl.cs" />
+    <Compile Include="Behaviors\PlatformBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Prism">
