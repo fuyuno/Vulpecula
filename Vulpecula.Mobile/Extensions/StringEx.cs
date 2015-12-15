@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Vulpecula.Mobile.Extensions
 {
@@ -6,7 +7,7 @@ namespace Vulpecula.Mobile.Extensions
     {
         public static string ToSingleLine(this string str)
         {
-            return str.Trim().Replace(Environment.NewLine, "");
+            return str?.Trim().Replace(Environment.NewLine, "");
         }
     }
 }

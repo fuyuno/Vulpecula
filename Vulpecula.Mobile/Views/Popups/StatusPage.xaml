@@ -8,15 +8,8 @@
      xmlns:e="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
      mvvm:ViewModelLocator.AutowireViewModel="True">
     <Grid>
-        <Grid.Behaviors>
-            <behaviors:PlatformBehavior />
-        </Grid.Behaviors>
-        <!--<Editor Text="{Binding Text}" HorizontalOptions="StartAndExpand"
-            Keyboard="Default" HeightRequest="200" />-->
-        <Label Text="iOS Only" HorizontalOptions="StartAndExpand"
-            e:PlatformControl.iOS="True" e:PlatformControl.Android="False" />
-        <Label Text="Android Only" HorizontalOptions="StartAndExpand"
-            e:PlatformControl.iOS="False" e:PlatformControl.Android="True" />
+        <Editor Text="{Binding Text}" HorizontalOptions="StartAndExpand"
+            Keyboard="Default" HeightRequest="200" />
     </Grid>
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding CloseCommand, Mode=OneWay}"

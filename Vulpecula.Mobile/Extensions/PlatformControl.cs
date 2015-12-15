@@ -2,7 +2,7 @@
 
 namespace Vulpecula.Mobile.Extensions
 {
-    public class PlatformControl
+    public static class PlatformControl
     {
         // iOS
 

@@ -1,12 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+
+using UIKit;
 
 using Vulpecula.iOS.Renderers;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using System.Collections.Generic;
-using UIKit;
-using Vulpecula.Mobile.ViewModels.Primitives;
 
 [assembly: ExportRenderer(typeof(ContentPage), typeof(NavigationPageRenderer))]
 
