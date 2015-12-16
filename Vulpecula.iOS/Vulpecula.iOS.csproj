@@ -112,6 +112,7 @@
     <BundleResource Include="Resources\share.png" />
     <BundleResource Include="Resources\share%402x.png" />
     <Compile Include="Renderers\NavigationPageRenderer.cs" />
+    <Compile Include="Renderers\ListViewControlRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\first.png" />
