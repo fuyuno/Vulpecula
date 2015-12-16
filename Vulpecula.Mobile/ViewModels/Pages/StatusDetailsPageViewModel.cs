@@ -50,7 +50,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
             this.ScreenName = $"@{this._status.User.ScreenName}";
             this.UserName = this._status.User.Name.ToSingleLine();
-            this.Text = this._status.Text;
+            this.Text = this._status.Text.Trim();
             this.UserIcon = this._status.User.ProfileImageUrlHttps;
             this.CreatedAt = this._status.CreatedAt.ToString("G");
             this.Via = this._status.Source.Name.ToSingleLine();
