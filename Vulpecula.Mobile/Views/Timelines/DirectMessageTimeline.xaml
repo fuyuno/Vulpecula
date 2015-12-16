@@ -8,85 +8,98 @@
         <ToolbarItem Command="{Binding NavigateCommand, Mode=OneWay}"
              Icon="sent" Priority="1" />
     </ContentPage.ToolbarItems>
-    <ListView HasUnevenRows="True" ItemsSource="{Binding Statuses}">
-        <ListView.Behaviors>
-            <behaviors:ListViewDisableSelectionBehavior />
-        </ListView.Behaviors>
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <ViewCell.View>
-                        <ContentView Padding="5">
-                            <Grid ColumnSpacing="0">
-                                <Grid.Resources>
-                                    <ResourceDictionary>
-                                        <Style TargetType="Label">
-                                            <Setter Property="FontSize"
-                                                 Value="14" />
-                                        </Style>
-                                    </ResourceDictionary>
-                                </Grid.Resources>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="56" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <ContentView Grid.Column="0" Padding="4">
-                                    <Grid>
-                                        <Image HeightRequest="48"
-                                             HorizontalOptions="Start"
-                                             Source="{Binding Icon}"
-                                             VerticalOptions="Start"
-                                             WidthRequest="48">
-                                            <Image.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OnTappedCommand}"
-                                                     CommandParameter="Sender" />
-                                            </Image.GestureRecognizers>
-                                        </Image>
-                                        <Image HeightRequest="24"
-                                             HorizontalOptions="End"
-                                             Source="{Binding RecipientIcon}"
-                                             VerticalOptions="End"
-                                             WidthRequest="24">
-                                            <Image.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OnTappedCommand}"
-                                                     CommandParameter="Reciever" />
-                                            </Image.GestureRecognizers>
-                                        </Image>
+    <Grid>
+        <StackLayout HorizontalOptions="CenterAndExpand"
+             VerticalOptions="CenterAndExpand" x:Name="Indicator">
+            <ActivityIndicator IsRunning="true" />
+            <Label Text="Loading timeline..." TextColor="Silver" />
+        </StackLayout>
+        <ListView HasUnevenRows="True" ItemsSource="{Binding Statuses}">
+            <ListView.Behaviors>
+                <behaviors:ListViewDisableSelectionBehavior />
+                <behaviors:EmptyListBehavior Target="Indicator" />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <ContentView Padding="5">
+                                <Grid ColumnSpacing="0">
+                                    <Grid.Resources>
+                                        <ResourceDictionary>
+                                            <Style TargetType="Label">
+                                                <Setter Property="FontSize"
+                                                     Value="14" />
+                                            </Style>
+                                        </ResourceDictionary>
+                                    </Grid.Resources>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="56" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <ContentView Grid.Column="0" Padding="4">
+                                        <Grid>
+                                            <Image HeightRequest="48"
+                                                 HorizontalOptions="Start"
+                                                 Source="{Binding Icon}"
+                                                 VerticalOptions="Start"
+                                                 WidthRequest="48">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding OnTappedCommand}"
+                                                         CommandParameter="Sender" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <Image HeightRequest="24"
+                                                 HorizontalOptions="End"
+                                                 Source="{Binding RecipientIcon}"
+                                                 VerticalOptions="End"
+                                                 WidthRequest="24">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding OnTappedCommand}"
+                                                         CommandParameter="Reciever" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Grid>
+                                    </ContentView>
+                                    <Grid Grid.Column="1" RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" ColumnSpacing="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding UserName}"
+                                                 Grid.Column="0" Font="Bold"
+                                                FontSize="13"
+                                                 LineBreakMode="NoWrap" />
+                                            <Label Text="{Binding ScreenName}"
+                                                 Grid.Column="1"
+                                                 LineBreakMode="TailTruncation"
+                                                 TextColor="Silver"
+                                                 FontSize="12"
+                                                 VerticalOptions="End" />
+                                            <Label Text="{Binding CreatedAt}"
+                                                 Grid.Column="2"
+                                                 TextColor="Silver"
+                                                 FontSize="12"
+                                                 LineBreakMode="NoWrap"
+                                                 VerticalOptions="End"
+                                                 HorizontalOptions="EndAndExpand" />
+                                        </Grid>
+                                        <Label Grid.Row="1"
+                                             Text="{Binding Text}" />
                                     </Grid>
-                                </ContentView>
-                                <Grid Grid.Column="1" RowSpacing="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0" ColumnSpacing="5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <Label Text="{Binding UserName}"
-                                             Grid.Column="0" Font="Bold"
-                                            FontSize="13" LineBreakMode="NoWrap" />
-                                        <Label Text="{Binding ScreenName}"
-                                             Grid.Column="1"
-                                             LineBreakMode="TailTruncation"
-                                             TextColor="Silver" FontSize="12"
-                                            VerticalOptions="End" />
-                                        <Label Text="{Binding CreatedAt}"
-                                             Grid.Column="2" TextColor="Silver"
-                                            FontSize="12" LineBreakMode="NoWrap"
-                                            VerticalOptions="End"
-                                             HorizontalOptions="EndAndExpand" />
-                                    </Grid>
-                                    <Label Grid.Row="1" Text="{Binding Text}" />
                                 </Grid>
-                            </Grid>
-                        </ContentView>
-                    </ViewCell.View>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                            </ContentView>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </ContentPage>

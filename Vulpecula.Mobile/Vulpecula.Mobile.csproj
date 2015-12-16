@@ -95,6 +95,7 @@
     <Compile Include="Extensions\StringEx.cs" />
     <Compile Include="Extensions\PlatformControl.cs" />
     <Compile Include="Behaviors\PlatformBehavior.cs" />
+    <Compile Include="Behaviors\EmptyListBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Prism">
