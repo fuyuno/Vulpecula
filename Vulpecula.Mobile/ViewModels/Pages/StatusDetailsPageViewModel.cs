@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
 
+using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 
@@ -11,11 +12,10 @@ using Vulpecula.Mobile.Models;
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
 using Vulpecula.Mobile.Views.Pages;
+using Vulpecula.Mobile.Views.Popups;
 using Vulpecula.Models;
 
 using Xamarin.Forms;
-using Prism.Commands;
-using Vulpecula.Mobile.Views.Popups;
 
 namespace Vulpecula.Mobile.ViewModels.Pages
 {

@@ -1,8 +1,9 @@
 ﻿using System;
-using Xamarin.Forms;
+using System.Collections.Specialized;
 
 using Vulpecula.Mobile.Extensions;
-using System.Collections.Specialized;
+
+using Xamarin.Forms;
 
 namespace Vulpecula.Mobile.Behaviors
 {

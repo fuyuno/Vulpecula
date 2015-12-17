@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
+using Prism.Commands;
 using Prism.Navigation;
 
 using Vulpecula.Mobile.Models;
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
 using Vulpecula.Mobile.ViewModels.Timelines.Primitives;
+using Vulpecula.Mobile.Views.Popups;
 using Vulpecula.Models;
 using Vulpecula.Streaming.Reactive;
-using Prism.Commands;
-using Vulpecula.Mobile.Views.Popups;
 
 namespace Vulpecula.Mobile.ViewModels.Timelines
 {

@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Vulpecula.iOS.Renderers;
+
 using Xamarin.Forms;
-using Vulpecula.iOS.Renderers;
 using Xamarin.Forms.Platform.iOS;
-using UIKit;
 
 [assembly: ExportRenderer(typeof(ListView), typeof(ListViewControlRenderer))]
 
