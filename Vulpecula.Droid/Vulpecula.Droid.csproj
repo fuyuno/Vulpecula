@@ -100,6 +100,39 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\sent.png" />
     <AndroidResource Include="Resources\drawable\share.png" />
+    <AndroidResource Include="Resources\drawable\more.png" />
+    <AndroidResource Include="Resources\drawable\favorite.png" />
+    <AndroidResource Include="Resources\drawable\comment.png" />
+    <AndroidResource Include="Resources\drawable\re.png" />
+    <AndroidResource Include="Resources\drawable\reply.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\comment.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\favorite.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\more.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\re.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\repeat.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\reply.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\sent.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\comment.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\favorite.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\more.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\re.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\repeat.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\reply.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\sent.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\comments.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\favorite.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\more.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\re.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\repeat.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\reply.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\sent.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\comments.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\favorite.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\more.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\re.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\repeat.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\reply.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\sent.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />
@@ -127,4 +160,10 @@
 		<Target Name="AfterBuild">
 		</Target>
  -->
+  <ItemGroup>
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-ldpi\" />
+  </ItemGroup>
 </Project>

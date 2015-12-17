@@ -113,6 +113,16 @@
     <BundleResource Include="Resources\share%402x.png" />
     <Compile Include="Renderers\NavigationPageRenderer.cs" />
     <Compile Include="Renderers\ListViewControlRenderer.cs" />
+    <BundleResource Include="Resources\re.png" />
+    <BundleResource Include="Resources\re%402x.png" />
+    <BundleResource Include="Resources\reply.png" />
+    <BundleResource Include="Resources\reply%402x.png" />
+    <BundleResource Include="Resources\favorite.png" />
+    <BundleResource Include="Resources\favorite%402x.png" />
+    <BundleResource Include="Resources\comment.png" />
+    <BundleResource Include="Resources\comment%402x.png" />
+    <BundleResource Include="Resources\more.png" />
+    <BundleResource Include="Resources\more%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\first.png" />

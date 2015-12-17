@@ -95,16 +95,46 @@
                     </StackLayout>
                 </StackLayout>
             </Grid>
-            <!--
-        <Grid Grid.Column="0" Grid.ColumnSpan="2"
-            Grid.Row="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Text="Conversations" />
-        </Grid>
-        -->
+            <ContentView Grid.Column="0" Grid.ColumnSpan="2"
+                Grid.Row="3">
+                <Grid>
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="Button">
+                                <Setter Property="HeightRequest">
+                                    <Setter.Value>
+                                        <OnPlatform x:TypeArguments="x:Double"
+                                             Android="32" iOS="48" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="WidthRequest">
+                                    <Setter.Value>
+                                        <OnPlatform x:TypeArguments="x:Double"
+                                             Android="32" iOS="48" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Image="reply"
+                        BackgroundColor="Transparent" />
+                    <Button Grid.Column="1" Image="re"
+                        BackgroundColor="Transparent" />
+                    <Button Grid.Column="2" Image="favorite"
+                        BackgroundColor="Transparent" />
+                    <Button Grid.Column="3" Image="comment"
+                        BackgroundColor="Transparent" />
+                    <Button Grid.Column="4" Image="more"
+                        BackgroundColor="Transparent" />
+                </Grid>
+            </ContentView>
         </Grid>
     </ScrollView>
 </ContentPage>
