@@ -34,7 +34,23 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         public string UserName => this._originalStatus.User.Name.ToSingleLine();
         public string Text => this._originalStatus.Text.Trim();
         public string Icon => this._originalStatus.User.ProfileImageUrlHttps;
-        public string CreatedAt => this._originalStatus.CreatedAt.ToString("HH:mm");
+        public string CreatedAt 
+        {
+            get {
+                var format = "HH:mm";
+                // 1 hour
+                if(this._originalStatus.CreatedAt.AddDays(1) < DateTime.Now)
+                {
+                    format = "MM/dd HH:mm";
+                }
+                // 1 year
+                if(this._originalStatus.CreatedAt.AddYears(1) < DateTime.Now)
+                {
+                    format = "yy/MM/dd HH:mm";   
+                }
+                return this._originalStatus.CreatedAt.ToString(format);
+            }
+        }
 
         #endregion
 

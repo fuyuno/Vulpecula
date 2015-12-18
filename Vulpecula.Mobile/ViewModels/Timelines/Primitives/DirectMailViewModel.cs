@@ -32,7 +32,23 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         public string Text => this._model.Text.Trim();
         public string Icon => this._model.Sender.ProfileImageUrlHttps;
         public string RecipientIcon => this._model.Recipient.ProfileImageUrlHttps;
-        public string CreatedAt => this._model.CreatedAt.ToString("HH:mm");
+        public string CreatedAt 
+        {
+            get {
+                var format = "HH:mm";
+                // 1 hour
+                if(this._model.CreatedAt.AddDays(1) < DateTime.Now)
+                {
+                    format = "MM/dd HH:mm";
+                }
+                // 1 year
+                if(this._model.CreatedAt.AddYears(1) < DateTime.Now)
+                {
+                    format = "yy/MM/dd HH:mm";   
+                }
+                return this._model.CreatedAt.ToString(format);
+            }
+        }
 
         #endregion
 
