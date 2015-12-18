@@ -125,10 +125,6 @@
     <BundleResource Include="Resources\more%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\first.png" />
-    <BundleResource Include="Resources\second.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
