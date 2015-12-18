@@ -124,15 +124,20 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Image="reply"
-                        BackgroundColor="Transparent" />
+                        BackgroundColor="Transparent"
+                         Command="{Binding OnTappedReplyCommand}" />
                     <Button Grid.Column="1" Image="re"
-                        BackgroundColor="Transparent" />
+                        BackgroundColor="Transparent"
+                         Command="{Binding OnTappedShareCommand}" />
                     <Button Grid.Column="2" Image="favorite"
-                        BackgroundColor="Transparent" />
+                        BackgroundColor="Transparent"
+                         Command="{Binding OnTappedFavoriteCommand}" />
                     <Button Grid.Column="3" Image="comment"
-                        BackgroundColor="Transparent" />
+                        BackgroundColor="Transparent"
+                         Command="{Binding OnTappedCommentCommand}" />
                     <Button Grid.Column="4" Image="more"
-                        BackgroundColor="Transparent" />
+                        BackgroundColor="Transparent"
+                         Command="{Binding OnTappedMoreCommand}" />
                 </Grid>
             </ContentView>
         </Grid>

@@ -23,6 +23,15 @@ namespace Vulpecula.Mobile.ViewModels.Popups
             NavigationTitle = this.GetLocalizedString("Status");
         }
 
+        public override void OnNavigatedTo(NavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("status"))
+            {
+                this.Text = parameters["status"].ToString();
+            }
+            base.OnNavigatedTo(parameters);
+        }
+
         #region Properties
 
         #region Text

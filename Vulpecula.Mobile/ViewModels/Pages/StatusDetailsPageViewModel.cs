@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Input;
 
 using Prism.Commands;
@@ -56,6 +55,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             this.Via = this._status.Source.Name.ToSingleLine();
             this.FavoritedCount = this._status.FavoritedCount;
             this.SpreadCount = this._status.SpreadCount;
+
+            this.OnTappedShareCommand.ChangeCanExecute();
 
             base.OnNavigatedTo(parameters);
         }
@@ -195,6 +196,77 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         #endregion
 
+        #region OnTappedReplyCommand
+
+        private ICommand _onTappedReplyCommand;
+        public ICommand OnTappedReplyCommand => _onTappedReplyCommand ?? (_onTappedReplyCommand = new Command(OnTappedReply));
+
+        private void OnTappedReply()
+        {
+            var param = new NavigationParameters();
+            param.Add("status", $"{this.ScreenName} ");
+            param.Add("in_reply_to_status_id", this._status.Id);
+            this.NavigationService.Navigate<StatusPage>(param);
+        }
+
+        #endregion
+
+        #region OnTappedShareCommand
+
+        private Command _onTappedShareCommand;
+        public Command OnTappedShareCommand => _onTappedShareCommand ?? (_onTappedShareCommand = new Command(OnTappedShare, CanOnTappedShare));
+
+        private async void OnTappedShare()
+        {
+            await this._accountManager.Providers.First().Croudia.Statuses.SpreadAsync(this._status.Id);
+        }
+
+        private bool CanOnTappedShare()
+        {
+            if(this._status == null) {
+                return true;
+            }
+            return !this._status.User.IsProtected;   
+        }
+
+        #endregion
+
+        #region OnTappedFavoriteCommand
+
+        private ICommand _onTappedFavoriteCommand;
+        public ICommand OnTappedFavoriteCommand => _onTappedFavoriteCommand ?? (_onTappedFavoriteCommand = new Command(OnTappedFavorite));
+
+        private async void OnTappedFavorite()
+        {
+            await this._accountManager.Providers.First().Croudia.Favorites.CreateAsync(this._status.Id);
+        }
+
+        #endregion
+
+        #region OnTappedCommentCommand
+
+        private ICommand _onTappedCommentCommand;
+        public ICommand OnTappedCommentCommand => _onTappedCommentCommand ?? (_onTappedCommentCommand = new Command(OnTappedComment));
+
+        private void OnTappedComment()
+        {
+            // comment
+        }
+
+        #endregion
+
+        #region OnTappedMoreCommand
+
+        private ICommand _onTappedMoreCommand;
+        public ICommand OnTappedMoreCommand => _onTappedMoreCommand ?? (_onTappedMoreCommand = new Command(OnTappedMore));
+
+        private void OnTappedMore()
+        {
+            // more
+        }
+
+        #endregion
+
         #region NavigateCommand
 
         private DelegateCommand _navigateCommand;
@@ -207,6 +279,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         }
 
         #endregion
+
 
         #endregion
 

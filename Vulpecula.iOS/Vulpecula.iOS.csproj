@@ -123,6 +123,8 @@
     <BundleResource Include="Resources\comment%402x.png" />
     <BundleResource Include="Resources\more.png" />
     <BundleResource Include="Resources\more%402x.png" />
+    <BundleResource Include="Resources\favorited.png" />
+    <BundleResource Include="Resources\favorited%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
