@@ -9,18 +9,6 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
     /// </summary>
     public class TabbedViewModel : NavigationalViewModel
     {
-        #region Title
-
-        private string _title;
-
-        public string Title
-        {
-            get { return this._title; }
-            set { this.SetProperty(ref this._title, value); }
-        }
-
-        #endregion
-
         public string Icon { get; set; }
 
         protected TabbedViewModel(ILocalization localization, INavigationService navigationService)
@@ -37,5 +25,17 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
         {
             // Override
         }
+
+        #region Title
+
+        private string _title;
+
+        public string Title
+        {
+            get { return this._title; }
+            set { this.SetProperty(ref this._title, value); }
+        }
+
+        #endregion
     }
 }

@@ -12,9 +12,9 @@ namespace Vulpecula.Mobile.Behaviors
     /// </summary>
     public class PlatformBehavior : Behavior<Layout<View>>
     {
-        private Layout<View> _layout;
         private IDisposable _disposable;
         private bool _flag;
+        private Layout<View> _layout;
 
         protected override void OnAttachedTo(Layout<View> bindable)
         {
@@ -73,7 +73,5 @@ namespace Vulpecula.Mobile.Behaviors
 
             this._flag = false;
         }
-
     }
 }
-

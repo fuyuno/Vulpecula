@@ -17,8 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Mobile", "Vulpecu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Universal.BgTask", "Vulpecula.Universal.BgTask\Vulpecula.Universal.BgTask.csproj", "{263F65EF-0771-4501-BD7B-1D10E2F5284A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Droid", "Vulpecula.Droid\Vulpecula.Droid.csproj", "{1B975B8D-37C1-42B7-8307-7D515FDAEBFA}"
-EndProject
+#Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Droid", "Vulpecula.Droid\Vulpecula.Droid.csproj", "{1B975B8D-37C1-42B7-8307-7D515FDAEBFA}"
+#EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulpecula.Mac", "Vulpecula.Mac\Vulpecula.Mac.csproj", "{6BDAFEAE-67BF-45E4-891B-78690CF180B9}"
 EndProject
 Global

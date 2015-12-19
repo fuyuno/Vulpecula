@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-
 using System.Reactive.Linq;
+
 using Prism.Commands;
 using Prism.Navigation;
 
@@ -12,16 +12,17 @@ using Vulpecula.Mobile.ViewModels.Timelines.Primitives;
 using Vulpecula.Mobile.Views.Popups;
 using Vulpecula.Streaming.Reactive;
 
+// ReSharper disable InconsistentNaming
+
 namespace Vulpecula.Mobile.ViewModels.Timelines
 {
     public class DirectMessageTimelineViewModel : TabbedViewModel
     {
-        public ObservableCollection<DirectMailViewModel> Statuses { get; set; }
-
         private readonly CroudiaProvider _provider;
-        private long _receivedLastId = 0;
-        private long _sentLastId = 0;
         private IDisposable _disposable;
+        private long _receivedLastId;
+        private long _sentLastId;
+        public ObservableCollection<DirectMailViewModel> Statuses { get; set; }
 
         public DirectMessageTimelineViewModel(ILocalization localization, INavigationService navigationService, CroudiaProvider provider)
             : base(localization, navigationService)

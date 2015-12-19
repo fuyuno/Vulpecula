@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Vulpecula.Mobile.Extensions
 {
@@ -11,4 +10,3 @@ namespace Vulpecula.Mobile.Extensions
         }
     }
 }
-

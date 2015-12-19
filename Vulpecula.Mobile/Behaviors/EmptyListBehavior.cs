@@ -10,11 +10,12 @@ namespace Vulpecula.Mobile.Behaviors
     public class EmptyListBehavior : Behavior<ListView>
     {
         public static readonly BindableProperty TargetProperty =
-            BindableProperty.Create(nameof(Target), typeof(string), typeof(EmptyListBehavior), string.Empty);
+            BindableProperty.Create(nameof(Target), typeof (string), typeof (EmptyListBehavior), string.Empty);
+
+        private ListView _associatedObject;
 
         private int _count;
         private IDisposable _disposable;
-        private ListView _associatedObject;
 
         public string Target
         {
@@ -50,33 +51,32 @@ namespace Vulpecula.Mobile.Behaviors
                 return;
             }
             this._disposable = items.ToObservable().Subscribe(w =>
+            {
+                switch (w.EventArgs.Action)
                 {
-                    switch (w.EventArgs.Action)
-                    {
-                        case NotifyCollectionChangedAction.Add:
-                            this._count += w.EventArgs.NewItems.Count;
-                            break;
+                    case NotifyCollectionChangedAction.Add:
+                        this._count += w.EventArgs.NewItems.Count;
+                        break;
 
-                        case NotifyCollectionChangedAction.Remove:
-                            this._count -= w.EventArgs.OldItems.Count;
-                            break;
+                    case NotifyCollectionChangedAction.Remove:
+                        this._count -= w.EventArgs.OldItems.Count;
+                        break;
 
-                        case NotifyCollectionChangedAction.Replace:
-                        case NotifyCollectionChangedAction.Move:
-                            break;
+                    case NotifyCollectionChangedAction.Replace:
+                    case NotifyCollectionChangedAction.Move:
+                        break;
 
-                        case NotifyCollectionChangedAction.Reset:
-                            this._count = 0;
-                            break;
-                    }   
-                    this.Action();
-                });
-            
+                    case NotifyCollectionChangedAction.Reset:
+                        this._count = 0;
+                        break;
+                }
+                this.Action();
+            });
         }
 
         private void Action()
         {
-            var element = ((VisualElement)this._associatedObject.ParentView).FindByName<VisualElement>(this.Target);
+            var element = this._associatedObject.ParentView.FindByName<VisualElement>(this.Target);
             if (element != null)
             {
                 if (this._count > 0)
@@ -93,4 +93,3 @@ namespace Vulpecula.Mobile.Behaviors
         }
     }
 }
-

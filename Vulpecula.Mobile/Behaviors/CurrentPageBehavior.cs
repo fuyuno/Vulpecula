@@ -50,7 +50,7 @@ namespace Vulpecula.Mobile.Behaviors
             if (context == null)
                 return;
             NavigationService.ConfigureCurrent(context);
-            this._currentPage = ((context as NavigationPage).CurrentPage);
+            this._currentPage = (context as NavigationPage).CurrentPage;
             (this._currentPage.BindingContext as TabbedViewModel)?.OnTabNavigatedTo();
         }
     }

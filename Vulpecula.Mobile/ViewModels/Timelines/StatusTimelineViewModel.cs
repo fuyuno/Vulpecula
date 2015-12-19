@@ -12,14 +12,16 @@ using Vulpecula.Mobile.Views.Popups;
 using Vulpecula.Models;
 using Vulpecula.Streaming.Reactive;
 
+// ReSharper disable InconsistentNaming
+
 namespace Vulpecula.Mobile.ViewModels.Timelines
 {
     public class StatusTimelineViewModel : TabbedViewModel
     {
         private readonly CroudiaProvider _provider;
         private readonly TimelineTypes _type;
-        private long _lastId = 0;
         private IDisposable _disposable;
+        private long _lastId;
 
         public ObservableCollection<StatusViewModel> Statuses { get; }
 
@@ -52,10 +54,10 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
         public override void OnTabNavigatedTo()
         {
             this._disposable = this.ConnectTimeline().Subscribe(w =>
-                {
-                    this.Statuses.Insert(0, new StatusViewModel(this.Localization, this.NavigationService, w));
-                    this._lastId = w.Id;
-                });
+            {
+                this.Statuses.Insert(0, new StatusViewModel(this.Localization, this.NavigationService, w));
+                this._lastId = w.Id;
+            });
         }
 
         private IObservable<Status> ConnectTimeline()

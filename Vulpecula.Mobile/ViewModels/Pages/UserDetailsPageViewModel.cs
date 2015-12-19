@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 using Prism.Commands;
 using Prism.Navigation;
@@ -15,17 +14,17 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 {
     public class UserDetailsPageViewModel : TabbedViewModel
     {
-        private AccountManager _accountManager;
+        private readonly AccountManager _accountManager;
 
         public UserDetailsPageViewModel(ILocalization localization, INavigationService navigationService, AccountManager accountManager)
             : base(localization, navigationService)
         {
-            this._accountManager= accountManager;
+            this._accountManager = accountManager;
             Title = this.GetLocalizedString("Me");
             Icon = "user";
             NavigationTitle = this.GetLocalizedString("Me");
         }
-           
+
         // Tab
         public override void OnTabNavigatedTo()
         {
@@ -40,7 +39,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             if (parameters.ContainsKey("user"))
             {
                 user = parameters["user"] as User;
-            } 
+            }
             else
             {
                 user = this._accountManager.Users.First();
@@ -73,8 +72,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string Cover
         {
-            get{ return this._cover; }
-            set{ this.SetProperty(ref this._cover, value); }
+            get { return this._cover; }
+            set { this.SetProperty(ref this._cover, value); }
         }
 
         #endregion
@@ -85,8 +84,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string UserIcon
         {
-            get{ return this._userIcon; }
-            set{ this.SetProperty(ref this._userIcon, value); }
+            get { return this._userIcon; }
+            set { this.SetProperty(ref this._userIcon, value); }
         }
 
         #endregion
@@ -97,8 +96,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string Username
         {
-            get{ return this._username; }
-            set{ this.SetProperty(ref this._username, value); }
+            get { return this._username; }
+            set { this.SetProperty(ref this._username, value); }
         }
 
         #endregion
@@ -109,8 +108,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string ScreenName
         {
-            get{ return this._screenName; }
-            set{ this.SetProperty(ref this._screenName, value); }
+            get { return this._screenName; }
+            set { this.SetProperty(ref this._screenName, value); }
         }
 
         #endregion
@@ -121,8 +120,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string Bio
         {
-            get{ return this._bio; }
-            set{ this.SetProperty(ref this._bio, value); }
+            get { return this._bio; }
+            set { this.SetProperty(ref this._bio, value); }
         }
 
         #endregion
@@ -133,8 +132,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string Location
         {
-            get{ return this._location; }
-            set{ this.SetProperty(ref this._location, value); }
+            get { return this._location; }
+            set { this.SetProperty(ref this._location, value); }
         }
 
         #endregion
@@ -186,20 +185,18 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         }
 
         #endregion
-       
+
         #region Whispers
 
         private string _whispers;
 
         public string Whispers
         {
-            get{ return this._whispers; }
-            set{ this.SetProperty(ref this._whispers, value); }
+            get { return this._whispers; }
+            set { this.SetProperty(ref this._whispers, value); }
         }
 
         #endregion
-
-
 
         #region Image does not fit width of screen that saving scaling.
 

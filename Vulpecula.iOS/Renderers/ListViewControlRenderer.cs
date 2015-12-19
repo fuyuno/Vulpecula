@@ -3,7 +3,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(ListView), typeof(ListViewControlRenderer))]
+[assembly: ExportRenderer(typeof (ListView), typeof (ListViewControlRenderer))]
 
 namespace Vulpecula.iOS.Renderers
 {
@@ -13,7 +13,7 @@ namespace Vulpecula.iOS.Renderers
         {
             this.ElementChanged += (sender, e) =>
             {
-                var element = this.Element as ListView;
+                var element = this.Element;
                 if (element == null)
                 {
                     return;
@@ -23,4 +23,3 @@ namespace Vulpecula.iOS.Renderers
         }
     }
 }
-

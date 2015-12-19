@@ -20,8 +20,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 {
     public class StatusDetailsPageViewModel : TabbedViewModel
     {
-        private readonly IPageDialogService _dialogService;
         private readonly AccountManager _accountManager;
+        private readonly IPageDialogService _dialogService;
         private Status _status;
 
         public StatusDetailsPageViewModel(ILocalization localization, INavigationService navigationService, IPageDialogService dialogService, AccountManager accountManager)
@@ -166,8 +166,9 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         #region OnTappedShowUserDetailsCommand
 
         private ICommand _onTappedShowUserDetailsCommand;
-        public ICommand OnTappedShowUserDetailsCommand => 
-        _onTappedShowUserDetailsCommand ?? (_onTappedShowUserDetailsCommand = new Command(OnTappedShowUserDetails));
+
+        public ICommand OnTappedShowUserDetailsCommand =>
+            _onTappedShowUserDetailsCommand ?? (_onTappedShowUserDetailsCommand = new Command(OnTappedShowUserDetails));
 
         private void OnTappedShowUserDetails()
         {
@@ -181,13 +182,14 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         #region OnTappedOpenViaAppCommand
 
         private ICommand _onTappedOpenViaAppCommand;
-        public ICommand OnTappedOpenViaAppCommand => 
-        _onTappedOpenViaAppCommand ?? (_onTappedOpenViaAppCommand = new Command(OnTappedOpenViaApp));
+
+        public ICommand OnTappedOpenViaAppCommand =>
+            _onTappedOpenViaAppCommand ?? (_onTappedOpenViaAppCommand = new Command(OnTappedOpenViaApp));
 
         private void OnTappedOpenViaApp()
         {
             // TODO: Move to another class(Browser.cs ?)
-            if(string.IsNullOrWhiteSpace(this._status.Source.Url)) 
+            if (string.IsNullOrWhiteSpace(this._status.Source.Url))
             {
                 return;
             }
@@ -223,10 +225,11 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private bool CanOnTappedShare()
         {
-            if(this._status == null) {
+            if (this._status == null)
+            {
                 return true;
             }
-            return !this._status.User.IsProtected;   
+            return !this._status.User.IsProtected;
         }
 
         #endregion
@@ -280,10 +283,6 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         #endregion
 
-
         #endregion
-
     }
 }
-
-

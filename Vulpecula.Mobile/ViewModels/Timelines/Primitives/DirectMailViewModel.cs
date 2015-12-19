@@ -15,8 +15,8 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
 {
     public class DirectMailViewModel : ViewModel
     {
-        private readonly INavigationService _navigationService;
         private readonly SecretMail _model;
+        private readonly INavigationService _navigationService;
 
         public DirectMailViewModel(ILocalization localization, INavigationService navigation, SecretMail status)
             : base(localization)
@@ -32,19 +32,21 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         public string Text => this._model.Text.Trim();
         public string Icon => this._model.Sender.ProfileImageUrlHttps;
         public string RecipientIcon => this._model.Recipient.ProfileImageUrlHttps;
-        public string CreatedAt 
+
+        public string CreatedAt
         {
-            get {
+            get
+            {
                 var format = "HH:mm";
                 // 1 hour
-                if(this._model.CreatedAt.AddDays(1) < DateTime.Now)
+                if (this._model.CreatedAt.AddDays(1) < DateTime.Now)
                 {
                     format = "MM/dd HH:mm";
                 }
                 // 1 year
-                if(this._model.CreatedAt.AddYears(1) < DateTime.Now)
+                if (this._model.CreatedAt.AddYears(1) < DateTime.Now)
                 {
-                    format = "yy/MM/dd HH:mm";   
+                    format = "yy/MM/dd HH:mm";
                 }
                 return this._model.CreatedAt.ToString(format);
             }
@@ -60,7 +62,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         private void OnTapped(string type)
         {
             User user;
-            if(type == "Sender")
+            if (type == "Sender")
             {
                 user = this._model.Sender;
             }
@@ -76,4 +78,3 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         #endregion
     }
 }
-

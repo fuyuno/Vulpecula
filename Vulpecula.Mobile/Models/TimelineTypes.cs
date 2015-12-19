@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Vulpecula.Mobile.Models
+﻿namespace Vulpecula.Mobile.Models
 {
     public enum TimelineTypes
     {
@@ -19,7 +17,7 @@ namespace Vulpecula.Mobile.Models
             {
                 case TimelineTypes.Public:
                     return "Public";
-                
+
                 case TimelineTypes.Home:
                     return "Home";
 
@@ -46,4 +44,3 @@ namespace Vulpecula.Mobile.Models
         }
     }
 }
-

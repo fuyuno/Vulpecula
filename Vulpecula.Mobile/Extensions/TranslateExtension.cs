@@ -33,4 +33,3 @@ namespace Vulpecula.Mobile.Extensions
         #endregion
     }
 }
-

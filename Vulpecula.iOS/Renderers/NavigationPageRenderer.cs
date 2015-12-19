@@ -8,7 +8,7 @@ using Vulpecula.iOS.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(ContentPage), typeof(NavigationPageRenderer))]
+[assembly: ExportRenderer(typeof (ContentPage), typeof (NavigationPageRenderer))]
 
 namespace Vulpecula.iOS.Renderers
 {
@@ -39,4 +39,3 @@ namespace Vulpecula.iOS.Renderers
         }
     }
 }
-

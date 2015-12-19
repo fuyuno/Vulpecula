@@ -3,20 +3,20 @@ using System.Windows.Input;
 
 using Prism.Navigation;
 
-using Xamarin.Forms;
-
 using Vulpecula.Mobile.Extensions;
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
 using Vulpecula.Mobile.Views.Pages;
 using Vulpecula.Models;
 
+using Xamarin.Forms;
+
 namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
 {
     public class StatusViewModel : ViewModel
     {
-        private readonly INavigationService _navigationService;
         private readonly Status _model;
+        private readonly INavigationService _navigationService;
         private readonly Status _originalStatus;
 
         public StatusViewModel(ILocalization localization, INavigationService navigation, Status status) : base(localization)
@@ -34,19 +34,21 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         public string UserName => this._originalStatus.User.Name.ToSingleLine();
         public string Text => this._originalStatus.Text.Trim();
         public string Icon => this._originalStatus.User.ProfileImageUrlHttps;
-        public string CreatedAt 
+
+        public string CreatedAt
         {
-            get {
+            get
+            {
                 var format = "HH:mm";
                 // 1 hour
-                if(this._originalStatus.CreatedAt.AddDays(1) < DateTime.Now)
+                if (this._originalStatus.CreatedAt.AddDays(1) < DateTime.Now)
                 {
                     format = "MM/dd HH:mm";
                 }
                 // 1 year
-                if(this._originalStatus.CreatedAt.AddYears(1) < DateTime.Now)
+                if (this._originalStatus.CreatedAt.AddYears(1) < DateTime.Now)
                 {
-                    format = "yy/MM/dd HH:mm";   
+                    format = "yy/MM/dd HH:mm";
                 }
                 return this._originalStatus.CreatedAt.ToString(format);
             }
@@ -59,7 +61,8 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         #region OnTappedShowUserDetailsCommand
 
         private ICommand _onTappedShowUserDetailsCommand;
-        public ICommand OnTappedShowUserDetailsCommand => 
+
+        public ICommand OnTappedShowUserDetailsCommand =>
             _onTappedShowUserDetailsCommand ?? (_onTappedShowUserDetailsCommand = new Command(OnTappedShowUserDetails));
 
         private void OnTappedShowUserDetails()
@@ -74,6 +77,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         #region OnTappedShowStatusDetailsCommand
 
         private ICommand _onTappedShowStatusDetailsCommand;
+
         public ICommand OnTappedShowStatusDetailsCommand =>
             _onTappedShowStatusDetailsCommand ?? (_onTappedShowStatusDetailsCommand = new Command(OnTappedShowStatusDetails));
 

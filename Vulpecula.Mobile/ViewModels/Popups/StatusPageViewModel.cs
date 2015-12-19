@@ -45,7 +45,7 @@ namespace Vulpecula.Mobile.ViewModels.Popups
             {
                 if (this.SetProperty(ref this._text, value))
                 {
-                    this.SendCommand.ChangeCanExecute(); 
+                    this.SendCommand.ChangeCanExecute();
                 }
             }
         }
@@ -56,17 +56,13 @@ namespace Vulpecula.Mobile.ViewModels.Popups
 
         #region Commands
 
-
         #region CloseCommand
 
         private ICommand _closeCommand;
 
         public ICommand CloseCommand
         {
-            get
-            {
-                return this._closeCommand ?? (this._closeCommand = new Command(Close));
-            }
+            get { return this._closeCommand ?? (this._closeCommand = new Command(Close)); }
         }
 
         private void Close()
@@ -82,10 +78,7 @@ namespace Vulpecula.Mobile.ViewModels.Popups
 
         public Command SendCommand
         {
-            get
-            {
-                return this._sendCommand ?? (this._sendCommand = new Command(Send, CanSend));
-            }
+            get { return this._sendCommand ?? (this._sendCommand = new Command(Send, CanSend)); }
         }
 
         private async void Send()

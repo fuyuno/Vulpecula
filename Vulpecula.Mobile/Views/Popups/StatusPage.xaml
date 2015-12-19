@@ -1,20 +1,26 @@
 ﻿<ContentPage x:Class="Vulpecula.Mobile.Views.Popups.StatusPage"
-     xmlns="http://xamarin.com/schemas/2014/forms"
-     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-     xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-     xmlns:i18n="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
-     Title="{Binding NavigationTitle}"
-     xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
-     xmlns:e="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
-     mvvm:ViewModelLocator.AutowireViewModel="True">
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
+             xmlns:e="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
+             xmlns:i18n="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             Title="{Binding NavigationTitle}"
+             mvvm:ViewModelLocator.AutowireViewModel="True">
     <Grid>
-        <Editor Text="{Binding Text}" HorizontalOptions="StartAndExpand"
-            Keyboard="Default" HeightRequest="200" />
+        <Editor HeightRequest="200"
+                HorizontalOptions="StartAndExpand"
+                Keyboard="Default"
+                Text="{Binding Text}" />
     </Grid>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding CloseCommand, Mode=OneWay}"
-             Text="{i18n:Translate Cancel}" Priority="-1" />
-        <ToolbarItem Command="{Binding SendCommand, Mode=OneWay}"
-             Text="{i18n:Translate Whisper}" Priority="1" />
+        <ToolbarItem Command="{Binding CloseCommand,
+                                       Mode=OneWay}"
+                     Priority="-1"
+                     Text="{i18n:Translate Cancel}" />
+        <ToolbarItem Command="{Binding SendCommand,
+                                       Mode=OneWay}"
+                     Priority="1"
+                     Text="{i18n:Translate Whisper}" />
     </ContentPage.ToolbarItems>
 </ContentPage>

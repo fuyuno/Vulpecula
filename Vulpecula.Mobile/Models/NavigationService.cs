@@ -18,7 +18,7 @@ namespace Vulpecula.Mobile.Models
     {
         public static Page RootPage { get; private set; }
 
-        private static Page CurrentPage{ get; set; }
+        private static Page CurrentPage { get; set; }
 
         /// <summary>
         /// Navigates to the most recent entry in the back navigation history by popping the calling Page off the navigation stack.
@@ -39,7 +39,7 @@ namespace Vulpecula.Mobile.Models
         /// <param name="animated">If <c>true</c> the transition is animated, if <c>false</c> there is no animation on transition.</param>
         public void Navigate<T>(NavigationParameters parameters = null, bool useModalNavigation = true, bool animated = true)
         {
-            var page = Activator.CreateInstance(typeof(T)) as Page;
+            var page = Activator.CreateInstance(typeof (T)) as Page;
             if (page == null)
                 throw new InvalidCastException("T cannot cast to Xamarin.Forms.Page.");
             Push(page, useModalNavigation, animated);

@@ -1,12 +1,9 @@
-﻿using System;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Vulpecula.Mobile.Behaviors
 {
     public class ListViewDisableSelectionBehavior : Behavior<ListView>
     {
-
         protected override void OnAttachedTo(ListView bindable)
         {
             bindable.ItemSelected += Bindable_ItemSelected;
@@ -23,8 +20,5 @@ namespace Vulpecula.Mobile.Behaviors
         {
             ((ListView)sender).SelectedItem = null;
         }
-
-
     }
 }
-

@@ -1,16 +1,20 @@
 ﻿<ContentPage x:Class="Vulpecula.Mobile.Views.Timelines.DirectMessageTimeline"
-     xmlns="http://xamarin.com/schemas/2014/forms"
-     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-     xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
-     xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-     Title="{Binding Title}" Icon="{Binding Icon}">
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             Title="{Binding Title}"
+             Icon="{Binding Icon}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding NavigateCommand, Mode=OneWay}"
-             Icon="sent" Priority="1" />
+        <ToolbarItem Command="{Binding NavigateCommand,
+                                       Mode=OneWay}"
+                     Icon="sent"
+                     Priority="1" />
     </ContentPage.ToolbarItems>
     <Grid>
-        <StackLayout HorizontalOptions="CenterAndExpand"
-             VerticalOptions="CenterAndExpand" x:Name="Indicator">
+        <StackLayout x:Name="Indicator"
+                     HorizontalOptions="CenterAndExpand"
+                     VerticalOptions="CenterAndExpand">
             <ActivityIndicator IsRunning="true" />
             <Label Text="Loading timeline..." TextColor="Silver" />
         </StackLayout>
@@ -28,8 +32,7 @@
                                     <Grid.Resources>
                                         <ResourceDictionary>
                                             <Style TargetType="Label">
-                                                <Setter Property="FontSize"
-                                                     Value="14" />
+                                                <Setter Property="FontSize" Value="14" />
                                             </Style>
                                         </ResourceDictionary>
                                     </Grid.Resources>
@@ -40,23 +43,21 @@
                                     <ContentView Grid.Column="0" Padding="4">
                                         <Grid>
                                             <Image HeightRequest="48"
-                                                 HorizontalOptions="Start"
-                                                 Source="{Binding Icon}"
-                                                 VerticalOptions="Start"
-                                                 WidthRequest="48">
+                                                   HorizontalOptions="Start"
+                                                   Source="{Binding Icon}"
+                                                   VerticalOptions="Start"
+                                                   WidthRequest="48">
                                                 <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding OnTappedCommand}"
-                                                         CommandParameter="Sender" />
+                                                    <TapGestureRecognizer Command="{Binding OnTappedCommand}" CommandParameter="Sender" />
                                                 </Image.GestureRecognizers>
                                             </Image>
                                             <Image HeightRequest="24"
-                                                 HorizontalOptions="End"
-                                                 Source="{Binding RecipientIcon}"
-                                                 VerticalOptions="End"
-                                                 WidthRequest="24">
+                                                   HorizontalOptions="End"
+                                                   Source="{Binding RecipientIcon}"
+                                                   VerticalOptions="End"
+                                                   WidthRequest="24">
                                                 <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding OnTappedCommand}"
-                                                         CommandParameter="Reciever" />
+                                                    <TapGestureRecognizer Command="{Binding OnTappedCommand}" CommandParameter="Reciever" />
                                                 </Image.GestureRecognizers>
                                             </Image>
                                         </Grid>
@@ -73,26 +74,26 @@
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            <Label Text="{Binding UserName}"
-                                                 Grid.Column="0" Font="Bold"
-                                                FontSize="13"
-                                                 LineBreakMode="NoWrap" />
-                                            <Label Text="{Binding ScreenName}"
-                                                 Grid.Column="1"
-                                                 LineBreakMode="TailTruncation"
-                                                 TextColor="Silver"
-                                                 FontSize="12"
-                                                 VerticalOptions="End" />
-                                            <Label Text="{Binding CreatedAt}"
-                                                 Grid.Column="2"
-                                                 TextColor="Silver"
-                                                 FontSize="12"
-                                                 LineBreakMode="NoWrap"
-                                                 VerticalOptions="End"
-                                                 HorizontalOptions="EndAndExpand" />
+                                            <Label Grid.Column="0"
+                                                   Font="Bold"
+                                                   FontSize="13"
+                                                   LineBreakMode="NoWrap"
+                                                   Text="{Binding UserName}" />
+                                            <Label Grid.Column="1"
+                                                   FontSize="12"
+                                                   LineBreakMode="TailTruncation"
+                                                   Text="{Binding ScreenName}"
+                                                   TextColor="Silver"
+                                                   VerticalOptions="End" />
+                                            <Label Grid.Column="2"
+                                                   FontSize="12"
+                                                   HorizontalOptions="EndAndExpand"
+                                                   LineBreakMode="NoWrap"
+                                                   Text="{Binding CreatedAt}"
+                                                   TextColor="Silver"
+                                                   VerticalOptions="End" />
                                         </Grid>
-                                        <Label Grid.Row="1"
-                                             Text="{Binding Text}" />
+                                        <Label Grid.Row="1" Text="{Binding Text}" />
                                     </Grid>
                                 </Grid>
                             </ContentView>
