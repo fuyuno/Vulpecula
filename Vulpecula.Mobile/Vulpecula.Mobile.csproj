@@ -131,11 +131,8 @@
     <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="Vulpecula.Streaming, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Vulpecula.Streaming.1.0.0.1\lib\portable-net45+dnxcore50+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\Vulpecula.Streaming.dll</HintPath>
-    </Reference>
     <Reference Include="Vulpecula">
-      <HintPath>..\packages\Vulpecula.1.0.0.1\lib\portable-net45+dnxcore50+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\Vulpecula.dll</HintPath>
+      <HintPath>..\Vulpecula\bin\Debug\Vulpecula.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core">
       <HintPath>..\packages\Xamarin.Forms.2.0.0.6490\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
@@ -209,5 +206,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vulpecula.Streaming\Vulpecula.Streaming.csproj">
+      <Project>{2538124a-5dc4-4200-83fd-6ec643ccb7e8}</Project>
+      <Name>Vulpecula.Streaming</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 
 using Vulpecula.Models;
 using Vulpecula.Rest;
+using Vulpecula.Streaming.Internal;
 
 // ReSharper disable FunctionNeverReturns
 // ReSharper disable InconsistentNaming
@@ -25,7 +26,12 @@ namespace Vulpecula.Streaming
         /// <para>count : long</para>
         /// </param>
         /// <returns></returns>
-        public static IEnumerable<SecretMail> ReceivedAsStreaming(this SecretMails obj,
+        public static IEnumerable<SecretMail> ReceivedAsStreaming(this SecretMails obj, params Expression<Func<string, object>>[] parameters)
+        {
+            return ReceivedAsStreaming(obj, false, parameters);
+        }
+
+        internal static IEnumerable<SecretMail> ReceivedAsStreaming(this SecretMails obj, bool enableDummy,
             params Expression<Func<string, object>>[] parameters)
         {
             var lastStatusId = 0L;
@@ -39,6 +45,10 @@ namespace Vulpecula.Streaming
                 var secretMails = obj.Received(parameters).ToArray();
                 if (!secretMails.Any())
                 {
+                    if (enableDummy)
+                    {
+                        yield return new DummySecretMail();
+                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }
@@ -56,6 +66,7 @@ namespace Vulpecula.Streaming
         /// <summary>
         /// 認証ユーザーが送信した最新20件のシークレットメールを返します。
         /// </summary>
+        /// <param name="obj"></param>
         /// <param name="parameters">
         /// <para>利用可能なパラメータ</para>
         /// <para>trim_user : bool</para>
@@ -64,7 +75,12 @@ namespace Vulpecula.Streaming
         /// <para>count : long</para>
         /// </param>
         /// <returns></returns>
-        public static IEnumerable<SecretMail> SentAsStreaming(this SecretMails obj,
+        public static IEnumerable<SecretMail> SentAsStreaming(this SecretMails obj, params Expression<Func<string, object>>[] parameters)
+        {
+            return SentAsStreaming(obj, false, parameters);
+        }
+
+        internal static IEnumerable<SecretMail> SentAsStreaming(this SecretMails obj, bool enableDummy,
             params Expression<Func<string, object>>[] parameters)
         {
             var lastStatusId = 0L;
@@ -78,6 +94,10 @@ namespace Vulpecula.Streaming
                 var secretMails = obj.Sent(parameters).ToArray();
                 if (!secretMails.Any())
                 {
+                    if (enableDummy)
+                    {
+                        yield return new DummySecretMail();
+                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }

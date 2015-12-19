@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 
 using Vulpecula.Models;
 using Vulpecula.Rest;
+using Vulpecula.Streaming.Internal;
 
 // ReSharper disable FunctionNeverReturns
 // ReSharper disable InconsistentNaming
@@ -30,6 +31,12 @@ namespace Vulpecula.Streaming
         public static IEnumerable<Status> GetPublicTimelineAsStreaming(this Statuses obj,
             params Expression<Func<string, object>>[] parameters)
         {
+            return GetPublicTimelineAsStreaming(obj, false, parameters);
+        }
+
+        internal static IEnumerable<Status> GetPublicTimelineAsStreaming(this Statuses obj, bool enableDummy,
+            params Expression<Func<string, object>>[] parameters)
+        {
             var lastStatusId = 0L;
             while (true)
             {
@@ -41,6 +48,10 @@ namespace Vulpecula.Streaming
                 var statuses = obj.GetPublieTimeline(parameters).ToArray();
                 if (!statuses.Any())
                 {
+                    if (enableDummy)
+                    {
+                        yield return new DummyStatus();
+                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }
@@ -71,6 +82,12 @@ namespace Vulpecula.Streaming
         public static IEnumerable<Status> GetHomeTimelineAsStreaming(this Statuses obj,
             params Expression<Func<string, object>>[] parameters)
         {
+            return GetHomeTimelineAsStreaming(obj, false, parameters);
+        }
+
+        internal static IEnumerable<Status> GetHomeTimelineAsStreaming(this Statuses obj, bool enableDummy,
+            params Expression<Func<string, object>>[] parameters)
+        {
             var lastStatusId = 0L;
             while (true)
             {
@@ -82,6 +99,10 @@ namespace Vulpecula.Streaming
                 var statuses = obj.GetHomeTimeline(parameters).ToArray();
                 if (!statuses.Any())
                 {
+                    if (enableDummy)
+                    {
+                        yield return new DummyStatus();
+                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }
@@ -116,6 +137,12 @@ namespace Vulpecula.Streaming
         public static IEnumerable<Status> GetUserTimelineAsStreaming(this Statuses obj,
             params Expression<Func<string, object>>[] parameters)
         {
+            return GetUserTimelineAsStreaming(obj, false, parameters);
+        }
+
+        internal static IEnumerable<Status> GetUserTimelineAsStreaming(this Statuses obj, bool enableDummy,
+            params Expression<Func<string, object>>[] parameters)
+        {
             var lastStatusId = 0L;
             while (true)
             {
@@ -127,6 +154,10 @@ namespace Vulpecula.Streaming
                 var statuses = obj.GetUserTimeline(parameters).ToArray();
                 if (!statuses.Any())
                 {
+                    if (enableDummy)
+                    {
+                        yield return new DummyStatus();
+                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }
@@ -157,6 +188,12 @@ namespace Vulpecula.Streaming
         public static IEnumerable<Status> GetMentionsAsStreaming(this Statuses obj,
             params Expression<Func<string, object>>[] parameters)
         {
+            return GetMentionsAsStreaming(obj, false, parameters);
+        }
+
+        internal static IEnumerable<Status> GetMentionsAsStreaming(this Statuses obj, bool enableDummy,
+            params Expression<Func<string, object>>[] parameters)
+        {
             var lastStatusId = 0L;
             while (true)
             {
@@ -168,6 +205,10 @@ namespace Vulpecula.Streaming
                 var statuses = obj.GetMentions(parameters).ToArray();
                 if (!statuses.Any())
                 {
+                    if (enableDummy)
+                    {
+                        yield return new DummyStatus();
+                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }

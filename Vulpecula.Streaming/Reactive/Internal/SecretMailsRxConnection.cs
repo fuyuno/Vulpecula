@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Vulpecula.Models;
 using Vulpecula.Rest;
+using Vulpecula.Streaming.Internal;
 
 namespace Vulpecula.Streaming.Reactive.Internal
 {
     internal class SecretMailsRxConnection : ConnectionBase<SecretMails, StreamTypes.SecretMails, SecretMail>
     {
         public SecretMailsRxConnection(SecretMails obj, StreamTypes.SecretMails type,
-                                       Expression<Func<string, object>>[] parameters, IObserver<SecretMail> observer)
+            Expression<Func<string, object>>[] parameters, IObserver<SecretMail> observer)
             : base(obj, type, parameters, observer)
         {
         }
@@ -26,20 +26,37 @@ namespace Vulpecula.Streaming.Reactive.Internal
                     case StreamTypes.SecretMails.Received:
                         Task.Run(() =>
                         {
-                            foreach (
-                                var mails in this.Obj.Received(this.Parameters)
-                                    .TakeWhile(w => !token.IsCancellationRequested))
-                                this.Observer.OnNext(mails);
+                            foreach (var mail in this.Obj.ReceivedAsStreaming(true, this.Parameters))
+                            {
+                                if (!(mail is DummySecretMail))
+                                {
+                                    this.Observer.OnNext(mail);
+                                }
+                                if (token.IsCancellationRequested)
+                                {
+                                    break;
+                                }
+                            }
                         }, token).ContinueWith(t => this.DisposeToken(), token);
                         break;
 
                     case StreamTypes.SecretMails.Sent:
                         Task.Run(() =>
                         {
-                            foreach (
-                                var mails in this.Obj.Sent(this.Parameters)
-                                    .TakeWhile(w => !token.IsCancellationRequested))
-                                this.Observer.OnNext(mails);
+                            while (!token.IsCancellationRequested)
+                            {
+                                foreach (var mail in this.Obj.SentAsStreaming(true, this.Parameters))
+                                {
+                                    if (!(mail is DummySecretMail))
+                                    {
+                                        this.Observer.OnNext(mail);
+                                    }
+                                    if (token.IsCancellationRequested)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
                         }, token).ContinueWith(t => this.DisposeToken(), token);
                         break;
 

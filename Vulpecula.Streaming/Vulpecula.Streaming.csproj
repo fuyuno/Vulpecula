@@ -35,6 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Compile Include="Internal\DummySecretMail.cs" />
+    <Compile Include="Internal\DummyStatus.cs" />
     <Compile Include="Reactive\Internal\ConnectionBase.cs" />
     <Compile Include="Reactive\Internal\ObservableBase.cs" />
     <Compile Include="Reactive\Internal\SecretMailsRxObservable.cs" />

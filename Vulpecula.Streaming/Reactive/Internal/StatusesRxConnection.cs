@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Vulpecula.Models;
 using Vulpecula.Rest;
+using Vulpecula.Streaming.Internal;
 
 namespace Vulpecula.Streaming.Reactive.Internal
 {
@@ -25,40 +25,68 @@ namespace Vulpecula.Streaming.Reactive.Internal
                     case StreamTypes.Statuses.Public:
                         Task.Run(() =>
                         {
-                            foreach (
-                                var status in this.Obj.GetPublicTimelineAsStreaming(this.Parameters)
-                                    .TakeWhile(w => !token.IsCancellationRequested))
-                                this.Observer.OnNext(status);
+                            foreach (var status in this.Obj.GetPublicTimelineAsStreaming(true, this.Parameters))
+                            {
+                                if (!(status is DummyStatus))
+                                {
+                                    this.Observer.OnNext(status);
+                                }
+                                if (token.IsCancellationRequested)
+                                {
+                                    break;
+                                }
+                            }
                         }, token).ContinueWith(t => this.DisposeToken(), token);
                         break;
 
                     case StreamTypes.Statuses.Home:
                         Task.Run(() =>
                         {
-                            foreach (
-                                var status in this.Obj.GetHomeTimelineAsStreaming(this.Parameters)
-                                    .TakeWhile(w => !token.IsCancellationRequested))
-                                this.Observer.OnNext(status);
+                            foreach (var status in this.Obj.GetHomeTimelineAsStreaming(true, this.Parameters))
+                            {
+                                if (!(status is DummyStatus))
+                                {
+                                    this.Observer.OnNext(status);
+                                }
+                                if (token.IsCancellationRequested)
+                                {
+                                    break;
+                                }
+                            }
                         }, token).ContinueWith(t => this.DisposeToken(), token);
                         break;
 
                     case StreamTypes.Statuses.User:
                         Task.Run(() =>
                         {
-                            foreach (
-                                var status in this.Obj.GetUserTimelineAsStreaming(this.Parameters)
-                                    .TakeWhile(w => !token.IsCancellationRequested))
-                                this.Observer.OnNext(status);
+                            foreach (var status in this.Obj.GetUserTimelineAsStreaming(true, this.Parameters))
+                            {
+                                if (!(status is DummyStatus))
+                                {
+                                    this.Observer.OnNext(status);
+                                }
+                                if (token.IsCancellationRequested)
+                                {
+                                    break;
+                                }
+                            }
                         }, token).ContinueWith(t => this.DisposeToken(), token);
                         break;
 
                     case StreamTypes.Statuses.Mentions:
                         Task.Run(() =>
                         {
-                            foreach (
-                                var status in this.Obj.GetMentionsAsStreaming(this.Parameters)
-                                    .TakeWhile(w => !token.IsCancellationRequested))
-                                this.Observer.OnNext(status);
+                            foreach (var status in this.Obj.GetMentionsAsStreaming(true, this.Parameters))
+                            {
+                                if (!(status is DummyStatus))
+                                {
+                                    this.Observer.OnNext(status);
+                                }
+                                if (token.IsCancellationRequested)
+                                {
+                                    break;
+                                }
+                            }
                         }, token).ContinueWith(t => this.DisposeToken(), token);
                         break;
 

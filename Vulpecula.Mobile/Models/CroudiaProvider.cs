@@ -53,7 +53,7 @@ namespace Vulpecula.Mobile.Models
 
             try
             {
-                var code = url.Replace(_constants.RedirectUrl + "/?code=", "");
+                var code = url.Replace(_constants.RedirectUrl + "?code=", "");
                 await this.Croudia.OAuth.TokenAsync(code);
                 this.User = await this.Croudia.Account.VerifyCredentialsAsync();
 
