@@ -217,7 +217,7 @@ namespace Vulpecula.Rest
         /// <param name="parameters">
         /// <para>利用可能なパラメータ</para>
         /// <para>status : string (* Required)</para>
-        /// <para>media : <see cref="System.IO.Stream"/> (* Required)</para>
+        /// <para>media : <see cref="System.IO.Stream" /> (* Required)</para>
         /// <para>in_reply_to_status_id : long</para>
         /// <para>timer : bool</para>
         /// <para>trim_user : bool</para>
@@ -236,7 +236,7 @@ namespace Vulpecula.Rest
         /// <param name="parameters">
         /// <para>利用可能なパラメータ</para>
         /// <para>status : string (* Required)</para>
-        /// <para>media : <see cref="System.IO.Stream"/> (* Required)</para>
+        /// <para>media : <see cref="System.IO.Stream" /> (* Required)</para>
         /// <para>in_reply_to_status_id : long</para>
         /// <para>timer : bool</para>
         /// <para>trim_user : bool</para>
@@ -287,7 +287,7 @@ namespace Vulpecula.Rest
         }
 
         /// <summary>
-        /// 指定したIDの <see cref="Vulpecula.Models.Status"/> を返します。
+        /// 指定したIDの <see cref="Vulpecula.Models.Status" /> を返します。
         /// </summary>
         /// <param name="id">取得するステータスID</param>
         /// <param name="parameters">
@@ -298,11 +298,11 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Status> ShowAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesShowId, id), parameters);
+            return await this.Croudia.GetAsync<Status>(string.Format(EndPoints.StatusesShowId, id), parameters);
         }
 
         /// <summary>
-        /// 指定したIDの <see cref="Vulpecula.Models.Status"/> を返します。
+        /// 指定したIDの <see cref="Vulpecula.Models.Status" /> を返します。
         /// </summary>
         /// <param name="id">取得するステータスID</param>
         /// <param name="parameters">
@@ -314,7 +314,7 @@ namespace Vulpecula.Rest
         public Status Show(long id, params Expression<Func<string, object>>[] parameters)
         {
             var task = Task.Run(async () =>
-                await this.Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesShowId, id), parameters));
+                await this.Croudia.GetAsync<Status>(string.Format(EndPoints.StatusesShowId, id), parameters));
             task.Wait();
             return task.Result;
         }
@@ -395,7 +395,7 @@ namespace Vulpecula.Rest
         /// <para>利用可能なパラメータ</para>
         /// <para>id : long (* Required)</para>
         /// <para>status : string (* Required)</para>
-        /// <para>media : <see cref="System.IO.Stream"/> (* Required)</para>
+        /// <para>media : <see cref="System.IO.Stream" /> (* Required)</para>
         /// <para>trim_user : bool</para>
         /// <para>include_entities : bool</para>
         /// </param>
@@ -412,7 +412,7 @@ namespace Vulpecula.Rest
         /// <para>利用可能なパラメータ</para>
         /// <para>id : long (* Required)</para>
         /// <para>status : string (* Required)</para>
-        /// <para>media : <see cref="System.IO.Stream"/> (* Required)</para>
+        /// <para>media : <see cref="System.IO.Stream" /> (* Required)</para>
         /// <para>trim_user : bool</para>
         /// <para>include_entities : bool</para>
         /// </param>
