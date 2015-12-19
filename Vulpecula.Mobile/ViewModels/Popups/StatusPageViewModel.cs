@@ -25,11 +25,16 @@ namespace Vulpecula.Mobile.ViewModels.Popups
 
         public override void OnNavigatedTo(NavigationParameters parameters)
         {
+            base.OnNavigatedTo(parameters);
+
+            if (parameters == null)
+            {
+                return;
+            }
             if (parameters.ContainsKey("status"))
             {
                 this.Text = parameters["status"].ToString();
             }
-            base.OnNavigatedTo(parameters);
         }
 
         #region Properties
