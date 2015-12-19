@@ -42,7 +42,7 @@ namespace Vulpecula.Universal.Models
             }
 
             var startUri = new Uri(this.Croudia.OAuth.GetAuthorizeUrl());
-            var endUri = new Uri("http://vulpecula.mkzk.tk/");
+            var endUri = new Uri("https://vulpecula.mkzk.xyz/authorized");
             var result =
                 await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, startUri, endUri);
             if (result.ResponseStatus != WebAuthenticationStatus.Success)
