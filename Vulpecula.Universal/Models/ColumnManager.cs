@@ -23,10 +23,12 @@ namespace Vulpecula.Universal.Models
         public static ColumnManager Instance => _instance ?? (_instance = new ColumnManager());
 
         public ObservableCollection<Column> Columns { get; }
+        public bool IsInitialized { get; private set; }
 
         private ColumnManager()
         {
             this.Columns = new ObservableCollection<Column>();
+            this.IsInitialized = false;
         }
 
         public async Task InitializeColumns()
@@ -57,6 +59,7 @@ namespace Vulpecula.Universal.Models
                 // 初期化
                 this.SetupInitialColumns(AccountManager.Instance.Users.First().Id);
             }
+            this.IsInitialized = true;
         }
 
         [UsedImplicitly]

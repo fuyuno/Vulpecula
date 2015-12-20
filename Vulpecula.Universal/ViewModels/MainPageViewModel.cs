@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 using JetBrains.Annotations;
 
@@ -33,6 +36,11 @@ namespace Vulpecula.Universal.ViewModels
 
         public async void Initialize()
         {
+            while (!ColumnManager.Instance.IsInitialized)
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(500));
+                Debug.WriteLine("Waiting for Initializing Columns.");
+            }
             if (AccountManager.Instance.Users.Count == 0)
             {
                 await AccountManager.Instance.AuthorizationAccount();

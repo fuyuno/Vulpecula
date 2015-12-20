@@ -155,9 +155,13 @@ namespace Vulpecula.Universal.ViewModels.Timelines
         {
             foreach (var item in e.AddedItems.Cast<StatusViewModel>())
             {
-                this.Statuses.First(w => w.Model.Id == item.Model.Id).IsExpanded = true;
+                var i = this.Statuses.First(w => w.Model.Id == item.Model.Id);
+                i.IsExpanded = !i.IsExpanded;
                 this.Statuses.Where(w => w.Model.Id != item.Model.Id).ForEach(w => w.IsExpanded = false);
             }
+            var listView = sender as ListView;
+            if (listView != null)
+                listView.SelectedIndex = -1;
         }
     }
 }
