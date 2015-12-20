@@ -202,5 +202,17 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         }
 
         #endregion
+
+        #region IsExpanded
+
+        private bool _isExpaned;
+
+        public bool IsExpanded
+        {
+            get { return this._isExpaned; }
+            set { this.SetProperty(ref this._isExpaned, value); }
+        }
+
+        #endregion
     }
 }

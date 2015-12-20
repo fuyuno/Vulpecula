@@ -100,9 +100,13 @@
                                Foreground="{StaticResource HyperlinkDisabledThemeBrush}"
                                Text="{Binding Via}" />
                 </StackPanel>
+
                 <StackPanel Grid.Row="4"
                             Orientation="Horizontal"
-                            Padding="0,5">
+                            Padding="0,5"
+                            Visibility="{Binding IsExpanded,
+                                                 Mode=OneWay,
+                                                 Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Button Margin="0,0,5,0" Padding="0">
                         <FontIcon Width="32"
                                   Height="16"

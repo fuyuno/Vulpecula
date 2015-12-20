@@ -7,6 +7,9 @@ using System.Linq;
 using System.Reactive.Linq;
 
 using Windows.UI.Core;
+using Windows.UI.Xaml.Controls;
+
+using Microsoft.Practices.ObjectBuilder2;
 
 using Vulpecula.Models;
 using Vulpecula.Models.Base;
@@ -146,6 +149,15 @@ namespace Vulpecula.Universal.ViewModels.Timelines
             var vm = new StatusViewModel(new StatusModel(status), _provider);
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => Statuses.Insert(0, vm));
             _counter++;
+        }
+
+        public void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (var item in e.AddedItems.Cast<StatusViewModel>())
+            {
+                this.Statuses.First(w => w.Model.Id == item.Model.Id).IsExpanded = true;
+                this.Statuses.Where(w => w.Model.Id != item.Model.Id).ForEach(w => w.IsExpanded = false);
+            }
         }
     }
 }

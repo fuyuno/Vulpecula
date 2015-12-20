@@ -31,6 +31,8 @@ namespace Vulpecula.Universal.DesignViewModels
 
         public UserViewModel ShareUser { get; }
 
+        public bool IsExpanded { get; }
+
         public StatusViewDesignViewModel()
         {
             Model = new StatusModel(new Status

@@ -223,7 +223,7 @@
             </RelativePanel>
             <Grid Grid.Row="1">
                 <ProgressBar x:Name="ProgressBar" IsIndeterminate="True" />
-                <ListView ItemsSource="{Binding Statuses}">
+                <ListView ItemsSource="{Binding Statuses}" SelectionChanged="{x:Bind ViewModel.SelectionChanged}">
                     <i:Interaction.Behaviors>
                         <behaviors:EmptyListBehavior Target="ProgressBar" />
                     </i:Interaction.Behaviors>
