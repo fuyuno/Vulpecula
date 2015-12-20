@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -36,19 +37,21 @@ namespace Vulpecula.Universal.Models
             try
             {
                 var columns = Configuration.Instance.Columns;
+                var tempColumn = new List<Column>();
                 foreach (var columnComposite in columns)
                 {
                     var column = Column.RestoreColumnInfo(columnComposite);
-                    if (column.Row >= this.Columns.Count)
-                        this.Columns.Add(column);
-                    else
-                        this.Columns.Insert(column.Row, column);
-                    Debug.WriteLine($"Restored column {{ID:{column.ColumnId}, Name:{column.Name}, Query:{column.Query}}}.");
+                    tempColumn.Add(column);
+                    Debug.WriteLine($"Restored column {{ID:{column.ColumnId}, Name:{column.Name}, Query:{column.Query}, Row:{column.Row}}}.");
+                }
+                foreach (var source in tempColumn.OrderBy(w => w.Row))
+                {
+                    this.Columns.Add(source);
                 }
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e);
                 await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("CanNotRestored"), "Error");
                 var columns = Configuration.Instance.Columns;
                 foreach (var columnComposite in columns)

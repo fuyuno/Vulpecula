@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 using Windows.Storage;
 
@@ -45,12 +46,12 @@ namespace Vulpecula.Universal.Models.Timelines
             var info = new Column
             {
                 Type = type,
-                ColumnId = adcv[nameof(ColumnId)].ToString(),
-                Name = adcv[nameof(Name)].ToString(),
-                UserId = long.Parse(adcv[nameof(UserId)].ToString()),
-                Row = int.Parse(adcv[nameof(Row)].ToString()),
-                Query = adcv[nameof(Query)]?.ToString(),
-                EnableNotity = bool.Parse(adcv[nameof(EnableNotity)].ToString())
+                ColumnId = adcv.ContainsKey(nameof(ColumnId)) ? adcv[nameof(ColumnId)].ToString() : null,
+                Name = adcv.ContainsKey(nameof(Name)) ? adcv[nameof(Name)].ToString() : "##unloaded##",
+                UserId = adcv[nameof(UserId)].ToString() != "0" ? long.Parse(adcv[nameof(UserId)].ToString()) : AccountManager.Instance.Users.First().Id,
+                Row = adcv.ContainsKey(nameof(Row)) ? int.Parse(adcv[nameof(Row)].ToString()) : int.MaxValue,
+                Query = adcv.ContainsKey(nameof(Query)) ? adcv[nameof(Query)]?.ToString() : null,
+                EnableNotity = !adcv.ContainsKey(nameof(EnableNotity)) || bool.Parse(adcv[nameof(EnableNotity)].ToString())
             };
 
             return info;
