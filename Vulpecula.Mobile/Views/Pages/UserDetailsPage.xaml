@@ -20,8 +20,6 @@
                        HeightRequest="{Binding Height,
                                                Mode=OneWay}"
                        HorizontalOptions="Fill"
-                       MinimumHeightRequest="{Binding Height,
-                                                      Mode=OneWay}"
                        Source="{Binding Cover}"
                        VerticalOptions="Fill" />
                 <StackLayout HorizontalOptions="CenterAndExpand"

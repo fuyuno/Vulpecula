@@ -150,7 +150,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         #endregion
 
-        #region
+        #region Followings
 
         private string _followings;
 
