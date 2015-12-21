@@ -162,6 +162,12 @@
   <data name="MessageDialogWrapper_Yes.Text" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="SettingsMainPage_General.Header" xml:space="preserve">
+    <value>general</value>
+  </data>
+  <data name="SettingsMainPage_Timeline.Header" xml:space="preserve">
+    <value>timeline</value>
+  </data>
   <data name="StatusViewXaml_ScreenName.Text" xml:space="preserve">
     <value>@{0}</value>
   </data>

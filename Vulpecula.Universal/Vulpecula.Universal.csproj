@@ -152,6 +152,8 @@
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsGeneralPageViewModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingsMainPageViewModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingsTimelinePageViewModel.cs" />
     <Compile Include="ViewModels\Timelines\ColumnViewModel.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\StatusViewModel.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\UserViewModel.cs" />
@@ -169,6 +171,12 @@
     </Compile>
     <Compile Include="Views\Settings\SettingsGeneralPage.xaml.cs">
       <DependentUpon>SettingsGeneralPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsMainPage.xaml.cs">
+      <DependentUpon>SettingsMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsTimelinePage.xaml.cs">
+      <DependentUpon>SettingsTimelinePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Timelines\Column.xaml.cs">
       <DependentUpon>Column.xaml</DependentUpon>
@@ -222,6 +230,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Settings\SettingsGeneralPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\SettingsMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\SettingsTimelinePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

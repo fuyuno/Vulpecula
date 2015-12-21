@@ -133,7 +133,7 @@ namespace Vulpecula.Universal.ViewModels
 
         private void NavigateToSettingsPage()
         {
-            this._navigationService.Navigate("Settings.SettingsGeneral", null);
+            this._navigationService.Navigate("Settings.SettingsMain", null);
         }
 
         #endregion

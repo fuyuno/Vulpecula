@@ -7,9 +7,9 @@ namespace Vulpecula.Universal.Views.Settings
     /// <summary>
     /// それ自体で使用できる空白ページまたはフレーム内に移動できる空白ページ。
     /// </summary>
-    public sealed partial class SettingsGeneralPage : UserControl
+    public sealed partial class SettingsTimelinePage : UserControl
     {
-        public SettingsGeneralPage()
+        public SettingsTimelinePage()
         {
             this.InitializeComponent();
         }
