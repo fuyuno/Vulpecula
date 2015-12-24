@@ -58,13 +58,7 @@ namespace Vulpecula.Mobile.ViewModels.Popups
         public string Text
         {
             get { return this._text; }
-            set
-            {
-                if (this.SetProperty(ref this._text, value))
-                {
-                    this.SendCommand.ChangeCanExecute();
-                }
-            }
+            set{ this.SetProperty(ref this._text, value); }
         }
 
         #endregion
@@ -76,7 +70,13 @@ namespace Vulpecula.Mobile.ViewModels.Popups
         public int Counter
         {
             get { return this._counter; }
-            set { this.SetProperty(ref this._counter, value); }
+            set
+            {
+                if (this.SetProperty(ref this._counter, value))
+                {
+                    this.SendCommand.ChangeCanExecute();
+                }
+            }
         }
 
         #endregion
@@ -126,7 +126,7 @@ namespace Vulpecula.Mobile.ViewModels.Popups
 
         private bool CanSend()
         {
-            if (string.IsNullOrWhiteSpace(this.Text) || this.Text.Length > 372)
+            if (string.IsNullOrWhiteSpace(this.Text) || this.Counter > 372 || this.Counter < 0)
             {
                 return false;
             }
