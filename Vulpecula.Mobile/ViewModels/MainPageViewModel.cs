@@ -25,7 +25,7 @@ namespace Vulpecula.Mobile.ViewModels
         {
             this._accountManager = accountManager;
 
-            if (false)
+            if (true)
             {
                 // リセット用
                 this._accountManager.ResetAccounts();

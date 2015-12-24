@@ -1,26 +1,37 @@
 ﻿<ContentPage x:Class="Vulpecula.Mobile.Views.Popups.StatusPage"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
-             xmlns:e="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
-             xmlns:i18n="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
-             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             Title="{Binding NavigationTitle}"
-             mvvm:ViewModelLocator.AutowireViewModel="True">
-    <Grid>
-        <Editor HeightRequest="200"
-                HorizontalOptions="StartAndExpand"
-                Keyboard="Default"
-                Text="{Binding Text}" />
-    </Grid>
+     xmlns="http://xamarin.com/schemas/2014/forms"
+     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
+     xmlns:e="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
+     xmlns:i18n="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
+     xmlns:triggers="clr-namespace:Vulpecula.Mobile.Triggers;assembly=Vulpecula.Mobile"
+     xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+     Title="{Binding NavigationTitle}"
+     mvvm:ViewModelLocator.AutowireViewModel="True">
+    <ContentPage.BackgroundColor>
+        <OnPlatform x:TypeArguments="Color" iOS="#FFF5F5F5"
+            Android="Default" />
+    </ContentPage.BackgroundColor>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding CloseCommand,
-                                       Mode=OneWay}"
-                     Priority="-1"
-                     Text="{i18n:Translate Cancel}" />
-        <ToolbarItem Command="{Binding SendCommand,
-                                       Mode=OneWay}"
-                     Priority="1"
-                     Text="{i18n:Translate Whisper}" />
+        <ToolbarItem Command="{Binding CloseCommand,Mode=OneWay}" Priority="-1"
+            Text="{i18n:Translate Cancel}" />
+        <ToolbarItem Command="{Binding SendCommand,Mode=OneWay}" Priority="1"
+            Text="{i18n:Translate Whisper}" />
     </ContentPage.ToolbarItems>
+    <StackLayout VerticalOptions="FillAndExpand">
+        <Editor HeightRequest="200" HorizontalOptions="FillAndExpand"
+            VerticalOptions="Start" Keyboard="Default"
+            Text="{Binding Text}">
+            <Editor.Triggers>
+                <EventTrigger Event="TextChanged">
+                    <triggers:CallMethodAction MethodName="TextChanged"
+                         TargetObject="{Binding}" />
+                </EventTrigger>
+            </Editor.Triggers>
+        </Editor>
+        <ContentView Padding="10,0">
+            <Label Text="{Binding Counter}" TextColor="Silver"
+                VerticalOptions="Start" HorizontalOptions="End" />
+        </ContentView>
+    </StackLayout>
 </ContentPage>

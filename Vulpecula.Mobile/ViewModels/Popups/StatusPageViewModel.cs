@@ -15,12 +15,15 @@ namespace Vulpecula.Mobile.ViewModels.Popups
     public class StatusPageViewModel : NavigationalViewModel
     {
         private readonly AccountManager _accountManager;
+        private long _inReplyToStatusId;
 
         public StatusPageViewModel(ILocalization localization, INavigationService navigationService, AccountManager accountManager)
             : base(localization, navigationService)
         {
             this._accountManager = accountManager;
             NavigationTitle = this.GetLocalizedString("Status");
+            this.Counter = 372;
+            this._inReplyToStatusId = -1;
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
@@ -35,6 +38,15 @@ namespace Vulpecula.Mobile.ViewModels.Popups
             {
                 this.Text = parameters["status"].ToString();
             }
+            if (parameters.ContainsKey("in_reply_to_status_id"))
+            {
+                this._inReplyToStatusId = (long)parameters["in_reply_to_status_id"];
+            }
+        }
+
+        public void TextChanged()
+        {
+            this.Counter = 372 - this.Text.Length;
         }
 
         #region Properties
@@ -53,6 +65,18 @@ namespace Vulpecula.Mobile.ViewModels.Popups
                     this.SendCommand.ChangeCanExecute();
                 }
             }
+        }
+
+        #endregion
+
+        #region Counter
+
+        private int _counter;
+
+        public int Counter
+        {
+            get { return this._counter; }
+            set { this.SetProperty(ref this._counter, value); }
         }
 
         #endregion
@@ -88,7 +112,14 @@ namespace Vulpecula.Mobile.ViewModels.Popups
 
         private async void Send()
         {
-            await this._accountManager.Providers.First().Croudia.Statuses.UpdateAsync(status => this.Text);
+            if (this._inReplyToStatusId == -1)
+            {
+                await this._accountManager.Providers.First().Croudia.Statuses.UpdateAsync(status => this.Text);
+            }
+            else
+            {
+                await this._accountManager.Providers.First().Croudia.Statuses.UpdateAsync(status => this.Text, in_reply_to_status_id => this._inReplyToStatusId);
+            }
             this.Text = string.Empty;
             this.NavigationService.GoBack();
         }
