@@ -16,7 +16,7 @@ using Vulpecula.Streaming.Reactive;
 
 namespace Vulpecula.Mobile.ViewModels.Timelines
 {
-    public class StatusTimelineViewModel : TabbedViewModel
+    public sealed class StatusTimelineViewModel : TabbedViewModel
     {
         private readonly CroudiaProvider _provider;
         private readonly TimelineTypes _type;
@@ -37,12 +37,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
             if (this._type == TimelineTypes.Public)
             {
                 // If first load this VM, OnTabNavigatedTo does not call.
-                this._disposable = this._provider.Croudia.Statuses.GetPublicTimelineAsObservable()
-                    .Subscribe(w =>
-                    {
-                        this.Statuses.Insert(0, new StatusViewModel(this.Localization, this.NavigationService, w));
-                        this._lastId = w.Id;
-                    });
+                this.OnTabNavigatedTo();
             }
         }
 

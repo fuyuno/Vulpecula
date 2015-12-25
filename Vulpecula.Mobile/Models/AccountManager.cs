@@ -53,6 +53,7 @@ namespace Vulpecula.Mobile.Models
                 var provider = new CroudiaProvider(_constants.ConsumerKey, _constants.ConsumerSecret);
                 if (!provider.ReAuthorization(credential))
                 {
+                    this._configuration.Accounts.Remove(credential.UserName);
                     continue;
                 }
                 this.Providers.Add(provider);
