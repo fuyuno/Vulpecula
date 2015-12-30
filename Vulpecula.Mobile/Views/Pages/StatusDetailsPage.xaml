@@ -1,11 +1,10 @@
 ﻿<ContentPage x:Class="Vulpecula.Mobile.Views.Pages.StatusDetailsPage"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:i18n="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
-             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             Title="{Binding Title}"
-             Padding="10"
-             mvvm:ViewModelLocator.AutowireViewModel="True">
+     xmlns="http://xamarin.com/schemas/2014/forms"
+     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     xmlns:i18n="clr-namespace:Vulpecula.Mobile.Extensions;assembly=Vulpecula.Mobile"
+     xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+     Title="{Binding Title}" Padding="10"
+    mvvm:ViewModelLocator.AutowireViewModel="True">
     <ScrollView>
         <Grid ColumnSpacing="0">
             <Grid.Resources>
@@ -25,38 +24,28 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <ContentView Grid.Row="0"
-                         Grid.Column="0"
-                         Padding="4,0">
+            <ContentView Grid.Row="0" Grid.Column="0"
+                Padding="4,0">
                 <Grid>
-                    <Image HeightRequest="48"
-                           HorizontalOptions="Start"
-                           Source="{Binding UserIcon}"
-                           VerticalOptions="Start"
-                           WidthRequest="48">
+                    <Image HeightRequest="48" HorizontalOptions="Start"
+                        Source="{Binding UserIcon}" VerticalOptions="Start"
+                        WidthRequest="48">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OnTappedShowUserDetailsCommand}" />
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>
             </ContentView>
-            <StackLayout Grid.Row="0"
-                         Grid.Column="1"
-                         VerticalOptions="CenterAndExpand">
-                <Label Font="Bold"
-                       FontSize="15"
-                       LineBreakMode="NoWrap"
-                       Text="{Binding UserName}" />
-                <Label FontSize="14"
-                       LineBreakMode="TailTruncation"
-                       Text="{Binding ScreenName}"
-                       TextColor="Silver"
-                       VerticalOptions="End" />
+            <StackLayout Grid.Row="0" Grid.Column="1"
+                VerticalOptions="CenterAndExpand">
+                <Label Font="Bold" FontSize="15"
+                    LineBreakMode="NoWrap" Text="{Binding UserName}" />
+                <Label FontSize="14" LineBreakMode="TailTruncation"
+                    Text="{Binding ScreenName}" TextColor="Silver"
+                    VerticalOptions="End" />
             </StackLayout>
-            <Grid Grid.Row="1"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="2"
-                  RowSpacing="0">
+            <Grid Grid.Row="1" Grid.Column="0"
+                Grid.ColumnSpan="2" RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -67,14 +56,11 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                 </Grid>
-                <Label Grid.Row="1"
-                       FontSize="18"
-                       Text="{Binding Text}" />
+                <Label Grid.Row="1" FontSize="18"
+                    Text="{Binding Text}" />
             </Grid>
-            <Grid Grid.Row="2"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="2"
-                  RowSpacing="0">
+            <Grid Grid.Row="2" Grid.Column="0"
+                Grid.ColumnSpan="2" RowSpacing="0">
                 <Grid.Resources>
                     <ResourceDictionary>
                         <Style TargetType="Label">
@@ -87,20 +73,18 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0"
-                             HorizontalOptions="StartAndExpand"
-                             Orientation="Horizontal">
-                    <Label Text="{Binding CreatedAt}" />
-                    <Label Text="- via" />
-                    <Label Text="{Binding Via}">
+                <StackLayout Grid.Row="0" HorizontalOptions="StartAndExpand"
+                    Orientation="Horizontal">
+                    <Label Text="{Binding CreatedAt}" LineBreakMode="NoWrap" />
+                    <Label Text="- via" LineBreakMode="NoWrap" />
+                    <Label Text="{Binding Via}" LineBreakMode="TailTruncation">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OnTappedOpenViaAppCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
-                <StackLayout Grid.Row="1"
-                             HorizontalOptions="StartAndExpand"
-                             Orientation="Horizontal">
+                <StackLayout Grid.Row="1" HorizontalOptions="StartAndExpand"
+                    Orientation="Horizontal">
                     <StackLayout Orientation="Horizontal" Spacing="2">
                         <Label Text="{Binding FavoritedCount}" />
                         <Label Text="{i18n:Translate Favs}" />
@@ -111,25 +95,22 @@
                     </StackLayout>
                 </StackLayout>
             </Grid>
-            <ContentView Grid.Row="3"
-                         Grid.Column="0"
-                         Grid.ColumnSpan="2">
+            <ContentView Grid.Row="3" Grid.Column="0"
+                Grid.ColumnSpan="2">
                 <Grid>
                     <Grid.Resources>
                         <ResourceDictionary>
                             <Style TargetType="Button">
                                 <Setter Property="HeightRequest">
                                     <Setter.Value>
-                                        <OnPlatform Android="32"
-                                                    iOS="48"
-                                                    x:TypeArguments="x:Double" />
+                                        <OnPlatform Android="32" iOS="48"
+                                            x:TypeArguments="x:Double" />
                                     </Setter.Value>
                                 </Setter>
                                 <Setter Property="WidthRequest">
                                     <Setter.Value>
-                                        <OnPlatform Android="32"
-                                                    iOS="48"
-                                                    x:TypeArguments="x:Double" />
+                                        <OnPlatform Android="32" iOS="48"
+                                            x:TypeArguments="x:Double" />
                                     </Setter.Value>
                                 </Setter>
                             </Style>
@@ -142,26 +123,18 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0"
-                            BackgroundColor="Transparent"
-                            Command="{Binding OnTappedReplyCommand}"
-                            Image="reply" />
-                    <Button Grid.Column="1"
-                            BackgroundColor="Transparent"
-                            Command="{Binding OnTappedShareCommand}"
-                            Image="re" />
-                    <Button Grid.Column="2"
-                            BackgroundColor="Transparent"
-                            Command="{Binding OnTappedFavoriteCommand}"
-                            Image="favorite" />
-                    <Button Grid.Column="3"
-                            BackgroundColor="Transparent"
-                            Command="{Binding OnTappedCommentCommand}"
-                            Image="comment" />
-                    <Button Grid.Column="4"
-                            BackgroundColor="Transparent"
-                            Command="{Binding OnTappedMoreCommand}"
-                            Image="more" />
+                    <Button Grid.Column="0" BackgroundColor="Transparent"
+                        Command="{Binding OnTappedReplyCommand}" Image="reply" />
+                    <Button Grid.Column="1" BackgroundColor="Transparent"
+                        Command="{Binding OnTappedShareCommand}" Image="re" />
+                    <Button Grid.Column="2" BackgroundColor="Transparent"
+                        Command="{Binding OnTappedFavoriteCommand}"
+                         Image="favorite" />
+                    <Button Grid.Column="3" BackgroundColor="Transparent"
+                        Command="{Binding OnTappedCommentCommand}"
+                         Image="comment" />
+                    <Button Grid.Column="4" BackgroundColor="Transparent"
+                        Command="{Binding OnTappedMoreCommand}" Image="more" />
                 </Grid>
             </ContentView>
         </Grid>
