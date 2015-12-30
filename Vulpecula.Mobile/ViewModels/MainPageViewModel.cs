@@ -27,14 +27,18 @@ namespace Vulpecula.Mobile.ViewModels
 
             if (false)
             {
-                // リセット用
-                this._accountManager.ResetAccounts();
-
-                var vault = App.ModelLocator.GetModel<IPasswordVault>();
-                var credential = App.ModelLocator.GetModel<IPasswordCredentials>();
-                credential.UserName = "MikazukiFuyuno";
-                vault.Remove(credential);
+                this.ResetAllConfigurations();
             }
+        }
+
+        private void ResetAllConfigurations()
+        {
+            this._accountManager.ResetAccounts();
+
+            var vault = App.ModelLocator.GetModel<IPasswordVault>();
+            var credential = App.ModelLocator.GetModel<IPasswordCredentials>();
+            credential.UserName = "MikazukiFuyuno";
+            vault.Remove(credential);
         }
 
         public void Initialize()
@@ -55,8 +59,9 @@ namespace Vulpecula.Mobile.ViewModels
             }
             catch (Exception)
             {
-                // ignored
                 Debug.WriteLine("throw Exception;");
+                this.ResetAllConfigurations();
+                this._isFirst = true;
             }
         }
 
