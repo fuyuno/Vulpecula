@@ -96,6 +96,9 @@
     <Compile Include="Extensions\PlatformControl.cs" />
     <Compile Include="Behaviors\PlatformBehavior.cs" />
     <Compile Include="Behaviors\EmptyListBehavior.cs" />
+    <Compile Include="Views\Timelines\Primitives\StatusView.xaml.cs">
+      <DependentUpon>StatusView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Prism">
@@ -164,6 +167,9 @@
     <EmbeddedResource Include="Views\Pages\StatusDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Timelines\Primitives\StatusView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Timelines\DirectMessageTimeline.xaml">
@@ -209,8 +215,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vulpecula.Streaming\Vulpecula.Streaming.csproj">
-      <Project>{2538124a-5dc4-4200-83fd-6ec643ccb7e8}</Project>
+      <Project>{2538124A-5DC4-4200-83FD-6EC643CCB7E8}</Project>
       <Name>Vulpecula.Streaming</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Timelines\Primitives\" />
   </ItemGroup>
 </Project>
