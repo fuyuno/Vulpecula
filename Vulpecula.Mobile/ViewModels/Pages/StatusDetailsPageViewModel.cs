@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Prism.Commands;
@@ -10,6 +12,7 @@ using Vulpecula.Mobile.Extensions;
 using Vulpecula.Mobile.Models;
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
+using Vulpecula.Mobile.ViewModels.Timelines.Primitives;
 using Vulpecula.Mobile.Views.Pages;
 using Vulpecula.Mobile.Views.Popups;
 using Vulpecula.Models;
@@ -30,6 +33,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             this._dialogService = dialogService;
             this._accountManager = accountManager;
             this.Title = this.GetLocalizedString("Details");
+            this.Conversations = new ObservableCollection<StatusViewModel>();
         }
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
@@ -57,11 +61,31 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             this.SpreadCount = this._status.SpreadCount;
 
             this.OnTappedShareCommand.ChangeCanExecute();
+            this.Conversations.Clear();
+            // Model?
+            Task.Run(async () =>
+                {
+                    Status status = this._status;
+                    while (status.InReplyToStatusId.HasValue && status.InReplyToStatusId.Value > 0)
+                    {
+                        try
+                        {
+                            status = await this._accountManager.Providers.First().Croudia.Statuses.ShowAsync(status.InReplyToStatusId.Value);
+                            this.Conversations.Add(new StatusViewModel(this.Localization, this.NavigationService, status));
+                        }
+                        catch
+                        {
+                            // ignore
+                        }
+                    }
+                });
 
             base.OnNavigatedTo(parameters);
         }
 
         #region Properties
+
+        public ObservableCollection<StatusViewModel> Conversations { get; private set;}
 
         #region ScreenName
 
