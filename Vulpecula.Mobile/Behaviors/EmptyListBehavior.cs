@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Linq;
 
 using Vulpecula.Mobile.Extensions;
 
 using Xamarin.Forms;
+using System.Collections;
 
 namespace Vulpecula.Mobile.Behaviors
 {
     public class EmptyListBehavior : Behavior<ListView>
     {
         public static readonly BindableProperty TargetProperty =
-            BindableProperty.Create(nameof(Target), typeof(string), typeof(EmptyListBehavior), string.Empty);
+            BindableProperty.Create("Target", typeof(string), typeof(EmptyListBehavior), string.Empty);
 
         public static readonly BindableProperty IsReverseProperty =
-            BindableProperty.Create(nameof(IsReverse), typeof(bool), typeof(EmptyListBehavior), false);
+            BindableProperty.Create("IsReverse", typeof(bool), typeof(EmptyListBehavior), false);
 
         private ListView _associatedObject;
 
@@ -59,6 +61,12 @@ namespace Vulpecula.Mobile.Behaviors
             {
                 return;
             }
+            this._count = ((IList)this._associatedObject.ItemsSource).Count;
+            if (this._count > 0)
+            {
+                this.Action();
+            }
+
             this._disposable = items.ToObservable().Subscribe(w =>
                 {
                     switch (w.EventArgs.Action)
