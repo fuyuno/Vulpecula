@@ -142,10 +142,10 @@
             </ContentView>
             <Grid Grid.Row="4" Grid.Column="0"
                 Grid.ColumnSpan="2">
-                <Grid x:Name="Conversations">
-                    <Label HorizontalOptions="CenterAndExpand"
-                         Text="No conversations" />
-                </Grid>
+                <StackLayout x:Name="Conversations">
+                </StackLayout>
+                <!-- View! -->
+                <!--
                 <ListView HasUnevenRows="True"
                      ItemsSource="{Binding Conversations}">
                     <ListView.Behaviors>
@@ -162,6 +162,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                -->
             </Grid>
         </Grid>
     </ScrollView>

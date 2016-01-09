@@ -18,23 +18,29 @@ using Vulpecula.Mobile.Views.Popups;
 using Vulpecula.Models;
 
 using Xamarin.Forms;
-using System.Diagnostics;
 
 namespace Vulpecula.Mobile.ViewModels.Pages
 {
     public class StatusDetailsPageViewModel : TabbedViewModel
     {
-        private readonly AccountManager _accountManager;
         private readonly IPageDialogService _dialogService;
-        private Status _status;
+        // aa~^
+        public Status Model { get; private set; }
+        public AccountManager AccountManager { get; private set; }
+        public new ILocalization Localization {
+            get { return base.Localization; }
+        }
+        public new INavigationService NavigationService {
+            get { return base.NavigationService; }
+        }
+
 
         public StatusDetailsPageViewModel(ILocalization localization, INavigationService navigationService, IPageDialogService dialogService, AccountManager accountManager)
             : base(localization, navigationService)
         {
             this._dialogService = dialogService;
-            this._accountManager = accountManager;
+            this.AccountManager = accountManager;
             this.Title = this.GetLocalizedString("Details");
-            this.Conversations = new ObservableCollection<StatusViewModel>();
         }
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
@@ -42,7 +48,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             // Navigated from View
             if (parameters.ContainsKey("status"))
             {
-                this._status = parameters["status"] as Status;
+                this.Model = parameters["status"] as Status;
             }
             else
             {
@@ -52,41 +58,16 @@ namespace Vulpecula.Mobile.ViewModels.Pages
                 return;
             }
 
-            this.ScreenName = $"@{this._status.User.ScreenName}";
-            this.UserName = this._status.User.Name.ToSingleLine();
-            this.Text = this._status.Text.Trim();
-            this.UserIcon = this._status.User.ProfileImageUrlHttps;
-            this.CreatedAt = this._status.CreatedAt.ToString("G");
-            this.Via = this._status.Source.Name.ToSingleLine();
-            this.FavoritedCount = this._status.FavoritedCount;
-            this.SpreadCount = this._status.SpreadCount;
+            this.ScreenName = $"@{this.Model.User.ScreenName}";
+            this.UserName = this.Model.User.Name.ToSingleLine();
+            this.Text = this.Model.Text.Trim();
+            this.UserIcon = this.Model.User.ProfileImageUrlHttps;
+            this.CreatedAt = this.Model.CreatedAt.ToString("G");
+            this.Via = this.Model.Source.Name.ToSingleLine();
+            this.FavoritedCount = this.Model.FavoritedCount;
+            this.SpreadCount = this.Model.SpreadCount;
 
             this.OnTappedShareCommand.ChangeCanExecute();
-            this.Conversations.Clear();
-            // Model?
-            Task.Run(async () =>
-                {
-                    Status status = this._status;
-                    while (status.InReplyToStatusId.HasValue && status.InReplyToStatusId.Value > 0)
-                    {
-                        try
-                        {
-                            status = await this._accountManager.Providers.First().Croudia.Statuses.ShowAsync(status.InReplyToStatusId.Value);
-                            // TODO: Fix
-                            if(status.User == null)
-                            {
-                                break;
-                            }
-                            this.Conversations.Add(new StatusViewModel(this.Localization, this.NavigationService, status));
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.WriteLine(e);
-                            // ignore
-                        }
-                    }
-                });
-
             base.OnNavigatedTo(parameters);
         }
 
@@ -204,7 +185,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         private void OnTappedShowUserDetails()
         {
             var param = new NavigationParameters();
-            param.Add("user", this._status.User);
+            param.Add("user", this.Model.User);
             this.NavigationService.Navigate<UserDetailsPage>(param, false);
         }
 
@@ -220,11 +201,11 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         private void OnTappedOpenViaApp()
         {
             // TODO: Move to another class(Browser.cs ?)
-            if (string.IsNullOrWhiteSpace(this._status.Source.Url))
+            if (string.IsNullOrWhiteSpace(this.Model.Source.Url))
             {
                 return;
             }
-            Device.OpenUri(new Uri(this._status.Source.Url));
+            Device.OpenUri(new Uri(this.Model.Source.Url));
         }
 
         #endregion
@@ -238,7 +219,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         {
             var param = new NavigationParameters();
             param.Add("status", $"{this.ScreenName} ");
-            param.Add("in_reply_to_status_id", this._status.Id);
+            param.Add("in_reply_to_status_id", this.Model.Id);
             this.NavigationService.Navigate<StatusPage>(param);
         }
 
@@ -251,16 +232,16 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private async void OnTappedShare()
         {
-            await this._accountManager.Providers.First().Croudia.Statuses.SpreadAsync(this._status.Id);
+            await this.AccountManager.Providers.First().Croudia.Statuses.SpreadAsync(this.Model.Id);
         }
 
         private bool CanOnTappedShare()
         {
-            if (this._status == null)
+            if (this.Model == null)
             {
                 return true;
             }
-            return !this._status.User.IsProtected;
+            return !this.Model.User.IsProtected;
         }
 
         #endregion
@@ -272,7 +253,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private async void OnTappedFavorite()
         {
-            await this._accountManager.Providers.First().Croudia.Favorites.CreateAsync(this._status.Id);
+            await this.AccountManager.Providers.First().Croudia.Favorites.CreateAsync(this.Model.Id);
         }
 
         #endregion
