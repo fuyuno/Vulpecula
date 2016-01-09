@@ -18,6 +18,7 @@ using Vulpecula.Mobile.Views.Popups;
 using Vulpecula.Models;
 
 using Xamarin.Forms;
+using System.Diagnostics;
 
 namespace Vulpecula.Mobile.ViewModels.Pages
 {
@@ -71,10 +72,16 @@ namespace Vulpecula.Mobile.ViewModels.Pages
                         try
                         {
                             status = await this._accountManager.Providers.First().Croudia.Statuses.ShowAsync(status.InReplyToStatusId.Value);
+                            // TODO: Fix
+                            if(status.User == null)
+                            {
+                                break;
+                            }
                             this.Conversations.Add(new StatusViewModel(this.Localization, this.NavigationService, status));
                         }
-                        catch
+                        catch (Exception e)
                         {
+                            Debug.WriteLine(e);
                             // ignore
                         }
                     }
