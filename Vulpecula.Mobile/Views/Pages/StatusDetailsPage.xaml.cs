@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
-
-using Xamarin.Forms;
-using Vulpecula.Mobile.ViewModels.Pages;
 using System.Threading.Tasks;
-using Vulpecula.Models;
+
+using Vulpecula.Mobile.ViewModels.Pages;
 using Vulpecula.Mobile.ViewModels.Timelines.Primitives;
 using Vulpecula.Mobile.Views.Timelines.Primitives;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
+using Vulpecula.Models;
+
+using Xamarin.Forms;
+
 
 namespace Vulpecula.Mobile.Views.Pages
 {
@@ -21,6 +22,10 @@ namespace Vulpecula.Mobile.Views.Pages
 
         protected override void OnAppearing()
         {
+            if (this.Conversations.Children.Count > 0)
+            {
+                return;
+            }
             Task.Run(async () =>
                 {
                     var vm = (this.BindingContext as StatusDetailsPageViewModel);
@@ -37,14 +42,11 @@ namespace Vulpecula.Mobile.Views.Pages
                             }
                             var svm = new StatusViewModel(vm.Localization, vm.NavigationService, status);
                             Device.BeginInvokeOnMainThread(() =>
-                                {
-                                    this.Conversations.Children.Add(
-                                        new StatusView()
-                                        {
-                                            BindingContext = svm,
-                                            HorizontalOptions = LayoutOptions.StartAndExpand
-                                        });
-                                });
+                                this.Conversations.Children.Add(new StatusView()
+                                    {
+                                        BindingContext = svm,
+                                        HorizontalOptions = LayoutOptions.StartAndExpand
+                                    }));
                         }
                         catch (Exception e)
                         {
