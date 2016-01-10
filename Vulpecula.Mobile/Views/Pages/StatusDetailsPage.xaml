@@ -24,6 +24,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <ContentView Grid.Row="0" Grid.Column="0">
@@ -61,7 +62,14 @@
                 <Label Grid.Row="1" FontSize="18"
                     Text="{Binding Text}" />
             </Grid>
-            <Grid Grid.Row="2" Grid.Column="0"
+            <ContentView Grid.Row="2" Grid.Column="0"
+                Grid.ColumnSpan="2" Padding="10"
+                IsVisible="{Binding HasImage}">
+                <Image Source="{Binding ImageUrl}" Aspect="AspectFit"
+                    HorizontalOptions="CenterAndExpand"
+                     VerticalOptions="CenterAndExpand" />
+            </ContentView>
+            <Grid Grid.Row="3" Grid.Column="0"
                 Padding="10,0" Grid.ColumnSpan="2"
                 RowSpacing="0">
                 <Grid.Resources>
@@ -98,7 +106,7 @@
                     </StackLayout>
                 </StackLayout>
             </Grid>
-            <ContentView Grid.Row="3" Grid.Column="0"
+            <ContentView Grid.Row="4" Grid.Column="0"
                 Grid.ColumnSpan="2">
                 <Grid>
                     <Grid.Resources>
@@ -140,7 +148,7 @@
                         Command="{Binding OnTappedMoreCommand}" Image="more" />
                 </Grid>
             </ContentView>
-            <Grid Grid.Row="4" Grid.Column="0"
+            <Grid Grid.Row="5" Grid.Column="0"
                 Grid.ColumnSpan="2">
                 <StackLayout x:Name="Conversations">
                 </StackLayout>

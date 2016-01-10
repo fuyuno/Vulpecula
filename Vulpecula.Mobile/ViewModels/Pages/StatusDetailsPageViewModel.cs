@@ -66,14 +66,14 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             this.Via = this.Model.Source.Name.ToSingleLine();
             this.FavoritedCount = this.Model.FavoritedCount;
             this.SpreadCount = this.Model.SpreadCount;
+            this.HasImage = this.Model.Entities?.Media?.MediaUrlHttps != null;
+            this.ImageUrl = this.HasImage ? this.Model.Entities.Media.MediaUrlHttps : "";
 
             this.OnTappedShareCommand.ChangeCanExecute();
             base.OnNavigatedTo(parameters);
         }
 
         #region Properties
-
-        public ObservableCollection<StatusViewModel> Conversations { get; private set;}
 
         #region ScreenName
 
@@ -167,6 +167,26 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         {
             get { return this._spreadCount; }
             set { this.SetProperty(ref this._spreadCount, value); }
+        }
+
+        #endregion
+
+        #region HasImage
+
+        private bool _hasImage;
+        public bool HasImage {
+            get { return this._hasImage; }
+            set { this.SetProperty(ref this._hasImage, value); }
+        }
+
+        #endregion
+
+        #region ImageUrl
+
+        private string _imageUrl;
+        public string ImageUrl {
+            get { return this._imageUrl; }
+            set { this.SetProperty(ref this._imageUrl, value); }
         }
 
         #endregion
