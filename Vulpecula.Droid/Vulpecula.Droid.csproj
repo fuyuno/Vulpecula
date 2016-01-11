@@ -133,6 +133,11 @@
     <AndroidResource Include="Resources\drawable-xhdpi\repeat.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\reply.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\sent.png" />
+    <AndroidResource Include="Resources\drawable\image.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\image.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\image.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\image.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\image.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />

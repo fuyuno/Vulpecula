@@ -125,6 +125,8 @@
     <BundleResource Include="Resources\more%402x.png" />
     <BundleResource Include="Resources\favorited.png" />
     <BundleResource Include="Resources\favorited%402x.png" />
+    <BundleResource Include="Resources\image%402x.png" />
+    <BundleResource Include="Resources\image.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -54,6 +54,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Font="Bold"
                     FontSize="13" LineBreakMode="NoWrap"
@@ -61,7 +62,9 @@
                 <Label Grid.Column="1" FontSize="12"
                     LineBreakMode="TailTruncation" Text="{Binding ScreenName}"
                     TextColor="Silver" VerticalOptions="End" />
-                <Label Grid.Column="2" FontSize="12"
+                <Image Grid.Column="2" Source="image.png"
+                    HeightRequest="12" IsVisible="{Binding HasImage}" />
+                <Label Grid.Column="3" FontSize="12"
                     HorizontalOptions="EndAndExpand" LineBreakMode="NoWrap"
                     Text="{Binding CreatedAt}" TextColor="Silver"
                     VerticalOptions="End" />

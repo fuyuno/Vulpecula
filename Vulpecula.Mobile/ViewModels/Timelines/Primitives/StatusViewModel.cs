@@ -34,6 +34,7 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         public string UserName => this._originalStatus.User.Name.ToSingleLine();
         public string Text => this._originalStatus.Text.Trim();
         public string Icon => this._originalStatus.User.ProfileImageUrlHttps;
+        public bool HasImage => this._originalStatus?.Entities?.Media?.MediaUrlHttps != null;
 
         public string CreatedAt
         {
