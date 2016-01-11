@@ -18,6 +18,10 @@ namespace Vulpecula.Mobile.Views.Pages
         public StatusDetailsPage()
         {
             InitializeComponent();
+            this.Appearing += (sender, e) =>
+            { 
+                Debug.WriteLine("aaa");
+            };
         }
 
         protected override void OnAppearing()
@@ -29,7 +33,21 @@ namespace Vulpecula.Mobile.Views.Pages
             Task.Run(async () =>
                 {
                     var vm = (this.BindingContext as StatusDetailsPageViewModel);
-                    Status status = vm.Model;
+                    Status status;
+                    if (Device.OS == TargetPlatform.Android)
+                    {
+                        // When android, vm.Model is null. Why?
+                        do
+                        {
+                            status = vm.Model;
+                            Debug.WriteLine("aaa");
+                        }
+                        while (status == null);
+                    }
+                    else
+                    {
+                        status = vm.Model;
+                    }
                     while (status.InReplyToStatusId.HasValue && status.InReplyToStatusId.Value > 0)
                     {
                         try
