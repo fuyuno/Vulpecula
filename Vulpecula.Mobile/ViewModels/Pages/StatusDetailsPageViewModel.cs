@@ -285,7 +285,9 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private void OnTappedComment()
         {
-            // comment
+            var parameters = new NavigationParameters();
+            parameters["comment"] = this.Model.Id;
+            NavigationService.Navigate<StatusPage>(parameters);
         }
 
         #endregion

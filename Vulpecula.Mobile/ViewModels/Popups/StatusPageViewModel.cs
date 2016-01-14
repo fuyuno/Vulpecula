@@ -8,6 +8,7 @@ using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
 
 using Xamarin.Forms;
+using Vulpecula.Models;
 
 namespace Vulpecula.Mobile.ViewModels.Popups
 {
@@ -16,6 +17,7 @@ namespace Vulpecula.Mobile.ViewModels.Popups
     {
         private readonly AccountManager _accountManager;
         private long _inReplyToStatusId;
+        private long _commentStatusId;
 
         public StatusPageViewModel(ILocalization localization, INavigationService navigationService, AccountManager accountManager)
             : base(localization, navigationService)
@@ -24,6 +26,7 @@ namespace Vulpecula.Mobile.ViewModels.Popups
             NavigationTitle = this.GetLocalizedString("Status");
             this.Counter = 372;
             this._inReplyToStatusId = -1;
+            this._commentStatusId = -1;
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
@@ -41,6 +44,10 @@ namespace Vulpecula.Mobile.ViewModels.Popups
             if (parameters.ContainsKey("in_reply_to_status_id"))
             {
                 this._inReplyToStatusId = (long)parameters["in_reply_to_status_id"];
+            }
+            if (parameters.ContainsKey("comment"))
+            {
+                this._commentStatusId = (long)parameters["comment"];
             }
         }
 
@@ -112,13 +119,17 @@ namespace Vulpecula.Mobile.ViewModels.Popups
 
         private async void Send()
         {
-            if (this._inReplyToStatusId == -1)
-            {
-                await this._accountManager.Providers.First().Croudia.Statuses.UpdateAsync(status => this.Text);
-            }
-            else
+            if (this._inReplyToStatusId > -1)
             {
                 await this._accountManager.Providers.First().Croudia.Statuses.UpdateAsync(status => this.Text, in_reply_to_status_id => this._inReplyToStatusId);
+            }
+            if (this._commentStatusId > -1)
+            {
+                await this._accountManager.Providers.First().Croudia.Statuses.CommentAsync(status => this.Text, id => this._commentStatusId);
+            }
+            if (this._inReplyToStatusId == -1 && this._commentStatusId == -1)
+            {
+                await this._accountManager.Providers.First().Croudia.Statuses.UpdateAsync(status => this.Text);
             }
             this.Text = string.Empty;
             this.NavigationService.GoBack();
