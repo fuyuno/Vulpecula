@@ -6,6 +6,10 @@
      xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
      xmlns:primitives="clr-namespace:Vulpecula.Mobile.Views.Timelines.Primitives;assembly=Vulpecula.Mobile"
      Title="{Binding Title}" mvvm:ViewModelLocator.AutowireViewModel="True">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding NavigateCommand,Mode=OneWay}" Icon="sent"
+            Priority="1" />
+    </ContentPage.ToolbarItems>
     <ScrollView>
         <Grid ColumnSpacing="0">
             <Grid.Resources>

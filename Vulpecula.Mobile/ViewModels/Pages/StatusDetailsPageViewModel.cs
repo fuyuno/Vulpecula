@@ -310,7 +310,10 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private void Navigate()
         {
-            NavigationService.Navigate<StatusPage>();
+            var parameters = new NavigationParameters();
+            parameters["status"] = this.ScreenName + " ";
+            parameters["in_reply_to_status_id"] = this.Model.Id;
+            NavigationService.Navigate<StatusPage>(parameters);
         }
 
         #endregion
