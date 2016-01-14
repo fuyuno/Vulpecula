@@ -158,6 +158,7 @@
   -->
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="SampleData.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\MainPage.xaml">

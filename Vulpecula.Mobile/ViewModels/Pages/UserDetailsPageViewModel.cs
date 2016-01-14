@@ -9,17 +9,24 @@ using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
 using Vulpecula.Mobile.Views.Popups;
 using Vulpecula.Models;
+using System.Diagnostics;
 
 namespace Vulpecula.Mobile.ViewModels.Pages
 {
     public class UserDetailsPageViewModel : TabbedViewModel
     {
-        private readonly AccountManager _accountManager;
-
+        public User Model { get; private set; }
+        public AccountManager AccountManager { get; private set; }
+        public new ILocalization Localization {
+            get { return base.Localization; }
+        }
+        public new INavigationService NavigationService {
+            get { return base.NavigationService; }
+        }
         public UserDetailsPageViewModel(ILocalization localization, INavigationService navigationService, AccountManager accountManager)
             : base(localization, navigationService)
         {
-            this._accountManager = accountManager;
+            this.AccountManager = accountManager;
             Title = this.GetLocalizedString("Me");
             Icon = "user";
             NavigationTitle = this.GetLocalizedString("Me");
@@ -28,7 +35,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         // Tab
         public override void OnTabNavigatedTo()
         {
-            this.Set(this._accountManager.Users.First());
+            this.Set(this.AccountManager.Users.First());
         }
 
         // Modai
@@ -42,7 +49,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
             }
             else
             {
-                user = this._accountManager.Users.First();
+                user = this.AccountManager.Users.First();
             }
             this.Set(user);
             this.Title = this.ScreenName;
@@ -51,6 +58,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private void Set(User user)
         {
+            this.Model = user;
             this.Cover = user.CoverImageUrlHttps;
             this.UserIcon = user.ProfileImageUrlHttps;
             this.Username = user.Name.ToSingleLine();
@@ -224,6 +232,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
                 if (this.SetProperty(ref this._width, value))
                 {
                     this.Height = this._width * 200 / 550;
+                    Debug.WriteLine(this.Height);
                 }
             }
         }

@@ -152,25 +152,6 @@
                 Grid.ColumnSpan="2">
                 <StackLayout x:Name="Conversations">
                 </StackLayout>
-                <!-- View! -->
-                <!--
-                <ListView HasUnevenRows="True"
-                     ItemsSource="{Binding Conversations}">
-                    <ListView.Behaviors>
-                        <behaviors:ListViewDisableSelectionBehavior />
-                        <behaviors:EmptyListBehavior Target="Conversations" />
-                    </ListView.Behaviors>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <ViewCell.View>
-                                    <primitives:StatusView BindingContext="{Binding}" />
-                                </ViewCell.View>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                -->
             </Grid>
         </Grid>
     </ScrollView>

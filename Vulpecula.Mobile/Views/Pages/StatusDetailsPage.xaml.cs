@@ -18,10 +18,6 @@ namespace Vulpecula.Mobile.Views.Pages
         public StatusDetailsPage()
         {
             InitializeComponent();
-            this.Appearing += (sender, e) =>
-            { 
-                Debug.WriteLine("aaa");
-            };
         }
 
         protected override void OnAppearing()
@@ -40,7 +36,6 @@ namespace Vulpecula.Mobile.Views.Pages
                         do
                         {
                             status = vm.Model;
-                            Debug.WriteLine("aaa");
                         }
                         while (status == null);
                     }
