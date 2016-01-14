@@ -149,7 +149,7 @@
                 </Grid>
             </ContentView>
             <Grid Grid.Row="5" Grid.Column="0"
-                Grid.ColumnSpan="2">
+                Grid.ColumnSpan="2" Padding="5,0,5,0">
                 <StackLayout x:Name="Conversations">
                 </StackLayout>
             </Grid>
