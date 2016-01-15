@@ -102,6 +102,7 @@ namespace Vulpecula
                 await this.OAuth.RefreshAsync();
                 return await this.GetAsync<T>(url, parameters);
             }
+            response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseString);
         }
@@ -152,6 +153,7 @@ namespace Vulpecula
                 await this.OAuth.RefreshAsync();
                 return await this.PostAsync<T>(url, parameters);
             }
+            response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseString);
         }
