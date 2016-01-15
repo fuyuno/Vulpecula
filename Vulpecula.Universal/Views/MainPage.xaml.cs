@@ -1,4 +1,7 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System;
+using System.Diagnostics;
+
+using Windows.UI.Xaml.Controls;
 
 using Vulpecula.Universal.ViewModels;
 
@@ -15,7 +18,14 @@ namespace Vulpecula.Universal.Views
 
         public MainPage()
         {
-            this.InitializeComponent();
+            try
+            {
+                this.InitializeComponent();
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("################################### EXCEPTION #################################");
+            }
         }
     }
 }

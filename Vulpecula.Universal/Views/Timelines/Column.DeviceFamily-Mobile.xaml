@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="Vulpecula.Universal.Views.Timelines.Column"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:behaviors="using:Vulpecula.Universal.Behaviors"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="using:WinRTXamlToolkit.Interactivity"
+             xmlns:local="using:Vulpecula.Universal.Views.Timelines"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:primitives="using:Vulpecula.Universal.Views.Timelines.Primitive"
+             xmlns:timelines="using:Vulpecula.Universal.ViewModels.Timelines"
+             d:DataContext="{d:DesignInstance timelines:ColumnViewModel}"
+             d:DesignHeight="640"
+             d:DesignWidth="360"
+             mc:Ignorable="d">
+    <Border BorderBrush="{StaticResource AppBarBorderThemeBrush}" BorderThickness="2" Margin="0,10,0,10">
+        <Grid>
+            <ProgressBar x:Name="ProgressBar1" IsIndeterminate="True" />
+            <ListView ItemsSource="{Binding Statuses}" SelectionChanged="{x:Bind ViewModel.SelectionChanged}">
+                <i:Interaction.Behaviors>
+                    <behaviors:EmptyListBehavior Target="ProgressBar1" />
+                </i:Interaction.Behaviors>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <primitives:StatusView HorizontalAlignment="Stretch" DataContext="{Binding}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Border>
+</UserControl>
