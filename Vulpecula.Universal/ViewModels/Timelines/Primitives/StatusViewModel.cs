@@ -1,10 +1,8 @@
-﻿using System.Windows.Input;
-
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Windows.Input;
 using Prism.Commands;
-
+using Prism.Windows.Navigation;
 using Vulpecula.Models;
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.Models.Services;
@@ -12,6 +10,9 @@ using Vulpecula.Universal.Models.Timelines.Primitive;
 using Vulpecula.Universal.ViewModels.Flyouts;
 using Vulpecula.Universal.ViewModels.Primitives;
 using Vulpecula.Universal.Views.Timelines.Primitive;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 {
@@ -46,6 +47,14 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             IsFlyoutOpened = false;
         }
 
+        public void Initialize()
+        {
+            DataTransferManager.GetForCurrentView().DataRequested += (sender, args) =>
+            {
+                // Share via (args.request...)
+            };
+        }
+
         public void OnTappedOpenUserProfile(object sender, RoutedEventArgs e)
         {
             // TODO: ヤバイので、Behavior でなんとかする。
@@ -77,42 +86,42 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         private string _text;
         public string Text => _text ?? (_text = IsShare ? Model.SpreadStatus.Text.Trim() : Model.Text.Trim());
 
-        #endregion
+        #endregion Text
 
         #region Image
 
         private string _imageUrl;
         public string ImageUrl => _imageUrl ?? (_imageUrl = HasImage ? IsShare ? Model.SpreadStatus.Entities.Media.MediaUrlHttps : Model.Entities.Media.MediaUrlHttps : "");
 
-        #endregion
+        #endregion Image
 
         #region User
 
         private UserViewModel _user;
         public UserViewModel User => _user ?? (_user = CreateUserViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
 
-        #endregion
+        #endregion User
 
         #region UserProfile
 
         private UserFlyoutViewModel _userProfile;
         public UserFlyoutViewModel UserProfile => _userProfile ?? (_userProfile = CreateUserFlyoutViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
 
-        #endregion
+        #endregion UserProfile
 
         #region Recipient
 
         private UserViewModel _recipient;
         public UserViewModel Recipient => _recipient ?? (_recipient = CreateUserViewModel(Model.Recipient));
 
-        #endregion
+        #endregion Recipient
 
         #region ShareUser
 
         private UserViewModel _shareUser;
         public UserViewModel ShareUser => _shareUser ?? (_shareUser = CreateUserViewModel(Model.User));
 
-        #endregion
+        #endregion ShareUser
 
         #region IsFavorited
 
@@ -124,7 +133,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             set { SetProperty(ref _isFavorited, value); }
         }
 
-        #endregion
+        #endregion IsFavorited
 
         #region IsShared
 
@@ -136,7 +145,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             set { SetProperty(ref _isShared, value); }
         }
 
-        #endregion
+        #endregion IsShared
 
         #region IsCommented
 
@@ -148,7 +157,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             set { SetProperty(ref _isCommented, value); }
         }
 
-        #endregion
+        #endregion IsCommented
 
         #region IsFlyoutOpened
 
@@ -160,7 +169,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             set { SetProperty(ref _isFlyoutOpened, value); }
         }
 
-        #endregion
+        #endregion IsFlyoutOpened
 
         #region SpreadCommand
 
@@ -174,7 +183,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             IsShared = !IsShared;
         }
 
-        #endregion
+        #endregion SpreadCommand
 
         #region FavoriteCommand
 
@@ -188,7 +197,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             IsFavorited = !IsFavorited;
         }
 
-        #endregion
+        #endregion FavoriteCommand
 
         #region DeleteCommand
 
@@ -201,7 +210,20 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             ServiceProvider.RegisterService(new StatusDeleteService(_provider, Model.Id, IsDirectMessage));
         }
 
-        #endregion
+        #endregion DeleteCommand
+
+        #region ShareCommand
+
+        private ICommand _shareCommand;
+
+        public ICommand ShareCommand => _shareCommand ?? (_shareCommand = new DelegateCommand(Share));
+
+        private void Share()
+        {
+            DataTransferManager.ShowShareUI();
+        }
+
+        #endregion ShareCommand
 
         #region IsExpanded
 
@@ -213,6 +235,6 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             set { this.SetProperty(ref this._isExpaned, value); }
         }
 
-        #endregion
+        #endregion IsExpanded
     }
 }

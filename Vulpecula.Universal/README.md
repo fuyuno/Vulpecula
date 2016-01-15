@@ -6,8 +6,9 @@ Vulpecula for Windows は、 [Universal Windows Platform](https://msdn.microsoft
 
 ### 動作環境
 * Windows 10
+* Windows 10 Mobile
 
-なお、動作確認は Windows 10 Home で行っています。
+なお、動作確認は Windows 10 Home, Windows 10 Mobile (MADOSMA) で行っています。
 
 
 ### ライセンス

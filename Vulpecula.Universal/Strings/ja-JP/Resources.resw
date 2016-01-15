@@ -129,6 +129,9 @@
   <data name="MainPageXaml_Account.Text" xml:space="preserve">
     <value>アカウント</value>
   </data>
+  <data name="MainPageXaml_Home.Text" xml:space="preserve">
+    <value>ホーム</value>
+  </data>
   <data name="MainPageXaml_NewAccount.Text" xml:space="preserve">
     <value>アカウントを追加</value>
   </data>

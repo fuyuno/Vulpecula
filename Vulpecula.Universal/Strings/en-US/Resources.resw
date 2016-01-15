@@ -129,6 +129,9 @@
   <data name="MainPageXaml_Account.Text" xml:space="preserve">
     <value>Accounts</value>
   </data>
+  <data name="MainPageXaml_Home.Text" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="MainPageXaml_NewAccount.Text" xml:space="preserve">
     <value>Register another account</value>
   </data>

@@ -28,7 +28,14 @@ namespace Vulpecula.Universal
 
         public void SetRootFrame(Frame frame)
         {
-            this.RootSplitView.Content = frame;
+            if (this.RootSplitView != null)
+            {
+                this.RootSplitView.Content = frame;
+            }
+            else
+            {
+                this.Content = frame;
+            }
         }
     }
 }
