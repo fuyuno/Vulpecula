@@ -73,7 +73,6 @@
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-
             </ItemsControl>
         </StackPanel>
         <!--  Add Accounts Button  -->
@@ -110,28 +109,10 @@
                             <FontIcon Width="48"
                                       Height="48"
                                       FontSize="24"
-                                      Glyph="&#xE80F;" />
-                            <TextBlock x:Uid="MainPageXaml_Home"
-                                       Margin="10,0"
-                                       VerticalAlignment="Center"
-                                       FontSize="18" />
-
-                        </StackPanel>
-                    </Button>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button>
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon Width="48"
-                                      Height="48"
-                                      FontSize="24"
                                       Glyph="&#xE094;" />
-                            <SearchBox x:Uid="MainPageXaml_SearchBox"
-                                       Width="252"
-                                       Height="38"
+                            <TextBlock x:Uid="MainPageXaml_SearchBox"
                                        Margin="10,0"
                                        VerticalAlignment="Center"
-                                       BorderThickness="1"
                                        FontSize="18" />
                         </StackPanel>
                     </Button>
@@ -151,7 +132,7 @@
                     </Button>
                 </ListBoxItem>
                 <ListBoxItem>
-                    <Button Command="{Binding NavigateToSettingsPageCommand}">
+                    <Button Click="ButtonBase_OnClick" Command="{Binding NavigateToSettingsPageCommand}">
                         <StackPanel Orientation="Horizontal">
                             <FontIcon Width="48"
                                       Height="48"
@@ -240,6 +221,5 @@
             </StackPanel>
         </StackPanel>
         <!--  #endregion  -->
-
     </RelativePanel>
 </UserControl>

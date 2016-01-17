@@ -37,7 +37,6 @@
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
-
         </VisualStateManager.VisualStateGroups>
         <StackPanel Background="{StaticResource AppBarItemBackgroundThemeBrush}" Orientation="Horizontal">
             <ToggleButton Width="48"
@@ -60,7 +59,7 @@
                    Grid.Row="1"
                    DisplayMode="CompactOverlay">
             <SplitView.Pane>
-                <views:MenuView />
+                <views:MenuView x:Name="MenuView" />
             </SplitView.Pane>
             <SplitView.Content>
                 <Frame x:Name="RootFrame"

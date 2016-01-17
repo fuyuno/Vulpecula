@@ -28,8 +28,8 @@ namespace Vulpecula.Universal.ViewModels
 
         public MainPageViewModel()
         {
-            this.Colmuns = new ObservableCollection<ColumnViewModel>();
-            ViewModelHelper.SubscribeNotifyCollectionChanged(ColumnManager.Instance.Columns, this.Colmuns, (Column w) => ColumnViewModel.Create(w));
+            Colmuns = new ObservableCollection<ColumnViewModel>();
+            ViewModelHelper.SubscribeNotifyCollectionChanged(ColumnManager.Instance.Columns, Colmuns, (Column w) => ColumnViewModel.Create(w));
         }
 
         #region Events
@@ -60,7 +60,7 @@ namespace Vulpecula.Universal.ViewModels
         {
             if (viewModelState.ContainsKey("TimelineState"))
             {
-                this.Colmuns = viewModelState["TimelineState"] as ObservableCollection<ColumnViewModel>;
+                Colmuns = viewModelState["TimelineState"] as ObservableCollection<ColumnViewModel>;
                 viewModelState.Remove("TimelineState");
             }
         }
@@ -74,9 +74,7 @@ namespace Vulpecula.Universal.ViewModels
         public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
         {
             if (!suspending)
-            {
-                viewModelState["TimelineState"] = this.Colmuns;
-            }
+                viewModelState["TimelineState"] = Colmuns;
         }
     }
 }

@@ -138,7 +138,7 @@
   <data name="MainPageXaml_ScreenName.Text" xml:space="preserve">
     <value>@{0}</value>
   </data>
-  <data name="MainPageXaml_SearchBox.PlaceholderText" xml:space="preserve">
+  <data name="MainPageXaml_SearchBox.Text" xml:space="preserve">
     <value>ささやき / ユーザーを検索</value>
   </data>
   <data name="MainPageXaml_Send.Content" xml:space="preserve">

@@ -18,19 +18,17 @@ namespace Vulpecula.Universal.Models.Timelines
 
         public string Query { get; set; }
 
-        private Column()
-        {
-        }
+        private Column() {}
 
         private Column(TimelineType type, string id, string name, long userId, int row, string query, bool enableNotity)
         {
             Type = type;
             ColumnId = id;
-            this._name = name;
+            _name = name;
             UserId = userId;
-            this._row = row;
+            _row = row;
             Query = query;
-            this._enableNotify = enableNotity;
+            _enableNotify = enableNotity;
         }
 
         public static Column CreateColumnInfo(TimelineType type, string name, long userId, int row, string query = null, bool enableNotity = true)
@@ -43,12 +41,13 @@ namespace Vulpecula.Universal.Models.Timelines
             TimelineType type;
             if (!Enum.TryParse(adcv[nameof(Type)].ToString(), out type))
                 throw new InvalidDataException();
+            var id = AccountManager.Instance.Users.FirstOrDefault() == null ? 0 : AccountManager.Instance.Users.First().Id;
             var info = new Column
             {
                 Type = type,
                 ColumnId = adcv.ContainsKey(nameof(ColumnId)) ? adcv[nameof(ColumnId)].ToString() : null,
                 Name = adcv.ContainsKey(nameof(Name)) ? adcv[nameof(Name)].ToString() : "##unloaded##",
-                UserId = adcv[nameof(UserId)].ToString() != "0" ? long.Parse(adcv[nameof(UserId)].ToString()) : AccountManager.Instance.Users.First().Id,
+                UserId = adcv[nameof(UserId)].ToString() != "0" ? long.Parse(adcv[nameof(UserId)].ToString()) : id,
                 Row = adcv.ContainsKey(nameof(Row)) ? int.Parse(adcv[nameof(Row)].ToString()) : int.MaxValue,
                 Query = adcv.ContainsKey(nameof(Query)) ? adcv[nameof(Query)]?.ToString() : null,
                 EnableNotity = !adcv.ContainsKey(nameof(EnableNotity)) || bool.Parse(adcv[nameof(EnableNotity)].ToString())
@@ -99,9 +98,7 @@ namespace Vulpecula.Universal.Models.Timelines
             set
             {
                 if (SetProperty(ref _name, value))
-                {
-                    this.Resave();
-                }
+                    Resave();
             }
         }
 
@@ -117,9 +114,7 @@ namespace Vulpecula.Universal.Models.Timelines
             set
             {
                 if (SetProperty(ref _row, value))
-                {
-                    this.Resave();
-                }
+                    Resave();
             }
         }
 
@@ -135,9 +130,7 @@ namespace Vulpecula.Universal.Models.Timelines
             set
             {
                 if (SetProperty(ref _enableNotify, value))
-                {
-                    this.Resave();
-                }
+                    Resave();
             }
         }
 

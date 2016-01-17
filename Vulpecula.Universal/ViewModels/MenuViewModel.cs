@@ -21,11 +21,12 @@ namespace Vulpecula.Universal.ViewModels
 
         public MenuViewModel(INavigationService navigationService)
         {
-            this._navigationService = navigationService;
-            this.Accounts = new ObservableCollection<UserAccountViewModel>();
-            this.Text = string.Empty;
-            this.IsWhisperZoneOpened = false;
-            ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, this.Accounts, (User w) => UserAccountViewModel.Create(w));
+            _navigationService = navigationService;
+            Accounts = new ObservableCollection<UserAccountViewModel>();
+            Text = string.Empty;
+            IsWhisperZoneOpened = false;
+            EventFired = false;
+            ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, Accounts, (User w) => UserAccountViewModel.Create(w));
         }
 
         #region Properties
@@ -38,13 +39,11 @@ namespace Vulpecula.Universal.ViewModels
 
         public string Text
         {
-            get { return this._text; }
+            get { return _text; }
             set
             {
-                if (this.SetProperty(ref this._text, value))
-                {
-                    ((DelegateCommand)this.SendTweetCommand).RaiseCanExecuteChanged();
-                }
+                if (SetProperty(ref _text, value))
+                    ((DelegateCommand) SendTweetCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -56,8 +55,20 @@ namespace Vulpecula.Universal.ViewModels
 
         public bool IsWhisperZoneOpened
         {
-            get { return this._isWhisperZoneOpened; }
-            set { this.SetProperty(ref this._isWhisperZoneOpened, value); }
+            get { return _isWhisperZoneOpened; }
+            set { SetProperty(ref _isWhisperZoneOpened, value); }
+        }
+
+        #endregion
+
+        #region EventFired
+
+        private bool _eventFired;
+
+        public bool EventFired
+        {
+            get { return _eventFired; }
+            set { SetProperty(ref _eventFired, value); }
         }
 
         #endregion
@@ -70,7 +81,7 @@ namespace Vulpecula.Universal.ViewModels
 
         private ICommand _authorizationCommand;
 
-        public ICommand AuthorizationCommand => this._authorizationCommand ?? (this._authorizationCommand = new DelegateCommand(Authorization));
+        public ICommand AuthorizationCommand => _authorizationCommand ?? (_authorizationCommand = new DelegateCommand(Authorization));
 
         private async void Authorization() => await AccountManager.Instance.AuthorizationAccount();
 
@@ -79,11 +90,11 @@ namespace Vulpecula.Universal.ViewModels
         #region ToggleTweetAreaCommand
 
         private ICommand _toggleTweetAreaCommand;
-        public ICommand ToggleTweetAreaCommand => this._toggleTweetAreaCommand ?? (this._toggleTweetAreaCommand = new DelegateCommand(ToggleTweetArea));
+        public ICommand ToggleTweetAreaCommand => _toggleTweetAreaCommand ?? (_toggleTweetAreaCommand = new DelegateCommand(ToggleTweetArea));
 
         private void ToggleTweetArea()
         {
-            this.IsWhisperZoneOpened = !this.IsWhisperZoneOpened;
+            IsWhisperZoneOpened = !IsWhisperZoneOpened;
         }
 
         #endregion
@@ -91,24 +102,20 @@ namespace Vulpecula.Universal.ViewModels
         #region SendTweetCommand
 
         private ICommand _sendTweetCommand;
-        public ICommand SendTweetCommand => this._sendTweetCommand ?? (this._sendTweetCommand = new DelegateCommand(SendTweet, CanSendTweet));
+        public ICommand SendTweetCommand => _sendTweetCommand ?? (_sendTweetCommand = new DelegateCommand(SendTweet, CanSendTweet));
 
         private void SendTweet()
         {
-            foreach (var account in this.Accounts.Where(w => w.IsWhisperEnabled))
-            {
-                account.SendWhisper(this.Text);
-            }
-            this.Text = "";
-            ((DelegateCommand)this.SendTweetCommand).RaiseCanExecuteChanged();
+            foreach (var account in Accounts.Where(w => w.IsWhisperEnabled))
+                account.SendWhisper(Text);
+            Text = "";
+            ((DelegateCommand) SendTweetCommand).RaiseCanExecuteChanged();
         }
 
         private bool CanSendTweet()
         {
-            if (this.Accounts.All(w => !w.IsWhisperEnabled) || string.IsNullOrWhiteSpace(this.Text))
-            {
+            if (Accounts.All(w => !w.IsWhisperEnabled) || string.IsNullOrWhiteSpace(Text))
                 return false;
-            }
             return true;
         }
 
@@ -117,11 +124,11 @@ namespace Vulpecula.Universal.ViewModels
         #region SelectAccountCommand
 
         private ICommand _selectAccountCommand;
-        public ICommand SelectAccountCommand => this._selectAccountCommand ?? (this._selectAccountCommand = new DelegateCommand(SelectAccount));
+        public ICommand SelectAccountCommand => _selectAccountCommand ?? (_selectAccountCommand = new DelegateCommand(SelectAccount));
 
         private void SelectAccount()
         {
-            ((DelegateCommand)this.SendTweetCommand).RaiseCanExecuteChanged();
+            ((DelegateCommand) SendTweetCommand).RaiseCanExecuteChanged();
         }
 
         #endregion
@@ -129,11 +136,14 @@ namespace Vulpecula.Universal.ViewModels
         #region NavigateToSettingsPageCommand
 
         private ICommand _navigateToSettingsPageCommand;
-        public ICommand NavigateToSettingsPageCommand => this._navigateToSettingsPageCommand ?? (this._navigateToSettingsPageCommand = new DelegateCommand(NavigateToSettingsPage));
+
+        public ICommand NavigateToSettingsPageCommand
+            => _navigateToSettingsPageCommand ?? (_navigateToSettingsPageCommand = new DelegateCommand(NavigateToSettingsPage));
 
         private void NavigateToSettingsPage()
         {
-            this._navigationService.Navigate("Settings.SettingsMain", null);
+            _navigationService.Navigate("Settings.SettingsMain", null);
+            EventFired = true;
         }
 
         #endregion

@@ -1,4 +1,7 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System.Diagnostics;
+
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 using Vulpecula.Universal.ViewModels;
 
@@ -11,11 +14,17 @@ namespace Vulpecula.Universal.Views
     /// </summary>
     public sealed partial class MenuView : UserControl
     {
-        public MenuViewModel ViewModel => this.DataContext as MenuViewModel;
+        public MenuViewModel ViewModel => DataContext as MenuViewModel;
 
         public MenuView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+            Debug.WriteLine((FrameworkElement) Parent);
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine(Parent);
         }
     }
 }
