@@ -19,40 +19,38 @@ namespace Vulpecula.Mobile.Models
         // ReSharper disable once InconsistentNaming
         private List<string> _Accounts
         {
-            get { return this._configuration.GetArray("Accounts")?.ToList(); }
-            set { this._configuration.SetArray("Accounts", value.ToArray()); }
+            get { return _configuration.GetArray("Accounts")?.ToList(); }
+            set { _configuration.SetArray("Accounts", value.ToArray()); }
         }
 
         public ObservableCollection<string> Accounts { get; }
 
         public Configuration()
         {
-            this._configuration = App.ModelLocator.GetModel<IConfiguration>();
+            _configuration = App.ModelLocator.GetModel<IConfiguration>();
 
-            if (this._Accounts == null)
-            {
-                this._Accounts = new List<string>();
-            }
-            this.Accounts = new ObservableCollection<string>(this._Accounts);
-            this.Accounts.ToObservable().Subscribe(w =>
+            if (_Accounts == null)
+                _Accounts = new List<string>();
+            Accounts = new ObservableCollection<string>(_Accounts);
+            Accounts.ToObservable().Subscribe(w =>
             {
                 List<string> temp;
                 switch (w.EventArgs.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        temp = this._Accounts;
+                        temp = _Accounts;
                         temp.Add(w.EventArgs.NewItems[0].ToString());
-                        this._Accounts = new List<string>(temp);
+                        _Accounts = new List<string>(temp);
                         break;
 
                     case NotifyCollectionChangedAction.Remove:
-                        temp = this._Accounts;
+                        temp = _Accounts;
                         temp.Remove(w.EventArgs.NewItems[0].ToString());
-                        this._Accounts = new List<string>(temp);
+                        _Accounts = new List<string>(temp);
                         break;
 
                     case NotifyCollectionChangedAction.Reset:
-                        this._Accounts = new List<string>();
+                        _Accounts = new List<string>();
                         break;
                 }
             });

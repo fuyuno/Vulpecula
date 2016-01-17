@@ -8,7 +8,7 @@ using Xamarin.Forms;
 namespace Vulpecula.Mobile.Behaviors
 {
     /// <summary>
-    /// Platform behavior.
+    ///     Platform behavior.
     /// </summary>
     public class PlatformBehavior : Behavior<Layout<View>>
     {
@@ -18,13 +18,13 @@ namespace Vulpecula.Mobile.Behaviors
 
         protected override void OnAttachedTo(Layout<View> bindable)
         {
-            this._layout = bindable;
-            this._disposable = Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(10))
-                .Select(_ => this._flag)
-                .DistinctUntilChanged()
-                .Where(w => w)
-                .Repeat()
-                .Subscribe(_ => this.DoAction());
+            _layout = bindable;
+            _disposable = Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(10))
+                                    .Select(_ => _flag)
+                                    .DistinctUntilChanged()
+                                    .Where(w => w)
+                                    .Repeat()
+                                    .Subscribe(_ => DoAction());
             bindable.ChildAdded += Bindable_ChildAdded;
             bindable.ChildRemoved += Bindable_ChildRemoved;
 
@@ -37,7 +37,7 @@ namespace Vulpecula.Mobile.Behaviors
 
             bindable.ChildAdded -= Bindable_ChildAdded;
             bindable.ChildRemoved -= Bindable_ChildRemoved;
-            this._disposable.Dispose();
+            _disposable.Dispose();
         }
 
         private void Bindable_ChildRemoved(object sender, ElementEventArgs e)
@@ -47,31 +47,27 @@ namespace Vulpecula.Mobile.Behaviors
 
         private void Bindable_ChildAdded(object sender, ElementEventArgs e)
         {
-            this._flag = true;
+            _flag = true;
         }
 
         private void DoAction()
         {
-            var children = this._layout.Children;
+            var children = _layout.Children;
             foreach (var child in children)
             {
                 if (Device.OS == TargetPlatform.Android)
                 {
-                    if (!(bool)child.GetValue(PlatformControl.AndroidProperty))
-                    {
-                        this._layout.Children.Remove(child);
-                    }
+                    if (!(bool) child.GetValue(PlatformControl.AndroidProperty))
+                        _layout.Children.Remove(child);
                 }
                 if (Device.OS == TargetPlatform.iOS)
                 {
-                    if (!(bool)child.GetValue(PlatformControl.iOSProperty))
-                    {
-                        this._layout.Children.Remove(child);
-                    }
+                    if (!(bool) child.GetValue(PlatformControl.iOSProperty))
+                        _layout.Children.Remove(child);
                 }
             }
 
-            this._flag = false;
+            _flag = false;
         }
     }
 }

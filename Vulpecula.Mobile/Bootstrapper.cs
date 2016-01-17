@@ -49,7 +49,7 @@ namespace Vulpecula.Mobile
         {
             var main = NavigationService.RootPage as MainPage;
             var viewModel = main?.BindingContext;
-            ((MainPageViewModel)viewModel)?.Initialize();
+            ((MainPageViewModel) viewModel)?.Initialize();
         }
     }
 }

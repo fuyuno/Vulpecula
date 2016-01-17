@@ -3,7 +3,7 @@ using Vulpecula.Mobile.Models.Interfaces;
 
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(PasswordCredentials))]
+[assembly: Dependency(typeof (PasswordCredentials))]
 
 namespace Vulpecula.Droid.Models
 {

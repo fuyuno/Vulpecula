@@ -22,9 +22,7 @@ namespace Vulpecula.Droid.Models
         {
             var type = typeof (Resource.String);
             foreach (var fieldInfo in type.GetFields().Where(fieldInfo => fieldInfo.Name == key))
-            {
-                return Application.Context.GetString((int)fieldInfo.GetValue(null));
-            }
+                return Application.Context.GetString((int) fieldInfo.GetValue(null));
             return key;
         }
 
@@ -37,9 +35,7 @@ namespace Vulpecula.Droid.Models
         {
             var type = typeof (Resource.String);
             foreach (var fieldInfo in type.GetFields().Where(fieldInfo => fieldInfo.Name == name))
-            {
-                return Application.Context.GetString((int)fieldInfo.GetValue(null));
-            }
+                return Application.Context.GetString((int) fieldInfo.GetValue(null));
             return name;
         }
     }

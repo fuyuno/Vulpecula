@@ -1,17 +1,21 @@
 ﻿<ContentPage x:Class="Vulpecula.Mobile.Views.Timelines.StatusTimeline"
-     xmlns="http://xamarin.com/schemas/2014/forms"
-     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-     xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
-     xmlns:primitives="clr-namespace:Vulpecula.Mobile.Views.Timelines.Primitives;assembly=Vulpecula.Mobile"
-     xmlns:triggers="clr-namespace:Vulpecula.Mobile.Triggers;assembly=Vulpecula.Mobile"
-     Title="{Binding Title}" Icon="{Binding Icon}">
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Vulpecula.Mobile.Behaviors;assembly=Vulpecula.Mobile"
+             xmlns:primitives="clr-namespace:Vulpecula.Mobile.Views.Timelines.Primitives;assembly=Vulpecula.Mobile"
+             xmlns:triggers="clr-namespace:Vulpecula.Mobile.Triggers;assembly=Vulpecula.Mobile"
+             Title="{Binding Title}"
+             Icon="{Binding Icon}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding NavigateCommand,Mode=OneWay}" Icon="sent"
-            Priority="1" />
+        <ToolbarItem Command="{Binding NavigateCommand,
+                                       Mode=OneWay}"
+                     Icon="sent"
+                     Priority="1" />
     </ContentPage.ToolbarItems>
     <Grid>
-        <StackLayout x:Name="Indicator" HorizontalOptions="Center"
-            VerticalOptions="Center">
+        <StackLayout x:Name="Indicator"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center">
             <ActivityIndicator IsRunning="true" />
             <Label Text="Loading timeline..." TextColor="Silver" />
         </StackLayout>

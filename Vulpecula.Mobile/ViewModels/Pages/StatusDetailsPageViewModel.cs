@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Prism.Commands;
@@ -12,7 +10,6 @@ using Vulpecula.Mobile.Extensions;
 using Vulpecula.Mobile.Models;
 using Vulpecula.Mobile.Models.Interfaces;
 using Vulpecula.Mobile.ViewModels.Primitives;
-using Vulpecula.Mobile.ViewModels.Timelines.Primitives;
 using Vulpecula.Mobile.Views.Pages;
 using Vulpecula.Mobile.Views.Popups;
 using Vulpecula.Models;
@@ -24,52 +21,54 @@ namespace Vulpecula.Mobile.ViewModels.Pages
     public class StatusDetailsPageViewModel : TabbedViewModel
     {
         private readonly IPageDialogService _dialogService;
+
         // aa~^
         public Status Model { get; private set; }
-        public AccountManager AccountManager { get; private set; }
-        public new ILocalization Localization {
+
+        public AccountManager AccountManager { get; }
+
+        public new ILocalization Localization
+        {
             get { return base.Localization; }
         }
-        public new INavigationService NavigationService {
+
+        public new INavigationService NavigationService
+        {
             get { return base.NavigationService; }
         }
 
-
         public StatusDetailsPageViewModel(ILocalization localization, INavigationService navigationService, IPageDialogService dialogService, AccountManager accountManager)
-            : base(localization, navigationService)
+        : base(localization, navigationService)
         {
-            this._dialogService = dialogService;
-            this.AccountManager = accountManager;
-            this.Title = this.GetLocalizedString("Details");
+            _dialogService = dialogService;
+            AccountManager = accountManager;
+            Title = GetLocalizedString("Details");
         }
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
         {
             // Navigated from View
             if (parameters.ContainsKey("status"))
-            {
-                this.Model = parameters["status"] as Status;
-            }
+                Model = ((Status) parameters["status"]);
             else
             {
                 // Error Dialog
-                await this._dialogService.DisplayAlert(
-                    this.GetLocalizedString("Error"), this.GetLocalizedString("InvalidStatusError"), this.GetLocalizedString("OK"));
+                await _dialogService.DisplayAlert(GetLocalizedString("Error"), GetLocalizedString("InvalidStatusError"), GetLocalizedString("OK"));
                 return;
             }
 
-            this.ScreenName = $"@{this.Model.User.ScreenName}";
-            this.UserName = this.Model.User.Name.ToSingleLine();
-            this.Text = this.Model.Text.Trim();
-            this.UserIcon = this.Model.User.ProfileImageUrlHttps;
-            this.CreatedAt = this.Model.CreatedAt.ToString("G");
-            this.Via = this.Model.Source.Name.ToSingleLine();
-            this.FavoritedCount = this.Model.FavoritedCount;
-            this.SpreadCount = this.Model.SpreadCount;
-            this.HasImage = this.Model.Entities?.Media?.MediaUrlHttps != null;
-            this.ImageUrl = this.HasImage ? this.Model.Entities.Media.MediaUrlHttps : "";
+            ScreenName = $"@{Model.User.ScreenName}";
+            UserName = Model.User.Name.ToSingleLine();
+            Text = Model.Text.Trim();
+            UserIcon = Model.User.ProfileImageUrlHttps;
+            CreatedAt = Model.CreatedAt.ToString("G");
+            Via = Model.Source.Name.ToSingleLine();
+            FavoritedCount = Model.FavoritedCount;
+            SpreadCount = Model.SpreadCount;
+            HasImage = Model.Entities?.Media?.MediaUrlHttps != null;
+            ImageUrl = HasImage ? Model.Entities.Media.MediaUrlHttps : "";
 
-            this.OnTappedShareCommand.ChangeCanExecute();
+            OnTappedShareCommand.ChangeCanExecute();
             base.OnNavigatedTo(parameters);
         }
 
@@ -81,8 +80,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string ScreenName
         {
-            get { return this._screenName; }
-            set { this.SetProperty(ref this._screenName, value); }
+            get { return _screenName; }
+            set { SetProperty(ref _screenName, value); }
         }
 
         #endregion
@@ -93,8 +92,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string UserName
         {
-            get { return this._userName; }
-            set { this.SetProperty(ref this._userName, value); }
+            get { return _userName; }
+            set { SetProperty(ref _userName, value); }
         }
 
         #endregion
@@ -105,8 +104,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string Text
         {
-            get { return this._text; }
-            set { this.SetProperty(ref this._text, value); }
+            get { return _text; }
+            set { SetProperty(ref _text, value); }
         }
 
         #endregion
@@ -117,8 +116,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string UserIcon
         {
-            get { return this._userIcon; }
-            set { this.SetProperty(ref this._userIcon, value); }
+            get { return _userIcon; }
+            set { SetProperty(ref _userIcon, value); }
         }
 
         #endregion
@@ -129,8 +128,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string CreatedAt
         {
-            get { return this._createdAt; }
-            set { this.SetProperty(ref this._createdAt, value); }
+            get { return _createdAt; }
+            set { SetProperty(ref _createdAt, value); }
         }
 
         #endregion
@@ -141,8 +140,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public string Via
         {
-            get { return this._via; }
-            set { this.SetProperty(ref this._via, value); }
+            get { return _via; }
+            set { SetProperty(ref _via, value); }
         }
 
         #endregion
@@ -153,8 +152,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public long FavoritedCount
         {
-            get { return this._favoritedCount; }
-            set { this.SetProperty(ref this._favoritedCount, value); }
+            get { return _favoritedCount; }
+            set { SetProperty(ref _favoritedCount, value); }
         }
 
         #endregion
@@ -165,8 +164,8 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         public long SpreadCount
         {
-            get { return this._spreadCount; }
-            set { this.SetProperty(ref this._spreadCount, value); }
+            get { return _spreadCount; }
+            set { SetProperty(ref _spreadCount, value); }
         }
 
         #endregion
@@ -174,9 +173,11 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         #region HasImage
 
         private bool _hasImage;
-        public bool HasImage {
-            get { return this._hasImage; }
-            set { this.SetProperty(ref this._hasImage, value); }
+
+        public bool HasImage
+        {
+            get { return _hasImage; }
+            set { SetProperty(ref _hasImage, value); }
         }
 
         #endregion
@@ -184,9 +185,11 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         #region ImageUrl
 
         private string _imageUrl;
-        public string ImageUrl {
-            get { return this._imageUrl; }
-            set { this.SetProperty(ref this._imageUrl, value); }
+
+        public string ImageUrl
+        {
+            get { return _imageUrl; }
+            set { SetProperty(ref _imageUrl, value); }
         }
 
         #endregion
@@ -200,13 +203,12 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         private ICommand _onTappedShowUserDetailsCommand;
 
         public ICommand OnTappedShowUserDetailsCommand =>
-            _onTappedShowUserDetailsCommand ?? (_onTappedShowUserDetailsCommand = new Command(OnTappedShowUserDetails));
+        _onTappedShowUserDetailsCommand ?? (_onTappedShowUserDetailsCommand = new Command(OnTappedShowUserDetails));
 
         private void OnTappedShowUserDetails()
         {
-            var param = new NavigationParameters();
-            param.Add("user", this.Model.User);
-            this.NavigationService.Navigate<UserDetailsPage>(param, false);
+            var param = new NavigationParameters { ["user"] = Model.User };
+            NavigationService.Navigate<UserDetailsPage>(param, false);
         }
 
         #endregion
@@ -216,16 +218,14 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         private ICommand _onTappedOpenViaAppCommand;
 
         public ICommand OnTappedOpenViaAppCommand =>
-            _onTappedOpenViaAppCommand ?? (_onTappedOpenViaAppCommand = new Command(OnTappedOpenViaApp));
+        _onTappedOpenViaAppCommand ?? (_onTappedOpenViaAppCommand = new Command(OnTappedOpenViaApp));
 
         private void OnTappedOpenViaApp()
         {
             // TODO: Move to another class(Browser.cs ?)
-            if (string.IsNullOrWhiteSpace(this.Model.Source.Url))
-            {
+            if (string.IsNullOrWhiteSpace(Model.Source.Url))
                 return;
-            }
-            Device.OpenUri(new Uri(this.Model.Source.Url));
+            Device.OpenUri(new Uri(Model.Source.Url));
         }
 
         #endregion
@@ -237,10 +237,12 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private void OnTappedReply()
         {
-            var param = new NavigationParameters();
-            param.Add("status", $"{this.ScreenName} ");
-            param.Add("in_reply_to_status_id", this.Model.Id);
-            this.NavigationService.Navigate<StatusPage>(param);
+            var param = new NavigationParameters
+            {
+                ["status"] = $"{ScreenName}",
+                ["in_reply_to_status_id"] = Model.Id
+            };
+            NavigationService.Navigate<StatusPage>(param);
         }
 
         #endregion
@@ -252,16 +254,14 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private async void OnTappedShare()
         {
-            await this.AccountManager.Providers.First().Croudia.Statuses.SpreadAsync(this.Model.Id);
+            await AccountManager.Providers.First().Croudia.Statuses.SpreadAsync(Model.Id);
         }
 
         private bool CanOnTappedShare()
         {
-            if (this.Model == null)
-            {
+            if (Model == null)
                 return true;
-            }
-            return !this.Model.User.IsProtected;
+            return !Model.User.IsProtected;
         }
 
         #endregion
@@ -273,7 +273,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private async void OnTappedFavorite()
         {
-            await this.AccountManager.Providers.First().Croudia.Favorites.CreateAsync(this.Model.Id);
+            await AccountManager.Providers.First().Croudia.Favorites.CreateAsync(Model.Id);
         }
 
         #endregion
@@ -285,8 +285,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private void OnTappedComment()
         {
-            var parameters = new NavigationParameters();
-            parameters["comment"] = this.Model.Id;
+            var parameters = new NavigationParameters { ["comment"] = Model.Id };
             NavigationService.Navigate<StatusPage>(parameters);
         }
 
@@ -312,9 +311,11 @@ namespace Vulpecula.Mobile.ViewModels.Pages
 
         private void Navigate()
         {
-            var parameters = new NavigationParameters();
-            parameters["status"] = this.ScreenName + " ";
-            parameters["in_reply_to_status_id"] = this.Model.Id;
+            var parameters = new NavigationParameters
+            {
+                ["status"] = ScreenName + " ",
+                ["in_reply_to_status_id"] = Model.Id
+            };
             NavigationService.Navigate<StatusPage>(parameters);
         }
 

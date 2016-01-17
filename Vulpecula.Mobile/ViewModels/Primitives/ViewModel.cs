@@ -15,8 +15,8 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
 
         protected ViewModel(ILocalization localization)
         {
-            this.CompositeDisposable = new CompositeDisposable();
-            this.Localization = localization;
+            CompositeDisposable = new CompositeDisposable();
+            Localization = localization;
         }
 
         /// <summary>
@@ -24,12 +24,12 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
         /// </summary>
         public void Dispose()
         {
-            this.CompositeDisposable.Dispose();
+            CompositeDisposable.Dispose();
         }
 
         protected string GetLocalizedString(string key)
         {
-            return this.Localization.GetString(key);
+            return Localization.GetString(key);
         }
     }
 }

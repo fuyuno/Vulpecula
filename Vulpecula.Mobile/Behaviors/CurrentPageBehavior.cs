@@ -21,7 +21,7 @@ namespace Vulpecula.Mobile.Behaviors
         protected override void OnAttachedTo(TabbedPage bindable)
         {
             bindable.CurrentPageChanged += BindableOnCurrentPageChanged;
-            this._currentPage = bindable.CurrentPage;
+            _currentPage = bindable.CurrentPage;
             base.OnAttachedTo(bindable);
         }
 
@@ -40,18 +40,18 @@ namespace Vulpecula.Mobile.Behaviors
 
         private void BindableOnCurrentPageChanged(object sender, EventArgs eventArgs)
         {
-            if (this._currentPage != null)
+            if (_currentPage != null)
             {
-                (this._currentPage.BindingContext as TabbedViewModel)?.OnTabNavigatedFrom();
-                this._currentPage = null;
+                (_currentPage.BindingContext as TabbedViewModel)?.OnTabNavigatedFrom();
+                _currentPage = null;
             }
             var tabbedPage = sender as TabbedPage;
             var context = tabbedPage?.CurrentPage; // CurrentPage is NavgationBar?
             if (context == null)
                 return;
             NavigationService.ConfigureCurrent(context);
-            this._currentPage = (context as NavigationPage).CurrentPage;
-            (this._currentPage.BindingContext as TabbedViewModel)?.OnTabNavigatedTo();
+            _currentPage = ((NavigationPage) context).CurrentPage;
+            (_currentPage.BindingContext as TabbedViewModel)?.OnTabNavigatedTo();
         }
     }
 }

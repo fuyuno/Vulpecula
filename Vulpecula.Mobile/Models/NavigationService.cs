@@ -82,26 +82,18 @@ namespace Vulpecula.Mobile.Models
         {
             var navigation = (CurrentPage ?? RootPage).Navigation;
             if (useModalNavigation)
-            {
                 await navigation.PushModalAsync(new NavigationPage(page), animated);
-            }
             else
-            {
                 await navigation.PushAsync(page, animated);
-            }
         }
 
         private static async void Pop(bool useModalNavigation, bool animated)
         {
             var navigation = (CurrentPage ?? RootPage).Navigation;
             if (useModalNavigation)
-            {
                 await navigation.PopModalAsync(animated);
-            }
             else
-            {
                 await navigation.PopAsync(animated);
-            }
         }
 
         private static void PrepareNavigation(Page page, NavigationParameters parameters)

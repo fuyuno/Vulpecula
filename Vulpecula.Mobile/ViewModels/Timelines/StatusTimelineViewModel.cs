@@ -26,47 +26,47 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
         public ObservableCollection<StatusViewModel> Statuses { get; }
 
         public StatusTimelineViewModel(ILocalization localization, INavigationService navigationService, CroudiaProvider provider, TimelineTypes type)
-            : base(localization, navigationService)
+        : base(localization, navigationService)
         {
-            Title = this.GetLocalizedString(type.GetTitle());
+            Title = GetLocalizedString(type.GetTitle());
             Icon = GetLocalizedString(type.GetIcon());
-            NavigationTitle = this.Title;
-            this.Statuses = new ObservableCollection<StatusViewModel>();
-            this._provider = provider;
-            this._type = type;
-            if (this._type == TimelineTypes.Public)
+            NavigationTitle = Title;
+            Statuses = new ObservableCollection<StatusViewModel>();
+            _provider = provider;
+            _type = type;
+            if (_type == TimelineTypes.Public)
             {
                 // If first load this VM, OnTabNavigatedTo does not call.
-                this.OnTabNavigatedTo();
+                OnTabNavigatedTo();
             }
         }
 
         public override void OnTabNavigatedFrom()
         {
-            this._disposable?.Dispose();
+            _disposable?.Dispose();
         }
 
         public override void OnTabNavigatedTo()
         {
-            this._disposable = this.ConnectTimeline().Subscribe(w =>
+            _disposable = ConnectTimeline().Subscribe(w =>
             {
-                this.Statuses.Insert(0, new StatusViewModel(this.Localization, this.NavigationService, w));
-                this._lastId = w.Id;
+                Statuses.Insert(0, new StatusViewModel(Localization, NavigationService, w));
+                _lastId = w.Id;
             });
         }
 
         private IObservable<Status> ConnectTimeline()
         {
-            switch (this._type)
+            switch (_type)
             {
                 case TimelineTypes.Public:
-                    return this._provider.Croudia.Statuses.GetPublicTimelineAsObservable(since_id => this._lastId);
+                    return _provider.Croudia.Statuses.GetPublicTimelineAsObservable(since_id => _lastId);
 
                 case TimelineTypes.Home:
-                    return this._provider.Croudia.Statuses.GetHomeTimelineAsObservable(since_id => this._lastId);
+                    return _provider.Croudia.Statuses.GetHomeTimelineAsObservable(since_id => _lastId);
 
                 case TimelineTypes.Mentions:
-                    return this._provider.Croudia.Statuses.GetMentionsAsObservable(since_id => this._lastId);
+                    return _provider.Croudia.Statuses.GetMentionsAsObservable(since_id => _lastId);
             }
             throw new InvalidOperationException();
         }

@@ -1,7 +1,7 @@
-﻿<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
-     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-     x:Class="Vulpecula.Mobile.Views.Timelines.Primitives.StatusView"
-     Padding="5">
+﻿<ContentView x:Class="Vulpecula.Mobile.Views.Timelines.Primitives.StatusView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Padding="5">
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Command="{Binding OnTappedShowStatusDetailsCommand}" />
     </ContentView.GestureRecognizers>
@@ -22,21 +22,28 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" FontSize="12"
-                IsVisible="{Binding IsSpread}" Opacity="0"
-                Text="Spacing" />
+            <Label Grid.Row="0"
+                   FontSize="12"
+                   IsVisible="{Binding IsSpread}"
+                   Opacity="0"
+                   Text="Spacing" />
             <ContentView Grid.Row="1" Padding="4,0">
                 <Grid>
-                    <Image HeightRequest="48" HorizontalOptions="Start"
-                        Source="{Binding Icon}" VerticalOptions="Start"
-                        WidthRequest="48">
+                    <Image HeightRequest="48"
+                           HorizontalOptions="Start"
+                           Source="{Binding Icon}"
+                           VerticalOptions="Start"
+                           WidthRequest="48">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OnTappedShowUserDetailsCommand}" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Image HeightRequest="24" HorizontalOptions="End"
-                        IsVisible="{Binding IsSpread}" Source="share"
-                        VerticalOptions="End" WidthRequest="24" />
+                    <Image HeightRequest="24"
+                           HorizontalOptions="End"
+                           IsVisible="{Binding IsSpread}"
+                           Source="share"
+                           VerticalOptions="End"
+                           WidthRequest="24" />
                 </Grid>
             </ContentView>
         </Grid>
@@ -46,9 +53,11 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" FontSize="12"
-                IsVisible="{Binding IsSpread}" Text="{Binding SharedMessage}"
-                TextColor="Silver" />
+            <Label Grid.Row="0"
+                   FontSize="12"
+                   IsVisible="{Binding IsSpread}"
+                   Text="{Binding SharedMessage}"
+                   TextColor="Silver" />
             <Grid Grid.Row="1" ColumnSpacing="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -56,18 +65,28 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Font="Bold"
-                    FontSize="13" LineBreakMode="NoWrap"
-                    Text="{Binding UserName}" />
-                <Label Grid.Column="1" FontSize="12"
-                    LineBreakMode="TailTruncation" Text="{Binding ScreenName}"
-                    TextColor="Silver" VerticalOptions="End" />
-                <Image Grid.Column="2" Source="image.png"
-                    HeightRequest="12" IsVisible="{Binding HasImage}" />
-                <Label Grid.Column="3" FontSize="12"
-                    HorizontalOptions="EndAndExpand" LineBreakMode="NoWrap"
-                    Text="{Binding CreatedAt}" TextColor="Silver"
-                    VerticalOptions="End" />
+                <Label Grid.Column="0"
+                       Font="Bold"
+                       FontSize="13"
+                       LineBreakMode="NoWrap"
+                       Text="{Binding UserName}" />
+                <Label Grid.Column="1"
+                       FontSize="12"
+                       LineBreakMode="TailTruncation"
+                       Text="{Binding ScreenName}"
+                       TextColor="Silver"
+                       VerticalOptions="End" />
+                <Image Grid.Column="2"
+                       HeightRequest="12"
+                       IsVisible="{Binding HasImage}"
+                       Source="image.png" />
+                <Label Grid.Column="3"
+                       FontSize="12"
+                       HorizontalOptions="EndAndExpand"
+                       LineBreakMode="NoWrap"
+                       Text="{Binding CreatedAt}"
+                       TextColor="Silver"
+                       VerticalOptions="End" />
             </Grid>
             <Label Grid.Row="2" Text="{Binding Text}" />
         </Grid>

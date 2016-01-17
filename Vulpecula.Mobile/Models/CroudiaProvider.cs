@@ -16,8 +16,8 @@ namespace Vulpecula.Mobile.Models
 
         public CroudiaProvider(string consumerKey, string consumerSecret)
         {
-            this.Croudia = new Croudia(consumerKey, consumerSecret);
-            this._constants = App.ModelLocator.GetModel<IConstants>();
+            Croudia = new Croudia(consumerKey, consumerSecret);
+            _constants = App.ModelLocator.GetModel<IConstants>();
         }
 
         public bool ReAuthorization(IPasswordCredentials credentials)
@@ -25,25 +25,22 @@ namespace Vulpecula.Mobile.Models
             var vault = App.ModelLocator.GetModel<IPasswordVault>();
             if (credentials != null)
             {
-                this.Croudia.RefreshToken = credentials.Password;
+                Croudia.RefreshToken = credentials.Password;
                 try
                 {
-                    this.Croudia.OAuth.Refresh();
-                    var task = Task.Run(() =>
-                        {
-                            return this.Croudia.Account.VerifyCredentials();
-                        });
+                    Croudia.OAuth.Refresh();
+                    var task = Task.Run(() => Croudia.Account.VerifyCredentials());
                     if (!task.Wait(1000 * 5))
                     {
                         vault.Remove(credentials);
                         Debug.WriteLine("Authorization timed out. Account information is deleted.");
                         return false;
                     }
-                    this.User = task.Result;
+                    User = task.Result;
 
                     var newCredentials = App.ModelLocator.GetModel<IPasswordCredentials>();
                     newCredentials.UserName = credentials.UserName;
-                    newCredentials.Password = this.Croudia.RefreshToken;
+                    newCredentials.Password = Croudia.RefreshToken;
                     vault.Update(credentials, newCredentials);
                     return true;
                 }
@@ -59,20 +56,18 @@ namespace Vulpecula.Mobile.Models
         public async Task<bool> Authorization(string url)
         {
             if (!url.StartsWith(_constants.RedirectUrl))
-            {
                 return false;
-            }
 
             try
             {
                 var code = url.Replace(_constants.RedirectUrl + "?code=", "");
-                await this.Croudia.OAuth.TokenAsync(code);
-                this.User = await this.Croudia.Account.VerifyCredentialsAsync();
+                await Croudia.OAuth.TokenAsync(code);
+                User = await Croudia.Account.VerifyCredentialsAsync();
 
                 var vault = App.ModelLocator.GetModel<IPasswordVault>();
                 var credentials = App.ModelLocator.GetModel<IPasswordCredentials>();
-                credentials.UserName = this.User.ScreenName;
-                credentials.Password = this.Croudia.RefreshToken;
+                credentials.UserName = User.ScreenName;
+                credentials.Password = Croudia.RefreshToken;
                 vault.Add(credentials);
 
                 return true;

@@ -11,13 +11,11 @@ namespace Vulpecula.iOS.Renderers
     {
         public ListViewControlRenderer()
         {
-            this.ElementChanged += (sender, e) =>
+            ElementChanged += (sender, e) =>
             {
-                var element = this.Element;
+                var element = Element;
                 if (element == null)
-                {
                     return;
-                }
                 element.Footer = new ContentView();
             };
         }

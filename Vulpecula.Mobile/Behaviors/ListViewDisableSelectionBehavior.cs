@@ -18,7 +18,7 @@ namespace Vulpecula.Mobile.Behaviors
 
         private void Bindable_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            ((ListView)sender).SelectedItem = null;
+            ((ListView) sender).SelectedItem = null;
         }
     }
 }

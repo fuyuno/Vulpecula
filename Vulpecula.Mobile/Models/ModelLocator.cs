@@ -45,7 +45,7 @@ namespace Vulpecula.Mobile.Models
                 var type = Type.GetType(clazz);
                 var instance = Activator.CreateInstance(type);
                 if (instance is T)
-                    return (T)instance;
+                    return (T) instance;
             }
             catch
             {

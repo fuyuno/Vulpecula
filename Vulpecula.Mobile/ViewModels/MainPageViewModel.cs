@@ -12,6 +12,10 @@ using Vulpecula.Mobile.ViewModels.Primitives;
 using Vulpecula.Mobile.ViewModels.Timelines;
 using Vulpecula.Mobile.Views;
 
+// ReSharper disable HeuristicUnreachableCode
+
+#pragma warning disable 162
+
 namespace Vulpecula.Mobile.ViewModels
 {
     [UsedImplicitly]
@@ -21,19 +25,17 @@ namespace Vulpecula.Mobile.ViewModels
         private bool _isFirst;
 
         public MainPageViewModel(ILocalization localization, INavigationService navigationService, AccountManager accountManager)
-            : base(localization, navigationService)
+        : base(localization, navigationService)
         {
-            this._accountManager = accountManager;
+            _accountManager = accountManager;
 
             if (false)
-            {
-                this.ResetAllConfigurations();
-            }
+                ResetAllConfigurations();
         }
 
         private void ResetAllConfigurations()
         {
-            this._accountManager.ResetAccounts();
+            _accountManager.ResetAccounts();
 
             var vault = App.ModelLocator.GetModel<IPasswordVault>();
             var credential = App.ModelLocator.GetModel<IPasswordCredentials>();
@@ -46,37 +48,37 @@ namespace Vulpecula.Mobile.ViewModels
             // 同期的に処理しても問題なさ気
             try
             {
-                this._accountManager.InitializeAccounts();
-                if (this._accountManager.Providers.Count == 0)
+                _accountManager.InitializeAccounts();
+                if (_accountManager.Providers.Count == 0)
                 {
                     // なんか良い方法ないかね
-                    this._isFirst = true;
+                    _isFirst = true;
                     return;
                 }
-                this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Public);
-                this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Mentions);
-                this.MessagesTimelineViewModel = new DirectMessageTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First());
+                PublicTimelineViewModel = new StatusTimelineViewModel(Localization, NavigationService, _accountManager.Providers.First(), TimelineTypes.Public);
+                MentionsTimelineViewModel = new StatusTimelineViewModel(Localization, NavigationService, _accountManager.Providers.First(), TimelineTypes.Mentions);
+                MessagesTimelineViewModel = new DirectMessageTimelineViewModel(Localization, NavigationService, _accountManager.Providers.First());
             }
             catch (Exception)
             {
                 Debug.WriteLine("throw Exception;");
-                this.ResetAllConfigurations();
-                this._isFirst = true;
+                ResetAllConfigurations();
+                _isFirst = true;
             }
         }
 
         public void OnAppearing()
         {
-            if (this._isFirst)
+            if (_isFirst)
             {
-                this.NavigationService.Navigate<AuthorizationPage>();
-                this._isFirst = false;
+                NavigationService.Navigate<AuthorizationPage>();
+                _isFirst = false;
             }
-            if (this.PublicTimelineViewModel == null && this._accountManager.Users.Count != 0)
+            if (PublicTimelineViewModel == null && _accountManager.Users.Count != 0)
             {
-                this.PublicTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Public);
-                this.MentionsTimelineViewModel = new StatusTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First(), TimelineTypes.Mentions);
-                this.MessagesTimelineViewModel = new DirectMessageTimelineViewModel(this.Localization, this.NavigationService, this._accountManager.Providers.First());
+                PublicTimelineViewModel = new StatusTimelineViewModel(Localization, NavigationService, _accountManager.Providers.First(), TimelineTypes.Public);
+                MentionsTimelineViewModel = new StatusTimelineViewModel(Localization, NavigationService, _accountManager.Providers.First(), TimelineTypes.Mentions);
+                MessagesTimelineViewModel = new DirectMessageTimelineViewModel(Localization, NavigationService, _accountManager.Providers.First());
             }
         }
 
@@ -88,8 +90,8 @@ namespace Vulpecula.Mobile.ViewModels
 
         public StatusTimelineViewModel PublicTimelineViewModel
         {
-            get { return this._publicTimelineViewModel; }
-            set { this.SetProperty(ref this._publicTimelineViewModel, value); }
+            get { return _publicTimelineViewModel; }
+            set { SetProperty(ref _publicTimelineViewModel, value); }
         }
 
         #endregion
@@ -100,8 +102,8 @@ namespace Vulpecula.Mobile.ViewModels
 
         public StatusTimelineViewModel MentionsTimelineViewModel
         {
-            get { return this._mentionsTimelineViewModel; }
-            set { this.SetProperty(ref this._mentionsTimelineViewModel, value); }
+            get { return _mentionsTimelineViewModel; }
+            set { SetProperty(ref _mentionsTimelineViewModel, value); }
         }
 
         #endregion
@@ -112,8 +114,8 @@ namespace Vulpecula.Mobile.ViewModels
 
         public DirectMessageTimelineViewModel MessagesTimelineViewModel
         {
-            get { return this._messagesTimelineViewModel; }
-            set { this.SetProperty(ref this._messagesTimelineViewModel, value); }
+            get { return _messagesTimelineViewModel; }
+            set { SetProperty(ref _messagesTimelineViewModel, value); }
         }
 
         #endregion

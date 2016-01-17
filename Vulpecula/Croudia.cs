@@ -23,6 +23,7 @@ namespace Vulpecula
     public class Croudia
     {
         private readonly object _lockObj = new object();
+
         public string ConsumerKey { get; }
 
         public string ConsumerSecret { get; }
@@ -62,31 +63,32 @@ namespace Vulpecula
         }
 
         public Croudia(string consumerKey, string consumerSecret, Token token)
-            : this(consumerKey, consumerSecret, token.AccessToken, token.RefreshToken)
+        : this(consumerKey, consumerSecret, token.AccessToken, token.RefreshToken)
         {
         }
 
         public Croudia(string consumerKey, string consumerSecret, string accessToken, string refreshToken)
         {
-            this.ConsumerKey = consumerKey;
-            this.ConsumerSecret = consumerSecret;
-            this.AccessToken = accessToken;
-            this.RefreshToken = refreshToken;
+            ConsumerKey = consumerKey;
+            ConsumerSecret = consumerSecret;
+            AccessToken = accessToken;
+            RefreshToken = refreshToken;
         }
 
         public void SetTokens(Token token)
         {
-            lock (this._lockObj)
+            lock (_lockObj)
             {
-                this.AccessToken = token.AccessToken;
-                this.RefreshToken = token.RefreshToken;
+                AccessToken = token.AccessToken;
+                RefreshToken = token.RefreshToken;
             }
         }
 
         public async Task<T> GetAsync<T>(string url, params Expression<Func<string, object>>[] parameters)
         {
-            var param = parameters.Select(expression => new KeyValuePair<string, object>(expression.Parameters[0].Name, expression.Compile().Invoke(null))).ToList();
-            return await this.GetAsync<T>(url, param);
+            var param =
+            parameters.Select(expression => new KeyValuePair<string, object>(expression.Parameters[0].Name, expression.Compile().Invoke(null))).ToList();
+            return await GetAsync<T>(url, param);
         }
 
         private async Task<T> GetAsync<T>(string url, IEnumerable<KeyValuePair<string, object>> parameters)
@@ -99,8 +101,8 @@ namespace Vulpecula
             var response = await httpClient.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                await this.OAuth.RefreshAsync();
-                return await this.GetAsync<T>(url, parameters);
+                await OAuth.RefreshAsync();
+                return await GetAsync<T>(url, parameters);
             }
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
@@ -110,7 +112,7 @@ namespace Vulpecula
         public async Task<T> PostAsync<T>(string url, params Expression<Func<string, object>>[] parameters)
         {
             var param = parameters.Select(expression => new KeyValuePair<string, object>(expression.Parameters[0].Name, expression.Compile().Invoke(null))).ToList();
-            return await this.PostAsync<T>(url, param);
+            return await PostAsync<T>(url, param);
         }
 
         private async Task<T> PostAsync<T>(string url, IEnumerable<KeyValuePair<string, object>> parameters)
@@ -126,21 +128,21 @@ namespace Vulpecula
                 {
                     if (kvp.Key == "media" || kvp.Key == "image")
                     {
-                        var streamContent = new StreamContent((Stream)kvp.Value);
+                        var streamContent = new StreamContent((Stream) kvp.Value);
                         streamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                         streamContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                         {
                             Name = $"\"{kvp.Key}\"",
                             FileName = $"\"{Path.GetRandomFileName()}\""
                         };
-                        ((MultipartFormDataContent)content).Add(streamContent);
+                        ((MultipartFormDataContent) content).Add(streamContent);
                     }
                     else
                     {
                         var stringContent =
-                            new StringContent(kvp.Value is bool ? kvp.Value.ToString().ToLower() : kvp.Value.ToString());
+                        new StringContent(kvp.Value is bool ? kvp.Value.ToString().ToLower() : kvp.Value.ToString());
                         stringContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = $"\"{kvp.Key}\"" };
-                        ((MultipartFormDataContent)content).Add(stringContent);
+                        ((MultipartFormDataContent) content).Add(stringContent);
                     }
                 }
             }
@@ -150,8 +152,8 @@ namespace Vulpecula
             var response = await httpClient.PostAsync(url, content);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                await this.OAuth.RefreshAsync();
-                return await this.PostAsync<T>(url, parameters);
+                await OAuth.RefreshAsync();
+                return await PostAsync<T>(url, parameters);
             }
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();

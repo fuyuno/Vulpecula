@@ -28,24 +28,22 @@ namespace Vulpecula.Mobile.Models
 
         public AccountManager(Configuration configuration)
         {
-            this._configuration = configuration;
-            this.Providers = new ObservableCollection<CroudiaProvider>();
-            this.Users = new ObservableCollection<User>();
-            this._constants = App.ModelLocator.GetModel<IConstants>();
+            _configuration = configuration;
+            Providers = new ObservableCollection<CroudiaProvider>();
+            Users = new ObservableCollection<User>();
+            _constants = App.ModelLocator.GetModel<IConstants>();
         }
 
         [UsedImplicitly]
         public void ResetAccounts()
         {
-            this._configuration.Accounts.Clear();
+            _configuration.Accounts.Clear();
         }
 
         public void InitializeAccounts()
         {
-            if (this._isInit)
-            {
+            if (_isInit)
                 return;
-            }
             var vault = App.ModelLocator.GetModel<IPasswordVault>();
             foreach (var account in _configuration.Accounts)
             {
@@ -53,26 +51,24 @@ namespace Vulpecula.Mobile.Models
                 var provider = new CroudiaProvider(_constants.ConsumerKey, _constants.ConsumerSecret);
                 if (!provider.ReAuthorization(credential))
                 {
-                    this._configuration.Accounts.Remove(credential.UserName);
+                    _configuration.Accounts.Remove(credential.UserName);
                     continue;
                 }
-                this.Providers.Add(provider);
-                this.Users.Add(provider.User);
+                Providers.Add(provider);
+                Users.Add(provider.User);
             }
-            this._isInit = true;
+            _isInit = true;
         }
 
         public async Task AddAccount(string url)
         {
             var provider = new CroudiaProvider(_constants.ConsumerKey, _constants.ConsumerSecret);
             if (!await provider.Authorization(url))
-            {
                 return;
-            }
 
-            this.Providers.Add(provider);
-            this.Users.Add(provider.User);
-            this._configuration.Accounts.Add(provider.User.ScreenName);
+            Providers.Add(provider);
+            Users.Add(provider.User);
+            _configuration.Accounts.Add(provider.User.ScreenName);
         }
     }
 }

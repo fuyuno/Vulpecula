@@ -19,19 +19,19 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         private readonly INavigationService _navigationService;
 
         public DirectMailViewModel(ILocalization localization, INavigationService navigation, SecretMail status)
-            : base(localization)
+        : base(localization)
         {
-            this._navigationService = navigation;
-            this._model = status;
+            _navigationService = navigation;
+            _model = status;
         }
 
         #region Properties
 
-        public string ScreenName => $"@{this._model.Sender.ScreenName}";
-        public string UserName => this._model.Sender.Name.ToSingleLine();
-        public string Text => this._model.Text.Trim();
-        public string Icon => this._model.Sender.ProfileImageUrlHttps;
-        public string RecipientIcon => this._model.Recipient.ProfileImageUrlHttps;
+        public string ScreenName => $"@{_model.Sender.ScreenName}";
+        public string UserName => _model.Sender.Name.ToSingleLine();
+        public string Text => _model.Text.Trim();
+        public string Icon => _model.Sender.ProfileImageUrlHttps;
+        public string RecipientIcon => _model.Recipient.ProfileImageUrlHttps;
 
         public string CreatedAt
         {
@@ -39,16 +39,12 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
             {
                 var format = "HH:mm";
                 // 1 hour
-                if (this._model.CreatedAt.AddDays(1) < DateTime.Now)
-                {
+                if (_model.CreatedAt.AddDays(1) < DateTime.Now)
                     format = "MM/dd HH:mm";
-                }
                 // 1 year
-                if (this._model.CreatedAt.AddYears(1) < DateTime.Now)
-                {
+                if (_model.CreatedAt.AddYears(1) < DateTime.Now)
                     format = "yy/MM/dd HH:mm";
-                }
-                return this._model.CreatedAt.ToString(format);
+                return _model.CreatedAt.ToString(format);
             }
         }
 
@@ -63,16 +59,12 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         {
             User user;
             if (type == "Sender")
-            {
-                user = this._model.Sender;
-            }
+                user = _model.Sender;
             else
-            {
-                user = this._model.Recipient;
-            }
+                user = _model.Recipient;
             var param = new NavigationParameters();
             param.Add("user", user);
-            this._navigationService.Navigate<UserDetailsPage>(param, false);
+            _navigationService.Navigate<UserDetailsPage>(param, false);
         }
 
         #endregion

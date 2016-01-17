@@ -12,7 +12,7 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
         public string Icon { get; set; }
 
         protected TabbedViewModel(ILocalization localization, INavigationService navigationService)
-            : base(localization, navigationService)
+        : base(localization, navigationService)
         {
         }
 
@@ -32,8 +32,8 @@ namespace Vulpecula.Mobile.ViewModels.Primitives
 
         public string Title
         {
-            get { return this._title; }
-            set { this.SetProperty(ref this._title, value); }
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
         #endregion

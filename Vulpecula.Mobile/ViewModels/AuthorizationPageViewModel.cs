@@ -10,6 +10,8 @@ using Vulpecula.Mobile.ViewModels.Primitives;
 
 using Xamarin.Forms;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+
 namespace Vulpecula.Mobile.ViewModels
 {
     [UsedImplicitly]
@@ -22,28 +24,26 @@ namespace Vulpecula.Mobile.ViewModels
         public string Title { get; set; }
 
         public AuthorizationPageViewModel(ILocalization localization, INavigationService navigationService, IConstants constants, AccountManager accountManager)
-            : base(localization)
+        : base(localization)
         {
-            this._navigationService = navigationService;
-            this._accountManager = accountManager;
-            this._constants = constants;
+            _navigationService = navigationService;
+            _accountManager = accountManager;
+            _constants = constants;
 
-            this.Title = this.GetLocalizedString("AuthorizationPage");
+            Title = GetLocalizedString("AuthorizationPage");
 
             var croudia = new Croudia(constants.ConsumerKey, constants.ConsumerSecret);
-            this.Source = croudia.OAuth.GetAuthorizeUrl();
+            Source = croudia.OAuth.GetAuthorizeUrl();
         }
 
         // form Code-behind
         public async Task WebViewNavigated(object sender, WebNavigatingEventArgs e)
         {
-            if (e.Url.StartsWith(this._constants.RedirectUrl))
+            if (e.Url.StartsWith(_constants.RedirectUrl))
             {
-                await this._accountManager.AddAccount(e.Url);
-                if (this._accountManager.Providers.Count == 1)
-                {
-                    this._navigationService.GoBack();
-                }
+                await _accountManager.AddAccount(e.Url);
+                if (_accountManager.Providers.Count == 1)
+                    _navigationService.GoBack();
             }
         }
 
@@ -53,8 +53,8 @@ namespace Vulpecula.Mobile.ViewModels
 
         public string Source
         {
-            get { return this._source; }
-            set { this.SetProperty(ref this._source, value); }
+            get { return _source; }
+            set { SetProperty(ref _source, value); }
         }
 
         #endregion

@@ -16,9 +16,7 @@ namespace Vulpecula.Mobile.Triggers
         protected override void Invoke(Element sender)
         {
             if (MethodName == null)
-            {
                 return;
-            }
 
             var bindingContext = sender.BindingContext;
             if (TargetObject?.Path == null || TargetObject.Path == ".")

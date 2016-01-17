@@ -17,67 +17,65 @@ namespace Vulpecula.iOS.Models
 
         public Configuration()
         {
-            this._userDefaults = NSUserDefaults.StandardUserDefaults;
+            _userDefaults = NSUserDefaults.StandardUserDefaults;
         }
 
         public void SetString(string key, string value)
         {
-            this._userDefaults.SetString(value, key);
-            this._userDefaults.Synchronize();
+            _userDefaults.SetString(value, key);
+            _userDefaults.Synchronize();
         }
 
         public string GetString(string key)
         {
-            return this._userDefaults.StringForKey(key);
+            return _userDefaults.StringForKey(key);
         }
 
         public void SetInt(string key, int value)
         {
-            this._userDefaults.SetInt(value, key);
-            this._userDefaults.Synchronize();
+            _userDefaults.SetInt(value, key);
+            _userDefaults.Synchronize();
         }
 
         public int GetInt(string key)
         {
-            return (int)this._userDefaults.IntForKey(key);
+            return (int) _userDefaults.IntForKey(key);
         }
 
         public void SetDouble(string key, double value)
         {
-            this._userDefaults.SetDouble(value, key);
-            this._userDefaults.Synchronize();
+            _userDefaults.SetDouble(value, key);
+            _userDefaults.Synchronize();
         }
 
         public double GetDouble(string key)
         {
-            return this._userDefaults.DoubleForKey(key);
+            return _userDefaults.DoubleForKey(key);
         }
 
         public void SetBool(string key, bool value)
         {
-            this._userDefaults.SetBool(value, key);
-            this._userDefaults.Synchronize();
+            _userDefaults.SetBool(value, key);
+            _userDefaults.Synchronize();
         }
 
         public bool GetBool(string key)
         {
-            return this._userDefaults.BoolForKey(key);
+            return _userDefaults.BoolForKey(key);
         }
 
         public void SetArray(string key, string[] value)
         {
             var array = new NSMutableArray();
             foreach (var o in value)
-            {
                 array.Add(new NSString(o));
-            }
-            this._userDefaults.SetValueForKey(array, new NSString(key));
-            this._userDefaults.Synchronize();
+            _userDefaults.SetValueForKey(array, new NSString(key));
+            _userDefaults.Synchronize();
         }
 
         public string[] GetArray(string key)
         {
-            var array = this._userDefaults.ArrayForKey(key);
+            var array = _userDefaults.ArrayForKey(key);
             return array?.Select(o => o.ToString()).ToArray();
         }
     }

@@ -21,20 +21,20 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
 
         public StatusViewModel(ILocalization localization, INavigationService navigation, Status status) : base(localization)
         {
-            this._navigationService = navigation;
-            this._model = status;
-            this._originalStatus = this._model.SpreadStatus ?? this._model;
+            _navigationService = navigation;
+            _model = status;
+            _originalStatus = _model.SpreadStatus ?? _model;
         }
 
         #region Properties
 
-        public bool IsSpread => this._model.SpreadStatus != null;
-        public string SharedMessage => string.Format(this.GetLocalizedString("SharedMessage"), this._model.User.Name.ToSingleLine());
-        public string ScreenName => $"@{this._originalStatus.User.ScreenName}";
-        public string UserName => this._originalStatus.User.Name.ToSingleLine();
-        public string Text => this._originalStatus.Text.Trim();
-        public string Icon => this._originalStatus.User.ProfileImageUrlHttps;
-        public bool HasImage => this._originalStatus?.Entities?.Media?.MediaUrlHttps != null;
+        public bool IsSpread => _model.SpreadStatus != null;
+        public string SharedMessage => string.Format(GetLocalizedString("SharedMessage"), _model.User.Name.ToSingleLine());
+        public string ScreenName => $"@{_originalStatus.User.ScreenName}";
+        public string UserName => _originalStatus.User.Name.ToSingleLine();
+        public string Text => _originalStatus.Text.Trim();
+        public string Icon => _originalStatus.User.ProfileImageUrlHttps;
+        public bool HasImage => _originalStatus?.Entities?.Media?.MediaUrlHttps != null;
 
         public string CreatedAt
         {
@@ -42,16 +42,12 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
             {
                 var format = "HH:mm";
                 // 1 hour
-                if (this._originalStatus.CreatedAt.AddDays(1) < DateTime.Now)
-                {
+                if (_originalStatus.CreatedAt.AddDays(1) < DateTime.Now)
                     format = "MM/dd HH:mm";
-                }
                 // 1 year
-                if (this._originalStatus.CreatedAt.AddYears(1) < DateTime.Now)
-                {
+                if (_originalStatus.CreatedAt.AddYears(1) < DateTime.Now)
                     format = "yy/MM/dd HH:mm";
-                }
-                return this._originalStatus.CreatedAt.ToString(format);
+                return _originalStatus.CreatedAt.ToString(format);
             }
         }
 
@@ -64,13 +60,13 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         private ICommand _onTappedShowUserDetailsCommand;
 
         public ICommand OnTappedShowUserDetailsCommand =>
-            _onTappedShowUserDetailsCommand ?? (_onTappedShowUserDetailsCommand = new Command(OnTappedShowUserDetails));
+        _onTappedShowUserDetailsCommand ?? (_onTappedShowUserDetailsCommand = new Command(OnTappedShowUserDetails));
 
         private void OnTappedShowUserDetails()
         {
             var param = new NavigationParameters();
-            param.Add("user", this._originalStatus.User);
-            this._navigationService.Navigate<UserDetailsPage>(param, false);
+            param.Add("user", _originalStatus.User);
+            _navigationService.Navigate<UserDetailsPage>(param, false);
         }
 
         #endregion
@@ -80,13 +76,13 @@ namespace Vulpecula.Mobile.ViewModels.Timelines.Primitives
         private ICommand _onTappedShowStatusDetailsCommand;
 
         public ICommand OnTappedShowStatusDetailsCommand =>
-            _onTappedShowStatusDetailsCommand ?? (_onTappedShowStatusDetailsCommand = new Command(OnTappedShowStatusDetails));
+        _onTappedShowStatusDetailsCommand ?? (_onTappedShowStatusDetailsCommand = new Command(OnTappedShowStatusDetails));
 
         private void OnTappedShowStatusDetails()
         {
             var param = new NavigationParameters();
-            param.Add("status", this._originalStatus);
-            this._navigationService.Navigate<StatusDetailsPage>(param, false);
+            param.Add("status", _originalStatus);
+            _navigationService.Navigate<StatusDetailsPage>(param, false);
         }
 
         #endregion

@@ -1,11 +1,9 @@
-using System;
-
 using Vulpecula.Droid.Models;
 using Vulpecula.Mobile.Models.Interfaces;
 
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(PasswordVault))]
+[assembly: Dependency(typeof (PasswordVault))]
 
 namespace Vulpecula.Droid.Models
 {
@@ -16,12 +14,12 @@ namespace Vulpecula.Droid.Models
 
         public PasswordVault()
         {
-            this._configuration = new Configuration();
+            _configuration = new Configuration();
         }
 
         public void Add(IPasswordCredentials credentials)
         {
-            this._configuration.SetString(credentials.UserName, credentials.Password);
+            _configuration.SetString(credentials.UserName, credentials.Password);
         }
 
         public IPasswordCredentials FindByUserName(string username)
@@ -29,19 +27,19 @@ namespace Vulpecula.Droid.Models
             var credentials = new PasswordCredentials
             {
                 UserName = username,
-                Password = this._configuration.GetString(username)
+                Password = _configuration.GetString(username)
             };
             return credentials;
         }
 
         public void Remove(IPasswordCredentials credentials)
         {
-            this._configuration.SetString(credentials.UserName, null);
+            _configuration.SetString(credentials.UserName, null);
         }
 
         public void Update(IPasswordCredentials oldCredentials, IPasswordCredentials newCredentials)
         {
-            this._configuration.SetString(oldCredentials.UserName, newCredentials.Password);
+            _configuration.SetString(oldCredentials.UserName, newCredentials.Password);
         }
     }
 }

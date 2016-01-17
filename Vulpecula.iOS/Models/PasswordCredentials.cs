@@ -18,13 +18,13 @@ namespace Vulpecula.iOS.Models
         // Used from Vulpecula.iOS
         internal PasswordCredentials(SecRecord record)
         {
-            this._secRecord = record;
+            _secRecord = record;
         }
 
         // Used from Vulpecula.Mobile
         public PasswordCredentials()
         {
-            this._secRecord = new SecRecord(SecKind.InternetPassword)
+            _secRecord = new SecRecord(SecKind.InternetPassword)
             {
                 Server = "croudia.com"
             };
@@ -32,14 +32,14 @@ namespace Vulpecula.iOS.Models
 
         public string UserName
         {
-            get { return this._secRecord.Account; }
-            set { this._secRecord.Account = value; }
+            get { return _secRecord.Account; }
+            set { _secRecord.Account = value; }
         }
 
         public string Password
         {
-            get { return NSString.FromData(this._secRecord.ValueData, NSStringEncoding.UTF8); }
-            set { this._secRecord.ValueData = NSData.FromString(value, NSStringEncoding.UTF8); }
+            get { return NSString.FromData(_secRecord.ValueData, NSStringEncoding.UTF8); }
+            set { _secRecord.ValueData = NSData.FromString(value, NSStringEncoding.UTF8); }
         }
 
         internal SecRecord AsSecRecord()

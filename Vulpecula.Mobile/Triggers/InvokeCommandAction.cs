@@ -20,59 +20,49 @@ namespace Vulpecula.Mobile.Triggers
         /// <param name="sender">アクション実行者</param>
         protected override void Invoke(Element sender)
         {
-            if (this.Command?.Path == null || sender.BindingContext == null)
-            {
+            if (Command?.Path == null || sender.BindingContext == null)
                 return;
-            }
 
             // Binding 情報を解析して、Element.BidingContext から Command と CommandParameter を取得する
             var bindingContext = sender.BindingContext;
-            if (string.IsNullOrWhiteSpace(this.Command.Path))
-            {
-                this._command = bindingContext as ICommand;
-            }
+            if (string.IsNullOrWhiteSpace(Command.Path))
+                _command = bindingContext as ICommand;
             else
             {
                 var value = (from p in bindingContext.GetType().GetPropertiesHierarchical()
-                    where p.CanRead && this.Command.Path.Equals(p.Name)
-                    select p.GetValue(bindingContext)).FirstOrDefault();
-                if (this.Command.Converter != null)
+                             where p.CanRead && Command.Path.Equals(p.Name)
+                             select p.GetValue(bindingContext)).FirstOrDefault();
+                if (Command.Converter != null)
                 {
-                    value = this.Command.Converter.Convert(
-                        value,
-                        typeof (ICommand),
-                        this.Command.ConverterParameter,
-                        CultureInfo.CurrentCulture);
+                    value = Command.Converter.Convert(value,
+                                                      typeof (ICommand),
+                                                      Command.ConverterParameter,
+                                                      CultureInfo.CurrentCulture);
                 }
-                this._command = value as ICommand;
+                _command = value as ICommand;
             }
             if (string.IsNullOrWhiteSpace(CommandParameter?.Path))
-            {
-                this._commandParameter = bindingContext;
-            }
+                _commandParameter = bindingContext;
             else
             {
                 var value = (from p in bindingContext.GetType().GetPropertiesHierarchical()
-                    where p.CanRead && this.CommandParameter.Path.Equals(p.Name)
-                    select p.GetValue(bindingContext)).FirstOrDefault();
-                if (this.CommandParameter.Converter != null)
+                             where p.CanRead && CommandParameter.Path.Equals(p.Name)
+                             select p.GetValue(bindingContext)).FirstOrDefault();
+                if (CommandParameter.Converter != null)
                 {
-                    value = this.CommandParameter.Converter.Convert(
-                        value,
-                        typeof (object),
-                        this.CommandParameter.ConverterParameter,
-                        CultureInfo.CurrentCulture);
+                    value = CommandParameter.Converter.Convert(value,
+                                                               typeof (object),
+                                                               CommandParameter.ConverterParameter,
+                                                               CultureInfo.CurrentCulture);
                 }
-                this._commandParameter = value;
+                _commandParameter = value;
             }
 
             // 実行可能であれば Command を呼び出す
-            if (this._command == null || !this._command.CanExecute(this._commandParameter))
-            {
+            if (_command == null || !_command.CanExecute(_commandParameter))
                 return;
-            }
 
-            this._command.Execute(this._commandParameter);
+            _command.Execute(_commandParameter);
         }
 
         #region Command

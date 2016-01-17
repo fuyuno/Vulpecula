@@ -22,38 +22,34 @@ namespace Vulpecula.Mobile.ViewModels.Timelines
         private IDisposable _disposable;
         private long _receivedLastId;
         private long _sentLastId;
-        public ObservableCollection<DirectMailViewModel> Statuses { get; set; }
+        public ObservableCollection<DirectMailViewModel> Statuses { get; }
 
         public DirectMessageTimelineViewModel(ILocalization localization, INavigationService navigationService, CroudiaProvider provider)
-            : base(localization, navigationService)
+        : base(localization, navigationService)
         {
-            Title = this.GetLocalizedString("Messages");
+            Title = GetLocalizedString("Messages");
             Icon = "message";
-            NavigationTitle = this.GetLocalizedString("MessagesTimeline");
-            this.Statuses = new ObservableCollection<DirectMailViewModel>();
-            this._provider = provider;
+            NavigationTitle = GetLocalizedString("MessagesTimeline");
+            Statuses = new ObservableCollection<DirectMailViewModel>();
+            _provider = provider;
         }
 
         public override void OnTabNavigatedFrom()
         {
-            this._disposable?.Dispose();
+            _disposable?.Dispose();
         }
 
         public override void OnTabNavigatedTo()
         {
-            var obs = this._provider.Croudia.SecretMails.ReceivedAsObservable(since_id => this._receivedLastId);
-            obs.Merge(this._provider.Croudia.SecretMails.SentAsObservable(since_id => this._sentLastId));
-            this._disposable = obs.Subscribe(w =>
+            var obs = _provider.Croudia.SecretMails.ReceivedAsObservable(since_id => _receivedLastId);
+            obs.Merge(_provider.Croudia.SecretMails.SentAsObservable(since_id => _sentLastId));
+            _disposable = obs.Subscribe(w =>
             {
-                this.Statuses.Insert(0, new DirectMailViewModel(this.Localization, this.NavigationService, w));
-                if (w.SenderId == this._provider.User.Id)
-                {
-                    this._sentLastId = w.Id;
-                }
+                Statuses.Insert(0, new DirectMailViewModel(Localization, NavigationService, w));
+                if (w.SenderId == _provider.User.Id)
+                    _sentLastId = w.Id;
                 else
-                {
-                    this._receivedLastId = w.Id;
-                }
+                    _receivedLastId = w.Id;
             });
         }
 

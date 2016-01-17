@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+
+using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
 using Prism.Commands;
-using Prism.Windows.Navigation;
+
 using Vulpecula.Models;
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.Models.Services;
@@ -10,25 +13,12 @@ using Vulpecula.Universal.Models.Timelines.Primitive;
 using Vulpecula.Universal.ViewModels.Flyouts;
 using Vulpecula.Universal.ViewModels.Primitives;
 using Vulpecula.Universal.Views.Timelines.Primitive;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 {
     public class StatusViewModel : ViewModel
     {
         private readonly CroudiaProvider _provider;
-        public StatusModel Model { get; }
-
-        public bool IsShare { get; }
-        public bool IsComment { get; }
-        public bool IsDirectMessage { get; }
-        public bool HasImage { get; }
-
-        public string CreatedAt => Model.CreatedAt.ToString("HH:mm");
-
-        public string Via => Model.Source == null ? "" : $"via {Model.Source.Name}";
 
         public StatusViewModel(StatusModel statusModel, CroudiaProvider provider)
         {
@@ -47,6 +37,17 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             IsFlyoutOpened = false;
         }
 
+        public StatusModel Model { get; }
+
+        public bool IsShare { get; }
+        public bool IsComment { get; }
+        public bool IsDirectMessage { get; }
+        public bool HasImage { get; }
+
+        public string CreatedAt => Model.CreatedAt.ToString("HH:mm");
+
+        public string Via => Model.Source == null ? "" : $"via {Model.Source.Name}";
+
         public void Initialize()
         {
             DataTransferManager.GetForCurrentView().DataRequested += (sender, args) =>
@@ -58,11 +59,13 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         public void OnTappedOpenUserProfile(object sender, RoutedEventArgs e)
         {
             // TODO: ヤバイので、Behavior でなんとかする。
-            var uc = (StatusView)((Grid)((StackPanel)((Grid)((Image)sender).Parent).Parent).Parent).Parent;
+            var uc = (StatusView) ((Grid) ((StackPanel) ((Grid) ((Image) sender).Parent).Parent).Parent).Parent;
             var flyout = uc.FindName("Flyout") as SettingsFlyout;
             if (flyout != null)
             {
-                flyout.DataContext = ((Grid)((Image)sender).Parent).Children[0] == (Image)sender ? UserProfile : CreateUserFlyoutViewModel(this.Model.Recipient);
+                flyout.DataContext = ((Grid) ((Image) sender).Parent).Children[0] == (Image) sender
+                    ? UserProfile
+                    : CreateUserFlyoutViewModel(Model.Recipient);
                 flyout.ShowIndependent();
             }
         }
@@ -91,21 +94,34 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         #region Image
 
         private string _imageUrl;
-        public string ImageUrl => _imageUrl ?? (_imageUrl = HasImage ? IsShare ? Model.SpreadStatus.Entities.Media.MediaUrlHttps : Model.Entities.Media.MediaUrlHttps : "");
+
+        public string ImageUrl
+            =>
+                _imageUrl ??
+                (_imageUrl =
+                    HasImage
+                        ? IsShare ? Model.SpreadStatus.Entities.Media.MediaUrlHttps : Model.Entities.Media.MediaUrlHttps
+                        : "");
 
         #endregion Image
 
         #region User
 
         private UserViewModel _user;
-        public UserViewModel User => _user ?? (_user = CreateUserViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
+
+        public UserViewModel User
+            => _user ?? (_user = CreateUserViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
 
         #endregion User
 
         #region UserProfile
 
         private UserFlyoutViewModel _userProfile;
-        public UserFlyoutViewModel UserProfile => _userProfile ?? (_userProfile = CreateUserFlyoutViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
+
+        public UserFlyoutViewModel UserProfile
+            =>
+                _userProfile ??
+                (_userProfile = CreateUserFlyoutViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
 
         #endregion UserProfile
 
@@ -231,8 +247,8 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public bool IsExpanded
         {
-            get { return this._isExpaned; }
-            set { this.SetProperty(ref this._isExpaned, value); }
+            get { return _isExpaned; }
+            set { SetProperty(ref _isExpaned, value); }
         }
 
         #endregion IsExpanded

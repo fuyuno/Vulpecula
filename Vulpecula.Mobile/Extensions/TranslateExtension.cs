@@ -16,18 +16,16 @@ namespace Vulpecula.Mobile.Extensions
 
         public TranslateExtension()
         {
-            this._localization = App.ModelLocator.GetModel<ILocalization>();
+            _localization = App.ModelLocator.GetModel<ILocalization>();
         }
 
         #region IMarkupExtension implementation
 
         public object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (string.IsNullOrWhiteSpace(this.Text))
-            {
+            if (string.IsNullOrWhiteSpace(Text))
                 return "";
-            }
-            return this._localization.GetString(this.Text);
+            return _localization.GetString(Text);
         }
 
         #endregion
