@@ -133,6 +133,22 @@ namespace Vulpecula.Universal.ViewModels
 
         #endregion
 
+        #region NavigateToHomePageCommand
+
+        private ICommand _navigateToHomePageCommand;
+
+        public ICommand NavigateToHomePageCommand
+            => _navigateToHomePageCommand ?? (_navigateToHomePageCommand = new DelegateCommand(NavigateToHomePage));
+
+        private void NavigateToHomePage()
+        {
+            // Navigate("Main", null) だと、死ぬっぽい
+            _navigationService.Navigate("Main", null);
+            EventFired = true;
+        }
+
+        #endregion
+
         #region NavigateToSettingsPageCommand
 
         private ICommand _navigateToSettingsPageCommand;

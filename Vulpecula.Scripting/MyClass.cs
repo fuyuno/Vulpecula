@@ -1,12 +1,7 @@
-﻿using System;
-
-namespace Vulpecula.Scripting
+﻿namespace Vulpecula.Scripting
 {
     public class MyClass
     {
-        public MyClass()
-        {
-        }
+        public MyClass() {}
     }
 }
-

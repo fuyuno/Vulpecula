@@ -19,8 +19,8 @@ namespace Vulpecula.Universal
             InitializeComponent();
             Loaded += async (sender, args) =>
             {
-                AccountManager.Instance.ResetAccounts();
-                ColumnManager.Instance.ClearColumns();
+                // AccountManager.Instance.ResetAccounts();
+                // ColumnManager.Instance.ClearColumns();
 
                 await AccountManager.Instance.InitializeAccounts();
                 await ColumnManager.Instance.InitializeColumns();
