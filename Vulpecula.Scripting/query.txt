@@ -1,0 +1,7 @@
+Func<StatusBase, bool> => QUERY;
+
+BNF
+---------------
+<QUERY> ::= "from" <DATASOURCE> "where" <FILTER>
+
+<DATASOURCE> ::= 
