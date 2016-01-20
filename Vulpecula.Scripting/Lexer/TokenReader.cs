@@ -2,7 +2,7 @@
 
 namespace Vulpecula.Scripting.Lexer
 {
-    internal class TokenReader
+    public class TokenReader
     {
         private readonly List<Token> _tokens;
         private int _index;

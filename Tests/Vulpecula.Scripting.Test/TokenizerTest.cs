@@ -30,11 +30,13 @@ namespace Vulpecula.Scripting.Test
         [TestMethod]
         public void RunningTest2()
         {
-            var query = "from bucket where favorite_count > 10";
+            var query = "from user:\"Mikazuki\" where favorite_count > 10";
             var queryTokens = new List<Token>
                               {
                               new Token("from", TokenType.Keyword),
-                              new Token("bucket", TokenType.Variable),
+                              new Token("user", TokenType.Variable),
+                              new Token(":", TokenType.Sepatator),
+                              new Token("Mikazuki", TokenType.String),
                               new Token("where", TokenType.Keyword),
                               new Token("favorite_count", TokenType.Variable),
                               new Token(">", TokenType.Operator),

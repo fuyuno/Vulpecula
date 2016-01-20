@@ -1,6 +1,6 @@
 ﻿namespace Vulpecula.Scripting.Lexer
 {
-    internal enum TokenType
+    public enum TokenType
     {
         Keyword,
 

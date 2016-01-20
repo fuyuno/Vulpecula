@@ -1,6 +1,6 @@
 ﻿namespace Vulpecula.Scripting.Lexer
 {
-    internal class Token
+    public class Token
     {
         public string TokenString { get; }
 

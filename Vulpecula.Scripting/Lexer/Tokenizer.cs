@@ -50,7 +50,7 @@ namespace Vulpecula.Scripting.Lexer
                         if (ParseOperator(c, sr))
                             continue;
 
-                        if (ParseSeparator(c, sr))
+                        if (ParseSeparator(c))
                             continue;
 
                         throw new Exception();
@@ -119,6 +119,8 @@ namespace Vulpecula.Scripting.Lexer
         {
             if (c != ':')
                 return false;
+            if (!(('a' <= sr.Peek() && sr.Peek() <= 'z') || sr.Peek() == '_'))
+                return false;
 
             var sb = new StringBuilder();
             sb.Append(c);
@@ -141,14 +143,12 @@ namespace Vulpecula.Scripting.Lexer
             return true;
         }
 
-        private bool ParseSeparator(char c, StringReader sr)
+        private bool ParseSeparator(char c)
         {
-            if (c == '.' || c == ')' || c == '(')
-            {
-                Tokens.Add(new Token(c.ToString(), TokenType.Sepatator));
-                return true;
-            }
-            return false;
+            if (c != '.' && c != ')' && c != '(' && c != ':')
+                return false;
+            Tokens.Add(new Token(c.ToString(), TokenType.Sepatator));
+            return true;
         }
     }
 }
