@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using Vulpecula.Scripting.Lexer;
+using Vulpecula.Scripting.Parser;
 
 namespace Vulpecula.Scripting
 {
@@ -13,7 +18,14 @@ namespace Vulpecula.Scripting
 
         public IEnumerable<T> RunScript(string script)
         {
-            return _enumerable;
+            var tokenizer = new Tokenizer(script);
+            if (!string.IsNullOrEmpty(tokenizer.Message))
+                throw new Exception(tokenizer.Message);
+
+            var expr = new ScriptParser(new TokenReader(tokenizer.Tokens));
+            expr.Parse();
+            var func = expr.Compile<T>();
+            return _enumerable.Where(func);
         }
     }
 }

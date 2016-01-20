@@ -33,12 +33,15 @@
     <Compile Include="EnumerableExt.cs" />
     <Compile Include="Lexer\Token.cs" />
     <Compile Include="Lexer\Tokenizer.cs" />
+    <Compile Include="Lexer\TokenReader.cs" />
     <Compile Include="Lexer\TokenType.cs" />
+    <Compile Include="Parser\Expressions\CompilationUnit.cs" />
+    <Compile Include="Parser\Expressions\IExpression.cs" />
+    <Compile Include="Parser\ScriptParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptCore.cs" />
+    <Compile Include="StringExt.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Expressions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
