@@ -24,5 +24,10 @@ namespace Vulpecula.Scripting.Lexer
         {
             return _tokens[++_index];
         }
+
+        public bool HasNext()
+        {
+            return Peek() != null;
+        }
     }
 }

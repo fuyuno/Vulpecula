@@ -22,6 +22,7 @@ namespace Vulpecula.Scripting
             if (!string.IsNullOrEmpty(tokenizer.Message))
                 throw new Exception(tokenizer.Message);
 
+            tokenizer.Run();
             var expr = new ScriptParser(new TokenReader(tokenizer.Tokens));
             expr.Parse();
             var func = expr.Compile<T>();
