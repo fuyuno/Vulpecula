@@ -7,11 +7,11 @@ namespace Vulpecula.Scripting.Parser.Expressions
 {
     public abstract class ExpressionBase
     {
-        protected List<Expression> Children { get; private set; }
+        protected List<ExpressionBase> Children { get; private set; }
 
         protected ExpressionBase()
         {
-            Children = new List<Expression>();
+            Children = new List<ExpressionBase>();
         }
 
         public abstract void Parse(TokenReader reader);

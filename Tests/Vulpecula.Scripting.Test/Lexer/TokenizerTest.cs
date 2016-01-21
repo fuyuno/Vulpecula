@@ -4,13 +4,32 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Vulpecula.Scripting.Lexer;
 
-namespace Vulpecula.Scripting.Test
+namespace Vulpecula.Scripting.Test.Lexer
 {
     [TestClass]
     public class TokenizerTest
     {
+        #region Utilities
+
+        private void Asserion(string query, List<Token> queryTokens)
+        {
+            var tokenizer = new Tokenizer(query);
+            tokenizer.Run();
+            Assert.AreEqual("", tokenizer.Message);
+            Assert.AreEqual(queryTokens.Count, tokenizer.Tokens.Count);
+            for (int i = 0; i < queryTokens.Count; i++)
+            {
+                Assert.AreEqual(queryTokens[i].TokenString, tokenizer.Tokens[i].TokenString);
+                Assert.AreEqual(queryTokens[i].TokenType, tokenizer.Tokens[i].TokenType);
+            }
+        }
+
+        #endregion
+
+        #region TestCases
+
         [TestMethod]
-        public void RunningTest1()
+        public void TestCase01()
         {
             var query = "from bucket where user.screen == \"Mikazuki\"";
             var queryTokens = new List<Token>
@@ -28,7 +47,7 @@ namespace Vulpecula.Scripting.Test
         }
 
         [TestMethod]
-        public void RunningTest2()
+        public void TestCase02()
         {
             var query = "from user:\"Mikazuki\" where favorite_count > 10";
             var queryTokens = new List<Token>
@@ -46,7 +65,7 @@ namespace Vulpecula.Scripting.Test
         }
 
         [TestMethod]
-        public void RunningTest3()
+        public void TestCase03()
         {
             var query = "from bucket where (user.name == \"みかづき\" && favorite_count == 10) || source.name == \"Croudia\"";
             var queryTokens = new List<Token>
@@ -75,17 +94,6 @@ namespace Vulpecula.Scripting.Test
             Asserion(query, queryTokens);
         }
 
-        private void Asserion(string query, List<Token> queryTokens)
-        {
-            var tokenizer = new Tokenizer(query);
-            tokenizer.Run();
-            Assert.AreEqual("", tokenizer.Message);
-            Assert.AreEqual(queryTokens.Count, tokenizer.Tokens.Count);
-            for (int i = 0; i < queryTokens.Count; i++)
-            {
-                Assert.AreEqual(queryTokens[i].TokenString, tokenizer.Tokens[i].TokenString);
-                Assert.AreEqual(queryTokens[i].TokenType, tokenizer.Tokens[i].TokenType);
-            }
-        }
+        #endregion
     }
 }

@@ -6,7 +6,7 @@ namespace Vulpecula.Scripting.Test
     public class StringExtTest
     {
         [TestMethod]
-        public void RunningTest1()
+        public void TestCase01()
         {
             var i = "path_to_floor";
             var o = "PathToFloor";
@@ -15,7 +15,7 @@ namespace Vulpecula.Scripting.Test
         }
 
         [TestMethod]
-        public void RunningTest2()
+        public void TestCase02()
         {
             var i = "path_To_Floor";
             var o = "PathToFloor";

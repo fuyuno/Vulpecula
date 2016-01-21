@@ -52,7 +52,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="TokenizerTest.cs" />
+    <Compile Include="Lexer\TokenizerTest.cs" />
+    <Compile Include="Parser\Expressions\DataSourceExpressionTest.cs" />
     <Compile Include="StringExtTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

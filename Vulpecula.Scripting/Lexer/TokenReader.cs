@@ -22,7 +22,7 @@ namespace Vulpecula.Scripting.Lexer
 
         public Token Read()
         {
-            return _tokens[++_index];
+            return _tokens[_index++];
         }
 
         public bool HasNext()

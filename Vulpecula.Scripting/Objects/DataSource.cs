@@ -6,10 +6,10 @@
 
         public string Tag { get; }
 
-        public DataSource(SourceType type, object tag)
+        public DataSource(SourceType type, object tag = null)
         {
             SourceType = type;
-            Tag = tag.ToString();
+            Tag = tag?.ToString();
         }
     }
 }

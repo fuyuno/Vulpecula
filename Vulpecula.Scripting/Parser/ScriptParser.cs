@@ -6,17 +6,17 @@ using Vulpecula.Scripting.Parser.Expressions;
 
 namespace Vulpecula.Scripting.Parser
 {
-    internal class ScriptParser
+    public class ScriptParser
     {
         private readonly CompilationUnit _compilationUnit;
         private readonly TokenReader _tokenReader;
 
-        public DataSource DataSource { get; private set; }
+        public DataSource DataSource { get; internal set; }
 
         public ScriptParser(TokenReader tokenReader)
         {
             _tokenReader = tokenReader;
-            _compilationUnit = new CompilationUnit();
+            _compilationUnit = new CompilationUnit(this);
         }
 
         public void Parse()
