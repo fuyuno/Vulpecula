@@ -51,15 +51,17 @@
                                                     <TapGestureRecognizer Command="{Binding OnTappedCommand}" CommandParameter="Sender" />
                                                 </Image.GestureRecognizers>
                                             </Image>
-                                            <Image HeightRequest="24"
-                                                   HorizontalOptions="End"
-                                                   Source="{Binding RecipientIcon}"
-                                                   VerticalOptions="End"
-                                                   WidthRequest="24">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding OnTappedCommand}" CommandParameter="Reciever" />
-                                                </Image.GestureRecognizers>
-                                            </Image>
+                                            <Grid Padding="24,24,0,0">
+                                                <Image HeightRequest="24"
+                                                       HorizontalOptions="Start"
+                                                       Source="{Binding RecipientIcon}"
+                                                       VerticalOptions="Start"
+                                                       WidthRequest="24">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding OnTappedCommand}" CommandParameter="Reciever" />
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </Grid>
                                         </Grid>
                                     </ContentView>
                                     <Grid Grid.Column="1" RowSpacing="0">
