@@ -12,7 +12,9 @@
              d:DesignHeight="640"
              d:DesignWidth="360"
              mc:Ignorable="d">
-    <Border BorderBrush="{StaticResource AppBarBorderThemeBrush}" BorderThickness="2" Margin="0,10,0,10">
+    <Border Margin="0,10,0,10"
+            BorderBrush="{StaticResource AppBarBorderThemeBrush}"
+            BorderThickness="2">
         <Grid>
             <ProgressBar x:Name="ProgressBar1" IsIndeterminate="True" />
             <ListView ItemsSource="{Binding Statuses}" SelectionChanged="{x:Bind ViewModel.SelectionChanged}">
