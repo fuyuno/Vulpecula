@@ -9,8 +9,8 @@ namespace Vulpecula.Scripting.Lexer
     internal class Tokenizer
     {
         private readonly string[] _keywords = { "from", "where" };
-        private readonly string[] _operators = { "+", "-", "*", "/", "<", ">" };
-        private readonly string[] _operatorWords = { "contains", "cast", "or", "and" };
+        private readonly string[] _operators = { "+", "-", "*", "/", "<", ">", "!" };
+        private readonly string[] _operatorWords = { "contains", "cast", "or", "and", "not" };
         private readonly string _text;
 
         public string Message { get; private set; }
@@ -109,9 +109,9 @@ namespace Vulpecula.Scripting.Lexer
             if (_keywords.Contains(str))
                 Tokens.Add(new Token(str, TokenType.Keyword));
             else if (_operatorWords.Contains(str))
-                Tokens.Add(new Token(str, TokenType.Operator));
-            else
-                Tokens.Add(new Token(str, TokenType.Variable));
+                    Tokens.Add(new Token(str, TokenType.Operator));
+                else
+                    Tokens.Add(new Token(str, TokenType.Variable));
             return true;
         }
 
