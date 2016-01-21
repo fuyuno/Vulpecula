@@ -19,6 +19,11 @@ namespace Vulpecula.Scripting.Parser.Expressions
             throw new NotImplementedException();
         }
 
+        public Expression<Func<T, bool>> AsExpressionTree<T>()
+        {
+            return w => true;
+        }
+
         #endregion
     }
 }
