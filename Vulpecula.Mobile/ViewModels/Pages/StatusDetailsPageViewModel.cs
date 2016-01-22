@@ -239,7 +239,7 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         {
             var param = new NavigationParameters
             {
-                ["status"] = $"{ScreenName}",
+                ["status"] = $"{ScreenName} ",
                 ["in_reply_to_status_id"] = Model.Id
             };
             NavigationService.Navigate<StatusPage>(param);
