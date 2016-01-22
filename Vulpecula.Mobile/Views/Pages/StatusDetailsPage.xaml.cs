@@ -48,7 +48,6 @@ namespace Vulpecula.Mobile.Views.Pages
                         try
                         {
                             status = await vm.AccountManager.Providers.First().Croudia.Statuses.ShowAsync(status.InReplyToStatusId.Value);
-                            // #14
                             if (status.User == null)
                             {
                                 break;
@@ -64,7 +63,7 @@ namespace Vulpecula.Mobile.Views.Pages
                         catch (Exception e)
                         {
                             Debug.WriteLine(e);
-                            // #14
+                            break;
                         }
                     }
                 });
