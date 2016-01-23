@@ -13,13 +13,11 @@ namespace Vulpecula.Universal.Models.Services
         private IConnectableObservable<SecretMail> _connectableObservable;
         private IDisposable _disposable;
 
-        public DirectMessageTimelineService(CroudiaProvider provider) : base(provider)
-        {
-        }
+        public DirectMessageTimelineService(CroudiaProvider provider) : base(provider) {}
 
         public override void Suspend()
         {
-            this._disposable.Dispose();
+            _disposable.Dispose();
         }
 
         /// <summary>
@@ -32,22 +30,20 @@ namespace Vulpecula.Universal.Models.Services
 
         public override void Start()
         {
-            var observable = this.Provider.Croudia.SecretMails.SentAsObservable();
-            observable.Merge(this.Provider.Croudia.SecretMails.ReceivedAsObservable());
+            var observable = Provider.Croudia.SecretMails.SentAsObservable();
+            observable.Merge(Provider.Croudia.SecretMails.ReceivedAsObservable());
 
             _connectableObservable = observable.Publish();
-            foreach (var action in this.Subscribers)
+            foreach (var action in Subscribers)
                 _connectableObservable.Subscribe(w => action.Invoke(w));
-            this._disposable = _connectableObservable.Connect();
+            _disposable = _connectableObservable.Connect();
             StartSubscriberRequest();
         }
 
         protected override void SubscriberAdded(Action<SecretMail> obj)
         {
             if (obj != null)
-            {
                 _connectableObservable.Subscribe(obj);
-            }
         }
     }
 }

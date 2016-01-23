@@ -29,8 +29,8 @@ namespace Vulpecula.Universal.Models
 
         private AccountManager()
         {
-            this.Providers = new ObservableCollection<CroudiaProvider>();
-            this.Users = new ObservableCollection<User>();
+            Providers = new ObservableCollection<CroudiaProvider>();
+            Users = new ObservableCollection<User>();
         }
 
         [UsedImplicitly]
@@ -44,12 +44,10 @@ namespace Vulpecula.Universal.Models
                 var accounts = vault.FindAllByResource(AppDefintions.VulpeculaAppKey);
                 foreach (var credential in accounts)
                     vault.Remove(credential);
-                this.Providers.Clear();
-                this.Users.Clear();
+                Providers.Clear();
+                Users.Clear();
             }
-            catch (COMException)
-            {
-            }
+            catch (COMException) {}
         }
 
         public async Task InitializeAccounts()
@@ -69,8 +67,8 @@ namespace Vulpecula.Universal.Models
                         vault.Remove(credential);
                         continue;
                     }
-                    this.Providers.Add(provider);
-                    this.Users.Add(provider.User);
+                    Providers.Add(provider);
+                    Users.Add(provider.User);
                 }
             }
             catch (COMException e)
@@ -81,7 +79,7 @@ namespace Vulpecula.Universal.Models
 
         public async Task AuthorizationAccount(PasswordCredential credential = null)
         {
-            if (this.Users.Count >= 10)
+            if (Users.Count >= 10)
             {
                 await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("CanNotAdd"), "Error");
                 return;
@@ -93,8 +91,8 @@ namespace Vulpecula.Universal.Models
                 await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("FailAuth"), "Error");
                 return;
             }
-            this.Providers.Add(provider);
-            this.Users.Add(provider.User);
+            Providers.Add(provider);
+            Users.Add(provider.User);
         }
     }
 }

@@ -39,16 +39,16 @@ namespace Vulpecula.Universal.Models.Services
         {
             // 500ms ごとに、 Queue に登録されたサービスを実行。
             _disposable1 = Observable.Interval(TimeSpan.FromMilliseconds(500)).Select(w => _flag1)
-                .DistinctUntilChanged()
-                .Where(w => w)
-                .Repeat()
-                .Subscribe(w => WorkQueue());
+                                     .DistinctUntilChanged()
+                                     .Where(w => w)
+                                     .Repeat()
+                                     .Subscribe(w => WorkQueue());
 
             _disposable2 = Observable.Interval(TimeSpan.FromMilliseconds(500)).Select(w => _flag2)
-                .DistinctUntilChanged()
-                .Where(w => w)
-                .Repeat()
-                .Subscribe(async w => await WorkQueueAsync());
+                                     .DistinctUntilChanged()
+                                     .Where(w => w)
+                                     .Repeat()
+                                     .Subscribe(async w => await WorkQueueAsync());
         }
 
         public static async Task StartService()
@@ -69,13 +69,9 @@ namespace Vulpecula.Universal.Models.Services
                 service.Dispose();
             }
             foreach (var service in Queue)
-            {
                 service.Dispose();
-            }
             foreach (var service in QueueAsync)
-            {
                 service.Dispose();
-            }
             _disposable1.Dispose();
             _disposable2.Dispose();
         }
@@ -88,9 +84,7 @@ namespace Vulpecula.Universal.Models.Services
         {
             Queue.Enqueue(service);
             if (!_flag1)
-            {
                 _flag1 = true;
-            }
         }
 
         /// <summary>
@@ -102,9 +96,7 @@ namespace Vulpecula.Universal.Models.Services
         {
             QueueAsync.Enqueue(service);
             if (!_flag2)
-            {
                 _flag2 = true;
-            }
         }
 
         /// <summary>

@@ -11,9 +11,7 @@ namespace Vulpecula.Universal.Models.Notifications
         public static void Initialize()
         {
             foreach (var task in BackgroundTaskRegistration.AllTasks)
-            {
                 task.Value.Unregister(true);
-            }
 
             if (BackgroundTaskRegistration.AllTasks.All(w => w.Value.Name != nameof(QuickReplyBackgroundTask)))
             {

@@ -13,8 +13,8 @@ namespace Vulpecula.Universal.Models.Services.Primitive
 
         protected TimelineServiceBase(CroudiaProvider provider)
         {
-            this.Subscribers = new ObservableCollection<Action<T>>();
-            this.Provider = provider;
+            Subscribers = new ObservableCollection<Action<T>>();
+            Provider = provider;
         }
 
         protected void StartSubscriberRequest()
@@ -24,11 +24,11 @@ namespace Vulpecula.Universal.Models.Services.Primitive
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        this.SubscriberAdded((Action<T>)e.NewItems[0]);
+                        SubscriberAdded((Action<T>) e.NewItems[0]);
                         break;
 
                     case NotifyCollectionChangedAction.Remove:
-                        this.SubscriberRemoved((Action<T>)e.OldItems[0]);
+                        SubscriberRemoved((Action<T>) e.OldItems[0]);
                         break;
 
                     case NotifyCollectionChangedAction.Reset:
@@ -38,16 +38,10 @@ namespace Vulpecula.Universal.Models.Services.Primitive
             };
         }
 
-        protected virtual void SubscriberAdded(Action<T> obj)
-        {
-        }
+        protected virtual void SubscriberAdded(Action<T> obj) {}
 
-        protected virtual void SubscriberRemoved(Action<T> obj)
-        {
-        }
+        protected virtual void SubscriberRemoved(Action<T> obj) {}
 
-        protected virtual void SubscriberCleared()
-        {
-        }
+        protected virtual void SubscriberCleared() {}
     }
 }

@@ -16,8 +16,8 @@ namespace Vulpecula.Universal.ViewModels
 
         private UserAccountViewModel(User user, CroudiaProvider provider) : base(user)
         {
-            this._provider = provider;
-            this.IsWhisperEnabled = false;
+            _provider = provider;
+            IsWhisperEnabled = false;
         }
 
         public static UserAccountViewModel Create(User user)
@@ -29,7 +29,7 @@ namespace Vulpecula.Universal.ViewModels
 
         public void SendWhisper(string text)
         {
-            ServiceProvider.RegisterService(new StatusService(this._provider, text));
+            ServiceProvider.RegisterService(new StatusService(_provider, text));
         }
 
         #region IsWhisperEnabled
@@ -38,8 +38,8 @@ namespace Vulpecula.Universal.ViewModels
 
         public bool IsWhisperEnabled
         {
-            get { return this._isWhisperEnabled; }
-            set { this.SetProperty(ref this._isWhisperEnabled, value); }
+            get { return _isWhisperEnabled; }
+            set { SetProperty(ref _isWhisperEnabled, value); }
         }
 
         #endregion

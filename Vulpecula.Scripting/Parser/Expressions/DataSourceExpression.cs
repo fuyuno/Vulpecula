@@ -8,7 +8,7 @@ namespace Vulpecula.Scripting.Parser.Expressions
 {
     // Parsing Script
     // "from" "bucket"
-    // "from" {"user"|"voice"|"favorite"|"conv"} ":" {LiteralExpression}
+    // "from" ("user"|"voice"|"favorite"|"conv") ":" <LiteralExpression>
     public class DataSourceExpression : ExpressionBase
     {
         private DataSource _dataSource;

@@ -20,9 +20,9 @@ namespace Vulpecula.Universal.ViewModels.Primitives
 
         protected ViewModel()
         {
-            this.CompositeDisposable = new CompositeDisposable();
-            this.Dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
-            this._resource = ServiceLocator.Current.GetInstance<IResourceLoader>();
+            CompositeDisposable = new CompositeDisposable();
+            Dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
+            _resource = ServiceLocator.Current.GetInstance<IResourceLoader>();
         }
 
         /// <summary>
@@ -30,12 +30,12 @@ namespace Vulpecula.Universal.ViewModels.Primitives
         /// </summary>
         public void Dispose()
         {
-            this.CompositeDisposable.Dispose();
+            CompositeDisposable.Dispose();
         }
 
         public string GetLocalizedString(string key)
         {
-            return this._resource.GetString($"{this.GetType().Name}_{key}/Text");
+            return _resource.GetString($"{GetType().Name}_{key}/Text");
         }
     }
 }

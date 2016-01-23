@@ -5,13 +5,16 @@ using Vulpecula.Scripting.Lexer;
 
 namespace Vulpecula.Scripting.Parser.Expressions
 {
-    public class FilterExpression : ExpressionBase
+    // Parsing Script
+    // Variable is IDENTIFIER(not numeric, string, opetators and separators)
+    // Convert to Camelcase str (favorited_count => FavoritedCount)
+    public class VariableExpression : ExpressionBase
     {
         #region Overrides of ExpressionBase
 
         public override void Parse(TokenReader reader)
         {
-            reader.Read(); // where
+            throw new NotImplementedException();
         }
 
         public override Expression AsExpressionTree()

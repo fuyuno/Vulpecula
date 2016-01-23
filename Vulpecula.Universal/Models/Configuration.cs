@@ -19,35 +19,33 @@ namespace Vulpecula.Universal.Models
         /// </summary>
         public IEnumerable<ApplicationDataCompositeValue> Columns
         {
-            get { return this._roamingContainer.Values.Where(w => w.Key.StartsWith("Column-")).Select(w => (ApplicationDataCompositeValue)w.Value).ToList(); }
+            get { return _roamingContainer.Values.Where(w => w.Key.StartsWith("Column-")).Select(w => (ApplicationDataCompositeValue) w.Value).ToList(); }
         }
 
         private Configuration()
         {
-            this._roamingContainer = ApplicationData.Current.RoamingSettings;
+            _roamingContainer = ApplicationData.Current.RoamingSettings;
         }
 
         /// <summary>
         /// 設定を初期化します。
         /// </summary>
-        public void Initialize()
-        {
-        }
+        public void Initialize() {}
 
         public void AddValues(string key, object value)
         {
-            this._roamingContainer.Values.Add(key, value);
+            _roamingContainer.Values.Add(key, value);
         }
 
         public void RemoveValue(string key)
         {
-            this._roamingContainer.Values.Remove(key);
+            _roamingContainer.Values.Remove(key);
         }
 
         public void RewriteValue(string key, object value)
         {
-            this._roamingContainer.Values.Remove(key);
-            this._roamingContainer.Values.Add(key, value);
+            _roamingContainer.Values.Remove(key);
+            _roamingContainer.Values.Add(key, value);
         }
     }
 }

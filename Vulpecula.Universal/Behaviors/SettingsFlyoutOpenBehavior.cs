@@ -14,30 +14,31 @@ namespace Vulpecula.Universal.Behaviors
         /// 操作対象 Flyout
         /// </summary>
         public static readonly DependencyProperty FlyoutProperty =
-            DependencyProperty.Register(nameof(Flyout), typeof (SettingsFlyout), typeof (SettingsFlyoutOpenBehavior), new PropertyMetadata(null));
+        DependencyProperty.Register(nameof(Flyout), typeof (SettingsFlyout), typeof (SettingsFlyoutOpenBehavior), new PropertyMetadata(null));
 
         public static readonly DependencyProperty FlyoutDataContextProperty =
-            DependencyProperty.Register(nameof(FlyoutDataContext), typeof (object), typeof (SettingsFlyoutOpenBehavior), new PropertyMetadata(null, FlyoutDataContextChanged));
+        DependencyProperty.Register(nameof(FlyoutDataContext), typeof (object), typeof (SettingsFlyoutOpenBehavior),
+                                    new PropertyMetadata(null, FlyoutDataContextChanged));
 
         public static readonly DependencyProperty IsOpenProperty =
-            DependencyProperty.Register(nameof(IsOpen), typeof (bool), typeof (SettingsFlyoutOpenBehavior), new PropertyMetadata(false, IsOpenChanged));
+        DependencyProperty.Register(nameof(IsOpen), typeof (bool), typeof (SettingsFlyoutOpenBehavior), new PropertyMetadata(false, IsOpenChanged));
 
         public SettingsFlyout Flyout
         {
-            get { return (SettingsFlyout)this.GetValue(FlyoutProperty); }
-            set { this.SetValue(FlyoutProperty, value); }
+            get { return (SettingsFlyout) GetValue(FlyoutProperty); }
+            set { SetValue(FlyoutProperty, value); }
         }
 
         public object FlyoutDataContext
         {
-            get { return this.GetValue(FlyoutDataContextProperty); }
-            set { this.SetValue(FlyoutDataContextProperty, value); }
+            get { return GetValue(FlyoutDataContextProperty); }
+            set { SetValue(FlyoutDataContextProperty, value); }
         }
 
         public bool IsOpen
         {
-            get { return (bool)this.GetValue(IsOpenProperty); }
-            set { this.SetValue(IsOpenProperty, value); }
+            get { return (bool) GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
         }
 
         private static void FlyoutDataContextChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
@@ -54,14 +55,10 @@ namespace Vulpecula.Universal.Behaviors
             if (behavior == null)
                 return;
 
-            if ((bool)e.NewValue)
-            {
+            if ((bool) e.NewValue)
                 behavior.Flyout.ShowIndependent();
-            }
             else
-            {
                 behavior.Flyout.Hide();
-            }
         }
 
         protected override void OnAttached()

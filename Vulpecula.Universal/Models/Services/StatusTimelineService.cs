@@ -17,34 +17,32 @@ namespace Vulpecula.Universal.Models.Services
 
         public StatusTimelineService(CroudiaProvider provider, TimelineType type) : base(provider)
         {
-            this._type = type;
+            _type = type;
         }
 
         public override void Suspend()
         {
-            this._disposable.Dispose();
+            _disposable.Dispose();
         }
 
         public override void Dispose()
         {
-            this._disposable.Dispose();
+            _disposable.Dispose();
         }
 
         public override void Start()
         {
-            _connectableObservable = this.ConnectTimeline().Publish();
-            foreach (var subscriber in this.Subscribers)
+            _connectableObservable = ConnectTimeline().Publish();
+            foreach (var subscriber in Subscribers)
                 _connectableObservable.Subscribe(w => subscriber.Invoke(w));
-            this._disposable = _connectableObservable.Connect();
+            _disposable = _connectableObservable.Connect();
             StartSubscriberRequest();
         }
 
         protected override void SubscriberAdded(Action<Status> obj)
         {
             if (obj != null)
-            {
                 _connectableObservable.Subscribe(obj);
-            }
         }
 
         private IObservable<Status> ConnectTimeline()
@@ -52,13 +50,13 @@ namespace Vulpecula.Universal.Models.Services
             switch (_type)
             {
                 case TimelineType.Home:
-                    return this.Provider.Croudia.Statuses.GetHomeTimelineAsObservable();
+                    return Provider.Croudia.Statuses.GetHomeTimelineAsObservable();
 
                 case TimelineType.Mentions:
-                    return this.Provider.Croudia.Statuses.GetMentionsAsObservable();
+                    return Provider.Croudia.Statuses.GetMentionsAsObservable();
 
                 case TimelineType.Public:
-                    return this.Provider.Croudia.Statuses.GetPublicTimelineAsObservable();
+                    return Provider.Croudia.Statuses.GetPublicTimelineAsObservable();
             }
             return null;
         }

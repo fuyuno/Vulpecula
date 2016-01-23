@@ -28,13 +28,9 @@ namespace Vulpecula.Universal.Models.Services
         public override async Task StartAsync()
         {
             if (_isDm)
-            {
                 await _provider.Croudia.SecretMails.DestroyAsync(_statusId);
-            }
             else
-            {
                 await _provider.Croudia.Statuses.DestroyAsync(_statusId);
-            }
         }
     }
 }

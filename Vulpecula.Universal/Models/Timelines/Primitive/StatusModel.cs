@@ -15,48 +15,48 @@ namespace Vulpecula.Universal.Models.Timelines.Primitive
         private readonly Status _status;
         public bool IsDirectMessage { get; }
 
-        public long Id => this._originalModel.Id;
+        public long Id => _originalModel.Id;
 
-        public DateTime CreatedAt => this._originalModel.CreatedAt;
+        public DateTime CreatedAt => _originalModel.CreatedAt;
 
-        public string Text => this._originalModel.Text;
+        public string Text => _originalModel.Text;
 
-        public Entities Entities => this._originalModel.Entities;
+        public Entities Entities => _originalModel.Entities;
 
-        public bool IsFavorited => this._status.IsFavorited;
+        public bool IsFavorited => _status.IsFavorited;
 
-        public long FavoritedCount => this._status.FavoritedCount;
+        public long FavoritedCount => _status.FavoritedCount;
 
-        public bool IsSpread => this._status.IsSpread;
+        public bool IsSpread => _status.IsSpread;
 
-        public long SpreadCount => this._status.SpreadCount;
+        public long SpreadCount => _status.SpreadCount;
 
-        public bool HasInReply => this._status.InReplyToStatusId.HasValue;
+        public bool HasInReply => _status.InReplyToStatusId.HasValue;
 
-        public long? InReplyToStatusId => this._status.InReplyToStatusId;
+        public long? InReplyToStatusId => _status.InReplyToStatusId;
 
-        public long? InReplyToUserId => this._status.InReplyToUserId;
+        public long? InReplyToUserId => _status.InReplyToUserId;
 
-        public string InReplyToScreenName => this._status.InReplyToScreenName;
+        public string InReplyToScreenName => _status.InReplyToScreenName;
 
-        public Source Source => this._status?.Source;
+        public Source Source => _status?.Source;
 
-        public User User => this.IsDirectMessage ? this._secretMail.Sender : this._status.User;
+        public User User => IsDirectMessage ? _secretMail.Sender : _status.User;
 
-        public User Recipient => this.IsDirectMessage ? this._secretMail.Recipient : new User();
+        public User Recipient => IsDirectMessage ? _secretMail.Recipient : new User();
 
-        public StatusModel SpreadStatus => this._status.SpreadStatus != null ? new StatusModel(this._status.SpreadStatus) : null;
+        public StatusModel SpreadStatus => _status.SpreadStatus != null ? new StatusModel(_status.SpreadStatus) : null;
 
-        public StatusModel QuotedStatus => this._status.QuotedStatus != null ? new StatusModel(this._status.QuotedStatus) : null;
+        public StatusModel QuotedStatus => _status.QuotedStatus != null ? new StatusModel(_status.QuotedStatus) : null;
 
         public StatusModel(StatusBase @base)
         {
-            this._originalModel = @base;
-            this.IsDirectMessage = @base is SecretMail;
-            if (this.IsDirectMessage)
-                this._secretMail = (SecretMail)@base;
+            _originalModel = @base;
+            IsDirectMessage = @base is SecretMail;
+            if (IsDirectMessage)
+                _secretMail = (SecretMail) @base;
             else
-                this._status = (Status)@base;
+                _status = (Status) @base;
         }
     }
 }

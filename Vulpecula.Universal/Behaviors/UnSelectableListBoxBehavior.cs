@@ -9,18 +9,18 @@ namespace Vulpecula.Universal.Behaviors
         protected override void OnAttached()
         {
             base.OnAttached();
-            this.AssociatedObject.SelectionChanged += OnSelectionChanged;
+            AssociatedObject.SelectionChanged += OnSelectionChanged;
         }
 
         protected override void OnDetaching()
         {
-            this.AssociatedObject.SelectionChanged -= OnSelectionChanged;
+            AssociatedObject.SelectionChanged -= OnSelectionChanged;
             base.OnDetaching();
         }
 
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
         {
-            this.AssociatedObject.SelectedIndex = -1;
+            AssociatedObject.SelectedIndex = -1;
         }
     }
 }

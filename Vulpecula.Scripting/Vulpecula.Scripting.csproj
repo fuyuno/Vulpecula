@@ -41,6 +41,7 @@
     <Compile Include="Parser\Expressions\DataSourceExpression.cs" />
     <Compile Include="Parser\Expressions\ExpressionBase.cs" />
     <Compile Include="Parser\Expressions\FilterExpression.cs" />
+    <Compile Include="Parser\Expressions\VariableExpression.cs" />
     <Compile Include="Parser\ScriptParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptCore.cs" />

@@ -29,7 +29,7 @@ namespace Vulpecula.Universal.Models.Dialogs
             dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("Cancel")) { Id = DialogCommands.Cancel });
 
             var result = await dialog.ShowAsync();
-            return (DialogCommands)result.Id;
+            return (DialogCommands) result.Id;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Vulpecula.Universal.Models.Dialogs
             dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("No")) { Id = DialogCommands.No });
 
             var result = await dialog.ShowAsync();
-            return (DialogCommands)result.Id;
+            return (DialogCommands) result.Id;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Vulpecula.Universal.Models.Dialogs
             dialog.Commands.Add(new UICommand(LocalizationHelper.GetString("Cancel")) { Id = DialogCommands.Cancel });
 
             var result = await dialog.ShowAsync();
-            return (DialogCommands)result.Id;
+            return (DialogCommands) result.Id;
         }
     }
 }

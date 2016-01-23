@@ -6,7 +6,7 @@ using Vulpecula.Scripting.Lexer;
 namespace Vulpecula.Scripting.Parser.Expressions
 {
     // Parsing Script
-    // [{DataSourceExpression}] {FilterExpression}
+    // [<DataSourceExpression>] <FilterExpression>
     public class CompilationUnit : ExpressionBase
     {
         private readonly ScriptParser _parser;

@@ -28,8 +28,8 @@ namespace Vulpecula.Universal.Models
 
         private ColumnManager()
         {
-            this.Columns = new ObservableCollection<Column>();
-            this.IsInitialized = false;
+            Columns = new ObservableCollection<Column>();
+            IsInitialized = false;
         }
 
         public async Task InitializeColumns()
@@ -45,9 +45,7 @@ namespace Vulpecula.Universal.Models
                     Debug.WriteLine($"Restored column {{ID:{column.ColumnId}, Name:{column.Name}, Query:{column.Query}, Row:{column.Row}}}.");
                 }
                 foreach (var source in tempColumn.OrderBy(w => w.Row))
-                {
-                    this.Columns.Add(source);
-                }
+                    Columns.Add(source);
             }
             catch (Exception e)
             {
@@ -56,13 +54,13 @@ namespace Vulpecula.Universal.Models
                 var columns = Configuration.Instance.Columns;
                 foreach (var columnComposite in columns)
                 {
-                    this.Columns.Clear();
+                    Columns.Clear();
                     Configuration.Instance.RemoveValue(columnComposite[nameof(Column.ColumnId)].ToString());
                 }
                 // 初期化
-                this.SetupInitialColumns(AccountManager.Instance.Users.First().Id);
+                SetupInitialColumns(AccountManager.Instance.Users.First().Id);
             }
-            this.IsInitialized = true;
+            IsInitialized = true;
         }
 
         [UsedImplicitly]
@@ -70,7 +68,7 @@ namespace Vulpecula.Universal.Models
         {
             var columns = Configuration.Instance.Columns;
             foreach (var column in columns)
-                this.RemoveColumn(Column.RestoreColumnInfo(column));
+                RemoveColumn(Column.RestoreColumnInfo(column));
         }
 
         /// <summary>
@@ -79,9 +77,9 @@ namespace Vulpecula.Universal.Models
         /// <param name="userId"></param>
         public void SetupInitialColumns(long userId)
         {
-            this.AddColumn(Column.CreateColumnInfo(TimelineType.Public, "public", userId, 0, enableNotity: false));
-            this.AddColumn(Column.CreateColumnInfo(TimelineType.Mentions, "mentions", userId, 1));
-            this.AddColumn(Column.CreateColumnInfo(TimelineType.DirectMessages, "messages", userId, 2));
+            AddColumn(Column.CreateColumnInfo(TimelineType.Public, "public", userId, 0, enableNotity: false));
+            AddColumn(Column.CreateColumnInfo(TimelineType.Mentions, "mentions", userId, 1));
+            AddColumn(Column.CreateColumnInfo(TimelineType.DirectMessages, "messages", userId, 2));
         }
 
         public void AddColumn(Column info)
@@ -100,13 +98,13 @@ namespace Vulpecula.Universal.Models
                 [nameof(Column.EnableNotity)] = info.EnableNotity
             };
 
-            this.Columns.Add(info);
+            Columns.Add(info);
             Configuration.Instance.AddValues(info.ColumnId, composite);
         }
 
         public void RemoveColumn(Column info)
         {
-            this.Columns.Remove(info);
+            Columns.Remove(info);
             Configuration.Instance.RemoveValue(info.ColumnId);
             Debug.WriteLine($"Removed column {{ID:{info.ColumnId}, Name:{info.Name}, Query:{info.Query}}}.");
         }

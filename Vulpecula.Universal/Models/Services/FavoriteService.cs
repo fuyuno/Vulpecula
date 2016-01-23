@@ -12,7 +12,7 @@ namespace Vulpecula.Universal.Models.Services
 
         public FavoriteService(CroudiaProvider provider, long statusId, bool isNot)
         {
-            this._provider = provider;
+            _provider = provider;
             _statusId = statusId;
             _isNot = isNot;
         }
@@ -28,13 +28,9 @@ namespace Vulpecula.Universal.Models.Services
         public override async Task StartAsync()
         {
             if (_isNot)
-            {
                 await _provider.Croudia.Favorites.DestroyAsync(_statusId);
-            }
             else
-            {
                 await _provider.Croudia.Favorites.CreateAsync(_statusId);
-            }
         }
     }
 }

@@ -16,49 +16,49 @@ namespace Vulpecula.Universal.Behaviors
     public class EmptyListBehavior : Behavior<ListView>
     {
         public static readonly DependencyProperty TargetProperty =
-            DependencyProperty.Register(
-                nameof(Target),
-                typeof (string),
-                typeof (EmptyListBehavior),
-                new PropertyMetadata(string.Empty));
+        DependencyProperty.Register(
+                                    nameof(Target),
+                                    typeof (string),
+                                    typeof (EmptyListBehavior),
+                                    new PropertyMetadata(string.Empty));
 
         private int _count;
         private IDisposable _disposable;
 
         public string Target
         {
-            get { return (string)GetValue(TargetProperty); }
+            get { return (string) GetValue(TargetProperty); }
             set { SetValue(TargetProperty, value); }
         }
 
         public EmptyListBehavior()
         {
-            this._count = 0;
+            _count = 0;
         }
 
         protected override void OnLoaded()
         {
             base.OnLoaded();
-            var source = this.AssociatedObject.ItemsSource as INotifyCollectionChanged;
-            var items = this.AssociatedObject.Items;
+            var source = AssociatedObject.ItemsSource as INotifyCollectionChanged;
+            var items = AssociatedObject.Items;
             if (items != null)
             {
-                this._count = items.Count;
-                this.Action();
+                _count = items.Count;
+                Action();
             }
 
             if (source != null)
             {
-                this._disposable = source.ToObservable().Subscribe(w =>
+                _disposable = source.ToObservable().Subscribe(w =>
                 {
                     switch (w.EventArgs.Action)
                     {
                         case NotifyCollectionChangedAction.Add:
-                            this._count++;
+                            _count++;
                             break;
 
                         case NotifyCollectionChangedAction.Remove:
-                            this._count--;
+                            _count--;
                             break;
 
                         case NotifyCollectionChangedAction.Replace:
@@ -66,33 +66,33 @@ namespace Vulpecula.Universal.Behaviors
                             break;
 
                         case NotifyCollectionChangedAction.Reset:
-                            this._count = 0;
+                            _count = 0;
                             break;
                     }
-                    this.Action();
+                    Action();
                 });
             }
         }
 
         protected override void OnUnloaded()
         {
-            this._disposable.Dispose();
+            _disposable.Dispose();
             base.OnUnloaded();
         }
 
         private void Action()
         {
-            var frameworkElement = (FrameworkElement)((FrameworkElement)this.AssociatedObject.Parent).FindName(this.Target);
+            var frameworkElement = (FrameworkElement) ((FrameworkElement) AssociatedObject.Parent).FindName(Target);
             if (frameworkElement != null)
             {
-                if (this._count > 0)
+                if (_count > 0)
                 {
-                    this.Visibility = Visibility.Visible;
+                    Visibility = Visibility.Visible;
                     frameworkElement.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
-                    this.Visibility = Visibility.Collapsed;
+                    Visibility = Visibility.Collapsed;
                     frameworkElement.Visibility = Visibility.Visible;
                 }
             }

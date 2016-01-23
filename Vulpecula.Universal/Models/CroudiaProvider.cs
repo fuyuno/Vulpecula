@@ -16,7 +16,7 @@ namespace Vulpecula.Universal.Models
 
         public CroudiaProvider()
         {
-            this.Croudia = new Croudia(AppDefintions.ConsumerKey, AppDefintions.ConsumerSecret);
+            Croudia = new Croudia(AppDefintions.ConsumerKey, AppDefintions.ConsumerSecret);
         }
 
         public async Task<bool> Authorization(PasswordVault vault, PasswordCredential credential)
@@ -24,15 +24,15 @@ namespace Vulpecula.Universal.Models
             if (credential != null)
             {
                 credential.RetrievePassword();
-                this.Croudia.RefreshToken = credential.Password;
+                Croudia.RefreshToken = credential.Password;
                 try
                 {
-                    await this.Croudia.OAuth.RefreshAsync();
-                    this.User = await this.Croudia.Account.VerifyCredentialsAsync();
+                    await Croudia.OAuth.RefreshAsync();
+                    User = await Croudia.Account.VerifyCredentialsAsync();
 
                     // 更新は、再度同じ Resource, Username で Add すれば良い
-                    vault.Add(new PasswordCredential(AppDefintions.VulpeculaAppKey, this.User.IdStr,
-                        this.Croudia.RefreshToken));
+                    vault.Add(new PasswordCredential(AppDefintions.VulpeculaAppKey, User.IdStr,
+                                                     Croudia.RefreshToken));
                     return true;
                 }
                 catch
@@ -41,21 +41,21 @@ namespace Vulpecula.Universal.Models
                 }
             }
 
-            var startUri = new Uri(this.Croudia.OAuth.GetAuthorizeUrl());
+            var startUri = new Uri(Croudia.OAuth.GetAuthorizeUrl());
             var endUri = new Uri("https://vulpecula.mkzk.xyz/authorized");
             var result =
-                await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, startUri, endUri);
+            await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, startUri, endUri);
             if (result.ResponseStatus != WebAuthenticationStatus.Success)
                 return false;
 
             try
             {
                 var url = result.ResponseData;
-                await this.Croudia.OAuth.TokenAsync(url.Substring(url.IndexOf("code=", StringComparison.Ordinal) + 5));
-                this.User = await this.Croudia.Account.VerifyCredentialsAsync();
+                await Croudia.OAuth.TokenAsync(url.Substring(url.IndexOf("code=", StringComparison.Ordinal) + 5));
+                User = await Croudia.Account.VerifyCredentialsAsync();
 
-                vault.Add(new PasswordCredential(AppDefintions.VulpeculaAppKey, this.User.IdStr,
-                    this.Croudia.RefreshToken));
+                vault.Add(new PasswordCredential(AppDefintions.VulpeculaAppKey, User.IdStr,
+                                                 Croudia.RefreshToken));
                 return true;
             }
             catch

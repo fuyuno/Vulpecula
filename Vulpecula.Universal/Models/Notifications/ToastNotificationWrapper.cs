@@ -18,11 +18,9 @@ namespace Vulpecula.Universal.Models.Notifications
 
             var notifySound = sound.ToString();
             if (notifySound.Contains("Call") || notifySound.Contains("Alarm"))
-            {
                 notifySound = "Looping." + notifySound;
-            }
             var payload =
-                $@"<toast>
+            $@"<toast>
     <visual>
         <binding template='ToastGeneric'>
             <text>{title}</text>
@@ -46,9 +44,7 @@ namespace Vulpecula.Universal.Models.Notifications
 
             var notifySound = sound.ToString();
             if (notifySound.Contains("Call") || notifySound.Contains("Alarm"))
-            {
                 notifySound = "Looping." + notifySound;
-            }
             var arguments = new[]
             {
                 new KeyValuePair<string, object>("access_token", AccountManager.Instance.Providers.Single(w => w.User.Id == user.Id).Croudia.AccessToken),
@@ -56,10 +52,11 @@ namespace Vulpecula.Universal.Models.Notifications
                 new KeyValuePair<string, object>("in_reply_to_screen_name", status.User.ScreenName)
             };
             var payload =
-                $@"<toast activationType='background' launch='args'>
+            $@"<toast activationType='background' launch='args'>
     <visual>
         <binding template='ToastGeneric'>
-            <image placement='appLogoOverride' src='{user.ProfileImageUrlHttps}' />
+            <image placement='appLogoOverride' src='{user
+            .ProfileImageUrlHttps}' />
             <text>{title}</text>
             <text>{status.Text}</text>
         </binding>
@@ -67,10 +64,12 @@ namespace Vulpecula.Universal.Models.Notifications
     <actions>
         <input id='status'
                type='text'
-               title='Reply to @{user.ScreenName}'
+               title='Reply to @{user
+            .ScreenName}'
                placeHolderContent='Hello!' />
         <action activationType='background'
-                arguments='{QueryString.Query(arguments)}'
+                arguments='{QueryString
+            .Query(arguments)}'
                 content='Whisper' />
         <action activationType='system'
                 arguments='dismiss'

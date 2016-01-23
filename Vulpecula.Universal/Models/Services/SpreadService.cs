@@ -14,7 +14,7 @@ namespace Vulpecula.Universal.Models.Services
         {
             _provider = provider;
             _statusId = statusId;
-            this._isNot = isNot;
+            _isNot = isNot;
         }
 
         /// <summary>
@@ -28,13 +28,9 @@ namespace Vulpecula.Universal.Models.Services
         public override async Task StartAsync()
         {
             if (_isNot)
-            {
                 await _provider.Croudia.Statuses.DestroyAsync(_statusId);
-            }
             else
-            {
                 await _provider.Croudia.Statuses.SpreadAsync(_statusId);
-            }
         }
     }
 }
