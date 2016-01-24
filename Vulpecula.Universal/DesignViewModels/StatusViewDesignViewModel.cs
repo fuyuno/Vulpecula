@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 
 using Vulpecula.Models;
 using Vulpecula.Universal.Models.Timelines.Primitive;
-using Vulpecula.Universal.ViewModels.Flyouts;
 using Vulpecula.Universal.ViewModels.Timelines.Primitives;
 
 namespace Vulpecula.Universal.DesignViewModels
@@ -24,8 +23,6 @@ namespace Vulpecula.Universal.DesignViewModels
         public string Via => Model.Source == null ? "" : $"via {Model.Source.Name}";
 
         public UserDesignViewModel User { get; }
-
-        public UserFlyoutViewModel UserProfile { get; }
 
         public UserViewModel Recipient { get; }
 

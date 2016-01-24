@@ -26,10 +26,10 @@ namespace Vulpecula.Universal.ViewModels
 
         #endregion
 
-        public MainPageViewModel()
+        public MainPageViewModel(INavigationService navigationService)
         {
             Colmuns = new ObservableCollection<ColumnViewModel>();
-            ViewModelHelper.SubscribeNotifyCollectionChanged(ColumnManager.Instance.Columns, Colmuns, (Column w) => ColumnViewModel.Create(w));
+            ViewModelHelper.SubscribeNotifyCollectionChanged(ColumnManager.Instance.Columns, Colmuns, (Column w) => ColumnViewModel.Create(w, navigationService));
         }
 
         #region Events

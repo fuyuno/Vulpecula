@@ -117,6 +117,7 @@
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="DesignViewModels\StatusViewDesignViewModel.cs" />
     <Compile Include="DesignViewModels\UserDesignViewModel.cs" />
+    <Compile Include="DesignViewModels\UserDetailPageDesignViewModel.cs" />
     <Compile Include="DesignViewModels\UserFlyoutDesignViewModel.cs" />
     <Compile Include="Extensions\ObservableCollectionEx.cs" />
     <Compile Include="Extensions\ViewModelEx.cs" />
@@ -151,8 +152,8 @@
     <Compile Include="Models\Timelines\TimelineType.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="ViewModels\CommandMenuPageViewModel.cs" />
-    <Compile Include="ViewModels\Flyouts\UserFlyoutViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\Pages\UserDetailPageViewModel.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsGeneralPageViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsMainPageViewModel.cs" />
@@ -164,9 +165,6 @@
     <Compile Include="Views\CommandMenuPage.xaml.cs">
       <DependentUpon>CommandMenuPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Flyouts\UserFlyout.xaml.cs">
-      <DependentUpon>UserFlyout.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -174,6 +172,9 @@
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\UserDetailPage.xaml.cs">
+      <DependentUpon>UserDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\SettingsGeneralPage.xaml.cs">
       <DependentUpon>SettingsGeneralPage.xaml</DependentUpon>
@@ -270,15 +271,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\UserDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Timelines\Column.DeviceFamily-Mobile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.DeviceFamily-Mobile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Flyouts\UserFlyout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

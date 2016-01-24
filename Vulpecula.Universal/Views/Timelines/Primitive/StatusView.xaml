@@ -4,8 +4,6 @@
              xmlns:behaviors="using:Vulpecula.Universal.Behaviors"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dvm="using:Vulpecula.Universal.DesignViewModels"
-             xmlns:flyouts="using:Vulpecula.Universal.Views.Flyouts"
-             xmlns:interactivity="using:WinRTXamlToolkit.Interactivity"
              xmlns:local="using:Vulpecula.Universal.Views.Timelines.Primitive"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Vulpecula.Universal.ViewModels.Timelines.Primitives"
@@ -16,18 +14,6 @@
              d:DesignWidth="360"
              mc:Ignorable="d">
     <Grid Padding="0,10">
-        <interactivity:Interaction.Behaviors>
-            <!--  なんでかわかんないけど、それなりの割合で IsFlyoutOpened がバインドされていない  -->
-            <!--
-            <behaviors:SettingsFlyoutOpenBehavior FlyoutDataContext="{Binding UserProfile}" IsOpen="{Binding IsFlyoutOpened, Mode=TwoWay}">
-                <flyouts:UserFlyout x:Name="Flyout" />
-            </behaviors:SettingsFlyoutOpenBehavior>
-            -->
-            <behaviors:SettingsFlyoutOpenBehavior FlyoutDataContext="{Binding UserProfile}">
-                <flyouts:UserFlyout x:Name="Flyout" />
-            </behaviors:SettingsFlyoutOpenBehavior>
-        </interactivity:Interaction.Behaviors>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60" />
             <ColumnDefinition Width="*" />

@@ -2,24 +2,22 @@
 using System.Windows.Input;
 
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Storage;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 using Prism.Commands;
+using Prism.Windows.Navigation;
 
 using Vulpecula.Models;
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.Models.Services;
 using Vulpecula.Universal.Models.Timelines.Primitive;
-using Vulpecula.Universal.ViewModels.Flyouts;
 using Vulpecula.Universal.ViewModels.Primitives;
-using Vulpecula.Universal.Views.Timelines.Primitive;
 
 namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 {
     public class StatusViewModel : ViewModel
     {
+        private readonly INavigationService _navigationService;
         private readonly CroudiaProvider _provider;
 
         public StatusModel Model { get; }
@@ -33,10 +31,11 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public string Via => Model.Source == null ? "" : $"via {Model.Source.Name}";
 
-        public StatusViewModel(StatusModel statusModel, CroudiaProvider provider)
+        public StatusViewModel(StatusModel statusModel, CroudiaProvider provider, INavigationService navigationService)
         {
             Model = statusModel;
             _provider = provider;
+            _navigationService = navigationService;
 
             if (Model.IsDirectMessage)
             {
@@ -54,16 +53,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public void OnTappedOpenUserProfile(object sender, RoutedEventArgs e)
         {
-            // TODO: ヤバイので、Behavior でなんとかする。
-            var uc = (StatusView) ((Grid) ((StackPanel) ((Grid) ((Image) sender).Parent).Parent).Parent).Parent;
-            var flyout = uc.FindName("Flyout") as SettingsFlyout;
-            if (flyout != null)
-            {
-                flyout.DataContext = ((Grid) ((Image) sender).Parent).Children[0] == (Image) sender
-                ? UserProfile
-                : CreateUserFlyoutViewModel(Model.Recipient);
-                flyout.ShowIndependent();
-            }
+            _navigationService.Navigate("Pages.UserDetail", Model.User);
         }
 
         private UserViewModel CreateUserViewModel(User user)
@@ -71,13 +61,6 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             var uvm = new UserViewModel(user);
             CompositeDisposable.Add(uvm);
             return uvm;
-        }
-
-        private UserFlyoutViewModel CreateUserFlyoutViewModel(User user)
-        {
-            var ufvm = new UserFlyoutViewModel(user);
-            CompositeDisposable.Add(ufvm);
-            return ufvm;
         }
 
         #region Text
@@ -109,17 +92,6 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             => _user ?? (_user = CreateUserViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
 
         #endregion User
-
-        #region UserProfile
-
-        private UserFlyoutViewModel _userProfile;
-
-        public UserFlyoutViewModel UserProfile
-            =>
-            _userProfile ??
-            (_userProfile = CreateUserFlyoutViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
-
-        #endregion UserProfile
 
         #region Recipient
 
