@@ -12,6 +12,12 @@
     <ScrollViewer HorizontalScrollBarVisibility="Auto"
                   Loaded="{x:Bind ViewModel.Initialize}"
                   VerticalScrollBarVisibility="Disabled">
+        <ScrollViewer.Transitions>
+            <TransitionCollection>
+                <EntranceThemeTransition />
+            </TransitionCollection>
+        </ScrollViewer.Transitions>
+
         <StackPanel HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Orientation="Horizontal">

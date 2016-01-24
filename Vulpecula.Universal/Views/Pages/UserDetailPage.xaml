@@ -9,8 +9,12 @@
       d:DesignWidth="400"
       mvvm:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
-
     <ScrollViewer Background="{StaticResource SearchBoxDisabledBorderThemeBrush}">
+        <ScrollViewer.Transitions>
+            <TransitionCollection>
+                <EntranceThemeTransition />
+            </TransitionCollection>
+        </ScrollViewer.Transitions>
         <StackPanel Style="{StaticResource SettingsFlyoutSectionStyle}">
             <Grid>
                 <Border BorderBrush="{StaticResource TextBoxBorderThemeBrush}" BorderThickness="1">
