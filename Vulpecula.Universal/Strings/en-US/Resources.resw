@@ -186,10 +186,34 @@
   <data name="SettingsMainPage_Timeline.Header" xml:space="preserve">
     <value>timeline</value>
   </data>
+  <data name="StatusViewXaml_Comment.Label" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="StatusViewXaml_Delete.Label" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="StatusViewXaml_Favorite.Label" xml:space="preserve">
+    <value>Favorite</value>
+  </data>
+  <data name="StatusViewXaml_Quote.Label" xml:space="preserve">
+    <value>Quote</value>
+  </data>
+  <data name="StatusViewXaml_Reply.Label" xml:space="preserve">
+    <value>Reply</value>
+  </data>
   <data name="StatusViewXaml_ScreenName.Text" xml:space="preserve">
     <value>@{0}</value>
   </data>
+  <data name="StatusViewXaml_Share.Label" xml:space="preserve">
+    <value>Share</value>
+  </data>
   <data name="StatusViewXaml_Shared.Text" xml:space="preserve">
     <value>{0} shared</value>
+  </data>
+  <data name="StatusViewXaml_Spread.Label" xml:space="preserve">
+    <value>Spread</value>
+  </data>
+  <data name="StatusViewXaml_ViewDetails.Label" xml:space="preserve">
+    <value>View Details</value>
   </data>
 </root>

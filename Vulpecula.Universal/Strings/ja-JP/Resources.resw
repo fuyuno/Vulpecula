@@ -186,10 +186,34 @@
   <data name="SettingsMainPage_Timeline.Header" xml:space="preserve">
     <value>タイムライン</value>
   </data>
+  <data name="StatusViewXaml_Comment.Label" xml:space="preserve">
+    <value>コメント</value>
+  </data>
+  <data name="StatusViewXaml_Delete.Label" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="StatusViewXaml_Favorite.Label" xml:space="preserve">
+    <value>お気に入り</value>
+  </data>
+  <data name="StatusViewXaml_Quote.Label" xml:space="preserve">
+    <value>引用</value>
+  </data>
+  <data name="StatusViewXaml_Reply.Label" xml:space="preserve">
+    <value>返信</value>
+  </data>
   <data name="StatusViewXaml_ScreenName.Text" xml:space="preserve">
     <value>@{0}</value>
   </data>
+  <data name="StatusViewXaml_Share.Label" xml:space="preserve">
+    <value>共有</value>
+  </data>
   <data name="StatusViewXaml_Shared.Text" xml:space="preserve">
     <value>{0} さんがシェアしました</value>
+  </data>
+  <data name="StatusViewXaml_Spread.Label" xml:space="preserve">
+    <value>シェア</value>
+  </data>
+  <data name="StatusViewXaml_ViewDetails.Label" xml:space="preserve">
+    <value>詳細をみる</value>
   </data>
 </root>

@@ -115,48 +115,48 @@
                                          Mode=OneWay,
                                          Converter={StaticResource BooleanToVisibilityConverter}}">
             <CommandBar Background="Transparent" IsOpen="False">
-                <AppBarButton Width="65"
-                              MinWidth="65"
-                              Label="Reply">
+                <AppBarButton x:Uid="StatusViewXaml_Reply"
+                              Width="65"
+                              MinWidth="65">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE248;" />
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton Width="65"
+                <AppBarButton x:Uid="StatusViewXaml_Spread"
+                              Width="65"
                               MinWidth="65"
                               Command="{Binding SpreadCommand}"
                               IsEnabled="{Binding User.IsProtected,
-                                                  Converter={StaticResource ReverseBooleanConverter}}"
-                              Label="Spread">
+                                                  Converter={StaticResource ReverseBooleanConverter}}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE8EB;" />
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton Width="65"
+                <AppBarButton x:Uid="StatusViewXaml_Favorite"
+                              Width="65"
                               MinWidth="65"
                               Command="{Binding FavoriteCommand}"
                               IsEnabled="{Binding IsDirectMessage,
-                                                  Converter={StaticResource ReverseBooleanConverter}}"
-                              Label="Favorite">
+                                                  Converter={StaticResource ReverseBooleanConverter}}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE735;" />
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton Width="65"
+                <AppBarButton x:Uid="StatusViewXaml_Share"
+                              Width="65"
                               MinWidth="65"
-                              Command="{Binding ShareCommand}"
-                              Label="Share">
+                              Command="{Binding ShareCommand}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE72D;" />
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton IsEnabled="{Binding User.IsProtected, Converter={StaticResource ReverseBooleanConverter}}" Label="Quote" />
-                    <AppBarButton IsEnabled="{Binding User.IsProtected, Converter={StaticResource ReverseBooleanConverter}}" Label="Comment" />
-                    <AppBarButton Command="{Binding DeleteCommand}"
-                                  IsEnabled="{Binding User.IsOwn}"
-                                  Label="Delete" />
-                    <AppBarButton Label="View Details" />
+                    <AppBarButton x:Uid="StatusViewXaml_Quote" IsEnabled="{Binding User.IsProtected, Converter={StaticResource ReverseBooleanConverter}}" />
+                    <AppBarButton x:Uid="StatusViewXaml_Comment" IsEnabled="{Binding User.IsProtected, Converter={StaticResource ReverseBooleanConverter}}" />
+                    <AppBarButton x:Uid="StatusViewXaml_Delete"
+                                  Command="{Binding DeleteCommand}"
+                                  IsEnabled="{Binding User.IsOwn}" />
+                    <AppBarButton x:Uid="StatusViewXaml_ViewDetails" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </StackPanel>
