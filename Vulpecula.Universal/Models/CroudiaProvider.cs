@@ -43,13 +43,13 @@ namespace Vulpecula.Universal.Models
 
             var startUri = new Uri(Croudia.OAuth.GetAuthorizeUrl());
             var endUri = new Uri("https://vulpecula.mkzk.xyz/authorized");
-            var result =
-            await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, startUri, endUri);
-            if (result.ResponseStatus != WebAuthenticationStatus.Success)
-                return false;
-
             try
             {
+                var result =
+                await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, startUri, endUri);
+                if (result.ResponseStatus != WebAuthenticationStatus.Success)
+                    return false;
+
                 var url = result.ResponseData;
                 await Croudia.OAuth.TokenAsync(url.Substring(url.IndexOf("code=", StringComparison.Ordinal) + 5));
                 User = await Croudia.Account.VerifyCredentialsAsync();
@@ -58,7 +58,7 @@ namespace Vulpecula.Universal.Models
                                                  Croudia.RefreshToken));
                 return true;
             }
-            catch
+            catch (Exception)
             {
                 return false;
             }

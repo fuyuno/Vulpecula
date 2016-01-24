@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 
 using JetBrains.Annotations;
@@ -23,8 +22,6 @@ namespace Vulpecula.Universal.ViewModels
         {
             _navigationService = navigationService;
             Accounts = new ObservableCollection<UserAccountViewModel>();
-            Text = string.Empty;
-            IsWhisperZoneOpened = false;
             EventFired = false;
             ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, Accounts, (User w) => UserAccountViewModel.Create(w));
         }
@@ -32,34 +29,6 @@ namespace Vulpecula.Universal.ViewModels
         #region Properties
 
         public ObservableCollection<UserAccountViewModel> Accounts { get; }
-
-        #region Text Property
-
-        private string _text;
-
-        public string Text
-        {
-            get { return _text; }
-            set
-            {
-                if (SetProperty(ref _text, value))
-                    ((DelegateCommand) SendTweetCommand).RaiseCanExecuteChanged();
-            }
-        }
-
-        #endregion
-
-        #region IsWhisperZoneOpened
-
-        private bool _isWhisperZoneOpened;
-
-        public bool IsWhisperZoneOpened
-        {
-            get { return _isWhisperZoneOpened; }
-            set { SetProperty(ref _isWhisperZoneOpened, value); }
-        }
-
-        #endregion
 
         #region EventFired
 
@@ -84,52 +53,6 @@ namespace Vulpecula.Universal.ViewModels
         public ICommand AuthorizationCommand => _authorizationCommand ?? (_authorizationCommand = new DelegateCommand(Authorization));
 
         private async void Authorization() => await AccountManager.Instance.AuthorizationAccount();
-
-        #endregion
-
-        #region ToggleTweetAreaCommand
-
-        private ICommand _toggleTweetAreaCommand;
-        public ICommand ToggleTweetAreaCommand => _toggleTweetAreaCommand ?? (_toggleTweetAreaCommand = new DelegateCommand(ToggleTweetArea));
-
-        private void ToggleTweetArea()
-        {
-            IsWhisperZoneOpened = !IsWhisperZoneOpened;
-        }
-
-        #endregion
-
-        #region SendTweetCommand
-
-        private ICommand _sendTweetCommand;
-        public ICommand SendTweetCommand => _sendTweetCommand ?? (_sendTweetCommand = new DelegateCommand(SendTweet, CanSendTweet));
-
-        private void SendTweet()
-        {
-            foreach (var account in Accounts.Where(w => w.IsWhisperEnabled))
-                account.SendWhisper(Text);
-            Text = "";
-            ((DelegateCommand) SendTweetCommand).RaiseCanExecuteChanged();
-        }
-
-        private bool CanSendTweet()
-        {
-            if (Accounts.All(w => !w.IsWhisperEnabled) || string.IsNullOrWhiteSpace(Text))
-                return false;
-            return true;
-        }
-
-        #endregion
-
-        #region SelectAccountCommand
-
-        private ICommand _selectAccountCommand;
-        public ICommand SelectAccountCommand => _selectAccountCommand ?? (_selectAccountCommand = new DelegateCommand(SelectAccount));
-
-        private void SelectAccount()
-        {
-            ((DelegateCommand) SendTweetCommand).RaiseCanExecuteChanged();
-        }
 
         #endregion
 

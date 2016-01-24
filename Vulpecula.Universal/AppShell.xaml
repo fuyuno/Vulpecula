@@ -12,11 +12,6 @@
       mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="48" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="LayoutVisualStateGroup">
                 <!--  最小幅  -->
@@ -26,6 +21,8 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="RootSplitView.DisplayMode" Value="Overlay" />
+                        <Setter Target="RootSplitView.Margin" Value="0,0,0,48" />
+                        <Setter Target="RsCommandBar.Visibility" Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NormalLayout">
@@ -34,39 +31,35 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="RootSplitView.DisplayMode" Value="CompactOverlay" />
+                        <Setter Target="RootSplitView.Margin" Value="0" />
+                        <Setter Target="RsCommandBar.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <StackPanel Background="{StaticResource AppBarItemBackgroundThemeBrush}" Orientation="Horizontal">
-            <ToggleButton Width="48"
-                          Height="48"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Top"
-                          AutomationProperties.Name="Menu"
-                          Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
-                          IsChecked="{Binding ElementName=RootSplitView,
-                                              Path=IsPaneOpen,
-                                              Mode=TwoWay}">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
-            </ToggleButton>
-            <TextBlock Margin="10,0"
-                       VerticalAlignment="Center"
-                       Style="{StaticResource TitleTextBlockStyle}"
-                       Text="Vulpecula" />
-        </StackPanel>
-        <SplitView x:Name="RootSplitView"
-                   Grid.Row="1"
-                   DisplayMode="CompactOverlay">
+        <SplitView x:Name="RootSplitView" DisplayMode="CompactOverlay">
             <SplitView.Pane>
-                <views:MenuView x:Name="MenuView" />
+                <Grid>
+                    <ToggleButton Width="48"
+                                  Height="48"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  AutomationProperties.Name="Menu"
+                                  Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+                                  IsChecked="{Binding ElementName=RootSplitView,
+                                                      Path=IsPaneOpen,
+                                                      Mode=TwoWay}">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
+                    </ToggleButton>
+                    <views:MenuView x:Name="MenuView" Margin="0,48,0,0" />
+                </Grid>
             </SplitView.Pane>
             <SplitView.Content>
                 <Frame x:Name="RootFrame"
-                       Margin="0,-48,0,0"
                        HorizontalContentAlignment="Stretch"
                        VerticalContentAlignment="Stretch" />
             </SplitView.Content>
         </SplitView>
+        <views:CommandMenuPage x:Name="RsCommandBar" VerticalAlignment="Bottom" />
     </Grid>
 </Page>

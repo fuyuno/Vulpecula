@@ -126,31 +126,46 @@
   <data name="ColumnManager_CanNotRestored.Text" xml:space="preserve">
     <value>ロード中にエラーが発生したため、カラムを復元できませんでした。</value>
   </data>
-  <data name="MainPageXaml_Account.Text" xml:space="preserve">
+  <data name="CommandMenuPageXaml_Accounts.Label" xml:space="preserve">
     <value>アカウント</value>
   </data>
-  <data name="MainPageXaml_Home.Text" xml:space="preserve">
+  <data name="CommandMenuPageXaml_Home.Label" xml:space="preserve">
     <value>ホーム</value>
   </data>
-  <data name="MainPageXaml_NewAccount.Text" xml:space="preserve">
-    <value>アカウントを追加</value>
+  <data name="CommandMenuPageXaml_Search.Label" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="CommandMenuPageXaml_Settings.Label" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="CommandMenuPageXaml_Whisper.Label" xml:space="preserve">
+    <value>ささやく</value>
   </data>
   <data name="MainPageXaml_ScreenName.Text" xml:space="preserve">
     <value>@{0}</value>
   </data>
-  <data name="MainPageXaml_SearchBox.Text" xml:space="preserve">
-    <value>ささやき / ユーザーを検索</value>
-  </data>
   <data name="MainPageXaml_Send.Content" xml:space="preserve">
     <value>送信</value>
-  </data>
-  <data name="MainPageXaml_Settings.Text" xml:space="preserve">
-    <value>設定</value>
   </data>
   <data name="MainPageXaml_WhatsHappening.PlaceholderText" xml:space="preserve">
     <value>今何してる？</value>
   </data>
-  <data name="MainPageXaml_Whisper.Text" xml:space="preserve">
+  <data name="MenuPageXaml_Account.Text" xml:space="preserve">
+    <value>アカウント</value>
+  </data>
+  <data name="MenuPageXaml_Home.Text" xml:space="preserve">
+    <value>ホーム</value>
+  </data>
+  <data name="MenuPageXaml_NewAccount.Text" xml:space="preserve">
+    <value>アカウントを追加</value>
+  </data>
+  <data name="MenuPageXaml_SearchBox.Text" xml:space="preserve">
+    <value>ささやき / ユーザーを検索</value>
+  </data>
+  <data name="MenuPageXaml_Settings.Text" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="MenuPageXaml_Whisper.Text" xml:space="preserve">
     <value>ささやく</value>
   </data>
   <data name="MessageDialogWrapper_Cancel.Text" xml:space="preserve">

@@ -38,13 +38,41 @@
                     <behaviors:UnSelectableListBoxBehavior />
                 </i:Interaction.Behaviors>
                 <ListBoxItem>
-                    <Button Command="{Binding ToggleTweetAreaCommand}">
+                    <Button>
                         <StackPanel Orientation="Horizontal">
                             <FontIcon Width="48"
                                       Height="48"
                                       FontSize="24"
-                                      Glyph="&#xE70F;" />
-                            <TextBlock x:Uid="MainPageXaml_Whisper"
+                                      Glyph="&#xE8BD;" />
+                            <TextBlock x:Uid="MenuPageXaml_Whisper"
+                                       Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18" />
+                        </StackPanel>
+                    </Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Command="{Binding NavigateToHomePageCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48"
+                                      Height="48"
+                                      FontSize="24"
+                                      Glyph="&#xE80F;" />
+                            <TextBlock x:Uid="MenuPageXaml_Home"
+                                       Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18" />
+                        </StackPanel>
+                    </Button>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48"
+                                      Height="48"
+                                      FontSize="24"
+                                      Glyph="&#xE094;" />
+                            <TextBlock x:Uid="MenuPageXaml_SearchBox"
                                        Margin="10,0"
                                        VerticalAlignment="Center"
                                        FontSize="18" />
@@ -54,7 +82,9 @@
             </ListBox>
         </StackPanel>
         <!--  Accounts  -->
-        <StackPanel x:Name="UpCenter" RelativePanel.Below="Header">
+        <StackPanel x:Name="Center"
+                    Orientation="Vertical"
+                    RelativePanel.Above="Footer">
             <ItemsControl ItemsSource="{x:Bind ViewModel.Accounts}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -74,9 +104,6 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </StackPanel>
-        <!--  Add Accounts Button  -->
-        <StackPanel x:Name="DownCenter" RelativePanel.Below="UpCenter">
             <ListBox>
                 <i:Interaction.Behaviors>
                     <behaviors:UnSelectableListBoxBehavior />
@@ -88,7 +115,7 @@
                                       Height="48"
                                       FontSize="24"
                                       Glyph="&#xE109;" />
-                            <TextBlock x:Uid="MainPageXaml_NewAccount"
+                            <TextBlock x:Uid="MenuPageXaml_NewAccount"
                                        Margin="10,0"
                                        VerticalAlignment="Center"
                                        FontSize="18" />
@@ -104,41 +131,13 @@
                     <behaviors:UnSelectableListBoxBehavior />
                 </i:Interaction.Behaviors>
                 <ListBoxItem>
-                    <Button Command="{Binding NavigateToHomePageCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon Width="48"
-                                      Height="48"
-                                      FontSize="24"
-                                      Glyph="&#xE80F;" />
-                            <TextBlock x:Uid="MainPageXaml_Home"
-                                       Margin="10,0"
-                                       VerticalAlignment="Center"
-                                       FontSize="18" />
-                        </StackPanel>
-                    </Button>
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button>
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon Width="48"
-                                      Height="48"
-                                      FontSize="24"
-                                      Glyph="&#xE094;" />
-                            <TextBlock x:Uid="MainPageXaml_SearchBox"
-                                       Margin="10,0"
-                                       VerticalAlignment="Center"
-                                       FontSize="18" />
-                        </StackPanel>
-                    </Button>
-                </ListBoxItem>
-                <ListBoxItem>
                     <Button>
                         <StackPanel Orientation="Horizontal">
                             <FontIcon Width="48"
                                       Height="48"
                                       FontSize="24"
                                       Glyph="&#xE125;" />
-                            <TextBlock x:Uid="MainPageXaml_Account"
+                            <TextBlock x:Uid="MenuPageXaml_Account"
                                        Margin="10,0"
                                        VerticalAlignment="Center"
                                        FontSize="18" />
@@ -146,13 +145,15 @@
                     </Button>
                 </ListBoxItem>
                 <ListBoxItem>
-                    <Button Click="ButtonBase_OnClick" Command="{Binding NavigateToSettingsPageCommand}">
+                    <Button HorizontalAlignment="Stretch"
+                            Click="ButtonBase_OnClick"
+                            Command="{Binding NavigateToSettingsPageCommand}">
                         <StackPanel Orientation="Horizontal">
                             <FontIcon Width="48"
                                       Height="48"
                                       FontSize="24"
                                       Glyph="&#xE115;" />
-                            <TextBlock x:Uid="MainPageXaml_Settings"
+                            <TextBlock x:Uid="MenuPageXaml_Settings"
                                        Margin="10,0"
                                        VerticalAlignment="Center"
                                        FontSize="18" />
@@ -160,6 +161,7 @@
                     </Button>
                 </ListBoxItem>
             </ListBox>
+
             <StackPanel Orientation="Horizontal">
                 <Image Width="48px"
                        Height="48px"
@@ -168,70 +170,6 @@
                            VerticalAlignment="Center"
                            FontSize="18"
                            Text="Vulpecula for Windows" />
-            </StackPanel>
-        </StackPanel>
-        <StackPanel x:Name="WhisperZone"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    RelativePanel.AlignTopWithPanel="True"
-                    Visibility="{Binding IsWhisperZoneOpened,
-                                         UpdateSourceTrigger=PropertyChanged,
-                                         Converter={StaticResource BooleanToVisibilityConverter}}">
-            <StackPanel Margin="48,0,0,0" Background="#FF171717">
-                <TextBlock Margin="10" FontSize="16">From</TextBlock>
-                <ItemsControl ItemsSource="{x:Bind ViewModel.Accounts}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsWrapGrid Width="252"
-                                           ItemHeight="48"
-                                           ItemWidth="48"
-                                           Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <ToggleButton Width="48"
-                                          Height="48"
-                                          Background="Transparent"
-                                          Command="{Binding DataContext.SelectAccountCommand,
-                                                            ElementName=Header}"
-                                          IsChecked="{Binding IsWhisperEnabled,
-                                                              UpdateSourceTrigger=PropertyChanged,
-                                                              Mode=TwoWay}"
-                                          Padding="0">
-                                <Grid Width="36"
-                                      Height="36"
-                                      Margin="0,0,0,0"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      Padding="0">
-                                    <Border CornerRadius="10">
-                                        <Border.Background>
-                                            <ImageBrush ImageSource="{Binding Icon}" />
-                                        </Border.Background>
-                                    </Border>
-                                </Grid>
-                            </ToggleButton>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-                <TextBox x:Uid="MainPageXaml_WhatsHappening"
-                         Width="252"
-                         Height="114"
-                         Margin="10"
-                         VerticalAlignment="Center"
-                         AcceptsReturn="True"
-                         BorderThickness="1"
-                         FontSize="18"
-                         Text="{Binding Text,
-                                        UpdateSourceTrigger=PropertyChanged,
-                                        Mode=TwoWay}" />
-                <Button x:Uid="MainPageXaml_Send"
-                        Margin="10,0"
-                        HorizontalAlignment="Right"
-                        Command="{Binding SendTweetCommand}"
-                        Style="{x:Null}" />
             </StackPanel>
         </StackPanel>
         <!--  #endregion  -->

@@ -150,6 +150,7 @@
     <Compile Include="Models\Services\Primitive\TimelineServiceBase.cs" />
     <Compile Include="Models\Timelines\TimelineType.cs" />
     <Compile Include="Models\Configuration.cs" />
+    <Compile Include="ViewModels\CommandMenuPageViewModel.cs" />
     <Compile Include="ViewModels\Flyouts\UserFlyoutViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
@@ -160,6 +161,9 @@
     <Compile Include="ViewModels\Timelines\Primitives\StatusViewModel.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\UserViewModel.cs" />
     <Compile Include="ViewModels\UserAccountViewModel.cs" />
+    <Compile Include="Views\CommandMenuPage.xaml.cs">
+      <DependentUpon>CommandMenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Flyouts\UserFlyout.xaml.cs">
       <DependentUpon>UserFlyout.xaml</DependentUpon>
     </Compile>
@@ -259,6 +263,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="AppShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CommandMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
