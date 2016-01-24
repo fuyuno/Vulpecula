@@ -1,6 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -20,6 +22,17 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
     {
         private readonly CroudiaProvider _provider;
 
+        public StatusModel Model { get; }
+
+        public bool IsShare { get; }
+        public bool IsComment { get; }
+        public bool IsDirectMessage { get; }
+        public bool HasImage { get; }
+
+        public string CreatedAt => Model.CreatedAt.ToString("HH:mm");
+
+        public string Via => Model.Source == null ? "" : $"via {Model.Source.Name}";
+
         public StatusViewModel(StatusModel statusModel, CroudiaProvider provider)
         {
             Model = statusModel;
@@ -37,24 +50,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             IsFlyoutOpened = false;
         }
 
-        public StatusModel Model { get; }
-
-        public bool IsShare { get; }
-        public bool IsComment { get; }
-        public bool IsDirectMessage { get; }
-        public bool HasImage { get; }
-
-        public string CreatedAt => Model.CreatedAt.ToString("HH:mm");
-
-        public string Via => Model.Source == null ? "" : $"via {Model.Source.Name}";
-
-        public void Initialize()
-        {
-            DataTransferManager.GetForCurrentView().DataRequested += (sender, args) =>
-            {
-                // Share via (args.request...)
-            };
-        }
+        public void Initialize() {}
 
         public void OnTappedOpenUserProfile(object sender, RoutedEventArgs e)
         {
@@ -64,8 +60,8 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             if (flyout != null)
             {
                 flyout.DataContext = ((Grid) ((Image) sender).Parent).Children[0] == (Image) sender
-                    ? UserProfile
-                    : CreateUserFlyoutViewModel(Model.Recipient);
+                ? UserProfile
+                : CreateUserFlyoutViewModel(Model.Recipient);
                 flyout.ShowIndependent();
             }
         }
@@ -97,11 +93,11 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public string ImageUrl
             =>
-                _imageUrl ??
-                (_imageUrl =
-                    HasImage
-                        ? IsShare ? Model.SpreadStatus.Entities.Media.MediaUrlHttps : Model.Entities.Media.MediaUrlHttps
-                        : "");
+            _imageUrl ??
+            (_imageUrl =
+            HasImage
+            ? IsShare ? Model.SpreadStatus.Entities.Media.MediaUrlHttps : Model.Entities.Media.MediaUrlHttps
+            : "");
 
         #endregion Image
 
@@ -120,8 +116,8 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public UserFlyoutViewModel UserProfile
             =>
-                _userProfile ??
-                (_userProfile = CreateUserFlyoutViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
+            _userProfile ??
+            (_userProfile = CreateUserFlyoutViewModel(IsShare ? Model.SpreadStatus.User : Model.User));
 
         #endregion UserProfile
 
@@ -236,7 +232,18 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         private void Share()
         {
+            // なんか違う気がする
+            var dataTransferManager = DataTransferManager.GetForCurrentView();
+            dataTransferManager.DataRequested += Callback;
             DataTransferManager.ShowShareUI();
+        }
+
+        private void Callback(DataTransferManager sender, DataRequestedEventArgs e)
+        {
+            var request = e.Request;
+            request.Data.Properties.Title = " ";
+            request.Data.SetText($"{Model.Text}{Environment.NewLine}https://croudia.com/voices/show/{Model.Id}");
+            sender.DataRequested -= Callback;
         }
 
         #endregion ShareCommand
