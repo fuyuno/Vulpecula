@@ -48,9 +48,9 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignKey>iPhone Developer: mikazuki_fuyuno@outlook.com (HZ32W4CGLS)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>e408aa86-2882-47c9-baf7-c084e4eb49b5</CodesignProvision>
-    <CodesignExtraArgs>
-    </CodesignExtraArgs>
+    <IpaPackageName>
+    </IpaPackageName>
+    <CodesignProvision>3721f976-3f92-43c8-83f2-8f734801269a</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>

@@ -44,13 +44,12 @@ namespace Vulpecula.Mobile.Views.Pages
                     var statuses = await vm.AccountManager.Providers.First().Croudia.Statuses.GetUserTimelineAsync(screen_name => user.ScreenName);
                     foreach (var status in statuses)
                     {
-                        Device.BeginInvokeOnMainThread(() =>
-                            this.Statuses.Children.Add(new StatusView()
-                                {
-                                    BindingContext = new StatusViewModel(vm.Localization, vm.NavigationService, status),
-                                    HorizontalOptions = LayoutOptions.StartAndExpand
-                                }));
-
+                        var s = new StatusView()
+                        {
+                            BindingContext = new StatusViewModel(vm.Location, vm.NavigationService, status),
+                            HorizontalOptions = LayoutOptions.StartAndExpand
+                        };
+                        Device.BeginInvokeOnMainThread(() => this.Statuses.Children.Add(s));
                     }
                 });
         }
