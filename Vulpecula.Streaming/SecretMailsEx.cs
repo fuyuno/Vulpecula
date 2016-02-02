@@ -32,7 +32,7 @@ namespace Vulpecula.Streaming
         }
 
         internal static IEnumerable<SecretMail> ReceivedAsStreaming(this SecretMails obj, bool enableDummy,
-            params Expression<Func<string, object>>[] parameters)
+                                                                    params Expression<Func<string, object>>[] parameters)
         {
             var lastStatusId = 0L;
             while (true)
@@ -42,13 +42,20 @@ namespace Vulpecula.Streaming
                     var id = lastStatusId;
                     parameters = CroudiaStreaming.AdjustParameters(parameters, since_id => id);
                 }
-                var secretMails = obj.Received(parameters).ToArray();
+                IEnumerable<SecretMail> secretMails;
+                try
+                {
+                    secretMails = obj.Received(parameters).ToArray();
+                }
+                catch (Exception)
+                {
+                    secretMails = new List<SecretMail>();
+                }
+
                 if (!secretMails.Any())
                 {
                     if (enableDummy)
-                    {
                         yield return new DummySecretMail();
-                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }
@@ -81,7 +88,7 @@ namespace Vulpecula.Streaming
         }
 
         internal static IEnumerable<SecretMail> SentAsStreaming(this SecretMails obj, bool enableDummy,
-            params Expression<Func<string, object>>[] parameters)
+                                                                params Expression<Func<string, object>>[] parameters)
         {
             var lastStatusId = 0L;
             while (true)
@@ -91,13 +98,20 @@ namespace Vulpecula.Streaming
                     var id = lastStatusId;
                     parameters = CroudiaStreaming.AdjustParameters(parameters, since_id => id);
                 }
-                var secretMails = obj.Sent(parameters).ToArray();
+                IEnumerable<SecretMail> secretMails;
+                try
+                {
+                    // API throw "404 Not Found"
+                    secretMails = obj.Sent(parameters).ToArray();
+                }
+                catch (Exception)
+                {
+                    secretMails = new List<SecretMail>();
+                }
                 if (!secretMails.Any())
                 {
                     if (enableDummy)
-                    {
                         yield return new DummySecretMail();
-                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }

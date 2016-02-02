@@ -29,13 +29,13 @@ namespace Vulpecula.Streaming
         /// </param>
         /// <returns></returns>
         public static IEnumerable<Status> GetPublicTimelineAsStreaming(this Statuses obj,
-            params Expression<Func<string, object>>[] parameters)
+                                                                       params Expression<Func<string, object>>[] parameters)
         {
             return GetPublicTimelineAsStreaming(obj, false, parameters);
         }
 
         internal static IEnumerable<Status> GetPublicTimelineAsStreaming(this Statuses obj, bool enableDummy,
-            params Expression<Func<string, object>>[] parameters)
+                                                                         params Expression<Func<string, object>>[] parameters)
         {
             var lastStatusId = 0L;
             while (true)
@@ -45,13 +45,20 @@ namespace Vulpecula.Streaming
                     var id = lastStatusId;
                     parameters = CroudiaStreaming.AdjustParameters(parameters, since_id => id);
                 }
-                var statuses = obj.GetPublieTimeline(parameters).ToArray();
+                IEnumerable<Status> statuses;
+
+                try
+                {
+                    statuses = obj.GetPublieTimeline(parameters).ToArray();
+                }
+                catch (Exception)
+                {
+                    statuses = new List<Status>();
+                }
                 if (!statuses.Any())
                 {
                     if (enableDummy)
-                    {
                         yield return new DummyStatus();
-                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }
@@ -80,13 +87,13 @@ namespace Vulpecula.Streaming
         /// </param>
         /// <returns></returns>
         public static IEnumerable<Status> GetHomeTimelineAsStreaming(this Statuses obj,
-            params Expression<Func<string, object>>[] parameters)
+                                                                     params Expression<Func<string, object>>[] parameters)
         {
             return GetHomeTimelineAsStreaming(obj, false, parameters);
         }
 
         internal static IEnumerable<Status> GetHomeTimelineAsStreaming(this Statuses obj, bool enableDummy,
-            params Expression<Func<string, object>>[] parameters)
+                                                                       params Expression<Func<string, object>>[] parameters)
         {
             var lastStatusId = 0L;
             while (true)
@@ -96,13 +103,19 @@ namespace Vulpecula.Streaming
                     var id = lastStatusId;
                     parameters = CroudiaStreaming.AdjustParameters(parameters, since_id => id);
                 }
-                var statuses = obj.GetHomeTimeline(parameters).ToArray();
+                IEnumerable<Status> statuses;
+                try
+                {
+                    statuses = obj.GetHomeTimeline(parameters).ToArray();
+                }
+                catch (Exception)
+                {
+                    statuses = new List<Status>();
+                }
                 if (!statuses.Any())
                 {
                     if (enableDummy)
-                    {
                         yield return new DummyStatus();
-                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }
@@ -135,13 +148,13 @@ namespace Vulpecula.Streaming
         /// </param>
         /// <returns></returns>
         public static IEnumerable<Status> GetUserTimelineAsStreaming(this Statuses obj,
-            params Expression<Func<string, object>>[] parameters)
+                                                                     params Expression<Func<string, object>>[] parameters)
         {
             return GetUserTimelineAsStreaming(obj, false, parameters);
         }
 
         internal static IEnumerable<Status> GetUserTimelineAsStreaming(this Statuses obj, bool enableDummy,
-            params Expression<Func<string, object>>[] parameters)
+                                                                       params Expression<Func<string, object>>[] parameters)
         {
             var lastStatusId = 0L;
             while (true)
@@ -151,13 +164,19 @@ namespace Vulpecula.Streaming
                     var id = lastStatusId;
                     parameters = CroudiaStreaming.AdjustParameters(parameters, since_id => id);
                 }
-                var statuses = obj.GetUserTimeline(parameters).ToArray();
+                IEnumerable<Status> statuses;
+                try
+                {
+                    statuses = obj.GetUserTimeline(parameters).ToArray();
+                }
+                catch (Exception)
+                {
+                    statuses = new List<Status>();
+                }
                 if (!statuses.Any())
                 {
                     if (enableDummy)
-                    {
                         yield return new DummyStatus();
-                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }
@@ -186,13 +205,13 @@ namespace Vulpecula.Streaming
         /// </param>
         /// <returns></returns>
         public static IEnumerable<Status> GetMentionsAsStreaming(this Statuses obj,
-            params Expression<Func<string, object>>[] parameters)
+                                                                 params Expression<Func<string, object>>[] parameters)
         {
             return GetMentionsAsStreaming(obj, false, parameters);
         }
 
         internal static IEnumerable<Status> GetMentionsAsStreaming(this Statuses obj, bool enableDummy,
-            params Expression<Func<string, object>>[] parameters)
+                                                                   params Expression<Func<string, object>>[] parameters)
         {
             var lastStatusId = 0L;
             while (true)
@@ -202,13 +221,19 @@ namespace Vulpecula.Streaming
                     var id = lastStatusId;
                     parameters = CroudiaStreaming.AdjustParameters(parameters, since_id => id);
                 }
-                var statuses = obj.GetMentions(parameters).ToArray();
+                IEnumerable<Status> statuses;
+                try
+                {
+                    statuses = obj.GetMentions(parameters).ToArray();
+                }
+                catch (Exception)
+                {
+                    statuses = new List<Status>();
+                }
                 if (!statuses.Any())
                 {
                     if (enableDummy)
-                    {
                         yield return new DummyStatus();
-                    }
                     CroudiaStreaming.Wait();
                     continue;
                 }

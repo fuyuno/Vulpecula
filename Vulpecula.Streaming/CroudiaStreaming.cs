@@ -17,18 +17,19 @@ namespace Vulpecula.Streaming
             TimeSpan = TimeSpan.FromSeconds(5);
         }
 
-        internal static Expression<Func<string, object>>[] AdjustParameters(Expression<Func<string, object>>[] parameters, Expression<Func<string, object>> newParameter)
+        internal static Expression<Func<string, object>>[] AdjustParameters(Expression<Func<string, object>>[] parameters,
+                                                                            Expression<Func<string, object>> newParameter)
         {
             var param = parameters.FirstOrDefault(w => w.Parameters[0].Name == newParameter.Parameters[0].Name);
             if (param == null)
-                // ReSharper disable once RedundantAssignment
+            // ReSharper disable once RedundantAssignment
                 parameters = parameters.Concat(new[] { newParameter }).ToArray();
             else
             {
                 var index =
-                    parameters.Select((expr, i) => new { Expr = expr, Index = i })
-                        .First(w => w.Expr.Parameters[0].Name == newParameter.Parameters[0].Name)
-                        .Index;
+                parameters.Select((expr, i) => new { Expr = expr, Index = i })
+                          .First(w => w.Expr.Parameters[0].Name == newParameter.Parameters[0].Name)
+                          .Index;
                 parameters[index] = newParameter;
             }
             return parameters;
@@ -36,7 +37,7 @@ namespace Vulpecula.Streaming
 
         internal static void Wait()
         {
-            var task = Task.Delay(CroudiaStreaming.TimeSpan);
+            var task = Task.Delay(TimeSpan);
             task.Wait();
         }
     }
