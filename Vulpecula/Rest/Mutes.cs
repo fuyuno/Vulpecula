@@ -9,17 +9,13 @@ namespace Vulpecula.Rest
 {
     public class Mutes : CroudiaApiImpl
     {
-        public MutesUsers Users => new MutesUsers(this.Croudia);
+        public MutesUsers Users => new MutesUsers(Croudia);
 
-        internal Mutes(Croudia croudia) : base(croudia)
-        {
-        }
+        internal Mutes(Croudia croudia) : base(croudia) {}
 
         public class MutesUsers : CroudiaApiImpl
         {
-            internal MutesUsers(Croudia croudia) : base(croudia)
-            {
-            }
+            internal MutesUsers(Croudia croudia) : base(croudia) {}
 
             /// <summary>
             /// <para>指定したユーザーをミュートします。</para>
@@ -33,7 +29,7 @@ namespace Vulpecula.Rest
             /// <returns></returns>
             public async Task<User> CreateAsync(params Expression<Func<string, object>>[] parameters)
             {
-                return await this.Croudia.PostAsync<User>(EndPoints.MutesUsersCreate, parameters);
+                return await Croudia.PostAsync<User>(EndPoints.MutesUsersCreate, parameters);
             }
 
             /// <summary>
@@ -49,7 +45,7 @@ namespace Vulpecula.Rest
             public User Create(params Expression<Func<string, object>>[] parameters)
             {
                 var task =
-                    Task.Run(async () => await this.Croudia.PostAsync<User>(EndPoints.MutesUsersCreate, parameters));
+                Task.Run(async () => await CreateAsync(parameters));
                 task.Wait();
                 return task.Result;
             }
@@ -66,7 +62,7 @@ namespace Vulpecula.Rest
             /// <returns></returns>
             public async Task<User> DestroyAsync(params Expression<Func<string, object>>[] parameters)
             {
-                return await this.Croudia.PostAsync<User>(EndPoints.MutesUsersDestroy, parameters);
+                return await Croudia.PostAsync<User>(EndPoints.MutesUsersDestroy, parameters);
             }
 
             /// <summary>
@@ -82,7 +78,7 @@ namespace Vulpecula.Rest
             public User Destroy(params Expression<Func<string, object>>[] parameters)
             {
                 var task =
-                    Task.Run(async () => await this.Croudia.PostAsync<User>(EndPoints.MutesUsersDestroy, parameters));
+                Task.Run(async () => await DestroyAsync(parameters));
                 task.Wait();
                 return task.Result;
             }
@@ -98,7 +94,7 @@ namespace Vulpecula.Rest
             /// <returns></returns>
             public async Task<List> ListAsync(params Expression<Func<string, object>>[] parameters)
             {
-                return await this.Croudia.GetAsync<List>(EndPoints.MutesUsersList, parameters);
+                return await Croudia.GetAsync<List>(EndPoints.MutesUsersList, parameters);
             }
 
             /// <summary>
@@ -112,7 +108,7 @@ namespace Vulpecula.Rest
             /// <returns></returns>
             public List List(params Expression<Func<string, object>>[] parameters)
             {
-                var task = Task.Run(async () => await this.Croudia.GetAsync<List>(EndPoints.MutesUsersList, parameters));
+                var task = Task.Run(async () => await ListAsync(parameters));
                 task.Wait();
                 return task.Result;
             }
@@ -127,7 +123,7 @@ namespace Vulpecula.Rest
             /// <returns></returns>
             public async Task<IDs> IdsAsync(params Expression<Func<string, object>>[] parameters)
             {
-                return await this.Croudia.GetAsync<IDs>(EndPoints.MutesUsersIds, parameters);
+                return await Croudia.GetAsync<IDs>(EndPoints.MutesUsersIds, parameters);
             }
 
             /// <summary>
@@ -140,7 +136,7 @@ namespace Vulpecula.Rest
             /// <returns></returns>
             public IDs Ids(params Expression<Func<string, object>>[] parameters)
             {
-                var task = Task.Run(async () => await this.Croudia.GetAsync<IDs>(EndPoints.MutesUsersIds, parameters));
+                var task = Task.Run(async () => await IdsAsync(parameters));
                 task.Wait();
                 return task.Result;
             }

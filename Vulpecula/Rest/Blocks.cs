@@ -9,9 +9,7 @@ namespace Vulpecula.Rest
 {
     public class Blocks : CroudiaApiImpl
     {
-        internal Blocks(Croudia croudia) : base(croudia)
-        {
-        }
+        internal Blocks(Croudia croudia) : base(croudia) {}
 
         /// <summary>
         /// <para>指定したユーザーをブロックします。</para>
@@ -25,7 +23,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<User> CreateAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<User>(EndPoints.BlocksCreate, parameters);
+            return await Croudia.PostAsync<User>(EndPoints.BlocksCreate, parameters);
         }
 
         /// <summary>
@@ -40,7 +38,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public User Create(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.PostAsync<User>(EndPoints.BlocksCreate, parameters));
+            var task = Task.Run(async () => await CreateAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -57,7 +55,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<User> DestroyAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<User>(EndPoints.BlocksDestroy, parameters);
+            return await Croudia.PostAsync<User>(EndPoints.BlocksDestroy, parameters);
         }
 
         /// <summary>
@@ -72,7 +70,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public User Destroy(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.PostAsync<User>(EndPoints.BlocksDestroy, parameters));
+            var task = Task.Run(async () => await DestroyAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -88,7 +86,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<List> ListAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<List>(EndPoints.BlocksList, parameters);
+            return await Croudia.GetAsync<List>(EndPoints.BlocksList, parameters);
         }
 
         /// <summary>
@@ -102,7 +100,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public List List(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.GetAsync<List>(EndPoints.BlocksList, parameters));
+            var task = Task.Run(async () => await ListAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -117,7 +115,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<IDs> IdsAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IDs>(EndPoints.BlocksIds, parameters);
+            return await Croudia.GetAsync<IDs>(EndPoints.BlocksIds, parameters);
         }
 
         /// <summary>
@@ -130,7 +128,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public IDs Ids(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.GetAsync<IDs>(EndPoints.BlocksIds, parameters));
+            var task = Task.Run(async () => await IdsAsync(parameters));
             task.Wait();
             return task.Result;
         }

@@ -1548,68 +1548,71 @@ namespace Vulpecula.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f030000
-			public const int ApplicationName = 2130903040;
-			
-			// aapt resource value: 0x7f030006
-			public const int AuthorizationPage = 2130903046;
-			
-			// aapt resource value: 0x7f03000d
-			public const int Cancel = 2130903053;
-			
-			// aapt resource value: 0x7f030008
-			public const int Details = 2130903048;
-			
-			// aapt resource value: 0x7f030009
-			public const int Error = 2130903049;
-			
-			// aapt resource value: 0x7f030012
-			public const int Favorites = 2130903058;
-			
-			// aapt resource value: 0x7f030013
-			public const int Favs = 2130903059;
-			
-			// aapt resource value: 0x7f030010
-			public const int Followers = 2130903056;
-			
-			// aapt resource value: 0x7f03000f
-			public const int Followings = 2130903055;
-			
-			// aapt resource value: 0x7f030002
-			public const int Home = 2130903042;
-			
-			// aapt resource value: 0x7f03000a
-			public const int InvalidStatusError = 2130903050;
-			
-			// aapt resource value: 0x7f030005
-			public const int Me = 2130903045;
-			
-			// aapt resource value: 0x7f030003
-			public const int Mentions = 2130903043;
-			
-			// aapt resource value: 0x7f030004
-			public const int Messages = 2130903044;
-			
-			// aapt resource value: 0x7f03000b
-			public const int OK = 2130903051;
-			
 			// aapt resource value: 0x7f030001
-			public const int Public = 2130903041;
+			public const int ApplicationName = 2130903041;
 			
 			// aapt resource value: 0x7f030007
-			public const int SharedMessage = 2130903047;
-			
-			// aapt resource value: 0x7f030014
-			public const int Shares = 2130903060;
-			
-			// aapt resource value: 0x7f03000c
-			public const int Status = 2130903052;
+			public const int AuthorizationPage = 2130903047;
 			
 			// aapt resource value: 0x7f03000e
-			public const int Whisper = 2130903054;
+			public const int Cancel = 2130903054;
+			
+			// aapt resource value: 0x7f030009
+			public const int Details = 2130903049;
+			
+			// aapt resource value: 0x7f03000a
+			public const int Error = 2130903050;
+			
+			// aapt resource value: 0x7f030013
+			public const int Favorites = 2130903059;
+			
+			// aapt resource value: 0x7f030014
+			public const int Favs = 2130903060;
 			
 			// aapt resource value: 0x7f030011
-			public const int Whispers = 2130903057;
+			public const int Followers = 2130903057;
+			
+			// aapt resource value: 0x7f030010
+			public const int Followings = 2130903056;
+			
+			// aapt resource value: 0x7f030000
+			public const int Hello = 2130903040;
+			
+			// aapt resource value: 0x7f030003
+			public const int Home = 2130903043;
+			
+			// aapt resource value: 0x7f03000b
+			public const int InvalidStatusError = 2130903051;
+			
+			// aapt resource value: 0x7f030006
+			public const int Me = 2130903046;
+			
+			// aapt resource value: 0x7f030004
+			public const int Mentions = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int Messages = 2130903045;
+			
+			// aapt resource value: 0x7f03000c
+			public const int OK = 2130903052;
+			
+			// aapt resource value: 0x7f030002
+			public const int Public = 2130903042;
+			
+			// aapt resource value: 0x7f030008
+			public const int SharedMessage = 2130903048;
+			
+			// aapt resource value: 0x7f030015
+			public const int Shares = 2130903061;
+			
+			// aapt resource value: 0x7f03000d
+			public const int Status = 2130903053;
+			
+			// aapt resource value: 0x7f03000f
+			public const int Whisper = 2130903055;
+			
+			// aapt resource value: 0x7f030012
+			public const int Whispers = 2130903058;
 			
 			static String()
 			{

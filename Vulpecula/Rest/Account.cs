@@ -9,9 +9,7 @@ namespace Vulpecula.Rest
 {
     public class Account : CroudiaApiImpl
     {
-        internal Account(Croudia croudia) : base(croudia)
-        {
-        }
+        internal Account(Croudia croudia) : base(croudia) {}
 
         /// <summary>
         /// 認証に成功するとリクエストしたユーザーの <see cref="Vulpecula.Models.User"/> を返します。
@@ -19,7 +17,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<User> VerifyCredentialsAsync()
         {
-            return await this.Croudia.GetAsync<User>(EndPoints.AccountVeriryCredentials);
+            return await Croudia.GetAsync<User>(EndPoints.AccountVeriryCredentials);
         }
 
         /// <summary>
@@ -28,7 +26,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public User VerifyCredentials()
         {
-            var task = Task.Run(async () => await this.Croudia.GetAsync<User>(EndPoints.AccountVeriryCredentials));
+            var task = Task.Run(async () => await VerifyCredentialsAsync());
             task.Wait();
             return task.Result;
         }
@@ -44,7 +42,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<User> UpdateProfileImageAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<User>(EndPoints.AccountUpdateProfileImage, parameters);
+            return await Croudia.PostAsync<User>(EndPoints.AccountUpdateProfileImage, parameters);
         }
 
         /// <summary>
@@ -58,8 +56,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public User UpdateProfileImage(params Expression<Func<string, object>>[] parameters)
         {
-            var task =
-                Task.Run(async () => await this.Croudia.PostAsync<User>(EndPoints.AccountUpdateProfileImage, parameters));
+            var task = Task.Run(async () => await UpdateProfileImageAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -75,7 +72,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<User> UpdateCoverImageAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<User>(EndPoints.AccountUpdateCoverImage, parameters);
+            return await Croudia.PostAsync<User>(EndPoints.AccountUpdateCoverImage, parameters);
         }
 
         /// <summary>
@@ -89,8 +86,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public User UpdateCoverImage(params Expression<Func<string, object>>[] parameters)
         {
-            var task =
-                Task.Run(async () => await this.Croudia.PostAsync<User>(EndPoints.AccountUpdateCoverImage, parameters));
+            var task = Task.Run(async () => await UpdateCoverImageAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -110,7 +106,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<User> UpdateProfileAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<User>(EndPoints.AccountUpdateProfile, parameters);
+            return await Croudia.PostAsync<User>(EndPoints.AccountUpdateProfile, parameters);
         }
 
         /// <summary>
@@ -128,8 +124,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public User UpdateProfile(params Expression<Func<string, object>>[] parameters)
         {
-            var task =
-                Task.Run(async () => await this.Croudia.PostAsync<User>(EndPoints.AccountUpdateProfile, parameters));
+            var task = Task.Run(async () => await UpdateProfileAsync(parameters));
             task.Wait();
             return task.Result;
         }

@@ -9,9 +9,7 @@ namespace Vulpecula.Rest
 {
     public class Followers : CroudiaApiImpl
     {
-        internal Followers(Croudia croudia) : base(croudia)
-        {
-        }
+        internal Followers(Croudia croudia) : base(croudia) {}
 
         /// <summary>
         /// 指定したユーザーのフォロワーのユーザーID一覧を返します。100件ずつ取得できます。
@@ -25,7 +23,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<IDs> IdsAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IDs>(EndPoints.FollowersIds, parameters);
+            return await Croudia.GetAsync<IDs>(EndPoints.FollowersIds, parameters);
         }
 
         /// <summary>
@@ -40,7 +38,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public IDs Ids(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.GetAsync<IDs>(EndPoints.FollowersIds, parameters));
+            var task = Task.Run(async () => await IdsAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -58,7 +56,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<List> ListAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<List>(EndPoints.FollowersList, parameters);
+            return await Croudia.GetAsync<List>(EndPoints.FollowersList, parameters);
         }
 
         /// <summary>
@@ -74,7 +72,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public List List(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.GetAsync<List>(EndPoints.FollowersList, parameters));
+            var task = Task.Run(async () => await ListAsync(parameters));
             task.Wait();
             return task.Result;
         }

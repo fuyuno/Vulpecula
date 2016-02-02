@@ -9,9 +9,7 @@ namespace Vulpecula.Rest
 {
     public class OAuth : CroudiaApiImpl
     {
-        internal OAuth(Croudia croudia) : base(croudia)
-        {
-        }
+        internal OAuth(Croudia croudia) : base(croudia) {}
 
         /// <summary>
         /// 認証用 URL を取得します。
@@ -20,10 +18,12 @@ namespace Vulpecula.Rest
         public string GetAuthorizeUrl(string state = null)
         {
             if (string.IsNullOrWhiteSpace(state))
-                return $"{EndPoints.OAuth2Authorize}?response_type=code&client_id={this.Croudia.ConsumerKey}";
+                return $"{EndPoints.OAuth2Authorize}?response_type=code&client_id={Croudia.ConsumerKey}";
             else
+            {
                 return
-                    $"{EndPoints.OAuth2Authorize}?response_type=code&client_id={this.Croudia.ConsumerKey}&state={state}";
+                $"{EndPoints.OAuth2Authorize}?response_type=code&client_id={Croudia.ConsumerKey}&state={state}";
+            }
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Token> TokenAsync(string access_code)
         {
-            var token = await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "authorization_code",
-                client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret, code => access_code);
-            this.Croudia.SetTokens(token);
+            var token = await Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "authorization_code",
+                                                       client_id => Croudia.ConsumerKey, client_secret => Croudia.ConsumerSecret, code => access_code);
+            Croudia.SetTokens(token);
             return token;
         }
 
@@ -44,12 +44,9 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public Token Token(string access_code)
         {
-            var task = Task.Run(async () =>
-                await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "authorization_code",
-                    client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret,
-                    code => access_code));
+            var task = Task.Run(async () => await TokenAsync(access_code));
             task.Wait();
-            this.Croudia.SetTokens(task.Result);
+            Croudia.SetTokens(task.Result);
             return task.Result;
         }
 
@@ -59,10 +56,10 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Token> RefreshAsync()
         {
-            var token = await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "refresh_token",
-                client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret,
-                refresh_token => this.Croudia.RefreshToken);
-            this.Croudia.SetTokens(token);
+            var token = await Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "refresh_token",
+                                                       client_id => Croudia.ConsumerKey, client_secret => Croudia.ConsumerSecret,
+                                                       refresh_token => Croudia.RefreshToken);
+            Croudia.SetTokens(token);
             return token;
         }
 
@@ -72,12 +69,9 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public Token Refresh()
         {
-            var task = Task.Run(async () =>
-                await this.Croudia.PostAsync<Token>(EndPoints.OAuth2Token, grant_type => "refresh_token",
-                    client_id => this.Croudia.ConsumerKey, client_secret => this.Croudia.ConsumerSecret,
-                    refresh_token => this.Croudia.RefreshToken));
+            var task = Task.Run(async () => await RefreshAsync());
             task.Wait();
-            this.Croudia.SetTokens(task.Result);
+            Croudia.SetTokens(task.Result);
             return task.Result;
         }
     }

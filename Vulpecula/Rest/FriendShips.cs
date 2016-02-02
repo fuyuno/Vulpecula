@@ -10,9 +10,7 @@ namespace Vulpecula.Rest
 {
     public class FriendShips : CroudiaApiImpl
     {
-        internal FriendShips(Croudia croudia) : base(croudia)
-        {
-        }
+        internal FriendShips(Croudia croudia) : base(croudia) {}
 
         /// <summary>
         /// <para>認証ユーザーで指定したユーザーをフォローします。</para>
@@ -26,7 +24,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<User> CreateAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<User>(EndPoints.FriendShipsCreate, parameters);
+            return await Croudia.PostAsync<User>(EndPoints.FriendShipsCreate, parameters);
         }
 
         /// <summary>
@@ -41,7 +39,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public User Create(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.PostAsync<User>(EndPoints.FriendShipsCreate, parameters));
+            var task = Task.Run(async () => await CreateAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -58,7 +56,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<User> DestroyAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<User>(EndPoints.FriendShipsDestroy, parameters);
+            return await Croudia.PostAsync<User>(EndPoints.FriendShipsDestroy, parameters);
         }
 
         /// <summary>
@@ -73,7 +71,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public User Destroy(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.PostAsync<User>(EndPoints.FriendShipsDestroy, parameters));
+            var task = Task.Run(async () => await DestroyAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -91,7 +89,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<RelationShipOwner> ShowAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<RelationShipOwner>(EndPoints.FriendShipsShow, parameters);
+            return await Croudia.GetAsync<RelationShipOwner>(EndPoints.FriendShipsShow, parameters);
         }
 
         /// <summary>
@@ -107,8 +105,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public RelationShipOwner Show(params Expression<Func<string, object>>[] parameters)
         {
-            var task =
-                Task.Run(async () => await this.Croudia.GetAsync<RelationShipOwner>(EndPoints.FriendShipsShow, parameters));
+            var task = Task.Run(async () => await ShowAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -125,7 +122,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<IEnumerable<RelationShipOwner2>> LookupAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IEnumerable<RelationShipOwner2>>(EndPoints.FriendShipsLookup, parameters);
+            return await Croudia.GetAsync<IEnumerable<RelationShipOwner2>>(EndPoints.FriendShipsLookup, parameters);
         }
 
         /// <summary>
@@ -140,9 +137,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public IEnumerable<RelationShipOwner2> Lookup(params Expression<Func<string, object>>[] parameters)
         {
-            var task =
-                Task.Run(async () =>
-                    await this.Croudia.GetAsync<IEnumerable<RelationShipOwner2>>(EndPoints.FriendShipsLookup, parameters));
+            var task = Task.Run(async () => await LookupAsync(parameters));
             task.Wait();
             return task.Result;
         }

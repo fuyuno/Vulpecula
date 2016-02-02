@@ -10,9 +10,7 @@ namespace Vulpecula.Rest
 {
     public class Statuses : CroudiaApiImpl
     {
-        internal Statuses(Croudia croudia) : base(croudia)
-        {
-        }
+        internal Statuses(Croudia croudia) : base(croudia) {}
 
         /// <summary>
         /// <para>世界中のささやきの内、非公開ユーザーを除く最新20件のささやきを返します。</para>
@@ -29,7 +27,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<IEnumerable<Status>> GetPublicTimelineAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesPublicTimeline, parameters);
+            return await Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesPublicTimeline, parameters);
         }
 
         /// <summary>
@@ -47,8 +45,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public IEnumerable<Status> GetPublieTimeline(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () =>
-                await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesPublicTimeline, parameters));
+            var task = Task.Run(async () => await GetPublicTimelineAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -67,7 +64,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<IEnumerable<Status>> GetHomeTimelineAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesHomeTimeline, parameters);
+            return await Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesHomeTimeline, parameters);
         }
 
         /// <summary>
@@ -84,8 +81,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public IEnumerable<Status> GetHomeTimeline(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () =>
-                await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesHomeTimeline, parameters));
+            var task = Task.Run(async () => await GetHomeTimelineAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -108,7 +104,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<IEnumerable<Status>> GetUserTimelineAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesUserTimeline, parameters);
+            return await Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesUserTimeline, parameters);
         }
 
         /// <summary>
@@ -129,8 +125,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public IEnumerable<Status> GetUserTimeline(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () =>
-                await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesUserTimeline, parameters));
+            var task = Task.Run(async () => await GetUserTimelineAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -149,7 +144,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<IEnumerable<Status>> GetMentionsAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesMentions, parameters);
+            return await Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesMentions, parameters);
         }
 
         /// <summary>
@@ -166,8 +161,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public IEnumerable<Status> GetMentions(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () =>
-                await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.StatusesMentions, parameters));
+            var task = Task.Run(async () => await GetMentionsAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -187,7 +181,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Status> UpdateAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<Status>(EndPoints.StatusesUpdate, parameters);
+            return await Croudia.PostAsync<Status>(EndPoints.StatusesUpdate, parameters);
         }
 
         /// <summary>
@@ -205,7 +199,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public Status Update(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.PostAsync<Status>(EndPoints.StatusesUpdate, parameters));
+            var task = Task.Run(async () => await UpdateAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -226,7 +220,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Status> UpdateWithMediaAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<Status>(EndPoints.StatusesUpdateWithMedia, parameters);
+            return await Croudia.PostAsync<Status>(EndPoints.StatusesUpdateWithMedia, parameters);
         }
 
         /// <summary>
@@ -245,8 +239,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public Status UpdateWithMedia(params Expression<Func<string, object>>[] parameters)
         {
-            var task =
-                Task.Run(async () => await this.Croudia.PostAsync<Status>(EndPoints.StatusesUpdateWithMedia, parameters));
+            var task = Task.Run(async () => await UpdateWithMediaAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -264,7 +257,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Status> DestroyAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesDestroyId, id), parameters);
+            return await Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesDestroyId, id), parameters);
         }
 
         /// <summary>
@@ -280,8 +273,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public Status Destroy(long id, params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () =>
-                await this.Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesDestroyId, id), parameters));
+            var task = Task.Run(async () => await DestroyAsync(id, parameters));
             task.Wait();
             return task.Result;
         }
@@ -298,7 +290,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Status> ShowAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<Status>(string.Format(EndPoints.StatusesShowId, id), parameters);
+            return await Croudia.GetAsync<Status>(string.Format(EndPoints.StatusesShowId, id), parameters);
         }
 
         /// <summary>
@@ -313,8 +305,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public Status Show(long id, params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () =>
-                await this.Croudia.GetAsync<Status>(string.Format(EndPoints.StatusesShowId, id), parameters));
+            var task = Task.Run(async () => await ShowAsync(id, parameters));
             task.Wait();
             return task.Result;
         }
@@ -332,7 +323,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Status> SpreadAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesSpreadId, id), parameters);
+            return await Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesSpreadId, id), parameters);
         }
 
         /// <summary>
@@ -348,8 +339,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public Status Spread(long id, params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () =>
-                await this.Croudia.PostAsync<Status>(string.Format(EndPoints.StatusesSpreadId, id), parameters));
+            var task = Task.Run(async () => await SpreadAsync(id, parameters));
             task.Wait();
             return task.Result;
         }
@@ -367,7 +357,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Status> CommentAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<Status>(EndPoints.StatusesComment, parameters);
+            return await Croudia.PostAsync<Status>(EndPoints.StatusesComment, parameters);
         }
 
         /// <summary>
@@ -383,7 +373,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public Status Comment(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.PostAsync<Status>(EndPoints.StatusesComment, parameters));
+            var task = Task.Run(async () => await CommentAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -402,7 +392,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Status> CommentWithMediaAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<Status>(EndPoints.StatusesCommentWithMedia, parameters);
+            return await Croudia.PostAsync<Status>(EndPoints.StatusesCommentWithMedia, parameters);
         }
 
         /// <summary>
@@ -419,8 +409,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public Status CommentWithMedia(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () =>
-                await this.Croudia.PostAsync<Status>(EndPoints.StatusesCommentWithMedia, parameters));
+            var task = Task.Run(async () => await CommentWithMediaAsync(parameters));
             task.Wait();
             return task.Result;
         }

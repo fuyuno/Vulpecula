@@ -10,9 +10,7 @@ namespace Vulpecula.Rest
 {
     public class Users : CroudiaApiImpl
     {
-        internal Users(Croudia croudia) : base(croudia)
-        {
-        }
+        internal Users(Croudia croudia) : base(croudia) {}
 
         /// <summary>
         /// 指定したユーザーの情報を返します。
@@ -25,7 +23,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<User> ShowAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<User>(EndPoints.UsersShow, parameters);
+            return await Croudia.GetAsync<User>(EndPoints.UsersShow, parameters);
         }
 
         /// <summary>
@@ -39,7 +37,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public User Show(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.GetAsync<User>(EndPoints.UsersShow, parameters));
+            var task = Task.Run(async () => await ShowAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -56,7 +54,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<IEnumerable<User>> LookupAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IEnumerable<User>>(EndPoints.UsersLookup, parameters);
+            return await Croudia.GetAsync<IEnumerable<User>>(EndPoints.UsersLookup, parameters);
         }
 
         /// <summary>
@@ -72,7 +70,7 @@ namespace Vulpecula.Rest
         public IEnumerable<User> Lookup(params Expression<Func<string, object>>[] parameters)
         {
             var task =
-                Task.Run(async () => await this.Croudia.GetAsync<IEnumerable<User>>(EndPoints.UsersLookup, parameters));
+            Task.Run(async () => await LookupAsync(parameters));
             task.Wait();
             return task.Result;
         }

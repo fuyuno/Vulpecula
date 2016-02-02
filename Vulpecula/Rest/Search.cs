@@ -10,9 +10,7 @@ namespace Vulpecula.Rest
 {
     public class Search : CroudiaApiImpl
     {
-        internal Search(Croudia croudia) : base(croudia)
-        {
-        }
+        internal Search(Croudia croudia) : base(croudia) {}
 
         /// <summary>
         /// ささやき（投稿）を検索して返します。
@@ -29,7 +27,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<SearchOwner> VoicesAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<SearchOwner>(EndPoints.SearchVoices, parameters);
+            return await Croudia.GetAsync<SearchOwner>(EndPoints.SearchVoices, parameters);
         }
 
         /// <summary>
@@ -47,7 +45,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public SearchOwner Voices(params Expression<Func<string, object>>[] parameters)
         {
-            var task = Task.Run(async () => await this.Croudia.GetAsync<SearchOwner>(EndPoints.SearchVoices, parameters));
+            var task = Task.Run(async () => await VoicesAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -65,7 +63,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<IEnumerable<User>> UsersAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IEnumerable<User>>(EndPoints.UsersSearch, parameters);
+            return await Croudia.GetAsync<IEnumerable<User>>(EndPoints.UsersSearch, parameters);
         }
 
         /// <summary>
@@ -81,8 +79,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public IEnumerable<User> Users(params Expression<Func<string, object>>[] parameters)
         {
-            var task =
-                Task.Run(async () => await this.Croudia.GetAsync<IEnumerable<User>>(EndPoints.UsersSearch, parameters));
+            var task = Task.Run(async () => await UsersAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -100,7 +97,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<IEnumerable<User>> ProfileAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IEnumerable<User>>(EndPoints.ProfileSearch, parameters);
+            return await Croudia.GetAsync<IEnumerable<User>>(EndPoints.ProfileSearch, parameters);
         }
 
         /// <summary>
@@ -116,8 +113,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public IEnumerable<User> Profile(params Expression<Func<string, object>>[] parameters)
         {
-            var task =
-                Task.Run(async () => await this.Croudia.GetAsync<IEnumerable<User>>(EndPoints.ProfileSearch, parameters));
+            var task = Task.Run(async () => await ProfileAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -137,7 +133,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<SearchOwner> FavoritesAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<SearchOwner>(EndPoints.SearchFavorits, parameters);
+            return await Croudia.GetAsync<SearchOwner>(EndPoints.SearchFavorits, parameters);
         }
 
         /// <summary>
@@ -155,8 +151,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public SearchOwner Favorites(params Expression<Func<string, object>>[] parameters)
         {
-            var task =
-                Task.Run(async () => await this.Croudia.GetAsync<SearchOwner>(EndPoints.SearchFavorits, parameters));
+            var task = Task.Run(async () => await FavoritesAsync(parameters));
             task.Wait();
             return task.Result;
         }

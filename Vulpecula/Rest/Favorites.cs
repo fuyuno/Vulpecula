@@ -10,9 +10,7 @@ namespace Vulpecula.Rest
 {
     public class Favorites : CroudiaApiImpl
     {
-        internal Favorites(Croudia croudia) : base(croudia)
-        {
-        }
+        internal Favorites(Croudia croudia) : base(croudia) {}
 
         /// <summary>
         /// 認証ユーザー、または指定したユーザーがお気に入りした最新20件のささやきを返します。
@@ -29,7 +27,7 @@ namespace Vulpecula.Rest
         [Obsolete("This method is not available because api.croudia.com disable this endpoint.", false)]
         public async Task<IEnumerable<Status>> ListAsync(params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.Favorites, parameters);
+            return await Croudia.GetAsync<IEnumerable<Status>>(EndPoints.Favorites, parameters);
         }
 
         /// <summary>
@@ -47,8 +45,7 @@ namespace Vulpecula.Rest
         [Obsolete("This method is not available because api.croudia.com disable this endpoint.", false)]
         public IEnumerable<Status> List(params Expression<Func<string, object>>[] parameters)
         {
-            var task =
-                Task.Run(async () => await this.Croudia.GetAsync<IEnumerable<Status>>(EndPoints.Favorites, parameters));
+            var task = Task.Run(async () => await ListAsync(parameters));
             task.Wait();
             return task.Result;
         }
@@ -65,7 +62,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Status> CreateAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<Status>(string.Format(EndPoints.FavoritedCreateId, id), parameters);
+            return await Croudia.PostAsync<Status>(string.Format(EndPoints.FavoritedCreateId, id), parameters);
         }
 
         /// <summary>
@@ -81,8 +78,7 @@ namespace Vulpecula.Rest
         public Status Create(long id, params Expression<Func<string, object>>[] parameters)
         {
             var task =
-                Task.Run(async () =>
-                    await this.Croudia.PostAsync<Status>(string.Format(EndPoints.FavoritedCreateId, id), parameters));
+            Task.Run(async () => await CreateAsync(id, parameters));
             task.Wait();
             return task.Result;
         }
@@ -99,7 +95,7 @@ namespace Vulpecula.Rest
         /// <returns></returns>
         public async Task<Status> DestroyAsync(long id, params Expression<Func<string, object>>[] parameters)
         {
-            return await this.Croudia.PostAsync<Status>(string.Format(EndPoints.FavoritesDestroyId, id), parameters);
+            return await Croudia.PostAsync<Status>(string.Format(EndPoints.FavoritesDestroyId, id), parameters);
         }
 
         /// <summary>
@@ -115,8 +111,7 @@ namespace Vulpecula.Rest
         public Status Destroy(long id, params Expression<Func<string, object>>[] parameters)
         {
             var task =
-                Task.Run(async () =>
-                    await this.Croudia.PostAsync<Status>(string.Format(EndPoints.FavoritesDestroyId, id), parameters));
+            Task.Run(async () => await DestroyAsync(id, parameters));
             task.Wait();
             return task.Result;
         }
