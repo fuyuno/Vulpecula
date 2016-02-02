@@ -296,9 +296,11 @@ namespace Vulpecula.Mobile.ViewModels.Pages
         private ICommand _onTappedMoreCommand;
         public ICommand OnTappedMoreCommand => _onTappedMoreCommand ?? (_onTappedMoreCommand = new Command(OnTappedMore));
 
-        private void OnTappedMore()
+        private async void OnTappedMore()
         {
             // more
+            var action = await this._dialogService.DisplayActionSheet (null, "Cancel", "Delete", "Quote Reply", "Mute", "Block");
+            System.Diagnostics.Debug.WriteLine ("Action: " + action);
         }
 
         #endregion

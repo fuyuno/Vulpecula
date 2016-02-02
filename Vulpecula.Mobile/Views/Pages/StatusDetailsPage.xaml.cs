@@ -52,13 +52,12 @@ namespace Vulpecula.Mobile.Views.Pages
                             {
                                 break;
                             }
-                            var svm = new StatusViewModel(vm.Localization, vm.NavigationService, status);
-                            Device.BeginInvokeOnMainThread(() =>
-                                this.Conversations.Children.Add(new StatusView()
-                                    {
-                                        BindingContext = svm,
-                                        HorizontalOptions = LayoutOptions.StartAndExpand
-                                    }));
+                            var s = new StatusView()
+                            {
+                                BindingContext = new StatusViewModel(vm.Localization, vm.NavigationService, status),
+                                HorizontalOptions = LayoutOptions.StartAndExpand
+                            };
+                            Device.BeginInvokeOnMainThread(() => this.Conversations.Children.Add(s));
                         }
                         catch (Exception e)
                         {
