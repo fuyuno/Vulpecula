@@ -17,5 +17,7 @@ namespace Vulpecula.Scripting.Parser.Expressions
         public abstract void Parse(TokenReader reader);
 
         public abstract Expression AsExpressionTree();
+
+        // public virtual AstNode AsAstTree() { }
     }
 }

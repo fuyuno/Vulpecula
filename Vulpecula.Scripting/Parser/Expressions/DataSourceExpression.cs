@@ -60,7 +60,7 @@ namespace Vulpecula.Scripting.Parser.Expressions
 
         public override Expression AsExpressionTree()
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         #endregion
