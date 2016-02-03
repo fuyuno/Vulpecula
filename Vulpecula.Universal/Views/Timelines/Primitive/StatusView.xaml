@@ -111,9 +111,7 @@
                 <AppBarButton x:Uid="StatusViewXaml_Spread"
                               Width="65"
                               MinWidth="65"
-                              Command="{Binding SpreadCommand}"
-                              IsEnabled="{Binding User.IsProtected,
-                                                  Converter={StaticResource ReverseBooleanConverter}}">
+                              Command="{Binding SpreadCommand}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE8EB;" />
                     </AppBarButton.Icon>
@@ -121,9 +119,7 @@
                 <AppBarButton x:Uid="StatusViewXaml_Favorite"
                               Width="65"
                               MinWidth="65"
-                              Command="{Binding FavoriteCommand}"
-                              IsEnabled="{Binding IsDirectMessage,
-                                                  Converter={StaticResource ReverseBooleanConverter}}">
+                              Command="{Binding FavoriteCommand}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE735;" />
                     </AppBarButton.Icon>
@@ -137,11 +133,9 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton x:Uid="StatusViewXaml_Quote" IsEnabled="{Binding User.IsProtected, Converter={StaticResource ReverseBooleanConverter}}" />
-                    <AppBarButton x:Uid="StatusViewXaml_Comment" IsEnabled="{Binding User.IsProtected, Converter={StaticResource ReverseBooleanConverter}}" />
-                    <AppBarButton x:Uid="StatusViewXaml_Delete"
-                                  Command="{Binding DeleteCommand}"
-                                  IsEnabled="{Binding User.IsOwn}" />
+                    <AppBarButton x:Uid="StatusViewXaml_Quote" Command="{Binding QuoteCommand}" />
+                    <AppBarButton x:Uid="StatusViewXaml_Comment" Command="{Binding CommentCommand}" />
+                    <AppBarButton x:Uid="StatusViewXaml_Delete" Command="{Binding DeleteCommand}" />
                     <AppBarButton x:Uid="StatusViewXaml_ViewDetails" />
                 </CommandBar.SecondaryCommands>
             </CommandBar>

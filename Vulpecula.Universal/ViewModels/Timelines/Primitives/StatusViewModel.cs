@@ -159,12 +159,17 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         private ICommand _spreadCommand;
 
-        public ICommand SpreadCommand => _spreadCommand ?? (_spreadCommand = new DelegateCommand(Spread));
+        public ICommand SpreadCommand => _spreadCommand ?? (_spreadCommand = new DelegateCommand(Spread, CanSpread));
 
         private void Spread()
         {
             ServiceProvider.RegisterService(new SpreadService(_provider, Model.Id, IsShared));
             IsShared = !IsShared;
+        }
+
+        private bool CanSpread()
+        {
+            return !IsDirectMessage && !User.IsProtected;
         }
 
         #endregion SpreadCommand
@@ -173,7 +178,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         private ICommand _favoriteCommand;
 
-        public ICommand FavoriteCommand => _favoriteCommand ?? (_favoriteCommand = new DelegateCommand(Favorite));
+        public ICommand FavoriteCommand => _favoriteCommand ?? (_favoriteCommand = new DelegateCommand(Favorite, CanFavorite));
 
         private void Favorite()
         {
@@ -181,26 +186,18 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             IsFavorited = !IsFavorited;
         }
 
-        #endregion FavoriteCommand
-
-        #region DeleteCommand
-
-        private ICommand _deleteCommand;
-
-        public ICommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new DelegateCommand(Delete));
-
-        private void Delete()
+        private bool CanFavorite()
         {
-            ServiceProvider.RegisterService(new StatusDeleteService(_provider, Model.Id, IsDirectMessage));
+            return !IsDirectMessage;
         }
 
-        #endregion DeleteCommand
+        #endregion FavoriteCommand
 
         #region ShareCommand
 
         private ICommand _shareCommand;
 
-        public ICommand ShareCommand => _shareCommand ?? (_shareCommand = new DelegateCommand(Share));
+        public ICommand ShareCommand => _shareCommand ?? (_shareCommand = new DelegateCommand(Share, CanShare));
 
         private void Share()
         {
@@ -208,6 +205,11 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
             var dataTransferManager = DataTransferManager.GetForCurrentView();
             dataTransferManager.DataRequested += Callback;
             DataTransferManager.ShowShareUI();
+        }
+
+        private bool CanShare()
+        {
+            return !IsDirectMessage && !User.IsProtected;
         }
 
         private void Callback(DataTransferManager sender, DataRequestedEventArgs e)
@@ -219,6 +221,55 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
         }
 
         #endregion ShareCommand
+
+        #region QuoteCommand
+
+        private ICommand _quoteCommand;
+        public ICommand QuoteCommand => _quoteCommand ?? (_quoteCommand = new DelegateCommand(Quote, CanQuote));
+
+        private void Quote()
+        {
+            //
+        }
+
+        private bool CanQuote()
+        {
+            return !IsDirectMessage && !User.IsProtected;
+        }
+
+        #endregion
+
+        #region CommentCommand
+
+        private ICommand _commentCommand;
+        public ICommand CommentCommand => _commentCommand ?? (_commentCommand = new DelegateCommand(Comment, CanComment));
+
+        private void Comment() {}
+
+        private bool CanComment()
+        {
+            return !IsDirectMessage && !User.IsProtected;
+        }
+
+        #endregion
+
+        #region DeleteCommand
+
+        private ICommand _deleteCommand;
+
+        public ICommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new DelegateCommand(Delete, CanDelete));
+
+        private void Delete()
+        {
+            ServiceProvider.RegisterService(new StatusDeleteService(_provider, Model.Id, IsDirectMessage));
+        }
+
+        private bool CanDelete()
+        {
+            return User.IsOwn;
+        }
+
+        #endregion DeleteCommand
 
         #region IsExpanded
 
