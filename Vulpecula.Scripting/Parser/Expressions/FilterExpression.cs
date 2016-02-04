@@ -14,6 +14,10 @@ namespace Vulpecula.Scripting.Parser.Expressions
         public override void Parse(TokenReader reader)
         {
             AssertKeyword(reader, "where");
+
+            var expr = new EqualityExpression();
+            expr.Parse(reader);
+            Children.Add(expr);
         }
 
         public override Expression AsExpressionTree()

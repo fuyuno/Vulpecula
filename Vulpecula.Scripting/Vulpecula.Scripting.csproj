@@ -39,6 +39,7 @@
     <Compile Include="Objects\SourceType.cs" />
     <Compile Include="Parser\Expressions\CompilationUnit.cs" />
     <Compile Include="Parser\Expressions\DataSourceExpression.cs" />
+    <Compile Include="Parser\Expressions\EqualityExpression.cs" />
     <Compile Include="Parser\Expressions\ExpressionBase.cs" />
     <Compile Include="Parser\Expressions\FilterExpression.cs" />
     <Compile Include="Parser\Expressions\VariableExpression.cs" />

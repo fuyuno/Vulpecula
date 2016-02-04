@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 using Vulpecula.Scripting.Lexer;
@@ -44,9 +45,10 @@ namespace Vulpecula.Scripting.Parser.Expressions
         public override Expression AsExpressionTree()
         {
             // DataSource is not contains to Expression Tree(DS is collection source, not filtering)
-            throw new NotImplementedException();
+            return Children.First().AsExpressionTree();
         }
 
+        // .Where(AsExpressionTree.Compile());
         public Expression<Func<T, bool>> AsExpressionTree<T>()
         {
             return w => true;
