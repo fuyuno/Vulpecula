@@ -5,13 +5,15 @@ using Vulpecula.Scripting.Lexer;
 
 namespace Vulpecula.Scripting.Parser.Expressions
 {
+    // Parsing Script
+    // "where" EqualityExpression
     public class FilterExpression : ExpressionBase
     {
         #region Overrides of ExpressionBase
 
         public override void Parse(TokenReader reader)
         {
-            reader.Read(); // where
+            AssertKeyword(reader, "where");
         }
 
         public override Expression AsExpressionTree()

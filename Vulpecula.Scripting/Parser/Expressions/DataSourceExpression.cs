@@ -41,7 +41,7 @@ namespace Vulpecula.Scripting.Parser.Expressions
 
         public override void Parse(TokenReader reader)
         {
-            reader.Read(); // from
+            AssertKeyword(reader, "from");
 
             var token = reader.Read();
             if (token.TokenString == "bucket")
