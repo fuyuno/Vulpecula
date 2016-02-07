@@ -15,9 +15,12 @@ namespace Vulpecula.Scripting.Parser.Expressions
 
         public override void Parse(TokenReader reader)
         {
-            if (VerifyAheadKeywords(reader, "+", "-"))
+            if (!VerifyAheadKeywords(reader, "+", "-"))
             {
                 // Multiplicative
+                var expr1 = new MultiplicativeExpression();
+                expr1.Parse(reader);
+                Children.Add(expr1);
             }
             else
             {
@@ -50,6 +53,9 @@ namespace Vulpecula.Scripting.Parser.Expressions
             _type = token.TokenString == "+" ? 0 : 1;
 
             // Multiplicative
+            var expr1 = new MultiplicativeExpression();
+            expr1.Parse(reader);
+            Children.Add(expr1);
 
             // Additive
             var expr2 = new AdditiveExpressionTail();
