@@ -7,6 +7,7 @@ using Vulpecula.Scripting.Lexer;
 namespace Vulpecula.Scripting.Parser.Expressions
 {
     // Parsing Script
+    // LL(2) くらい
     // [<DataSourceExpression>] <FilterExpression>
     public class CompilationUnit : ExpressionBase
     {
@@ -21,8 +22,7 @@ namespace Vulpecula.Scripting.Parser.Expressions
 
         public override void Parse(TokenReader reader)
         {
-            var token = reader.Peek();
-            if (token.TokenString == "from")
+            if (VerifyKeywords(reader, "from"))
             {
                 var expr1 = new DataSourceExpression();
                 expr1.Parse(reader);
@@ -32,7 +32,7 @@ namespace Vulpecula.Scripting.Parser.Expressions
                 expr2.Parse(reader);
                 Children.Add(expr2);
             }
-            else if (token.TokenString == "where")
+            else if (VerifyKeywords(reader, "where"))
             {
                 var expr = new FilterExpression();
                 expr.Parse(reader);

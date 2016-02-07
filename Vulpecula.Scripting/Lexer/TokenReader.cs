@@ -20,6 +20,13 @@ namespace Vulpecula.Scripting.Lexer
             return _tokens[_index + 1];
         }
 
+        public Token Ahead()
+        {
+            if (_tokens.Count <= _index + 2)
+                return null;
+            return _tokens[_index + 2];
+        }
+
         public Token Read()
         {
             return _tokens[_index++];

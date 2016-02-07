@@ -16,10 +16,13 @@ namespace Vulpecula.Scripting.Parser.Expressions
         public override void Parse(TokenReader reader)
         {
             // Relational
+            var expr1 = new RelationalExpression();
+            expr1.Parse(reader);
+            Children.Add(expr1);
 
-            // EqualityTail
-            if (reader.Peek().TokenString == "==" || reader.Peek().TokenString == "!=")
+            if (!VerifyKeywords(reader, "==", "!="))
                 return;
+            // -> EqualityTail
             var expr2 = new EqualityExpressionTail();
             expr2.Parse(reader);
             Children.Add(expr2);
@@ -47,8 +50,14 @@ namespace Vulpecula.Scripting.Parser.Expressions
             _type = token.TokenString == "==" ? 0 : 1;
 
             // Relational
+            var expr1 = new RelationalExpression();
+            expr1.Parse(reader);
+            Children.Add(expr1);
 
             // EqualityTail
+            var expr2 = new EqualityExpressionTail();
+            expr2.Parse(reader);
+            Children.Add(expr2);
         }
 
         public override Expression AsExpressionTree()
