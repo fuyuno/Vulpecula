@@ -45,6 +45,7 @@
     <Compile Include="Parser\Expressions\ExpressionBase.cs" />
     <Compile Include="Parser\Expressions\FilterExpression.cs" />
     <Compile Include="Parser\Expressions\MultiplicativeExpression.cs" />
+    <Compile Include="Parser\Expressions\PrimaryNoNewArray.cs" />
     <Compile Include="Parser\Expressions\RelationalExpression.cs" />
     <Compile Include="Parser\Expressions\VariableExpression.cs" />
     <Compile Include="Parser\ScriptParser.cs" />

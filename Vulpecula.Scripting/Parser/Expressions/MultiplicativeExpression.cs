@@ -7,9 +7,9 @@ namespace Vulpecula.Scripting.Parser.Expressions
 {
     // Parsing Script
     // UnaryExpression
-    // MultiplicativeExpression "*" UnaryExpression
-    // MultiplicativeExpression "/" UnaryExpression
-    // MultiplicativeExpression "%" UnaryExpression
+    // MultiplicativeExpression "*" PrimaryNoNewArray
+    // MultiplicativeExpression "/" PrimaryNoNewArray
+    // MultiplicativeExpression "%" PrimaryNoNewArray
     internal class MultiplicativeExpression : ExpressionBase
     {
         #region Overrides of ExpressionBase
@@ -18,7 +18,10 @@ namespace Vulpecula.Scripting.Parser.Expressions
         {
             if (!VerifyAheadKeywords(reader, "*", "/", "%"))
             {
-                // UnaryExpression
+                // PrimaryNoNewArray
+                var expr1 = new PrimaryNoNewArray();
+                expr1.Parse(reader);
+                Children.Add(expr1);
             }
             else
             {
@@ -38,9 +41,9 @@ namespace Vulpecula.Scripting.Parser.Expressions
     }
 
     // Parsing Script
-    // "*" UnaryExpression MultiplicativeExpressionTail
-    // "/" UnaryExpression MultiplicativeExpressionTail
-    // "%" UnaryExpression MultiplicativeExpressionTail
+    // "*" PrimaryNoNewArray  MultiplicativeExpressionTail
+    // "/" PrimaryNoNewArray  MultiplicativeExpressionTail
+    // "%" PrimaryNoNewArray  MultiplicativeExpressionTail
     internal class MultiplicativeExpressionTail : ExpressionBase
     {
         private int _type = 0;
@@ -52,7 +55,10 @@ namespace Vulpecula.Scripting.Parser.Expressions
             var token = AssertKeywordOr(reader, "*", "/", "%");
             _type = token.TokenString == "*" ? 0 : (token.TokenString == "/" ? 1 : 2);
 
-            // Unary
+            // PrimaryNoNewArray
+            var expr1 = new PrimaryNoNewArray();
+            expr1.Parse(reader);
+            Children.Add(expr1);
 
             // MultiplicativeTail
             var expr2 = new MultiplicativeExpressionTail();
