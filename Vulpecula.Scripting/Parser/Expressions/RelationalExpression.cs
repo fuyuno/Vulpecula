@@ -17,14 +17,20 @@ namespace Vulpecula.Scripting.Parser.Expressions
 
         public override void Parse(TokenReader reader)
         {
-            // Additive
-
-            if (!VerifyKeywords(reader, "<", ">", "<=", ">="))
-                return;
-            // -> RelationalTail
-            var expr2 = new RelationalExpressionTail();
-            expr2.Parse(reader);
-            Children.Add(expr2);
+            if (!VerifyAheadKeywords(reader, "<", ">", "<=", ">="))
+            {
+                // Additive
+                var expr1 = new AdditiveExpression();
+                expr1.Parse(reader);
+                Children.Add(expr1);
+            }
+            else
+            {
+                // -> RelationalTail
+                var expr2 = new RelationalExpressionTail();
+                expr2.Parse(reader);
+                Children.Add(expr2);
+            }
         }
 
         public override Expression AsExpressionTree()
@@ -51,6 +57,9 @@ namespace Vulpecula.Scripting.Parser.Expressions
             _type = token.TokenString == "<" ? 0 : (token.TokenString == ">" ? 1 : token.TokenString == "<=" ? 2 : 3);
 
             // Additive
+            var expr1 = new AdditiveExpression();
+            expr1.Parse(reader);
+            Children.Add(expr1);
 
             // RelationalTail
             var expr2 = new RelationalExpressionTail();

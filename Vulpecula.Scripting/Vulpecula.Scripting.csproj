@@ -38,6 +38,7 @@
     <Compile Include="Objects\DataSource.cs" />
     <Compile Include="Objects\SourceType.cs" />
     <Compile Include="Parser\Exceptions\InvalidKeywordException.cs" />
+    <Compile Include="Parser\Expressions\AdditiveExpression.cs" />
     <Compile Include="Parser\Expressions\CompilationUnit.cs" />
     <Compile Include="Parser\Expressions\DataSourceExpression.cs" />
     <Compile Include="Parser\Expressions\EqualityExpression.cs" />
