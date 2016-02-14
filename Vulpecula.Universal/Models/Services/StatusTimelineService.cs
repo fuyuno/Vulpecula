@@ -34,7 +34,7 @@ namespace Vulpecula.Universal.Models.Services
         {
             _connectableObservable = ConnectTimeline().Publish();
             foreach (var subscriber in Subscribers)
-                _connectableObservable.Subscribe(w => subscriber.Invoke(w));
+                Disposables.Add(_connectableObservable.Subscribe(w => subscriber.Invoke(w)));
             _disposable = _connectableObservable.Connect();
             StartSubscriberRequest();
         }

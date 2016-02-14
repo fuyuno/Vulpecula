@@ -28,7 +28,7 @@ namespace Vulpecula.Universal.ViewModels.Primitives
         /// <summary>
         /// アンマネージ リソースの解放またはリセットに関連付けられているアプリケーション定義のタスクを実行します。
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             CompositeDisposable.Dispose();
         }

@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 
 using JetBrains.Annotations;
 
+using Microsoft.Practices.ObjectBuilder2;
+
 using Prism.Windows.Navigation;
 
+using Vulpecula.Models;
 using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models;
+using Vulpecula.Universal.Models.Services;
+using Vulpecula.Universal.Models.Services.Primitive;
 using Vulpecula.Universal.Models.Timelines;
 using Vulpecula.Universal.ViewModels.Primitives;
 using Vulpecula.Universal.ViewModels.Timelines;
@@ -20,6 +25,8 @@ namespace Vulpecula.Universal.ViewModels
     [UsedImplicitly]
     public class MainPageViewModel : ViewModel
     {
+        private readonly INavigationService _navigationService;
+
         #region Properties
 
         public ObservableCollection<ColumnViewModel> Colmuns { get; private set; }
@@ -29,7 +36,9 @@ namespace Vulpecula.Universal.ViewModels
         public MainPageViewModel(INavigationService navigationService)
         {
             Colmuns = new ObservableCollection<ColumnViewModel>();
-            ViewModelHelper.SubscribeNotifyCollectionChanged(ColumnManager.Instance.Columns, Colmuns, (Column w) => ColumnViewModel.Create(w, navigationService));
+            _navigationService = navigationService;
+            ViewModelHelper.SubscribeNotifyCollectionChanged(ColumnManager.Instance.Columns, Colmuns,
+                                                             (Column w) => ColumnViewModel.Create(w, _navigationService));
         }
 
         #region Events
@@ -51,6 +60,8 @@ namespace Vulpecula.Universal.ViewModels
 
         #endregion
 
+        #region Overrides of ViewModelBase
+
         /// <summary>
         /// Called when navigation is performed to a page. You can use this method to load state if it is available.
         /// </summary>
@@ -58,11 +69,7 @@ namespace Vulpecula.Universal.ViewModels
         /// <param name="viewModelState">The state of the view model.</param>
         public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)
         {
-            if (viewModelState.ContainsKey("TimelineState"))
-            {
-                Colmuns = viewModelState["TimelineState"] as ObservableCollection<ColumnViewModel>;
-                viewModelState.Remove("TimelineState");
-            }
+            ColumnManager.Instance.Columns.ForEach(w => Colmuns.Add(ColumnViewModel.Create(w, _navigationService)));
         }
 
         /// <summary>
@@ -73,8 +80,13 @@ namespace Vulpecula.Universal.ViewModels
         /// <param name="suspending">if set to <c>true</c> you are navigating away from this viewmodel due to a suspension event.</param>
         public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
         {
-            if (!suspending)
-                viewModelState["TimelineState"] = Colmuns;
+            foreach (var suspendableService in ServiceProvider.SuspendableServices)
+            {
+                (suspendableService as TimelineServiceBase<Status>)?.Clear();
+                (suspendableService as TimelineServiceBase<SecretMail>)?.Clear();
+            }
         }
+
+        #endregion
     }
 }

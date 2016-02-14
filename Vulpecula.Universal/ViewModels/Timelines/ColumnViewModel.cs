@@ -60,6 +60,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
                 {
                     var s = ServiceProvider.SuspendableServices.Single(w => _cond(w, column.Type, provider.User.Id)) as DirectMessageTimelineService;
                     s?.Subscribers.Add(AddTimeline);
+                    s?.StoredItems.ForEach(AddTimeline);
                     Debug.WriteLine("Aattached to exist service.");
                 }
                 else
@@ -76,6 +77,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
                 {
                     var s = ServiceProvider.SuspendableServices.Single(w => _cond(w, column.Type, provider.User.Id)) as StatusTimelineService;
                     s?.Subscribers.Add(AddTimeline);
+                    s?.StoredItems.ForEach(AddTimeline);
                     Debug.WriteLine("Aattached to exist service.");
                 }
                 else
