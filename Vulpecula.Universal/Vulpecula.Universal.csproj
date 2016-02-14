@@ -161,6 +161,7 @@
     <Compile Include="ViewModels\Timelines\ColumnViewModel.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\StatusViewModel.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\UserViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\TimelineViewModel.cs" />
     <Compile Include="ViewModels\UserAccountViewModel.cs" />
     <Compile Include="Views\CommandMenuPage.xaml.cs">
       <DependentUpon>CommandMenuPage.xaml</DependentUpon>
@@ -190,6 +191,9 @@
     </Compile>
     <Compile Include="Views\Timelines\Primitive\StatusView.xaml.cs">
       <DependentUpon>StatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Timelines\Timeline.xaml.cs">
+      <DependentUpon>Timeline.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -308,6 +312,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Timelines\Primitive\StatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Timelines\Timeline.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

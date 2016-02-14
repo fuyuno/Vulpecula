@@ -222,22 +222,7 @@
                 </ToggleButton>
             </RelativePanel>
             <Grid Grid.Row="1">
-                <ProgressBar x:Name="ProgressBar" IsIndeterminate="True" />
-                <ListView ItemsSource="{Binding Statuses}" SelectionChanged="{x:Bind ViewModel.SelectionChanged}">
-                    <i:Interaction.Behaviors>
-                        <behaviors:EmptyListBehavior Target="ProgressBar" />
-                    </i:Interaction.Behaviors>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <primitives:StatusView HorizontalAlignment="Stretch" DataContext="{Binding}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <local:Timeline DataContext="{Binding TimelineViewModel}" />
             </Grid>
         </Grid>
     </Border>
