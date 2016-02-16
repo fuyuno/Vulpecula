@@ -28,12 +28,12 @@ namespace Vulpecula.Universal
         /// </summary>
         public App()
         {
-            WindowsAppInitializer.InitializeAsync(
-                WindowsCollectors.Metadata |
-                WindowsCollectors.Session);
-            this.InitializeComponent();
+            WindowsAppInitializer.InitializeAsync(WindowsCollectors.Metadata |
+                                                  WindowsCollectors.Session);
+            InitializeComponent();
 
-            this.Resuming += OnResuming;
+            Resuming += OnResuming;
+            UnhandledException += (sender, args) => { };
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Vulpecula.Universal
         {
             NotificationRegistry.Initialize();
 
-            this.Container.RegisterInstance<IResourceLoader>(new ResourceLoaderAdapter(new ResourceLoader()), new ContainerControlledLifetimeManager());
+            Container.RegisterInstance<IResourceLoader>(new ResourceLoaderAdapter(new ResourceLoader()), new ContainerControlledLifetimeManager());
             return base.OnInitializeAsync(args);
         }
 
@@ -54,7 +54,7 @@ namespace Vulpecula.Universal
         /// <param name="args">The <see cref="T:Windows.ApplicationModel.Activation.LaunchActivatedEventArgs" /> instance containing the event data.</param>
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-            this.NavigationService.Navigate("Main", null);
+            NavigationService.Navigate("Main", null);
             return Task.CompletedTask;
         }
 
@@ -67,7 +67,7 @@ namespace Vulpecula.Universal
         /// </returns>
         protected override UIElement CreateShell(Frame rootFrame)
         {
-            var shell = this.Container.Resolve<AppShell>();
+            var shell = Container.Resolve<AppShell>();
             shell.SetRootFrame(rootFrame);
             return shell;
         }

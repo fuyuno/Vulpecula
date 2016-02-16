@@ -160,6 +160,7 @@
     <Compile Include="ViewModels\Settings\SettingsTimelinePageViewModel.cs" />
     <Compile Include="ViewModels\Timelines\ColumnViewModel.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\StatusViewModel.cs" />
+    <Compile Include="ViewModels\Timelines\Primitives\TimelineViewModelBase.cs" />
     <Compile Include="ViewModels\Timelines\Primitives\UserViewModel.cs" />
     <Compile Include="ViewModels\Timelines\TimelineViewModel.cs" />
     <Compile Include="ViewModels\UserAccountViewModel.cs" />
@@ -344,6 +345,12 @@
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
       <Name>Behaviors SDK %28XAML%29</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\WindowsBase.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

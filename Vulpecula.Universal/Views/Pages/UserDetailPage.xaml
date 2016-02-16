@@ -5,6 +5,7 @@
       xmlns:local="using:Vulpecula.Universal.Views.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:mvvm="using:Prism.Windows.Mvvm"
+      xmlns:timelines="using:Vulpecula.Universal.Views.Timelines"
       d:DesignHeight="300"
       d:DesignWidth="400"
       mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -123,9 +124,7 @@
                            TextWrapping="Wrap" />
             </StackPanel>
             <ItemsControl x:Name="Timeline" RelativePanel.Below="Profile">
-                <TextBlock HorizontalAlignment="Center"
-                           Style="{StaticResource TitleTextBlockStyle}"
-                           Text="Timeline" />
+                <timelines:Timeline />
             </ItemsControl>
         </RelativePanel>
     </ScrollViewer>
