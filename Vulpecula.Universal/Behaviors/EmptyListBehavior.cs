@@ -76,7 +76,7 @@ namespace Vulpecula.Universal.Behaviors
 
         protected override void OnUnloaded()
         {
-            _disposable.Dispose();
+            _disposable?.Dispose();
             base.OnUnloaded();
         }
 

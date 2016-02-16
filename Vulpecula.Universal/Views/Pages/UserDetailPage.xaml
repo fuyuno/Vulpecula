@@ -123,8 +123,10 @@
                            Text="{Binding Bio}"
                            TextWrapping="Wrap" />
             </StackPanel>
-            <ItemsControl x:Name="Timeline" RelativePanel.Below="Profile">
-                <timelines:Timeline />
+            <ItemsControl x:Name="Timeline"
+                          HorizontalAlignment="Stretch"
+                          RelativePanel.Below="Profile">
+                <timelines:Timeline HorizontalAlignment="Stretch" />
             </ItemsControl>
         </RelativePanel>
     </ScrollViewer>
