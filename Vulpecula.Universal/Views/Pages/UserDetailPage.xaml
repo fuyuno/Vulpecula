@@ -40,7 +40,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <RelativePanel>
-            <StackPanel x:Name="Profile" MaxWidth="400">
+            <StackPanel x:Name="Profile" MaxWidth="500">
                 <Grid>
                     <Border BorderBrush="{StaticResource TextBoxBorderThemeBrush}" BorderThickness="1">
                         <Image Source="{Binding CoverUrl}" Stretch="UniformToFill" />
