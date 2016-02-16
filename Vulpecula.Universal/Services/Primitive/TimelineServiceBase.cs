@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace Vulpecula.Universal.Models.Services.Primitive
+using Vulpecula.Universal.Models;
+
+namespace Vulpecula.Universal.Services.Primitive
 {
     public abstract class TimelineServiceBase<T> : SuspendableService
     {

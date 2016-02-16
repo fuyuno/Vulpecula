@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
-using Vulpecula.Universal.Models.Services.Primitive;
+using Vulpecula.Universal.Services.Primitive;
 
-namespace Vulpecula.Universal.Models.Services
+namespace Vulpecula.Universal.Services
 {
     public static class ServiceProvider
     {

@@ -3,7 +3,7 @@ using System.Linq;
 
 using Vulpecula.Models;
 using Vulpecula.Universal.Models;
-using Vulpecula.Universal.Models.Services;
+using Vulpecula.Universal.Services;
 using Vulpecula.Universal.ViewModels.Timelines.Primitives;
 
 // ReSharper disable PossibleMultipleEnumeration

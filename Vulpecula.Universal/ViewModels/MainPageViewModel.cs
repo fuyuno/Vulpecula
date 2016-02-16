@@ -14,9 +14,9 @@ using Prism.Windows.Navigation;
 using Vulpecula.Models;
 using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models;
-using Vulpecula.Universal.Models.Services;
-using Vulpecula.Universal.Models.Services.Primitive;
 using Vulpecula.Universal.Models.Timelines;
+using Vulpecula.Universal.Services;
+using Vulpecula.Universal.Services.Primitive;
 using Vulpecula.Universal.ViewModels.Primitives;
 using Vulpecula.Universal.ViewModels.Timelines;
 

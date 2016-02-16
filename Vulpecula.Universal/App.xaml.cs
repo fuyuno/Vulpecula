@@ -13,7 +13,7 @@ using Prism.Unity.Windows;
 using Prism.Windows.AppModel;
 
 using Vulpecula.Universal.Models.Notifications;
-using Vulpecula.Universal.Models.Services;
+using Vulpecula.Universal.Services;
 
 namespace Vulpecula.Universal
 {

@@ -1,20 +1,21 @@
 ﻿using System.Threading.Tasks;
 
-using Vulpecula.Universal.Models.Services.Primitive;
+using Vulpecula.Universal.Models;
+using Vulpecula.Universal.Services.Primitive;
 
-namespace Vulpecula.Universal.Models.Services
+namespace Vulpecula.Universal.Services
 {
-    public class StatusDeleteService : AsyncService
+    public class FavoriteService : AsyncService
     {
-        private readonly bool _isDm;
+        private readonly bool _isNot;
         private readonly CroudiaProvider _provider;
         private readonly long _statusId;
 
-        public StatusDeleteService(CroudiaProvider provider, long statusId, bool isDm)
+        public FavoriteService(CroudiaProvider provider, long statusId, bool isNot)
         {
             _provider = provider;
             _statusId = statusId;
-            _isDm = isDm;
+            _isNot = isNot;
         }
 
         /// <summary>
@@ -27,10 +28,10 @@ namespace Vulpecula.Universal.Models.Services
 
         public override async Task StartAsync()
         {
-            if (_isDm)
-                await _provider.Croudia.SecretMails.DestroyAsync(_statusId);
+            if (_isNot)
+                await _provider.Croudia.Favorites.DestroyAsync(_statusId);
             else
-                await _provider.Croudia.Statuses.DestroyAsync(_statusId);
+                await _provider.Croudia.Favorites.CreateAsync(_statusId);
         }
     }
 }

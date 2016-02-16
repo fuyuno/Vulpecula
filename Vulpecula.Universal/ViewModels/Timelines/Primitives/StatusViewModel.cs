@@ -9,8 +9,8 @@ using Prism.Windows.Navigation;
 
 using Vulpecula.Models;
 using Vulpecula.Universal.Models;
-using Vulpecula.Universal.Models.Services;
 using Vulpecula.Universal.Models.Timelines.Primitive;
+using Vulpecula.Universal.Services;
 using Vulpecula.Universal.ViewModels.Primitives;
 
 namespace Vulpecula.Universal.ViewModels.Timelines.Primitives

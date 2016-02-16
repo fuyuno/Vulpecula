@@ -1,6 +1,6 @@
 ﻿using Vulpecula.Universal.Models.Timelines;
 
-namespace Vulpecula.Universal.Models.Services.Tags
+namespace Vulpecula.Universal.Services.Tags
 {
     public class TimelineTag
     {

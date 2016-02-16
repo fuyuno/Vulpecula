@@ -4,9 +4,10 @@ using System.Reactive.Subjects;
 
 using Vulpecula.Models;
 using Vulpecula.Streaming.Reactive;
-using Vulpecula.Universal.Models.Services.Primitive;
+using Vulpecula.Universal.Models;
+using Vulpecula.Universal.Services.Primitive;
 
-namespace Vulpecula.Universal.Models.Services
+namespace Vulpecula.Universal.Services
 {
     public class DirectMessageTimelineService : TimelineServiceBase<SecretMail>
     {

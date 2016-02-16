@@ -7,10 +7,10 @@ using Microsoft.Practices.ObjectBuilder2;
 using Prism.Windows.Navigation;
 
 using Vulpecula.Universal.Models;
-using Vulpecula.Universal.Models.Services;
-using Vulpecula.Universal.Models.Services.Primitive;
-using Vulpecula.Universal.Models.Services.Tags;
 using Vulpecula.Universal.Models.Timelines;
+using Vulpecula.Universal.Services;
+using Vulpecula.Universal.Services.Primitive;
+using Vulpecula.Universal.Services.Tags;
 using Vulpecula.Universal.ViewModels.Timelines.Primitives;
 
 namespace Vulpecula.Universal.ViewModels.Timelines

@@ -2,7 +2,7 @@
 
 using Vulpecula.Universal.Extensions;
 using Vulpecula.Universal.Models;
-using Vulpecula.Universal.Models.Services;
+using Vulpecula.Universal.Services;
 using Vulpecula.Universal.ViewModels;
 
 // 空白ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234238 を参照してください
