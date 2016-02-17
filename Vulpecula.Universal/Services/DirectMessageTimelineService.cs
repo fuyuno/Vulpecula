@@ -32,7 +32,7 @@ namespace Vulpecula.Universal.Services
         public override void Start()
         {
             var observable = Provider.Croudia.SecretMails.SentAsObservable();
-            observable.Merge(Provider.Croudia.SecretMails.ReceivedAsObservable());
+            observable = observable.Merge(Provider.Croudia.SecretMails.ReceivedAsObservable());
 
             _connectableObservable = observable.Publish();
             foreach (var action in Subscribers)
