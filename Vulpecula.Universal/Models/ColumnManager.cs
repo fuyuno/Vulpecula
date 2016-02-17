@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-
-using Windows.Storage;
 
 using JetBrains.Annotations;
 
@@ -21,14 +18,17 @@ namespace Vulpecula.Universal.Models
     public class ColumnManager
     {
         private static ColumnManager _instance;
+        private readonly ObservableCollection<Column> _columns;
         public static ColumnManager Instance => _instance ?? (_instance = new ColumnManager());
 
-        public ObservableCollection<Column> Columns { get; }
+        public ReadOnlyObservableCollection<Column> Columns { get; }
         public bool IsInitialized { get; private set; }
 
         private ColumnManager()
         {
-            Columns = new ObservableCollection<Column>();
+            _columns = new ObservableCollection<Column>();
+            _columns.CollectionChanged += (sender, args) => { Configuration.Instance.AddOrRewriteValue(ConfigurationKeys.ColumnsKey, _columns); };
+            Columns = new ReadOnlyObservableCollection<Column>(_columns);
             IsInitialized = false;
         }
 
@@ -36,27 +36,16 @@ namespace Vulpecula.Universal.Models
         {
             try
             {
-                var columns = Configuration.Instance.ColumnsLegacy;
-                var tempColumn = new List<Column>();
-                foreach (var columnComposite in columns)
-                {
-                    var column = Column.RestoreColumnInfo(columnComposite);
-                    tempColumn.Add(column);
-                    Debug.WriteLine($"Restored column {{ID:{column.ColumnId}, Name:{column.Name}, Query:{column.Query}, Row:{column.Row}}}.");
-                }
-                foreach (var source in tempColumn.OrderBy(w => w.Row))
-                    Columns.Add(source);
+                var columns = Configuration.Instance.Columns;
+                foreach (var source in columns.OrderBy(w => w.Row))
+                    _columns.Add(source);
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e);
                 await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("CanNotRestored"), "Error");
-                var columns = Configuration.Instance.ColumnsLegacy;
-                foreach (var columnComposite in columns)
-                {
-                    Columns.Clear();
-                    Configuration.Instance.RemoveValueLegacy(columnComposite[nameof(Column.ColumnId)].ToString());
-                }
+                ClearColumns();
+
                 // 初期化
                 SetupInitialColumns(AccountManager.Instance.Users.First().Id);
             }
@@ -66,9 +55,8 @@ namespace Vulpecula.Universal.Models
         [UsedImplicitly]
         public void ClearColumns()
         {
-            var columns = Configuration.Instance.ColumnsLegacy;
-            foreach (var column in columns)
-                RemoveColumn(Column.RestoreColumnInfo(column));
+            _columns.Clear();
+            Configuration.Instance.RemoveValue(ConfigurationKeys.ColumnsKey);
         }
 
         /// <summary>
@@ -84,45 +72,21 @@ namespace Vulpecula.Universal.Models
 
         public void AddColumn(Column info)
         {
-            if (!info.ColumnId.StartsWith("Column-"))
-                throw new ArgumentException(nameof(info));
-
-            var composite = new ApplicationDataCompositeValue
-            {
-                [nameof(Column.Type)] = info.Type.ToString(),
-                [nameof(Column.ColumnId)] = info.ColumnId,
-                [nameof(Column.Name)] = info.Name,
-                [nameof(Column.UserId)] = info.UserId,
-                [nameof(Column.Row)] = info.Row,
-                [nameof(Column.Query)] = info.Query,
-                [nameof(Column.EnableNotity)] = info.EnableNotity
-            };
-
-            Columns.Add(info);
-            Configuration.Instance.AddValueLegacy(info.ColumnId, composite);
+            _columns.Add(info);
         }
 
         public void RemoveColumn(Column info)
         {
-            Columns.Remove(info);
-            Configuration.Instance.RemoveValueLegacy(info.ColumnId);
-            Debug.WriteLine($"Removed column {{ID:{info.ColumnId}, Name:{info.Name}, Query:{info.Query}}}.");
+            _columns.Remove(info);
         }
 
         public void RewriteColumn(Column info)
         {
-            var composite = new ApplicationDataCompositeValue
+            for (var i = 0; i < _columns.Count; i++)
             {
-                [nameof(Column.Type)] = info.Type.ToString(),
-                [nameof(Column.ColumnId)] = info.ColumnId,
-                [nameof(Column.Name)] = info.Name,
-                [nameof(Column.UserId)] = info.UserId,
-                [nameof(Column.Row)] = info.Row,
-                [nameof(Column.Query)] = info.Query,
-                [nameof(Column.EnableNotity)] = info.EnableNotity
-            };
-
-            Configuration.Instance.RewriteValueLegacy(info.ColumnId, composite);
+                if (_columns[i].ColumnId == info.ColumnId)
+                    _columns[i] = info;
+            }
         }
     }
 }

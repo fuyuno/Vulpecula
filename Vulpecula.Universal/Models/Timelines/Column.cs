@@ -1,24 +1,26 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 
-using Windows.Storage;
+using JetBrains.Annotations;
 
 using Prism.Mvvm;
+
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace Vulpecula.Universal.Models.Timelines
 {
     public class Column : BindableBase
     {
-        public TimelineType Type { get; private set; }
+        public TimelineType Type { get; set; }
 
-        public string ColumnId { get; private set; }
+        public string ColumnId { get; set; }
 
-        public long UserId { get; private set; }
+        public long UserId { get; set; }
 
         public string Query { get; set; }
 
-        private Column() {}
+        // Called by Json.NET
+        [UsedImplicitly]
+        public Column() {}
 
         private Column(TimelineType type, string id, string name, long userId, int row, string query, bool enableNotity)
         {
@@ -33,27 +35,7 @@ namespace Vulpecula.Universal.Models.Timelines
 
         public static Column CreateColumnInfo(TimelineType type, string name, long userId, int row, string query = null, bool enableNotity = true)
         {
-            return new Column(type, $"Column-{Guid.NewGuid()}", name, userId, row, query, enableNotity);
-        }
-
-        public static Column RestoreColumnInfo(ApplicationDataCompositeValue adcv)
-        {
-            TimelineType type;
-            if (!Enum.TryParse(adcv[nameof(Type)].ToString(), out type))
-                throw new InvalidDataException();
-            var id = AccountManager.Instance.Users.FirstOrDefault() == null ? 0 : AccountManager.Instance.Users.First().Id;
-            var info = new Column
-            {
-                Type = type,
-                ColumnId = adcv.ContainsKey(nameof(ColumnId)) ? adcv[nameof(ColumnId)].ToString() : null,
-                Name = adcv.ContainsKey(nameof(Name)) ? adcv[nameof(Name)].ToString() : "##unloaded##",
-                UserId = adcv[nameof(UserId)].ToString() != "0" ? long.Parse(adcv[nameof(UserId)].ToString()) : id,
-                Row = adcv.ContainsKey(nameof(Row)) ? int.Parse(adcv[nameof(Row)].ToString()) : int.MaxValue,
-                Query = adcv.ContainsKey(nameof(Query)) ? adcv[nameof(Query)]?.ToString() : null,
-                EnableNotity = !adcv.ContainsKey(nameof(EnableNotity)) || bool.Parse(adcv[nameof(EnableNotity)].ToString())
-            };
-
-            return info;
+            return new Column(type, Guid.NewGuid().ToString(), name, userId, row, query, enableNotity);
         }
 
         private void Resave()
