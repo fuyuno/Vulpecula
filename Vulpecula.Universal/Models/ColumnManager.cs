@@ -36,7 +36,7 @@ namespace Vulpecula.Universal.Models
         {
             try
             {
-                var columns = Configuration.Instance.Columns;
+                var columns = Configuration.Instance.ColumnsLegacy;
                 var tempColumn = new List<Column>();
                 foreach (var columnComposite in columns)
                 {
@@ -51,11 +51,11 @@ namespace Vulpecula.Universal.Models
             {
                 Debug.WriteLine(e);
                 await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("CanNotRestored"), "Error");
-                var columns = Configuration.Instance.Columns;
+                var columns = Configuration.Instance.ColumnsLegacy;
                 foreach (var columnComposite in columns)
                 {
                     Columns.Clear();
-                    Configuration.Instance.RemoveValue(columnComposite[nameof(Column.ColumnId)].ToString());
+                    Configuration.Instance.RemoveValueLegacy(columnComposite[nameof(Column.ColumnId)].ToString());
                 }
                 // 初期化
                 SetupInitialColumns(AccountManager.Instance.Users.First().Id);
@@ -66,7 +66,7 @@ namespace Vulpecula.Universal.Models
         [UsedImplicitly]
         public void ClearColumns()
         {
-            var columns = Configuration.Instance.Columns;
+            var columns = Configuration.Instance.ColumnsLegacy;
             foreach (var column in columns)
                 RemoveColumn(Column.RestoreColumnInfo(column));
         }
@@ -99,13 +99,13 @@ namespace Vulpecula.Universal.Models
             };
 
             Columns.Add(info);
-            Configuration.Instance.AddValues(info.ColumnId, composite);
+            Configuration.Instance.AddValueLegacy(info.ColumnId, composite);
         }
 
         public void RemoveColumn(Column info)
         {
             Columns.Remove(info);
-            Configuration.Instance.RemoveValue(info.ColumnId);
+            Configuration.Instance.RemoveValueLegacy(info.ColumnId);
             Debug.WriteLine($"Removed column {{ID:{info.ColumnId}, Name:{info.Name}, Query:{info.Query}}}.");
         }
 
@@ -122,7 +122,7 @@ namespace Vulpecula.Universal.Models
                 [nameof(Column.EnableNotity)] = info.EnableNotity
             };
 
-            Configuration.Instance.RewriteValue(info.ColumnId, composite);
+            Configuration.Instance.RewriteValueLegacy(info.ColumnId, composite);
         }
     }
 }

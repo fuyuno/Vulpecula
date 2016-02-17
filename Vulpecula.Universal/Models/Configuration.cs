@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Windows.Storage;
@@ -17,7 +18,8 @@ namespace Vulpecula.Universal.Models
         /// <summary>
         /// 設定に保存されているカラムを取得します。
         /// </summary>
-        public IEnumerable<ApplicationDataCompositeValue> Columns
+        [Obsolete]
+        public IEnumerable<ApplicationDataCompositeValue> ColumnsLegacy
         {
             get { return _roamingContainer.Values.Where(w => w.Key.StartsWith("Column-")).Select(w => (ApplicationDataCompositeValue) w.Value).ToList(); }
         }
@@ -32,17 +34,20 @@ namespace Vulpecula.Universal.Models
         /// </summary>
         public void Initialize() {}
 
-        public void AddValues(string key, object value)
+        [Obsolete]
+        public void AddValueLegacy(string key, object value)
         {
             _roamingContainer.Values.Add(key, value);
         }
 
-        public void RemoveValue(string key)
+        [Obsolete]
+        public void RemoveValueLegacy(string key)
         {
             _roamingContainer.Values.Remove(key);
         }
 
-        public void RewriteValue(string key, object value)
+        [Obsolete]
+        public void RewriteValueLegacy(string key, object value)
         {
             _roamingContainer.Values.Remove(key);
             _roamingContainer.Values.Add(key, value);
