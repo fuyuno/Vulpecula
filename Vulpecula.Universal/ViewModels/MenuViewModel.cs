@@ -65,7 +65,6 @@ namespace Vulpecula.Universal.ViewModels
 
         private void NavigateToHomePage()
         {
-            // Navigate("Main", null) だと、死ぬっぽい
             _navigationService.Navigate("Main", null);
             EventFired = true;
         }

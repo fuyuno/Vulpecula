@@ -50,12 +50,11 @@ namespace Vulpecula.Universal.ViewModels
                 await Task.Delay(TimeSpan.FromMilliseconds(500));
                 Debug.WriteLine("Waiting for Initializing Columns.");
             }
-            if (AccountManager.Instance.Users.Count == 0)
-            {
-                await AccountManager.Instance.AuthorizationAccount();
-                if (AccountManager.Instance.Users.Count > 0)
-                    ColumnManager.Instance.SetupInitialColumns(AccountManager.Instance.Users.First().Id);
-            }
+            if (AccountManager.Instance.Users.Count != 0)
+                return;
+            await AccountManager.Instance.AuthorizationAccount();
+            if (AccountManager.Instance.Users.Count > 0)
+                ColumnManager.Instance.SetupInitialColumns(AccountManager.Instance.Users.First().Id);
         }
 
         #endregion

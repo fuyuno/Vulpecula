@@ -31,11 +31,10 @@ namespace Vulpecula.Universal
                 var viewModel = (MenuViewModel) sender.DataContext;
                 viewModel.Subscribe(nameof(viewModel.EventFired), e =>
                 {
-                    if (viewModel.EventFired)
-                    {
-                        RootSplitView.IsPaneOpen = false;
-                        viewModel.EventFired = false;
-                    }
+                    if (!viewModel.EventFired)
+                        return;
+                    RootSplitView.IsPaneOpen = false;
+                    viewModel.EventFired = false;
                 });
             };
         }

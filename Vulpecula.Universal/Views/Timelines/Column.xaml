@@ -8,7 +8,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:primitives="using:Vulpecula.Universal.Views.Timelines.Primitive"
              xmlns:timelines="using:Vulpecula.Universal.ViewModels.Timelines"
-             Width="360"
+             Width="500"
              d:DataContext="{d:DesignInstance timelines:ColumnViewModel}"
              d:DesignHeight="640"
              d:DesignWidth="360"
@@ -34,6 +34,7 @@
                            RelativePanel.RightOf="UserIcon"
                            Text="{Binding Column.Name}" />
                 <ToggleButton x:Name="EnableNotifyButton"
+                              Margin="0,0,10,0"
                               IsChecked="{Binding Column.EnableNotity,
                                                   Mode=TwoWay}"
                               Padding="0"
