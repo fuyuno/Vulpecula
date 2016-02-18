@@ -95,6 +95,7 @@
         <StackPanel Grid.Row="1"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right"
                     Orientation="Horizontal"
                     Padding="0,5"
                     Visibility="{Binding IsExpanded,

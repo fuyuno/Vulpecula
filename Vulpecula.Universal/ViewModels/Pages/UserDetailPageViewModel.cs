@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Prism.Windows.Navigation;
 
@@ -19,7 +20,7 @@ namespace Vulpecula.Universal.ViewModels.Pages
         /// <param name="e">The <see cref="T:Prism.Windows.Navigation.NavigatedToEventArgs"/> instance containing the event data.</param><param name="viewModelState">The state of the view model.</param>
         public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)
         {
-            _user = ((User) e.Parameter);
+            _user = (User) e.Parameter;
         }
 
         #endregion
@@ -28,7 +29,7 @@ namespace Vulpecula.Universal.ViewModels.Pages
 
         public string ScreenName => $"@{_user.ScreenName}";
 
-        public string UserName => _user.Name;
+        public string UserName => _user.Name.Replace(Environment.NewLine, "");
 
         public string IconUrl => _user.ProfileImageUrlHttps.EndsWith("default.png") ? "ms-appx:///Assets/Icon.png" : _user.ProfileImageUrlHttps;
 
