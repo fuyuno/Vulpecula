@@ -46,7 +46,7 @@ namespace Vulpecula.Mobile.Views.Pages
                     {
                         var s = new StatusView()
                         {
-                            BindingContext = new StatusViewModel(vm.Location, vm.NavigationService, status),
+                            BindingContext = new StatusViewModel(vm.Localization, vm.NavigationService, status),
                             HorizontalOptions = LayoutOptions.StartAndExpand
                         };
                         Device.BeginInvokeOnMainThread(() => this.Statuses.Children.Add(s));
