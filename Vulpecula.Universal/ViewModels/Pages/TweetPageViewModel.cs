@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 
+using JetBrains.Annotations;
+
 using Prism.Commands;
 using Prism.Windows.Navigation;
 
@@ -9,6 +11,7 @@ using Vulpecula.Universal.ViewModels.Primitives;
 
 namespace Vulpecula.Universal.ViewModels.Pages
 {
+    [UsedImplicitly]
     public class TweetPageViewModel : ViewModel
     {
         private readonly INavigationService _navigationService;

@@ -12,7 +12,7 @@
       mvvm:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
 
-    <RelativePanel>
+    <RelativePanel x:Name="Root" VerticalAlignment="Stretch">
         <RelativePanel x:Name="Header"
                        RelativePanel.AlignLeftWithPanel="True"
                        RelativePanel.AlignRightWithPanel="True"
@@ -50,6 +50,7 @@
             </ComboBox>
         </RelativePanel>
         <Grid x:Name="Footer"
+              Height="32"
               RelativePanel.AlignBottomWithPanel="True"
               RelativePanel.AlignLeftWithPanel="True"
               RelativePanel.AlignRightWithPanel="True">
