@@ -5,6 +5,8 @@
       xmlns:local="using:Vulpecula.Universal.Views.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:mvvm="using:Prism.Windows.Mvvm"
+      xmlns:vm="using:Vulpecula.Universal.ViewModels.Pages"
+      d:DataContext="{d:DesignInstance vm:TweetPageViewModel}"
       d:DesignHeight="300"
       d:DesignWidth="400"
       mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -21,7 +23,7 @@
                 <TextBlock Margin="0,0,10,0"
                            VerticalAlignment="Center"
                            FontSize="15"
-                           Text="372" />
+                           Text="{x:Bind ViewModel.WhisperCount, Mode=TwoWay}" />
             </Grid>
             <ComboBox Width="250"
                       Height="64"
@@ -29,7 +31,7 @@
                       ItemsSource="{x:Bind ViewModel.Accounts}"
                       RelativePanel.AlignLeftWithPanel="True"
                       RelativePanel.LeftOf="TweetCounter"
-                      SelectedItem="{x:Bind ViewModel.SelectedAccount}">
+                      SelectedItem="{x:Bind ViewModel.SelectedAccount, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -71,18 +73,22 @@
             <Button Grid.Column="3"
                     HorizontalAlignment="Stretch"
                     Background="{StaticResource SystemControlHighlightAccentBrush}"
-                    Content="Tweet" />
+                    Command="{x:Bind ViewModel.SendTweetCommand}"
+                    Content="Whisper" />
         </Grid>
-        <TextBox HorizontalAlignment="Stretch"
+        <TextBox x:Uid="TweetPageXaml_WhatsHappening"
+                 HorizontalAlignment="Stretch"
                  VerticalAlignment="Stretch"
                  AcceptsReturn="True"
                  Background="Transparent"
                  BorderThickness="0"
-                 PlaceholderText="いまなにしてる？"
                  RelativePanel.Above="Footer"
                  RelativePanel.AlignLeftWithPanel="True"
                  RelativePanel.AlignRightWithPanel="True"
                  RelativePanel.Below="Header"
+                 Text="{Binding WhisperText,
+                                UpdateSourceTrigger=PropertyChanged,
+                                Mode=TwoWay}"
                  TextWrapping="Wrap" />
     </RelativePanel>
 </Page>

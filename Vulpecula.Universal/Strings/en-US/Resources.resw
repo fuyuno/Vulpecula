@@ -147,9 +147,6 @@
   <data name="MainPageXaml_Send.Content" xml:space="preserve">
     <value>Send</value>
   </data>
-  <data name="MainPageXaml_WhatsHappening.PlaceholderText" xml:space="preserve">
-    <value>What's happening?</value>
-  </data>
   <data name="MenuPageXaml_Account.Text" xml:space="preserve">
     <value>Accounts</value>
   </data>
@@ -215,5 +212,8 @@
   </data>
   <data name="StatusViewXaml_ViewDetails.Label" xml:space="preserve">
     <value>View Details</value>
+  </data>
+  <data name="TweetPageXaml_WhatsHappening.PlaceholderText" xml:space="preserve">
+    <value>What's happening?</value>
   </data>
 </root>

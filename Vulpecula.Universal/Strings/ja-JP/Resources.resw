@@ -147,9 +147,6 @@
   <data name="MainPageXaml_Send.Content" xml:space="preserve">
     <value>送信</value>
   </data>
-  <data name="MainPageXaml_WhatsHappening.PlaceholderText" xml:space="preserve">
-    <value>今何してる？</value>
-  </data>
   <data name="MenuPageXaml_Account.Text" xml:space="preserve">
     <value>アカウント</value>
   </data>
@@ -215,5 +212,8 @@
   </data>
   <data name="StatusViewXaml_ViewDetails.Label" xml:space="preserve">
     <value>詳細をみる</value>
+  </data>
+  <data name="TweetPageXaml_WhatsHappening.PlaceholderText" xml:space="preserve">
+    <value>今何してる？</value>
   </data>
 </root>
