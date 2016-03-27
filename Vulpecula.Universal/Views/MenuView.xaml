@@ -38,7 +38,7 @@
                     <behaviors:UnSelectableListBoxBehavior />
                 </i:Interaction.Behaviors>
                 <ListBoxItem>
-                    <Button>
+                    <Button Command="{Binding NavigateToWhisperPageCommand}">
                         <StackPanel Orientation="Horizontal">
                             <FontIcon Width="48"
                                       Height="48"

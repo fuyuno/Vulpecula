@@ -23,7 +23,8 @@ namespace Vulpecula.Universal.ViewModels
             _navigationService = navigationService;
             Accounts = new ObservableCollection<UserAccountViewModel>();
             EventFired = false;
-            ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, Accounts, (User w) => UserAccountViewModel.Create(w));
+            ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, Accounts,
+                                                             (User w) => UserAccountViewModel.Create(w));
         }
 
         #region Properties
@@ -40,9 +41,9 @@ namespace Vulpecula.Universal.ViewModels
             set { SetProperty(ref _eventFired, value); }
         }
 
-        #endregion
+        #endregion EventFired
 
-        #endregion
+        #endregion Properties
 
         #region Commands
 
@@ -50,11 +51,12 @@ namespace Vulpecula.Universal.ViewModels
 
         private ICommand _authorizationCommand;
 
-        public ICommand AuthorizationCommand => _authorizationCommand ?? (_authorizationCommand = new DelegateCommand(Authorization));
+        public ICommand AuthorizationCommand
+            => _authorizationCommand ?? (_authorizationCommand = new DelegateCommand(Authorization));
 
         private async void Authorization() => await AccountManager.Instance.AuthorizationAccount();
 
-        #endregion
+        #endregion AuthorizationCommand
 
         #region NavigateToHomePageCommand
 
@@ -69,14 +71,16 @@ namespace Vulpecula.Universal.ViewModels
             EventFired = true;
         }
 
-        #endregion
+        #endregion NavigateToHomePageCommand
 
         #region NavigateToSettingsPageCommand
 
         private ICommand _navigateToSettingsPageCommand;
 
         public ICommand NavigateToSettingsPageCommand
-            => _navigateToSettingsPageCommand ?? (_navigateToSettingsPageCommand = new DelegateCommand(NavigateToSettingsPage));
+            =>
+            _navigateToSettingsPageCommand ??
+            (_navigateToSettingsPageCommand = new DelegateCommand(NavigateToSettingsPage));
 
         private void NavigateToSettingsPage()
         {
@@ -84,8 +88,25 @@ namespace Vulpecula.Universal.ViewModels
             EventFired = true;
         }
 
-        #endregion
+        #endregion NavigateToSettingsPageCommand
 
-        #endregion
+        #region NavigateToWhisperPageCommand
+
+        private ICommand _navigateToWhisperPageCommand;
+
+        public ICommand NavigateToWhisperPageCommand
+            =>
+            _navigateToWhisperPageCommand ??
+            (_navigateToWhisperPageCommand = new DelegateCommand(NavigateToWhisperPage));
+
+        private void NavigateToWhisperPage()
+        {
+            _navigationService.Navigate("Pages.Tweet", null);
+            EventFired = true;
+        }
+
+        #endregion NavigateToWhisperPageCommand
+
+        #endregion Commands
     }
 }

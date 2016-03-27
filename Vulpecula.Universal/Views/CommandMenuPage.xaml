@@ -35,7 +35,9 @@
                     <FontIcon Glyph="&#xE115;" />
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton x:Uid="CommandMenuPageXaml_Whisper" Width="63">
+            <AppBarButton x:Uid="CommandMenuPageXaml_Whisper"
+                          Width="63"
+                          Command="{Binding NavigateToWhisperPageCommand}">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE8BD;" />
                 </AppBarButton.Icon>

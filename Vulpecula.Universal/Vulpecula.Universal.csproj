@@ -153,6 +153,7 @@
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="ViewModels\CommandMenuPageViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\Pages\TweetPageViewModel.cs" />
     <Compile Include="ViewModels\Pages\UserDetailPageViewModel.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsGeneralPageViewModel.cs" />
@@ -174,6 +175,9 @@
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\TweetPage.xaml.cs">
+      <DependentUpon>TweetPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\UserDetailPage.xaml.cs">
       <DependentUpon>UserDetailPage.xaml</DependentUpon>
@@ -273,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CommandMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\TweetPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
