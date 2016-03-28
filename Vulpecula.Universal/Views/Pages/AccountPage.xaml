@@ -1,0 +1,30 @@
+﻿<Page x:Class="Vulpecula.Universal.Views.Pages.AccountPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:Vulpecula.Universal.Views.Pages"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:mvvm="using:Prism.Windows.Mvvm"
+      mvvm:ViewModelLocator.AutoWireViewModel="True"
+      mc:Ignorable="d">
+    <StackPanel Margin="10">
+        <TextBlock x:Uid="AccountPageXaml_Accounts" Style="{ThemeResource TitleTextBlockStyle}" />
+        <ItemsControl ItemsSource="{x:Bind ViewModel.Accounts}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <Image Width="48"
+                               Height="48"
+                               Source="{Binding Icon}" />
+                        <StackPanel Margin="10,0">
+                            <TextBlock FontSize="16" Text="{Binding Name}" />
+                            <TextBlock FontSize="14"
+                                       Foreground="Silver"
+                                       Text="{Binding ScreenName}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</Page>

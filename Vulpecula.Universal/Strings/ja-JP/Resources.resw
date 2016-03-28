@@ -123,6 +123,9 @@
   <data name="AccountManager_FailAuth.Text" xml:space="preserve">
     <value>認証に失敗しました。しばらくしてから、再度実行してください。</value>
   </data>
+  <data name="AccountPageXaml_Accounts.Text" xml:space="preserve">
+    <value>アカウント</value>
+  </data>
   <data name="ColumnManager_CanNotRestored.Text" xml:space="preserve">
     <value>ロード中にエラーが発生したため、カラムを復元できませんでした。</value>
   </data>

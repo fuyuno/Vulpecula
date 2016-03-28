@@ -107,6 +107,23 @@ namespace Vulpecula.Universal.ViewModels
 
         #endregion NavigateToWhisperPageCommand
 
+        #region NavigateToAccountPageCommand
+
+        private ICommand _navigateToAccountPageCommand;
+
+        public ICommand NavigateToAccountPageCommand
+            =>
+            _navigateToAccountPageCommand ??
+            (_navigateToAccountPageCommand = new DelegateCommand(NavigateToAccountPage));
+
+        private void NavigateToAccountPage()
+        {
+            _navigationService.Navigate("Pages.Account", null);
+            EventFired = true;
+        }
+
+        #endregion NavigateToAccountPageCommand
+
         #endregion Commands
     }
 }

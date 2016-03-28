@@ -29,6 +29,7 @@ namespace Vulpecula.Universal.ViewModels.Pages
 
         #region Properties
 
+        // TODO: ReadOnlyCollection To ReadOnlyObservableCollection
         public ReadOnlyCollection<UserAccountViewModel> Accounts { get; }
 
         #region SelectedAccount

@@ -131,7 +131,7 @@
                     <behaviors:UnSelectableListBoxBehavior />
                 </i:Interaction.Behaviors>
                 <ListBoxItem>
-                    <Button>
+                    <Button Command="{Binding NavigateToAccountPageCommand}">
                         <StackPanel Orientation="Horizontal">
                             <FontIcon Width="48"
                                       Height="48"

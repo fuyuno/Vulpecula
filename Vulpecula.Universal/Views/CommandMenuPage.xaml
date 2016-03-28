@@ -23,7 +23,9 @@
                     <FontIcon Glyph="&#xE094;" />
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton x:Uid="CommandMenuPageXaml_Accounts" Width="63">
+            <AppBarButton x:Uid="CommandMenuPageXaml_Accounts"
+                          Width="63"
+                          Command="{Binding NavigateToAccountPageCommand}">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE125;" />
                 </AppBarButton.Icon>
