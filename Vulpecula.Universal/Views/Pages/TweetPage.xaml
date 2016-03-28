@@ -60,12 +60,16 @@
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0"
-                    HorizontalAlignment="Stretch"
-                    Content="@" />
-            <Button Grid.Column="1"
-                    HorizontalAlignment="Stretch"
-                    Content="#" />
+            <Button Grid.Column="0" HorizontalAlignment="Stretch">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE910;" />
+                </Button.Content>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Stretch">
+                <Button.Content>
+                    <FontIcon Glyph="&#xE8EC;" />
+                </Button.Content>
+            </Button>
             <Button Grid.Column="2" HorizontalAlignment="Stretch">
                 <Button.Content>
                     <FontIcon Glyph="&#xE722;" />
