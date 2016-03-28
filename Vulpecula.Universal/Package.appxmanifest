@@ -22,6 +22,7 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#000046" />
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="portrait" />
+          <uap:Rotation Preference="landscape" />
         </uap:InitialRotationPreference>
       </uap:VisualElements>
       <Extensions>

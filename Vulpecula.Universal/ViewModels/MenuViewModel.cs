@@ -16,16 +16,16 @@ namespace Vulpecula.Universal.ViewModels
     [UsedImplicitly]
     public class MenuViewModel : ViewModel
     {
-        private readonly INavigationService _navigationService;
-
         public MenuViewModel(INavigationService navigationService)
         {
-            _navigationService = navigationService;
+            NavigationService = navigationService;
             Accounts = new ObservableCollection<UserAccountViewModel>();
             EventFired = false;
             ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, Accounts,
                                                              (User w) => UserAccountViewModel.Create(w));
         }
+
+        protected INavigationService NavigationService { get; }
 
         #region Properties
 
@@ -67,7 +67,7 @@ namespace Vulpecula.Universal.ViewModels
 
         private void NavigateToHomePage()
         {
-            _navigationService.Navigate("Main", null);
+            NavigationService.Navigate("Main", null);
             EventFired = true;
         }
 
@@ -84,7 +84,7 @@ namespace Vulpecula.Universal.ViewModels
 
         private void NavigateToSettingsPage()
         {
-            _navigationService.Navigate("Settings.SettingsMain", null);
+            NavigationService.Navigate("Settings.SettingsMain", null);
             EventFired = true;
         }
 
@@ -99,9 +99,8 @@ namespace Vulpecula.Universal.ViewModels
             _navigateToWhisperPageCommand ??
             (_navigateToWhisperPageCommand = new DelegateCommand(NavigateToWhisperPage));
 
-        private void NavigateToWhisperPage()
+        protected virtual void NavigateToWhisperPage()
         {
-            _navigationService.Navigate("Pages.Tweet", null);
             EventFired = true;
         }
 
@@ -118,7 +117,7 @@ namespace Vulpecula.Universal.ViewModels
 
         private void NavigateToAccountPage()
         {
-            _navigationService.Navigate("Pages.Account", null);
+            NavigationService.Navigate("Pages.Account", null);
             EventFired = true;
         }
 
