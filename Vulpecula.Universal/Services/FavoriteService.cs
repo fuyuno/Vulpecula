@@ -8,10 +8,10 @@ namespace Vulpecula.Universal.Services
     public class FavoriteService : AsyncService
     {
         private readonly bool _isNot;
-        private readonly CroudiaProvider _provider;
+        private readonly CroudiaAccount _provider;
         private readonly long _statusId;
 
-        public FavoriteService(CroudiaProvider provider, long statusId, bool isNot)
+        public FavoriteService(CroudiaAccount provider, long statusId, bool isNot)
         {
             _provider = provider;
             _statusId = statusId;
@@ -19,7 +19,7 @@ namespace Vulpecula.Universal.Services
         }
 
         /// <summary>
-        /// アンマネージ リソースの解放またはリセットに関連付けられているアプリケーション定義のタスクを実行します。
+        ///     アンマネージ リソースの解放またはリセットに関連付けられているアプリケーション定義のタスクを実行します。
         /// </summary>
         public override void Dispose()
         {

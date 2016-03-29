@@ -6,7 +6,6 @@ using JetBrains.Annotations;
 using Prism.Commands;
 using Prism.Windows.Navigation;
 
-using Vulpecula.Models;
 using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.ViewModels.Primitives;
@@ -16,13 +15,16 @@ namespace Vulpecula.Universal.ViewModels
     [UsedImplicitly]
     public class MenuViewModel : ViewModel
     {
-        public MenuViewModel(INavigationService navigationService)
+        private readonly AccountManager _accountManager;
+
+        public MenuViewModel(INavigationService navigationService, AccountManager accountManager)
         {
             NavigationService = navigationService;
+            _accountManager = accountManager;
             Accounts = new ObservableCollection<UserAccountViewModel>();
             EventFired = false;
-            ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, Accounts,
-                                                             (User w) => UserAccountViewModel.Create(w));
+            ViewModelHelper.SubscribeNotifyCollectionChanged(_accountManager.Accounts, Accounts,
+                                                             (CroudiaAccount w) => new UserAccountViewModel(w));
         }
 
         protected INavigationService NavigationService { get; }
@@ -54,7 +56,7 @@ namespace Vulpecula.Universal.ViewModels
         public ICommand AuthorizationCommand
             => _authorizationCommand ?? (_authorizationCommand = new DelegateCommand(Authorization));
 
-        private async void Authorization() => await AccountManager.Instance.AuthorizationAccount();
+        private async void Authorization() => await _accountManager.AuthorizationAccount();
 
         #endregion AuthorizationCommand
 

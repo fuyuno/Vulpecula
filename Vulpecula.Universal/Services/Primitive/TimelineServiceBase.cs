@@ -11,15 +11,8 @@ namespace Vulpecula.Universal.Services.Primitive
     {
         private readonly int _maxStores;
         private readonly List<T> _storedItems;
-        protected List<IDisposable> Disposables { get; }
-        public ObservableCollection<Action<T>> Subscribers { get; }
 
-        // ReSharper disable once MemberCanBeProtected.Global
-        public CroudiaProvider Provider { get; }
-
-        public ReadOnlyCollection<T> StoredItems => _storedItems.AsReadOnly();
-
-        protected TimelineServiceBase(CroudiaProvider provider, int maxStore = 100)
+        protected TimelineServiceBase(CroudiaAccount provider, int maxStore = 100)
         {
             Subscribers = new ObservableCollection<Action<T>>();
             Provider = provider;
@@ -29,6 +22,14 @@ namespace Vulpecula.Universal.Services.Primitive
 
             Subscribers.Add(Store);
         }
+
+        protected List<IDisposable> Disposables { get; }
+        public ObservableCollection<Action<T>> Subscribers { get; }
+
+        // ReSharper disable once MemberCanBeProtected.Global
+        public CroudiaAccount Provider { get; }
+
+        public ReadOnlyCollection<T> StoredItems => _storedItems.AsReadOnly();
 
         protected void StartSubscriberRequest()
         {
@@ -51,11 +52,17 @@ namespace Vulpecula.Universal.Services.Primitive
             };
         }
 
-        protected virtual void SubscriberAdded(Action<T> obj) {}
+        protected virtual void SubscriberAdded(Action<T> obj)
+        {
+        }
 
-        protected virtual void SubscriberRemoved(Action<T> obj) {}
+        protected virtual void SubscriberRemoved(Action<T> obj)
+        {
+        }
 
-        protected virtual void SubscriberCleared() {}
+        protected virtual void SubscriberCleared()
+        {
+        }
 
         private void Store(T item)
         {

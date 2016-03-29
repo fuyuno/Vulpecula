@@ -8,10 +8,10 @@ namespace Vulpecula.Universal.Services
     public class SpreadService : AsyncService
     {
         private readonly bool _isNot;
-        private readonly CroudiaProvider _provider;
+        private readonly CroudiaAccount _provider;
         private readonly long _statusId;
 
-        public SpreadService(CroudiaProvider provider, long statusId, bool isNot)
+        public SpreadService(CroudiaAccount provider, long statusId, bool isNot)
         {
             _provider = provider;
             _statusId = statusId;

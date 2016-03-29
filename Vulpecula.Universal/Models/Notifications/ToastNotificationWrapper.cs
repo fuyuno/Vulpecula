@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
-using Vulpecula.Models;
 using Vulpecula.Universal.BgTask;
 using Vulpecula.Universal.Models.Timelines.Primitive;
 
@@ -20,7 +18,8 @@ namespace Vulpecula.Universal.Models.Notifications
             if (notifySound.Contains("Call") || notifySound.Contains("Alarm"))
                 notifySound = "Looping." + notifySound;
             var payload =
-            $@"<toast>
+            $@"
+<toast>
     <visual>
         <binding template='ToastGeneric'>
             <text>{title}</text>
@@ -33,12 +32,13 @@ namespace Vulpecula.Universal.Models.Notifications
             xmlDoc.LoadXml(payload);
 
             var notification = new ToastNotification(xmlDoc);
-            ToastNotificationManager.CreateToastNotifier().Show(notification);
+            ToastNotificationManager.CreateToastNotifier()
+                                    .Show(notification);
             return notification;
         }
 
         // Vulpecula.Models.User がほしい
-        public static ToastNotification PopQuickReplyToast(string title, StatusModel status, User user, NotificationSounds sound = NotificationSounds.Default)
+        public static ToastNotification PopQuickReplyToast(string title, StatusModel status, CroudiaAccount account, NotificationSounds sound = NotificationSounds.Default)
         {
             ToastNotificationManager.History.Clear();
 
@@ -47,16 +47,16 @@ namespace Vulpecula.Universal.Models.Notifications
                 notifySound = "Looping." + notifySound;
             var arguments = new[]
             {
-                new KeyValuePair<string, object>("access_token", AccountManager.Instance.Providers.Single(w => w.User.Id == user.Id).Croudia.AccessToken),
+                new KeyValuePair<string, object>("access_token", account.Croudia.AccessToken),
                 new KeyValuePair<string, object>("in_reply_to_status_id", status.Id),
                 new KeyValuePair<string, object>("in_reply_to_screen_name", status.User.ScreenName)
             };
             var payload =
-            $@"<toast activationType='background' launch='args'>
+            $@"
+<toast activationType='background' launch='args'>
     <visual>
         <binding template='ToastGeneric'>
-            <image placement='appLogoOverride' src='{user
-            .ProfileImageUrlHttps}' />
+            <image placement='appLogoOverride' src='{account.User.ProfileImageUrlHttps}' />
             <text>{title}</text>
             <text>{status.Text}</text>
         </binding>
@@ -64,12 +64,10 @@ namespace Vulpecula.Universal.Models.Notifications
     <actions>
         <input id='status'
                type='text'
-               title='Reply to @{user
-            .ScreenName}'
+               title='Reply to @{account.User.ScreenName}'
                placeHolderContent='Hello!' />
         <action activationType='background'
-                arguments='{QueryString
-            .Query(arguments)}'
+                arguments='{QueryString.Query(arguments)}'
                 content='Whisper' />
         <action activationType='system'
                 arguments='dismiss'
@@ -81,7 +79,8 @@ namespace Vulpecula.Universal.Models.Notifications
             xmlDoc.LoadXml(payload);
 
             var notification = new ToastNotification(xmlDoc);
-            ToastNotificationManager.CreateToastNotifier().Show(notification);
+            ToastNotificationManager.CreateToastNotifier()
+                                    .Show(notification);
             return notification;
         }
     }

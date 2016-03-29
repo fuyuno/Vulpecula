@@ -124,11 +124,14 @@
     <Compile Include="Helpers\ViewModelHelper.cs" />
     <Compile Include="Models\AccountManager.cs" />
     <Compile Include="Models\AppDefintions.cs" />
-    <Compile Include="Models\CroudiaProvider.cs" />
+    <Compile Include="Models\CroudiaAccount.cs" />
     <Compile Include="Models\Dialogs\DialogCommands.cs" />
     <Compile Include="Models\Dialogs\MessageDialogWrapper.cs" />
     <Compile Include="Helpers\LocalizationHelper.cs" />
     <Compile Include="Models\FollowTypes.cs" />
+    <Compile Include="Models\Migrate\Migration20160329.cs" />
+    <Compile Include="Models\Migrate\Primitives\Migration.cs" />
+    <Compile Include="Models\Migrate\Primitives\MigrationBase.cs" />
     <Compile Include="Models\Notifications\NotificationRegistry.cs" />
     <Compile Include="Models\Notifications\NotificationSounds.cs" />
     <Compile Include="Models\Notifications\ToastNotificationWrapper.cs" />
@@ -362,9 +365,7 @@
       <Name>Vulpecula</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Migrate\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
       <Name>Behaviors SDK %28XAML%29</Name>

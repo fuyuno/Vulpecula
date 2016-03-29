@@ -8,15 +8,13 @@ namespace Vulpecula.Universal.ViewModels.Settings
 {
     public class SettingsTimelinePageViewModel : ViewModel
     {
-        public ObservableCollection<Column> TimelineContents { get; }
-
-        public SettingsTimelinePageViewModel()
+        public SettingsTimelinePageViewModel(ColumnManager columnManager)
         {
-            this.TimelineContents = new ObservableCollection<Column>();
-            foreach (var column in ColumnManager.Instance.Columns)
-            {
-                this.TimelineContents.Add(column);
-            }
+            TimelineContents = new ObservableCollection<Column>();
+            foreach (var column in columnManager.Columns)
+                TimelineContents.Add(column);
         }
+
+        public ObservableCollection<Column> TimelineContents { get; }
     }
 }

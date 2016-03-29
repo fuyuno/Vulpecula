@@ -7,10 +7,10 @@ namespace Vulpecula.Universal.Services
 {
     public class StatusService : AsyncService
     {
-        private readonly CroudiaProvider _provider;
+        private readonly CroudiaAccount _provider;
         private readonly string _text;
 
-        public StatusService(CroudiaProvider provider, string text)
+        public StatusService(CroudiaAccount provider, string text)
         {
             _provider = provider;
             _text = text;

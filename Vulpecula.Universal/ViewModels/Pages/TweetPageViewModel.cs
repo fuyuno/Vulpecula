@@ -5,7 +5,6 @@ using JetBrains.Annotations;
 using Prism.Commands;
 using Prism.Windows.Navigation;
 
-using Vulpecula.Models;
 using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.ViewModels.Primitives;
@@ -17,12 +16,12 @@ namespace Vulpecula.Universal.ViewModels.Pages
     {
         private readonly INavigationService _navigationService;
 
-        public TweetPageViewModel(INavigationService navigationService)
+        public TweetPageViewModel(INavigationService navigationService, AccountManager accountManager)
         {
             _navigationService = navigationService;
             Accounts = new ObservableCollection<UserAccountViewModel>();
-            ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, Accounts,
-                                                             (User w) => UserAccountViewModel.Create(w));
+            ViewModelHelper.SubscribeNotifyCollectionChanged(accountManager.Accounts, Accounts,
+                                                             (CroudiaAccount w) => new UserAccountViewModel(w));
             WhisperCount = 372;
             WhisperText = string.Empty;
         }

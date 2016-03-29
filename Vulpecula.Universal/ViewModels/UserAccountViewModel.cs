@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using Vulpecula.Models;
-using Vulpecula.Universal.Models;
+﻿using Vulpecula.Universal.Models;
 using Vulpecula.Universal.Services;
 using Vulpecula.Universal.ViewModels.Timelines.Primitives;
 
@@ -12,19 +8,12 @@ namespace Vulpecula.Universal.ViewModels
 {
     public class UserAccountViewModel : UserViewModel
     {
-        private readonly CroudiaProvider _provider;
+        private readonly CroudiaAccount _provider;
 
-        private UserAccountViewModel(User user, CroudiaProvider provider) : base(user)
+        public UserAccountViewModel(CroudiaAccount provider) : base(provider.User, true)
         {
             _provider = provider;
             IsWhisperEnabled = false;
-        }
-
-        public static UserAccountViewModel Create(User user)
-        {
-            if (AccountManager.Instance.Providers.All(w => w.User.Id != user.Id))
-                throw new KeyNotFoundException($"UserId:{user.Id} is not found in users that loading.");
-            return new UserAccountViewModel(user, AccountManager.Instance.Providers.Single(w => w.User.Id == user.Id));
         }
 
         public void SendWhisper(string text)
@@ -42,6 +31,6 @@ namespace Vulpecula.Universal.ViewModels
             set { SetProperty(ref _isWhisperEnabled, value); }
         }
 
-        #endregion
+        #endregion IsWhisperEnabled
     }
 }
