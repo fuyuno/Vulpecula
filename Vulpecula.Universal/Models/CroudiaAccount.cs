@@ -19,6 +19,8 @@ namespace Vulpecula.Universal.Models
 
         public User User { get; private set; }
 
+        public int Row { get; set; }
+
         public async Task<bool> Authorization(PasswordVault vault, PasswordCredential credential)
         {
             if (credential != null)

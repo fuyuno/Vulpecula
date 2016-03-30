@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -19,10 +21,13 @@ namespace Vulpecula.Universal.Models
     public sealed class AccountManager
     {
         private readonly ObservableCollection<CroudiaAccount> _accounts;
+        private readonly Configuration _configuration;
 
-        public AccountManager()
+        public AccountManager(Configuration configuration)
         {
+            _configuration = configuration;
             _accounts = new ObservableCollection<CroudiaAccount>();
+            _accounts.CollectionChanged += (a, b) => _configuration.AddOrRewriteValue(ConfigurationKeys.UsersKey, _accounts.Select(w => w.User.Id));
             Accounts = new ReadOnlyObservableCollection<CroudiaAccount>(_accounts);
         }
 
@@ -54,6 +59,8 @@ namespace Vulpecula.Universal.Models
                 vault.RetrieveAll();
 
                 var accounts = vault.FindAllByResource(AppDefintions.VulpeculaAppKey);
+                var rows = _configuration.GetValue<IEnumerable<long>>(ConfigurationKeys.UsersKey)
+                                         .ToList();
                 foreach (var credential in accounts)
                 {
                     var account = new CroudiaAccount();
@@ -63,7 +70,9 @@ namespace Vulpecula.Universal.Models
                         vault.Remove(credential);
                         continue;
                     }
-                    _accounts.Add(account);
+                    account.Row = rows.TakeWhile(w => w != account.User.Id)
+                                      .Count();
+                    _accounts.Insert(account.Row > _accounts.Count ? 0 : account.Row, account);
                 }
             }
             catch (COMException e)
@@ -86,6 +95,7 @@ namespace Vulpecula.Universal.Models
                 await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("FailAuth"), "Error");
                 return;
             }
+            account.Row = Accounts.Count;
             _accounts.Add(account);
         }
     }

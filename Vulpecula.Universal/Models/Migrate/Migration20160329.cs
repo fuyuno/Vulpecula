@@ -14,7 +14,7 @@ namespace Vulpecula.Universal.Models.Migrate
 
         public override void Migrate(Configuration configuration)
         {
-            // Broken changes. Reset configurations
+            // Broken changes. Reset configurations.
             configuration.RemoveValue(ConfigurationKeys.ColumnsKey);
         }
 
