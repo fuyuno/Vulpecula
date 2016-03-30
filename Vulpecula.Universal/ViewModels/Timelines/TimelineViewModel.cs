@@ -20,7 +20,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines
         private readonly Func<SuspendableService, TimelineType, long, bool> _cond =
         (w, t, i) => ((TimelineTag) w.Tag).Id == i && ((TimelineTag) w.Tag).Type == t;
 
-        public TimelineViewModel(Column column, CroudiaProvider provider, INavigationService navigationService) : base(provider, navigationService)
+        public TimelineViewModel(Column column, CroudiaAccount provider, INavigationService navigationService) : base(provider, navigationService)
         {
             if (column.Type == TimelineType.DirectMessages || column.Type == TimelineType.DirectMessagesAll)
             {

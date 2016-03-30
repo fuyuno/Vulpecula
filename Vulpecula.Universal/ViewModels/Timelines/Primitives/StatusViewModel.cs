@@ -18,7 +18,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
     public class StatusViewModel : ViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly CroudiaProvider _provider;
+        private readonly CroudiaAccount _provider;
 
         public StatusModel Model { get; }
 
@@ -31,7 +31,7 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public string Via => Model.Source == null ? "" : $"via {Model.Source.Name}";
 
-        public StatusViewModel(StatusModel statusModel, CroudiaProvider provider, INavigationService navigationService)
+        public StatusViewModel(StatusModel statusModel, CroudiaAccount provider, INavigationService navigationService)
         {
             Model = statusModel;
             _provider = provider;

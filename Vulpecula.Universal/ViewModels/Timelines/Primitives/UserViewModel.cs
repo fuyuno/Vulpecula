@@ -1,14 +1,18 @@
 ﻿using System;
-using System.Linq;
 
 using Vulpecula.Models;
-using Vulpecula.Universal.Models;
 using Vulpecula.Universal.ViewModels.Primitives;
 
 namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 {
     public class UserViewModel : ViewModel
     {
+        public UserViewModel(User user, bool isOwn = false)
+        {
+            User = user;
+            IsOwn = isOwn;
+        }
+
         public User User { get; }
 
         public string Name => User.Name.Replace(Environment.NewLine, "");
@@ -29,11 +33,6 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
 
         public string Url => User.Url;
 
-        public bool IsOwn => AccountManager.Instance.Users.Any(w => w.Id == User.Id);
-
-        public UserViewModel(User user)
-        {
-            User = user;
-        }
+        public bool IsOwn { get; }
     }
 }

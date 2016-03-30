@@ -14,7 +14,9 @@ namespace Vulpecula.Universal.Services
         private IConnectableObservable<SecretMail> _connectableObservable;
         private IDisposable _disposable;
 
-        public DirectMessageTimelineService(CroudiaProvider provider) : base(provider) {}
+        public DirectMessageTimelineService(CroudiaAccount provider) : base(provider)
+        {
+        }
 
         public override void Suspend()
         {
@@ -22,7 +24,7 @@ namespace Vulpecula.Universal.Services
         }
 
         /// <summary>
-        /// アンマネージ リソースの解放またはリセットに関連付けられているアプリケーション定義のタスクを実行します。
+        ///     アンマネージ リソースの解放またはリセットに関連付けられているアプリケーション定義のタスクを実行します。
         /// </summary>
         public override void Dispose()
         {

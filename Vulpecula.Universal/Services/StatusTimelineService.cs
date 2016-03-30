@@ -16,7 +16,7 @@ namespace Vulpecula.Universal.Services
         private IConnectableObservable<Status> _connectableObservable;
         private IDisposable _disposable;
 
-        public StatusTimelineService(CroudiaProvider provider, TimelineType type) : base(provider)
+        public StatusTimelineService(CroudiaAccount provider, TimelineType type) : base(provider)
         {
             _type = type;
         }

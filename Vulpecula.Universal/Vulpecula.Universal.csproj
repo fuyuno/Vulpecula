@@ -124,11 +124,14 @@
     <Compile Include="Helpers\ViewModelHelper.cs" />
     <Compile Include="Models\AccountManager.cs" />
     <Compile Include="Models\AppDefintions.cs" />
-    <Compile Include="Models\CroudiaProvider.cs" />
+    <Compile Include="Models\CroudiaAccount.cs" />
     <Compile Include="Models\Dialogs\DialogCommands.cs" />
     <Compile Include="Models\Dialogs\MessageDialogWrapper.cs" />
     <Compile Include="Helpers\LocalizationHelper.cs" />
     <Compile Include="Models\FollowTypes.cs" />
+    <Compile Include="Models\Migrate\Migration20160329.cs" />
+    <Compile Include="Models\Migrate\Primitives\Migration.cs" />
+    <Compile Include="Models\Migrate\Primitives\MigrationBase.cs" />
     <Compile Include="Models\Notifications\NotificationRegistry.cs" />
     <Compile Include="Models\Notifications\NotificationSounds.cs" />
     <Compile Include="Models\Notifications\ToastNotificationWrapper.cs" />
@@ -154,6 +157,7 @@
     <Compile Include="ViewModels\CommandMenuPageViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\Pages\AccountPageViewModel.cs" />
+    <Compile Include="ViewModels\Pages\MiniTweetPageViewModel.cs" />
     <Compile Include="ViewModels\Pages\TweetPageViewModel.cs" />
     <Compile Include="ViewModels\Pages\UserDetailPageViewModel.cs" />
     <Compile Include="ViewModels\Primitives\ViewModel.cs" />
@@ -179,6 +183,9 @@
     </Compile>
     <Compile Include="Views\Pages\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\MiniTweetPage.xaml.cs">
+      <DependentUpon>MiniTweetPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\TweetPage.xaml.cs">
       <DependentUpon>TweetPage.xaml</DependentUpon>
@@ -288,6 +295,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\MiniTweetPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\TweetPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -354,9 +365,7 @@
       <Name>Vulpecula</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Migrate\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
       <Name>Behaviors SDK %28XAML%29</Name>

@@ -1,7 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 
 using Vulpecula.Universal.Extensions;
-using Vulpecula.Universal.Models;
 using Vulpecula.Universal.Services;
 using Vulpecula.Universal.ViewModels;
 
@@ -10,21 +9,13 @@ using Vulpecula.Universal.ViewModels;
 namespace Vulpecula.Universal
 {
     /// <summary>
-    /// それ自体で使用できる空白ページまたはフレーム内に移動できる空白ページ。
+    ///     それ自体で使用できる空白ページまたはフレーム内に移動できる空白ページ。
     /// </summary>
     public sealed partial class AppShell : Page
     {
         public AppShell()
         {
             InitializeComponent();
-            Loaded += async (sender, args) =>
-            {
-                // AccountManager.Instance.ResetAccounts();
-                // ColumnManager.Instance.ClearColumns();
-
-                await AccountManager.Instance.InitializeAccounts();
-                await ColumnManager.Instance.InitializeColumns();
-            };
             Unloaded += (sender, args) => ServiceProvider.SuspendService();
             MenuView.DataContextChanged += (sender, args) =>
             {

@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using Prism.Windows.Navigation;
+﻿using Prism.Windows.Navigation;
 
 using Vulpecula.Models;
-using Vulpecula.Universal.Models;
 using Vulpecula.Universal.Models.Timelines;
 using Vulpecula.Universal.ViewModels.Primitives;
 
@@ -16,23 +12,16 @@ namespace Vulpecula.Universal.ViewModels.Timelines
     {
         private readonly User _user;
 
+        public ColumnViewModel(Column column, INavigationService navigationService)
+        {
+            Column = column;
+            TimelineViewModel = new TimelineViewModel(column, column.Account, navigationService);
+            _user = column.Account.User;
+        }
+
         public Column Column { get; }
 
         public string Icon => _user.ProfileImageUrlHttps;
         public TimelineViewModel TimelineViewModel { get; }
-
-        private ColumnViewModel(Column column, CroudiaProvider provider, INavigationService navigationService)
-        {
-            Column = column;
-            TimelineViewModel = new TimelineViewModel(column, provider, navigationService);
-            _user = provider.User;
-        }
-
-        public static ColumnViewModel Create(Column column, INavigationService navigationService)
-        {
-            if (AccountManager.Instance.Providers.All(w => w.User.Id != column.UserId))
-                throw new KeyNotFoundException($"UserId:{column.UserId} is not found in users that loading.");
-            return new ColumnViewModel(column, AccountManager.Instance.Providers.Single(w => w.User.Id == column.UserId), navigationService);
-        }
     }
 }

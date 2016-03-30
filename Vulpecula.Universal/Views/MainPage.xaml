@@ -3,36 +3,52 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:pages="using:Vulpecula.Universal.Views.Pages"
       xmlns:prism="using:Prism.Windows.Mvvm"
       xmlns:timeline="using:Vulpecula.Universal.Views.Timelines"
       xmlns:vm="using:Vulpecula.Universal.ViewModels"
       d:DataContext="{d:DesignInstance vm:MainPageViewModel}"
       prism:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                  Loaded="{x:Bind ViewModel.Initialize}"
-                  VerticalScrollBarVisibility="Disabled">
-        <ScrollViewer.Transitions>
-            <TransitionCollection>
-                <EntranceThemeTransition />
-            </TransitionCollection>
-        </ScrollViewer.Transitions>
+    <RelativePanel>
+        <!--  Tweet Area  -->
+        <pages:MiniTweetPage x:Name="TweetArea"
+                             Width="300"
+                             HorizontalAlignment="Right"
+                             RelativePanel.AlignBottomWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Visibility="Collapsed" />
 
-        <StackPanel HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Orientation="Horizontal">
-            <ItemsControl ItemsSource="{Binding Colmuns}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsStackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <timeline:Column DataContext="{Binding}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-    </ScrollViewer>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                      Loaded="{x:Bind ViewModel.Initialize}"
+                      RelativePanel.AlignBottomWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignTopWithPanel="True"
+                      RelativePanel.LeftOf="TweetArea"
+                      VerticalScrollBarVisibility="Disabled">
+            <ScrollViewer.Transitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition />
+                </TransitionCollection>
+            </ScrollViewer.Transitions>
+
+            <StackPanel HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Orientation="Horizontal">
+                <ItemsControl ItemsSource="{Binding Colmuns}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <timeline:Column DataContext="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </RelativePanel>
 </Page>

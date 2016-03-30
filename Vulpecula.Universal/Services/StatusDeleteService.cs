@@ -8,10 +8,10 @@ namespace Vulpecula.Universal.Services
     public class StatusDeleteService : AsyncService
     {
         private readonly bool _isDm;
-        private readonly CroudiaProvider _provider;
+        private readonly CroudiaAccount _provider;
         private readonly long _statusId;
 
-        public StatusDeleteService(CroudiaProvider provider, long statusId, bool isDm)
+        public StatusDeleteService(CroudiaAccount provider, long statusId, bool isDm)
         {
             _provider = provider;
             _statusId = statusId;

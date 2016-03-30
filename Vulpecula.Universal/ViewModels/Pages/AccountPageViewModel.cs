@@ -11,9 +11,9 @@ namespace Vulpecula.Universal.ViewModels.Pages
     [UsedImplicitly]
     public class AccountPageViewModel : ViewModel
     {
-        public AccountPageViewModel()
+        public AccountPageViewModel(AccountManager accountManager)
         {
-            Accounts = AccountManager.Instance.Users.Select(UserAccountViewModel.Create)
+            Accounts = accountManager.Accounts.Select(w => new UserAccountViewModel(w))
                                      .ToList()
                                      .AsReadOnly();
         }

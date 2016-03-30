@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -13,32 +14,36 @@ using Vulpecula.Universal.Models.Timelines;
 namespace Vulpecula.Universal.Models
 {
     /// <summary>
-    /// カラムを管理します。
+    ///     カラムを管理します。
     /// </summary>
     public class ColumnManager
     {
-        private static ColumnManager _instance;
+        private readonly AccountManager _accountManager;
         private readonly ObservableCollection<Column> _columns;
-        public static ColumnManager Instance => _instance ?? (_instance = new ColumnManager());
+        private readonly Configuration _configuration;
 
-        public ReadOnlyObservableCollection<Column> Columns { get; }
-        public bool IsInitialized { get; private set; }
-
-        private ColumnManager()
+        public ColumnManager(Configuration configuration, AccountManager accountManager)
         {
             _columns = new ObservableCollection<Column>();
-            _columns.CollectionChanged += (sender, args) => { Configuration.Instance.AddOrRewriteValue(ConfigurationKeys.ColumnsKey, _columns); };
+            _configuration = configuration;
+            _accountManager = accountManager;
+            _columns.CollectionChanged += (a, b) => _configuration.AddOrRewriteValue(ConfigurationKeys.ColumnsKey, _columns);
             Columns = new ReadOnlyObservableCollection<Column>(_columns);
-            IsInitialized = false;
         }
+
+        public ReadOnlyObservableCollection<Column> Columns { get; }
 
         public async Task InitializeColumns()
         {
             try
             {
-                var columns = Configuration.Instance.Columns;
+                var columns = _configuration.GetValue<IEnumerable<Column>>(ConfigurationKeys.ColumnsKey, new List<Column>())
+                                            .ToArray();
                 foreach (var source in columns.OrderBy(w => w.Row))
+                {
+                    source.Account = _accountManager.Accounts.Single(w => w.User.Id == source.UserId);
                     _columns.Add(source);
+                }
             }
             catch (Exception e)
             {
@@ -47,27 +52,26 @@ namespace Vulpecula.Universal.Models
                 ClearColumns();
 
                 // 初期化
-                SetupInitialColumns(AccountManager.Instance.Users.First().Id);
+                SetupInitialColumns(_accountManager.Accounts.First());
             }
-            IsInitialized = true;
         }
 
         [UsedImplicitly]
         public void ClearColumns()
         {
             _columns.Clear();
-            Configuration.Instance.RemoveValue(ConfigurationKeys.ColumnsKey);
+            _configuration.RemoveValue(ConfigurationKeys.ColumnsKey);
         }
 
         /// <summary>
-        /// 初期カラムを設定します。
+        ///     初期カラムを設定します。
         /// </summary>
-        /// <param name="userId"></param>
-        public void SetupInitialColumns(long userId)
+        /// <param name="account"></param>
+        public void SetupInitialColumns(CroudiaAccount account)
         {
-            AddColumn(Column.CreateColumnInfo(TimelineType.Public, "public", userId, 0, enableNotity: false));
-            AddColumn(Column.CreateColumnInfo(TimelineType.Mentions, "mentions", userId, 1));
-            AddColumn(Column.CreateColumnInfo(TimelineType.DirectMessages, "messages", userId, 2));
+            AddColumn(Column.Create(TimelineType.Public, "public", 0, account));
+            AddColumn(Column.Create(TimelineType.Mentions, "mentions", 1, account));
+            AddColumn(Column.Create(TimelineType.DirectMessages, "messages", 2, account));
         }
 
         public void AddColumn(Column info)

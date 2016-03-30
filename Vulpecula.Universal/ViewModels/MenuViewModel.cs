@@ -6,7 +6,6 @@ using JetBrains.Annotations;
 using Prism.Commands;
 using Prism.Windows.Navigation;
 
-using Vulpecula.Models;
 using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.ViewModels.Primitives;
@@ -16,16 +15,19 @@ namespace Vulpecula.Universal.ViewModels
     [UsedImplicitly]
     public class MenuViewModel : ViewModel
     {
-        private readonly INavigationService _navigationService;
+        private readonly AccountManager _accountManager;
 
-        public MenuViewModel(INavigationService navigationService)
+        public MenuViewModel(INavigationService navigationService, AccountManager accountManager)
         {
-            _navigationService = navigationService;
+            NavigationService = navigationService;
+            _accountManager = accountManager;
             Accounts = new ObservableCollection<UserAccountViewModel>();
             EventFired = false;
-            ViewModelHelper.SubscribeNotifyCollectionChanged(AccountManager.Instance.Users, Accounts,
-                                                             (User w) => UserAccountViewModel.Create(w));
+            ViewModelHelper.SubscribeNotifyCollectionChanged(_accountManager.Accounts, Accounts,
+                                                             (CroudiaAccount w) => new UserAccountViewModel(w));
         }
+
+        protected INavigationService NavigationService { get; }
 
         #region Properties
 
@@ -54,7 +56,7 @@ namespace Vulpecula.Universal.ViewModels
         public ICommand AuthorizationCommand
             => _authorizationCommand ?? (_authorizationCommand = new DelegateCommand(Authorization));
 
-        private async void Authorization() => await AccountManager.Instance.AuthorizationAccount();
+        private async void Authorization() => await _accountManager.AuthorizationAccount();
 
         #endregion AuthorizationCommand
 
@@ -67,7 +69,7 @@ namespace Vulpecula.Universal.ViewModels
 
         private void NavigateToHomePage()
         {
-            _navigationService.Navigate("Main", null);
+            NavigationService.Navigate("Main", null);
             EventFired = true;
         }
 
@@ -84,7 +86,7 @@ namespace Vulpecula.Universal.ViewModels
 
         private void NavigateToSettingsPage()
         {
-            _navigationService.Navigate("Settings.SettingsMain", null);
+            NavigationService.Navigate("Settings.SettingsMain", null);
             EventFired = true;
         }
 
@@ -99,9 +101,8 @@ namespace Vulpecula.Universal.ViewModels
             _navigateToWhisperPageCommand ??
             (_navigateToWhisperPageCommand = new DelegateCommand(NavigateToWhisperPage));
 
-        private void NavigateToWhisperPage()
+        protected virtual void NavigateToWhisperPage()
         {
-            _navigationService.Navigate("Pages.Tweet", null);
             EventFired = true;
         }
 
@@ -118,7 +119,7 @@ namespace Vulpecula.Universal.ViewModels
 
         private void NavigateToAccountPage()
         {
-            _navigationService.Navigate("Pages.Account", null);
+            NavigationService.Navigate("Pages.Account", null);
             EventFired = true;
         }
 

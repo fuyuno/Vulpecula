@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 
 using JetBrains.Annotations;
 
 using Prism.Commands;
 using Prism.Windows.Navigation;
 
+using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.ViewModels.Primitives;
 
@@ -16,13 +16,12 @@ namespace Vulpecula.Universal.ViewModels.Pages
     {
         private readonly INavigationService _navigationService;
 
-        public TweetPageViewModel(INavigationService navigationService)
+        public TweetPageViewModel(INavigationService navigationService, AccountManager accountManager)
         {
             _navigationService = navigationService;
-            Accounts = AccountManager.Instance.Users.Select(UserAccountViewModel.Create)
-                                     .ToList()
-                                     .AsReadOnly();
-            SelectedAccount = Accounts.First();
+            Accounts = new ObservableCollection<UserAccountViewModel>();
+            ViewModelHelper.SubscribeNotifyCollectionChanged(accountManager.Accounts, Accounts,
+                                                             (CroudiaAccount w) => new UserAccountViewModel(w));
             WhisperCount = 372;
             WhisperText = string.Empty;
         }
@@ -30,7 +29,7 @@ namespace Vulpecula.Universal.ViewModels.Pages
         #region Properties
 
         // TODO: ReadOnlyCollection To ReadOnlyObservableCollection
-        public ReadOnlyCollection<UserAccountViewModel> Accounts { get; }
+        public ObservableCollection<UserAccountViewModel> Accounts { get; }
 
         #region SelectedAccount
 

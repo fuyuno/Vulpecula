@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -7,7 +9,6 @@ using Windows.Security.Credentials;
 
 using JetBrains.Annotations;
 
-using Vulpecula.Models;
 using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models.Dialogs;
 
@@ -15,23 +16,22 @@ namespace Vulpecula.Universal.Models
 {
     // TODO: static
     /// <summary>
-    /// アカウントを管理します。
+    ///     アカウントを管理します。
     /// </summary>
     public sealed class AccountManager
     {
-        private static AccountManager _instance;
+        private readonly ObservableCollection<CroudiaAccount> _accounts;
+        private readonly Configuration _configuration;
 
-        public static AccountManager Instance => _instance ?? (_instance = new AccountManager());
-
-        public ObservableCollection<CroudiaProvider> Providers { get; }
-
-        public ObservableCollection<User> Users { get; }
-
-        private AccountManager()
+        public AccountManager(Configuration configuration)
         {
-            Providers = new ObservableCollection<CroudiaProvider>();
-            Users = new ObservableCollection<User>();
+            _configuration = configuration;
+            _accounts = new ObservableCollection<CroudiaAccount>();
+            _accounts.CollectionChanged += (a, b) => _configuration.AddOrRewriteValue(ConfigurationKeys.UsersKey, _accounts.Select(w => w.User.Id));
+            Accounts = new ReadOnlyObservableCollection<CroudiaAccount>(_accounts);
         }
+
+        public ReadOnlyObservableCollection<CroudiaAccount> Accounts { get; }
 
         [UsedImplicitly]
         public void ResetAccounts()
@@ -44,10 +44,11 @@ namespace Vulpecula.Universal.Models
                 var accounts = vault.FindAllByResource(AppDefintions.VulpeculaAppKey);
                 foreach (var credential in accounts)
                     vault.Remove(credential);
-                Providers.Clear();
-                Users.Clear();
+                _accounts.Clear();
             }
-            catch (COMException) {}
+            catch (COMException)
+            {
+            }
         }
 
         public async Task InitializeAccounts()
@@ -58,17 +59,20 @@ namespace Vulpecula.Universal.Models
                 vault.RetrieveAll();
 
                 var accounts = vault.FindAllByResource(AppDefintions.VulpeculaAppKey);
+                var rows = _configuration.GetValue<IEnumerable<long>>(ConfigurationKeys.UsersKey)
+                                         .ToList();
                 foreach (var credential in accounts)
                 {
-                    var provider = new CroudiaProvider();
-                    if (!await provider.Authorization(vault, credential))
+                    var account = new CroudiaAccount();
+                    if (!await account.Authorization(vault, credential))
                     {
                         // TODO: 再認証処理
                         vault.Remove(credential);
                         continue;
                     }
-                    Providers.Add(provider);
-                    Users.Add(provider.User);
+                    account.Row = rows.TakeWhile(w => w != account.User.Id)
+                                      .Count();
+                    _accounts.Insert(account.Row > _accounts.Count ? 0 : account.Row, account);
                 }
             }
             catch (COMException e)
@@ -79,20 +83,20 @@ namespace Vulpecula.Universal.Models
 
         public async Task AuthorizationAccount(PasswordCredential credential = null)
         {
-            if (Users.Count >= 10)
+            if (Accounts.Count >= 10)
             {
                 await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("CanNotAdd"), "Error");
                 return;
             }
 
-            var provider = new CroudiaProvider();
-            if (!await provider.Authorization(new PasswordVault(), credential))
+            var account = new CroudiaAccount();
+            if (!await account.Authorization(new PasswordVault(), credential))
             {
                 await MessageDialogWrapper.ShowOkMessageDialogAsync(LocalizationHelper.GetString("FailAuth"), "Error");
                 return;
             }
-            Providers.Add(provider);
-            Users.Add(provider.User);
+            account.Row = Accounts.Count;
+            _accounts.Add(account);
         }
     }
 }

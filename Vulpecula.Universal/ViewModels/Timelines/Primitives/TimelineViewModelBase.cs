@@ -19,11 +19,11 @@ namespace Vulpecula.Universal.ViewModels.Timelines.Primitives
     public class TimelineViewModelBase : ViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly CroudiaProvider _provider;
+        private readonly CroudiaAccount _provider;
 
         public ObservableCollection<StatusViewModel> Statuses { get; }
 
-        protected TimelineViewModelBase(CroudiaProvider provider, INavigationService navigationService)
+        protected TimelineViewModelBase(CroudiaAccount provider, INavigationService navigationService)
         {
             Statuses = new ObservableCollection<StatusViewModel>();
             _provider = provider;

@@ -8,16 +8,18 @@ using Vulpecula.Models;
 
 namespace Vulpecula.Universal.Models
 {
-    public class CroudiaProvider
+    public class CroudiaAccount
     {
+        public CroudiaAccount()
+        {
+            Croudia = new Croudia(AppDefintions.ConsumerKey, AppDefintions.ConsumerSecret);
+        }
+
         public Croudia Croudia { get; }
 
         public User User { get; private set; }
 
-        public CroudiaProvider()
-        {
-            Croudia = new Croudia(AppDefintions.ConsumerKey, AppDefintions.ConsumerSecret);
-        }
+        public int Row { get; set; }
 
         public async Task<bool> Authorization(PasswordVault vault, PasswordCredential credential)
         {
@@ -29,8 +31,6 @@ namespace Vulpecula.Universal.Models
                 {
                     await Croudia.OAuth.RefreshAsync();
                     User = await Croudia.Account.VerifyCredentialsAsync();
-
-                    // 更新は、再度同じ Resource, Username で Add すれば良い
                     vault.Add(new PasswordCredential(AppDefintions.VulpeculaAppKey, User.IdStr,
                                                      Croudia.RefreshToken));
                     return true;
