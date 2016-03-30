@@ -81,49 +81,6 @@
                 </ListBoxItem>
             </ListBox>
         </StackPanel>
-        <!--  Accounts  -->
-        <StackPanel x:Name="Center"
-                    Orientation="Vertical"
-                    RelativePanel.Above="Footer">
-            <ItemsControl ItemsSource="{x:Bind ViewModel.Accounts}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Grid Width="48" Height="48">
-                                <Border Margin="5" CornerRadius="19">
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding Icon}" />
-                                    </Border.Background>
-                                </Border>
-                            </Grid>
-                            <TextBlock Margin="10,0"
-                                       VerticalAlignment="Center"
-                                       FontSize="18"
-                                       Text="{Binding ScreenName}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ListBox>
-                <i:Interaction.Behaviors>
-                    <behaviors:UnSelectableListBoxBehavior />
-                </i:Interaction.Behaviors>
-                <ListBoxItem>
-                    <Button Command="{Binding AuthorizationCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon Width="48"
-                                      Height="48"
-                                      FontSize="24"
-                                      Glyph="&#xE109;" />
-                            <TextBlock x:Uid="MenuPageXaml_NewAccount"
-                                       Margin="10,0"
-                                       VerticalAlignment="Center"
-                                       FontSize="18" />
-                        </StackPanel>
-                    </Button>
-                </ListBoxItem>
-            </ListBox>
-        </StackPanel>
         <!--  Footer  -->
         <StackPanel x:Name="Footer" RelativePanel.AlignBottomWithPanel="True">
             <ListBox>
@@ -171,6 +128,49 @@
                            FontSize="18"
                            Text="Vulpecula for Windows" />
             </StackPanel>
+        </StackPanel>
+        <!--  Accounts  -->
+        <StackPanel x:Name="Center"
+                    Orientation="Vertical"
+                    RelativePanel.Above="Footer">
+            <ItemsControl ItemsSource="{x:Bind ViewModel.Accounts}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Width="48" Height="48">
+                                <Border Margin="5" CornerRadius="19">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding Icon}" />
+                                    </Border.Background>
+                                </Border>
+                            </Grid>
+                            <TextBlock Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18"
+                                       Text="{Binding ScreenName}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ListBox>
+                <i:Interaction.Behaviors>
+                    <behaviors:UnSelectableListBoxBehavior />
+                </i:Interaction.Behaviors>
+                <ListBoxItem>
+                    <Button Command="{Binding AuthorizationCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Width="48"
+                                      Height="48"
+                                      FontSize="24"
+                                      Glyph="&#xE109;" />
+                            <TextBlock x:Uid="MenuPageXaml_NewAccount"
+                                       Margin="10,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="18" />
+                        </StackPanel>
+                    </Button>
+                </ListBoxItem>
+            </ListBox>
         </StackPanel>
         <!--  #endregion  -->
     </RelativePanel>

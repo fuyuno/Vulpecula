@@ -9,89 +9,98 @@
              d:DesignWidth="400"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-
-    <RelativePanel VerticalAlignment="Stretch">
-        <RelativePanel x:Name="Header"
-                       RelativePanel.AlignLeftWithPanel="True"
-                       RelativePanel.AlignRightWithPanel="True"
-                       RelativePanel.AlignTopWithPanel="True">
-            <Grid x:Name="TweetCounter"
-                  Height="64"
-                  RelativePanel.AlignRightWithPanel="True">
-                <TextBlock Margin="0,0,10,0"
-                           VerticalAlignment="Center"
-                           FontSize="15"
-                           Text="{x:Bind ViewModel.WhisperCount, Mode=TwoWay}" />
-            </Grid>
-            <ComboBox Width="250"
-                      Height="64"
-                      BorderThickness="0"
-                      ItemsSource="{x:Bind ViewModel.Accounts}"
-                      RelativePanel.AlignLeftWithPanel="True"
-                      RelativePanel.LeftOf="TweetCounter"
-                      SelectedItem="{x:Bind ViewModel.SelectedAccount, Mode=TwoWay}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Width="48"
-                                   Height="48"
-                                   Source="{Binding Icon}" />
-                            <StackPanel Margin="10,0">
-                                <TextBlock FontSize="16" Text="{Binding Name}" />
-                                <TextBlock FontSize="14"
-                                           Foreground="Silver"
-                                           Text="{Binding ScreenName}" />
+    <Border BorderBrush="{StaticResource ToolTipBorderThemeBrush}" BorderThickness="2,0,0,0">
+        <RelativePanel VerticalAlignment="Stretch">
+            <RelativePanel x:Name="Header"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignRightWithPanel="True"
+                           RelativePanel.AlignTopWithPanel="True">
+                <StackPanel x:Name="TweetCounter"
+                            Height="64"
+                            Orientation="Horizontal"
+                            RelativePanel.AlignRightWithPanel="True">
+                    <TextBlock Margin="0,0,10,0"
+                               VerticalAlignment="Center"
+                               FontSize="15"
+                               Text="{x:Bind ViewModel.WhisperCount, Mode=TwoWay}" />
+                    <Button Width="64"
+                            Height="64"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{x:Bind ViewModel.CloseCommand}">
+                        <FontIcon Glyph="&#xE711;" />
+                    </Button>
+                </StackPanel>
+                <ComboBox Width="250"
+                          Height="64"
+                          BorderThickness="0"
+                          ItemsSource="{x:Bind ViewModel.Accounts}"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.LeftOf="TweetCounter"
+                          SelectedItem="{x:Bind ViewModel.SelectedAccount, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="48"
+                                       Height="48"
+                                       Source="{Binding Icon}" />
+                                <StackPanel Margin="10,0">
+                                    <TextBlock FontSize="16" Text="{Binding Name}" />
+                                    <TextBlock FontSize="14"
+                                               Foreground="Silver"
+                                               Text="{Binding ScreenName}" />
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </RelativePanel>
+            <Grid x:Name="Footer"
+                  Height="32"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" HorizontalAlignment="Stretch">
+                    <Button.Content>
+                        <FontIcon Glyph="&#xE910;" />
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="1" HorizontalAlignment="Stretch">
+                    <Button.Content>
+                        <FontIcon Glyph="&#xE8EC;" />
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="2" HorizontalAlignment="Stretch">
+                    <Button.Content>
+                        <FontIcon Glyph="&#xE722;" />
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="3"
+                        HorizontalAlignment="Stretch"
+                        Background="{StaticResource SystemControlHighlightAccentBrush}"
+                        Command="{x:Bind ViewModel.SendTweetCommand}"
+                        Content="Whisper" />
+            </Grid>
+            <TextBox x:Uid="TweetPageXaml_WhatsHappening"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     AcceptsReturn="True"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     RelativePanel.Above="Footer"
+                     RelativePanel.AlignLeftWithPanel="True"
+                     RelativePanel.AlignRightWithPanel="True"
+                     RelativePanel.Below="Header"
+                     Text="{Binding WhisperText,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Mode=TwoWay}"
+                     TextWrapping="Wrap" />
         </RelativePanel>
-        <Grid x:Name="Footer"
-              Height="32"
-              RelativePanel.AlignBottomWithPanel="True"
-              RelativePanel.AlignLeftWithPanel="True"
-              RelativePanel.AlignRightWithPanel="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" HorizontalAlignment="Stretch">
-                <Button.Content>
-                    <FontIcon Glyph="&#xE910;" />
-                </Button.Content>
-            </Button>
-            <Button Grid.Column="1" HorizontalAlignment="Stretch">
-                <Button.Content>
-                    <FontIcon Glyph="&#xE8EC;" />
-                </Button.Content>
-            </Button>
-            <Button Grid.Column="2" HorizontalAlignment="Stretch">
-                <Button.Content>
-                    <FontIcon Glyph="&#xE722;" />
-                </Button.Content>
-            </Button>
-            <Button Grid.Column="3"
-                    HorizontalAlignment="Stretch"
-                    Background="{StaticResource SystemControlHighlightAccentBrush}"
-                    Command="{x:Bind ViewModel.SendTweetCommand}"
-                    Content="Whisper" />
-        </Grid>
-        <TextBox x:Uid="TweetPageXaml_WhatsHappening"
-                 HorizontalAlignment="Stretch"
-                 VerticalAlignment="Stretch"
-                 AcceptsReturn="True"
-                 Background="Transparent"
-                 BorderThickness="0"
-                 RelativePanel.Above="Footer"
-                 RelativePanel.AlignLeftWithPanel="True"
-                 RelativePanel.AlignRightWithPanel="True"
-                 RelativePanel.Below="Header"
-                 Text="{Binding WhisperText,
-                                UpdateSourceTrigger=PropertyChanged,
-                                Mode=TwoWay}"
-                 TextWrapping="Wrap" />
-    </RelativePanel>
+    </Border>
 </UserControl>

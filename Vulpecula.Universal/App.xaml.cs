@@ -52,6 +52,8 @@ namespace Vulpecula.Universal
             // Prism.Unity
             Container.RegisterInstance<IResourceLoader>(new ResourceLoaderAdapter(new ResourceLoader()),
                                                         new ContainerControlledLifetimeManager());
+
+            // Singleton
             Container.RegisterType<Configuration>(new ContainerControlledLifetimeManager());
             Container.RegisterType<AccountManager>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ColumnManager>(new ContainerControlledLifetimeManager());

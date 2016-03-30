@@ -10,22 +10,9 @@
       d:DataContext="{d:DesignInstance vm:MainPageViewModel}"
       prism:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
-    <RelativePanel>
-        <!--  Tweet Area  -->
-        <pages:MiniTweetPage x:Name="TweetArea"
-                             Width="300"
-                             HorizontalAlignment="Right"
-                             RelativePanel.AlignBottomWithPanel="True"
-                             RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True"
-                             Visibility="Collapsed" />
-
+    <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Auto"
                       Loaded="{x:Bind ViewModel.Initialize}"
-                      RelativePanel.AlignBottomWithPanel="True"
-                      RelativePanel.AlignLeftWithPanel="True"
-                      RelativePanel.AlignTopWithPanel="True"
-                      RelativePanel.LeftOf="TweetArea"
                       VerticalScrollBarVisibility="Disabled">
             <ScrollViewer.Transitions>
                 <TransitionCollection>
@@ -50,5 +37,5 @@
                 </ItemsControl>
             </StackPanel>
         </ScrollViewer>
-    </RelativePanel>
+    </Grid>
 </Page>

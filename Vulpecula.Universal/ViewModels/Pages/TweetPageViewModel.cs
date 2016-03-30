@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 
 using JetBrains.Annotations;
 
@@ -24,6 +25,11 @@ namespace Vulpecula.Universal.ViewModels.Pages
                                                              (CroudiaAccount w) => new UserAccountViewModel(w));
             WhisperCount = 372;
             WhisperText = string.Empty;
+            Accounts.CollectionChanged += (sender, args) =>
+            {
+                if (SelectedAccount == null)
+                    SelectedAccount = Accounts.First();
+            };
         }
 
         #region Properties

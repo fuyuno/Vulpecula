@@ -7,11 +7,12 @@
       xmlns:local="using:Vulpecula.Universal"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:mvvm="using:Prism.Windows.Mvvm"
+      xmlns:pages="using:Vulpecula.Universal.Views.Pages"
       xmlns:viewModels="using:Vulpecula.Universal.ViewModels"
       xmlns:views="using:Vulpecula.Universal.Views"
       mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="LayoutVisualStateGroup">
                 <!--  最小幅  -->
@@ -37,7 +38,12 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <SplitView x:Name="RootSplitView" DisplayMode="CompactOverlay">
+        <SplitView x:Name="RootSplitView"
+                   DisplayMode="CompactOverlay"
+                   RelativePanel.AlignBottomWithPanel="True"
+                   RelativePanel.AlignLeftWithPanel="True"
+                   RelativePanel.AlignTopWithPanel="True"
+                   RelativePanel.LeftOf="TweetArea">
             <SplitView.Pane>
                 <Grid>
                     <ToggleButton Width="48"
@@ -61,5 +67,13 @@
             </SplitView.Content>
         </SplitView>
         <views:CommandMenuPage x:Name="RsCommandBar" VerticalAlignment="Bottom" />
-    </Grid>
+        <!--  Tweet Area  -->
+        <pages:MiniTweetPage x:Name="TweetArea"
+                             Width="300"
+                             HorizontalAlignment="Right"
+                             RelativePanel.AlignBottomWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             Visibility="Collapsed" />
+    </RelativePanel>
 </Page>

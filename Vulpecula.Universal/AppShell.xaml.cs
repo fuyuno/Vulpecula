@@ -1,8 +1,8 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 using Vulpecula.Universal.Extensions;
 using Vulpecula.Universal.Services;
-using Vulpecula.Universal.ViewModels;
 
 // 空白ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234238 を参照してください
 
@@ -17,17 +17,42 @@ namespace Vulpecula.Universal
         {
             InitializeComponent();
             Unloaded += (sender, args) => ServiceProvider.SuspendService();
-            MenuView.DataContextChanged += (sender, args) =>
+
+            //
+            MenuView.DataContextChanged += MenuViewDataContextChanged;
+            TweetArea.DataContextChanged += TweetAreaDataContextChanged;
+        }
+
+        private void MenuViewDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+            MenuView.DataContextChanged -= MenuViewDataContextChanged;
+
+            MenuView.ViewModel.Subscribe(nameof(MenuView.ViewModel.EventFired), e =>
             {
-                var viewModel = (MenuViewModel) sender.DataContext;
-                viewModel.Subscribe(nameof(viewModel.EventFired), e =>
-                {
-                    if (!viewModel.EventFired)
-                        return;
-                    RootSplitView.IsPaneOpen = false;
-                    viewModel.EventFired = false;
-                });
-            };
+                if (!MenuView.ViewModel.EventFired)
+                    return;
+                RootSplitView.IsPaneOpen = false;
+                MenuView.ViewModel.EventFired = false;
+            });
+            MenuView.ViewModel.Subscribe(nameof(MenuView.ViewModel.IsTweetPaneOpen), e =>
+            {
+                // Do not format this line....
+                TweetArea.Visibility = MenuView.ViewModel.IsTweetPaneOpen ? Visibility.Visible : Visibility.Collapsed;
+            });
+        }
+
+        private void TweetAreaDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+            TweetArea.DataContextChanged -= TweetAreaDataContextChanged;
+
+            TweetArea.ViewModel.Subscribe(nameof(TweetArea.ViewModel.IsPublishedCloseRequest), e1 =>
+            {
+                if (!TweetArea.ViewModel.IsPublishedCloseRequest)
+                    return;
+                TweetArea.Visibility = Visibility.Collapsed;
+                TweetArea.ViewModel.IsPublishedCloseRequest = false;
+                MenuView.ViewModel.IsTweetPaneOpen = false;
+            });
         }
 
         public void SetRootFrame(Frame frame)

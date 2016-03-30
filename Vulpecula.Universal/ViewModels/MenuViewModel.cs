@@ -45,6 +45,18 @@ namespace Vulpecula.Universal.ViewModels
 
         #endregion EventFired
 
+        #region IsTweetPaneOpen
+
+        private bool _isTweetPaneOpen;
+
+        public bool IsTweetPaneOpen
+        {
+            get { return _isTweetPaneOpen; }
+            set { SetProperty(ref _isTweetPaneOpen, value); }
+        }
+
+        #endregion IsTweetPaneOpen
+
         #endregion Properties
 
         #region Commands
@@ -103,6 +115,7 @@ namespace Vulpecula.Universal.ViewModels
 
         protected virtual void NavigateToWhisperPage()
         {
+            IsTweetPaneOpen = !IsTweetPaneOpen;
             EventFired = true;
         }
 
