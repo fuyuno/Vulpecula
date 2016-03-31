@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 
 using JetBrains.Annotations;
@@ -9,6 +10,8 @@ using Prism.Windows.Navigation;
 using Vulpecula.Universal.Helpers;
 using Vulpecula.Universal.Models;
 using Vulpecula.Universal.ViewModels.Primitives;
+
+using WinRTXamlToolkit.Tools;
 
 namespace Vulpecula.Universal.ViewModels.Pages
 {
@@ -21,15 +24,22 @@ namespace Vulpecula.Universal.ViewModels.Pages
         {
             _navigationService = navigationService;
             Accounts = new ObservableCollection<UserAccountViewModel>();
-            ViewModelHelper.SubscribeNotifyCollectionChanged(accountManager.Accounts, Accounts,
-                                                             (CroudiaAccount w) => new UserAccountViewModel(w));
             WhisperCount = 372;
             WhisperText = string.Empty;
             Accounts.CollectionChanged += (sender, args) =>
             {
                 if (SelectedAccount == null)
                     SelectedAccount = Accounts.First();
+                // When insert account, re-setting default account.
+                if (args.Action == NotifyCollectionChangedAction.Add)
+                {
+                    if (args.NewStartingIndex == 0)
+                        SelectedAccount = Accounts.First();
+                }
             };
+            accountManager.Accounts.ForEach(w => Accounts.Add(new UserAccountViewModel(w)));
+            ViewModelHelper.SubscribeNotifyCollectionChanged(accountManager.Accounts, Accounts,
+                                                             (CroudiaAccount w) => new UserAccountViewModel(w));
         }
 
         #region Properties
