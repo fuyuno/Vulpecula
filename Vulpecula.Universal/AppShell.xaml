@@ -66,7 +66,10 @@
                        VerticalContentAlignment="Stretch" />
             </SplitView.Content>
         </SplitView>
-        <views:CommandMenuPage x:Name="RsCommandBar" VerticalAlignment="Bottom" />
+        <views:CommandMenuPage x:Name="RsCommandBar"
+                               RelativePanel.AlignBottomWithPanel="True"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True" />
         <!--  Tweet Area  -->
         <pages:MiniTweetPage x:Name="TweetArea"
                              Width="300"

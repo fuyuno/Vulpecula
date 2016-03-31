@@ -46,6 +46,9 @@ namespace Vulpecula.Universal.ViewModels
 
         public async void Initialize()
         {
+            // 複数回きてたわ
+            if (_accountManager.IsInitialized)
+                return;
             await _accountManager.InitializeAccounts();
             await _columnManager.InitializeColumns();
 

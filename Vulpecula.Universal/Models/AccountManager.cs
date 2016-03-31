@@ -29,7 +29,10 @@ namespace Vulpecula.Universal.Models
             _accounts = new ObservableCollection<CroudiaAccount>();
             _accounts.CollectionChanged += (a, b) => _configuration.AddOrRewriteValue(ConfigurationKeys.UsersKey, _accounts.Select(w => w.User.Id));
             Accounts = new ReadOnlyObservableCollection<CroudiaAccount>(_accounts);
+            IsInitialized = false;
         }
+
+        public bool IsInitialized { get; set; }
 
         public ReadOnlyObservableCollection<CroudiaAccount> Accounts { get; }
 
@@ -79,6 +82,7 @@ namespace Vulpecula.Universal.Models
             {
                 Debug.WriteLine(e.Message);
             }
+            IsInitialized = true;
         }
 
         public async Task AuthorizationAccount(PasswordCredential credential = null)
