@@ -219,3 +219,6 @@ _Pvt_Extensions
 # Ignored?
 _*.*
 **/BundleArtifacts/
+
+# Visual Studio auto generated files
+*.Designer.cs
