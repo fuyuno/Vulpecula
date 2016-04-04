@@ -32,7 +32,7 @@ namespace Vulpecula.Universal.Models
             IsInitialized = false;
         }
 
-        public bool IsInitialized { get; set; }
+        public bool IsInitialized { get; private set; }
 
         public ReadOnlyObservableCollection<CroudiaAccount> Accounts { get; }
 
