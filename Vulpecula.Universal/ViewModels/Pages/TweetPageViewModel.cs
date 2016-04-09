@@ -102,7 +102,7 @@ namespace Vulpecula.Universal.ViewModels.Pages
         public DelegateCommand SendTweetCommand => _sendTweetCommand ??
                                                    (_sendTweetCommand = new DelegateCommand(SendTweet, CanSendTweet));
 
-        private void SendTweet()
+        protected virtual void SendTweet()
         {
             (SelectedAccount as UserAccountViewModel)?.SendWhisper(WhisperText);
             _navigationService.GoBack();

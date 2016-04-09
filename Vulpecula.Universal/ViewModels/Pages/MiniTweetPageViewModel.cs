@@ -14,6 +14,16 @@ namespace Vulpecula.Universal.ViewModels.Pages
             IsPublishedCloseRequest = false;
         }
 
+        #region Overrides of TweetPageViewModel
+
+        protected override void SendTweet()
+        {
+            (SelectedAccount as UserAccountViewModel)?.SendWhisper(WhisperText);
+            Close();
+        }
+
+        #endregion Overrides of TweetPageViewModel
+
         #region Properties
 
         private bool _isPublishedCloseRequest;
